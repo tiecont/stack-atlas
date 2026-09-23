@@ -42,4 +42,11 @@ def validate_catalog() -> tuple[list, list, list, list, list[str]]:
         errors.append("Human-authored catalog metadata must use YAML")
     if any((CONTENT / "paths").glob("*.json")):
         errors.append("Learning-path metadata must use YAML")
+    if not errors:
+        from stack_atlas.redirects import build_legacy_redirects
+
+        try:
+            build_legacy_redirects(articles, paths)
+        except ValueError as exc:
+            errors.append(str(exc))
     return domains, categories, paths, articles, errors

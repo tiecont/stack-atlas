@@ -6,6 +6,8 @@ import html
 import re
 import unicodedata
 from collections import defaultdict
+from datetime import date, datetime
+from math import isfinite
 from pathlib import Path
 
 import yaml
@@ -14,6 +16,39 @@ ROOT = Path(__file__).resolve().parents[2]
 CONTENT = ROOT / "content"
 VALID_DIFFICULTIES = {"beginner", "intermediate", "advanced", "all", "unspecified"}
 
+
+def normalize_yaml_value(value):
+    """Convert YAML date scalars and reject values outside JSON's data model."""
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    if isinstance(value, list):
+        return [normalize_yaml_value(item) for item in value]
+    if isinstance(value, dict):
+        normalized = {}
+        for key, item in value.items():
+            if not isinstance(key, str):
+                raise ValueError(f"YAML mapping keys must be strings, got {type(key).__name__}")
+            normalized[key] = normalize_yaml_value(item)
+        return normalized
+    if value is None or type(value) in (str, int, bool):
+        return value
+    if type(value) is float and isfinite(value):
+        return value
+    raise ValueError(f"Unsupported YAML value type: {type(value).__name__}")
+
+
+def is_iso_date(value) -> bool:
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        return False
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        return False
+    return True
+
+
 def read_yaml(path: Path):
     try:
         value = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -21,7 +56,10 @@ def read_yaml(path: Path):
         raise ValueError(f"Cannot read {path.relative_to(ROOT)}: {exc}") from exc
     if not isinstance(value, (dict, list)):
         raise ValueError(f"{path.relative_to(ROOT)}: expected a YAML object or list")
-    return value
+    try:
+        return normalize_yaml_value(value)
+    except ValueError as exc:
+        raise ValueError(f"{path}: {exc}") from exc
 
 def read_domains():
     return [read_yaml(path) for path in sorted((CONTENT / "domains").glob("*.yaml"))]
@@ -172,10 +210,10 @@ def make_catalog():
         if review is not None:
             if not isinstance(review, dict):
                 errors.append(f"{article.get('metadata_file')}: review must be an object")
-            elif review.get("last_reviewed") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(review["last_reviewed"])):
+            elif "last_reviewed" in review and not is_iso_date(review["last_reviewed"]):
                 errors.append(f"{article.get('metadata_file')}: review.last_reviewed must use YYYY-MM-DD")
         for date_field in ("created_at", "updated_at"):
-            if article.get(date_field) and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(article[date_field])):
+            if date_field in article and not is_iso_date(article[date_field]):
                 errors.append(f"{article.get('metadata_file')}: {date_field} must use YYYY-MM-DD")
 
     for article in articles:

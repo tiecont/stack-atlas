@@ -3,11 +3,15 @@ name: Kubernetes labs
 on:
   pull_request:
     paths:
-      - "content/**"
+      - "content/articles/kubernetes/**"
+      - "content/domains/kubernetes.yaml"
+      - "content/paths/kubernetes-engineer.yaml"
       - "labs/kubernetes/**"
       - "examples/atlas-demo-api/**"
       - "platform/**"
-      - "scripts/ci/**"
+      - "scripts/ci/kubernetes/**"
+      - "scripts/ci/test_kubernetes_labs.sh"
+      - "scripts/ci/validate_kubernetes_manifests.py"
       - "tests/kubernetes/**"
       - "pyproject.toml"
       - "Makefile"
@@ -15,11 +19,15 @@ on:
   push:
     branches: [main]
     paths:
-      - "content/**"
+      - "content/articles/kubernetes/**"
+      - "content/domains/kubernetes.yaml"
+      - "content/paths/kubernetes-engineer.yaml"
       - "labs/kubernetes/**"
       - "examples/atlas-demo-api/**"
       - "platform/**"
-      - "scripts/ci/**"
+      - "scripts/ci/kubernetes/**"
+      - "scripts/ci/test_kubernetes_labs.sh"
+      - "scripts/ci/validate_kubernetes_manifests.py"
       - "tests/kubernetes/**"
       - "pyproject.toml"
       - "Makefile"

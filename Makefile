@@ -28,6 +28,7 @@ test-site:
 
 test-kubernetes:
 	bash tests/kubernetes/context_safety.sh
+	bash tests/kubernetes/cluster_ownership.sh
 	CLEANUP=1 scripts/ci/test_kubernetes_labs.sh
 
 test-databases:

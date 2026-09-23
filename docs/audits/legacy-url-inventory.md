@@ -11,30 +11,30 @@ Verified legacy lesson routes: 341. Verified public season indexes: 24.
 
 | Legacy URL | Redirect target | Lessons |
 | --- | --- | ---: |
-| `/season-01-fundamentals/` | `/paths/golang-backend/#module-go-fundamentals` | 15 |
-| `/season-02-runtime/` | `/paths/golang-backend/#module-go-runtime` | 12 |
-| `/season-03-concurrency/` | `/paths/golang-backend/#module-go-concurrency` | 22 |
-| `/season-04-networking-with-go/` | `/paths/golang-backend/#module-networking-with-go` | 15 |
-| `/season-05-production-http-server/` | `/paths/golang-backend/#module-production-http` | 15 |
-| `/season-06-postgresql-with-go/` | `/paths/golang-backend/#module-postgresql-with-go` | 20 |
-| `/season-07-redis-caching/` | `/paths/golang-backend/#module-redis-caching` | 12 |
-| `/season-08-messaging/` | `/paths/golang-backend/#module-messaging-patterns` | 12 |
-| `/season-09-kafka-deep-dive/` | `/paths/golang-backend/#module-kafka-deep-dive` | 18 |
-| `/season-10-distributed-systems/` | `/paths/golang-backend/#module-distributed-systems` | 16 |
-| `/season-11-reliability-engineering/` | `/paths/golang-backend/#module-reliability-engineering` | 12 |
-| `/season-12-distributed-transactions/` | `/paths/golang-backend/#module-distributed-transactions` | 10 |
-| `/season-13-microservices-architecture/` | `/paths/golang-backend/#module-microservices-architecture` | 12 |
-| `/season-14-grpc-with-go/` | `/paths/golang-backend/#module-grpc-with-go` | 13 |
-| `/season-15-observability/` | `/paths/golang-backend/#module-observability` | 12 |
-| `/season-16-performance-engineering/` | `/paths/golang-backend/#module-performance-engineering` | 14 |
-| `/season-17-security-for-go-backend/` | `/paths/golang-backend/#module-security-for-backends` | 14 |
-| `/season-18-production-go-engineering/` | `/paths/golang-backend/#module-production-go` | 14 |
-| `/season-19-kubernetes-for-go-backend/` | `/paths/golang-backend/#module-kubernetes` | 13 |
-| `/season-20-distributed-data/` | `/paths/golang-backend/#module-distributed-data` | 13 |
-| `/season-21-consensus-coordination/` | `/paths/golang-backend/#module-consensus` | 13 |
-| `/season-22-elasticsearch-deep-dive/` | `/paths/golang-backend/#module-elasticsearch` | 16 |
-| `/season-23-architecture-patterns/` | `/paths/golang-backend/#module-architecture-patterns` | 12 |
-| `/season-24-system-design/` | `/paths/golang-backend/#module-system-design` | 16 |
+| `/season-01-fundamentals/index.html` | `/paths/golang-backend/#module-go-fundamentals` | 15 |
+| `/season-02-runtime/index.html` | `/paths/golang-backend/#module-go-runtime` | 12 |
+| `/season-03-concurrency/index.html` | `/paths/golang-backend/#module-go-concurrency` | 22 |
+| `/season-04-networking-with-go/index.html` | `/paths/golang-backend/#module-networking-with-go` | 15 |
+| `/season-05-production-http-server/index.html` | `/paths/golang-backend/#module-production-http` | 15 |
+| `/season-06-postgresql-with-go/index.html` | `/paths/golang-backend/#module-postgresql-with-go` | 20 |
+| `/season-07-redis-caching/index.html` | `/paths/golang-backend/#module-redis-caching` | 12 |
+| `/season-08-messaging/index.html` | `/paths/golang-backend/#module-messaging-patterns` | 12 |
+| `/season-09-kafka-deep-dive/index.html` | `/paths/golang-backend/#module-kafka-deep-dive` | 18 |
+| `/season-10-distributed-systems/index.html` | `/paths/golang-backend/#module-distributed-systems` | 16 |
+| `/season-11-reliability-engineering/index.html` | `/paths/golang-backend/#module-reliability-engineering` | 12 |
+| `/season-12-distributed-transactions/index.html` | `/paths/golang-backend/#module-distributed-transactions` | 10 |
+| `/season-13-microservices-architecture/index.html` | `/paths/golang-backend/#module-microservices-architecture` | 12 |
+| `/season-14-grpc-with-go/index.html` | `/paths/golang-backend/#module-grpc-with-go` | 13 |
+| `/season-15-observability/index.html` | `/paths/golang-backend/#module-observability` | 12 |
+| `/season-16-performance-engineering/index.html` | `/paths/golang-backend/#module-performance-engineering` | 14 |
+| `/season-17-security-for-go-backend/index.html` | `/paths/golang-backend/#module-security-for-backends` | 14 |
+| `/season-18-production-go-engineering/index.html` | `/paths/golang-backend/#module-production-go` | 14 |
+| `/season-19-kubernetes-for-go-backend/index.html` | `/paths/golang-backend/#module-kubernetes` | 13 |
+| `/season-20-distributed-data/index.html` | `/paths/golang-backend/#module-distributed-data` | 13 |
+| `/season-21-consensus-coordination/index.html` | `/paths/golang-backend/#module-consensus` | 13 |
+| `/season-22-elasticsearch-deep-dive/index.html` | `/paths/golang-backend/#module-elasticsearch` | 16 |
+| `/season-23-architecture-patterns/index.html` | `/paths/golang-backend/#module-architecture-patterns` | 12 |
+| `/season-24-system-design/index.html` | `/paths/golang-backend/#module-system-design` | 16 |
 
 ## Lesson route inventory
 

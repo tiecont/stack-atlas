@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import shutil
-import shutil
 from collections import defaultdict
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape

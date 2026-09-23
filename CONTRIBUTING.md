@@ -38,7 +38,7 @@ An article may be standalone or appear in several paths. Add `{path_id, module_i
 - Site configuration: `content/site.yaml`
 - Articles: folder-based YAML metadata and HTML body
 
-All human-authored metadata uses YAML. Generated machine-readable output, including `dist/search-index.json`, uses JSON. Dates use `YYYY-MM-DD`; do not infer dates from file ordering.
+All human-authored metadata uses YAML. Generated machine-readable output, including `dist/search-index.json`, uses JSON. Dates use `YYYY-MM-DD`; do not infer dates from file ordering. ISO date values may be unquoted; the catalog normalizes YAML date and datetime scalars to ISO strings before validation and JSON output.
 
 Use semantic, technology-independent domain concepts where possible. Keep implementation details such as PostgreSQL-specific behavior clear in the content itself. Put executable companions under `labs/` and reference their directories through an article's `labs` list.
 
@@ -59,10 +59,10 @@ Kubernetes lab checks:
 make test-kubernetes
 ```
 
-The full target requires Docker, kind v0.33.0 and kubectl v1.37.0. It creates and cleans up a kind cluster for the smoke test. The shell context-safety regression runs before cluster work.
+The full target requires Docker, kind v0.33.0 and kubectl v1.37.0. It creates and cleans up a kind cluster for the smoke test only when the runner created it. The shell context-safety and cluster-ownership regressions use command stubs and run before cluster work.
 
 ## Legacy URLs
 
-When migrating an article, retain each historical lesson URL in `legacy_urls`. The build must produce exactly one redirect for each declared alias and verify its canonical target. Season index compatibility redirects are derived from each season's lesson memberships and point to the corresponding path module anchor. The audited inventory is in `docs/audits/legacy-url-inventory.md`.
+When migrating an article, retain each historical lesson URL in `legacy_urls`. The build must produce exactly one redirect for each declared alias and verify its canonical target. Preserve a historical season index by listing its exact `/season-*/index.html` URL in the owning path module's `legacy_index_urls`; redirects point to that module's anchor. The audited inventory is in `docs/audits/legacy-url-inventory.md`.
 
 The repository structure test rejects root `season-*` directories and checked-in generated page trees. Do not archive old season folders elsewhere; preserve historical routing through canonical article metadata.

@@ -14,7 +14,7 @@ content/ + platform/ + labs/
  articles topics paths + assets + search/SEO
           |
           +--> lesson redirects from legacy_urls
-          +--> season-index redirects from path memberships
+          +--> season-index redirects from module legacy_index_urls
           |
           v
         dist/

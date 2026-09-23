@@ -5,13 +5,11 @@ from __future__ import annotations
 import html
 import json
 import re
-from collections import defaultdict
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-from stack_atlas.catalog import ROOT
 from stack_atlas.files import write_file
 from stack_atlas.templates import site_url
 
@@ -25,47 +23,70 @@ class Redirect:
 
 
 def build_legacy_redirects(articles: list[dict], paths: list[dict]) -> tuple[list[Redirect], list[Redirect]]:
-    """Return lesson redirects and season-index redirects from article metadata."""
+    """Return lesson and explicit season-index redirects from canonical metadata."""
     lesson_redirects = []
-    article_by_id = {article["id"]: article for article in articles}
-    season_articles: dict[str, set[str]] = defaultdict(set)
-    seen_routes = set()
+    seen_lesson_routes = set()
     for article in articles:
-        for route in article.get("legacy_urls", []):
-            if route in seen_routes:
+        legacy_urls = article.get("legacy_urls", [])
+        if not isinstance(legacy_urls, list):
+            raise ValueError(f"{article.get('id', '<unknown>')}: legacy_urls must be a list")
+        for route in legacy_urls:
+            if not isinstance(route, str):
+                raise ValueError(f"Invalid season legacy route: {route!r}")
+            if route in seen_lesson_routes:
                 raise ValueError(f"Duplicate legacy route: {route}")
-            seen_routes.add(route)
+            seen_lesson_routes.add(route)
             parsed = urlsplit(route)
             parts = parsed.path.strip("/").split("/")
             if (
-                parsed.query
+                not route.startswith("/")
+                or parsed.scheme
+                or parsed.netloc
+                or parsed.query
                 or parsed.fragment
+                or parsed.path != route
                 or len(parts) != 2
                 or not re.fullmatch(r"season-\d{2}-[a-z0-9-]+", parts[0])
                 or not parts[1].endswith(".html")
             ):
                 raise ValueError(f"Invalid season legacy route: {route}")
-            season_articles[parts[0]].add(article["id"])
+            if ".." in parts or "\\" in route:
+                raise ValueError(f"Unsafe season legacy route: {route}")
             lesson_redirects.append(Redirect(route, article["url"], "lesson", article["id"]))
 
-    path_modules = [(path, module) for path in paths for module in path.get("modules", [])]
     index_redirects = []
-    for season, article_ids in sorted(season_articles.items()):
-        candidates = [
-            (path, module)
-            for path, module in path_modules
-            if article_ids == set(module.get("article_ids", []))
-        ]
-        if len(candidates) != 1:
-            raise ValueError(f"{season}: expected one learning-path module for its {len(article_ids)} lesson routes, found {len(candidates)}")
-        path, module = candidates[0]
-        if not module.get("id"):
-            raise ValueError(f"{season}: mapped path module has no ID")
-        index_redirects.append(Redirect(
-            f"/{season}/index.html",
-            f"/paths/{path['id']}/#module-{module['id']}",
-            "season-index",
-        ))
+    seen_index_routes = set()
+    for path in paths:
+        path_id = path.get("id")
+        for module in path.get("modules", []):
+            legacy_index_urls = module.get("legacy_index_urls", [])
+            if not isinstance(legacy_index_urls, list):
+                raise ValueError(f"{path_id}/{module.get('id', '<unknown>')}: legacy_index_urls must be a list")
+            if not legacy_index_urls:
+                continue
+            module_id = module.get("id")
+            if not isinstance(module_id, str) or not module_id:
+                raise ValueError(f"{path_id}: module with a legacy index URL is missing its module ID")
+            if not isinstance(path_id, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", path_id):
+                raise ValueError(f"Invalid legacy index redirect target path ID: {path_id!r}")
+            if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", module_id):
+                raise ValueError(f"Invalid legacy index redirect target module ID: {module_id!r}")
+            target = f"/paths/{path_id}/#module-{module_id}"
+            target_parts = urlsplit(target)
+            if target_parts.path != f"/paths/{path_id}/" or target_parts.fragment != f"module-{module_id}":
+                raise ValueError(f"Invalid legacy index redirect target: {target}")
+            for route in legacy_index_urls:
+                if (
+                    not isinstance(route, str)
+                    or not re.fullmatch(r"/season-\d{2}-[a-z0-9-]+/index\.html", route)
+                    or ".." in route.split("/")
+                    or "\\" in route
+                ):
+                    raise ValueError(f"Invalid or unsafe season index URL: {route!r}")
+                if route in seen_index_routes:
+                    raise ValueError(f"Duplicate legacy season-index URL: {route}")
+                seen_index_routes.add(route)
+                index_redirects.append(Redirect(route, target, "season-index"))
     return lesson_redirects, index_redirects
 
 
@@ -132,6 +153,20 @@ def validate_legacy_redirects(articles: list[dict], paths: list[dict], output: P
             errors.append("Missing legacy lesson redirects: " + ", ".join(missing[:8]))
         if unexpected:
             errors.append("Unexpected legacy lesson routes: " + ", ".join(unexpected[:8]))
+
+    expected_index_routes = {redirect.route for redirect in indexes}
+    generated_index_routes = {
+        "/" + file.relative_to(output).as_posix()
+        for season_dir in output.glob("season-*") if season_dir.is_dir()
+        for file in season_dir.glob("index.html")
+    }
+    if expected_index_routes != generated_index_routes:
+        missing = sorted(expected_index_routes - generated_index_routes)
+        unexpected = sorted(generated_index_routes - expected_index_routes)
+        if missing:
+            errors.append("Missing legacy season-index redirects: " + ", ".join(missing[:8]))
+        if unexpected:
+            errors.append("Unexpected legacy season-index routes: " + ", ".join(unexpected[:8]))
 
     article_by_id = {article["id"]: article for article in articles}
     for redirect in lessons:

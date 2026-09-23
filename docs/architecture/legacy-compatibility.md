@@ -15,7 +15,7 @@ The builder emits one redirect file per declared route. It validates exact equal
 
 ## Season index URLs
 
-The builder groups legacy lesson aliases by season and matches each group to the learning-path module containing those articles. It emits the old `/season-*/index.html` route as a redirect to that module anchor. The generated path module has a stable `module-<id>` fragment.
+Each path module lists its historical season-index URLs in `legacy_index_urls`. The builder emits those routes directly as redirects to the declared module's stable `module-<id>` fragment; lesson memberships are not used to infer the mapping.
 
 The verified inventory contains 341 lesson aliases and 24 season index routes. The complete route-to-canonical map is recorded in `docs/audits/legacy-url-inventory.md`.
 

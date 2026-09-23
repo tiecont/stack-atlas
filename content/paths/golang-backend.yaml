@@ -25,6 +25,8 @@ modules:
   - season-01-fundamentals-14-testing-benchmarking
   - season-01-fundamentals-15-idiomatic-project
   order: 1
+  legacy_index_urls:
+  - /season-01-fundamentals/index.html
 - id: go-runtime
   title: Inside Go Runtime
   group: Golang Core
@@ -44,6 +46,8 @@ modules:
   - season-02-runtime-11-pprof
   - season-02-runtime-12-runtime-toolbox
   order: 2
+  legacy_index_urls:
+  - /season-02-runtime/index.html
 - id: go-concurrency
   title: Go Concurrency
   group: Golang Core
@@ -73,6 +77,8 @@ modules:
   - season-03-concurrency-21-go-scheduler
   - season-03-concurrency-22-gmp-model
   order: 3
+  legacy_index_urls:
+  - /season-03-concurrency/index.html
 - id: networking-with-go
   title: Networking with Go
   group: Golang Core
@@ -95,6 +101,8 @@ modules:
   - season-04-networking-with-go-14-reverse-proxy-gateway
   - season-04-networking-with-go-15-grpc-debugging-lab
   order: 4
+  legacy_index_urls:
+  - /season-04-networking-with-go/index.html
 - id: production-http
   title: Production HTTP Server
   group: Golang Core
@@ -117,6 +125,8 @@ modules:
   - season-05-production-http-server-14-testing-http-services
   - season-05-production-http-server-15-production-api-capstone
   order: 5
+  legacy_index_urls:
+  - /season-05-production-http-server/index.html
 - id: postgresql-with-go
   title: PostgreSQL with Go
   group: Data & Messaging
@@ -144,6 +154,8 @@ modules:
   - season-06-postgresql-with-go-19-sqlc-repository-design
   - season-06-postgresql-with-go-20-postgres-capstone
   order: 6
+  legacy_index_urls:
+  - /season-06-postgresql-with-go/index.html
 - id: redis-caching
   title: Redis & Caching
   group: Data & Messaging
@@ -163,6 +175,8 @@ modules:
   - season-07-redis-caching-11-redis-reliability-observability
   - season-07-redis-caching-12-cache-capstone
   order: 7
+  legacy_index_urls:
+  - /season-07-redis-caching/index.html
 - id: messaging-patterns
   title: Messaging
   group: Data & Messaging
@@ -182,6 +196,8 @@ modules:
   - season-08-messaging-11-message-schema-observability
   - season-08-messaging-12-messaging-capstone
   order: 8
+  legacy_index_urls:
+  - /season-08-messaging/index.html
 - id: kafka-deep-dive
   title: Kafka Deep Dive
   group: Data & Messaging
@@ -207,6 +223,8 @@ modules:
   - season-09-kafka-deep-dive-17-observability-capacity-share-groups
   - season-09-kafka-deep-dive-18-go-franz-go-capstone
   order: 9
+  legacy_index_urls:
+  - /season-09-kafka-deep-dive/index.html
 - id: distributed-systems
   title: Distributed Systems
   group: Distributed Systems
@@ -230,6 +248,8 @@ modules:
   - season-10-distributed-systems-15-distributed-transactions-preview
   - season-10-distributed-systems-16-capstone-distributed-design
   order: 10
+  legacy_index_urls:
+  - /season-10-distributed-systems/index.html
 - id: reliability-engineering
   title: Reliability Engineering
   group: Distributed Systems
@@ -249,6 +269,8 @@ modules:
   - season-11-reliability-engineering-11-slo-error-budget
   - season-11-reliability-engineering-12-reliability-capstone
   order: 11
+  legacy_index_urls:
+  - /season-11-reliability-engineering/index.html
 - id: distributed-transactions
   title: Distributed Transactions
   group: Distributed Systems
@@ -266,6 +288,8 @@ modules:
   - season-12-distributed-transactions-09-two-phase-commit
   - season-12-distributed-transactions-10-distributed-transactions-capstone
   order: 12
+  legacy_index_urls:
+  - /season-12-distributed-transactions/index.html
 - id: microservices-architecture
   title: Microservices Architecture
   group: Distributed Systems
@@ -285,6 +309,8 @@ modules:
   - season-13-microservices-architecture-11-anti-patterns
   - season-13-microservices-architecture-12-microservices-capstone
   order: 13
+  legacy_index_urls:
+  - /season-13-microservices-architecture/index.html
 - id: grpc-with-go
   title: gRPC
   group: Distributed Systems
@@ -305,6 +331,8 @@ modules:
   - season-14-grpc-with-go-12-grpc-observability-testing
   - season-14-grpc-with-go-13-grpc-capstone
   order: 14
+  legacy_index_urls:
+  - /season-14-grpc-with-go/index.html
 - id: observability
   title: Observability
   group: Production Engineering
@@ -324,6 +352,8 @@ modules:
   - season-15-observability-11-alerting-slo
   - season-15-observability-12-observability-capstone
   order: 15
+  legacy_index_urls:
+  - /season-15-observability/index.html
 - id: performance-engineering
   title: Performance Engineering
   group: Production Engineering
@@ -345,6 +375,8 @@ modules:
   - season-16-performance-engineering-13-capacity-planning
   - season-16-performance-engineering-14-performance-capstone
   order: 16
+  legacy_index_urls:
+  - /season-16-performance-engineering/index.html
 - id: security-for-backends
   title: Security
   group: Production Engineering
@@ -366,6 +398,8 @@ modules:
   - season-17-security-for-go-backend-13-security-testing
   - season-17-security-for-go-backend-14-security-capstone
   order: 17
+  legacy_index_urls:
+  - /season-17-security-for-go-backend/index.html
 - id: production-go
   title: Production Go
   group: Production Engineering
@@ -387,6 +421,8 @@ modules:
   - season-18-production-go-engineering-13-ci-cd-artifact
   - season-18-production-go-engineering-14-production-capstone
   order: 18
+  legacy_index_urls:
+  - /season-18-production-go-engineering/index.html
 - id: kubernetes
   title: Kubernetes
   group: Production Engineering
@@ -407,6 +443,8 @@ modules:
   - season-19-kubernetes-for-go-backend-12-kubernetes-debugging
   - season-19-kubernetes-for-go-backend-13-kubernetes-capstone
   order: 19
+  legacy_index_urls:
+  - /season-19-kubernetes-for-go-backend/index.html
 - id: distributed-data
   title: Distributed Data
   group: Data & Architecture
@@ -427,6 +465,8 @@ modules:
   - season-20-distributed-data-12-case-studies
   - season-20-distributed-data-13-distributed-data-capstone
   order: 20
+  legacy_index_urls:
+  - /season-20-distributed-data/index.html
 - id: consensus
   title: Consensus
   group: Data & Architecture
@@ -447,6 +487,8 @@ modules:
   - season-21-consensus-coordination-12-paxos-overview
   - season-21-consensus-coordination-13-consensus-capstone
   order: 21
+  legacy_index_urls:
+  - /season-21-consensus-coordination/index.html
 - id: elasticsearch
   title: Elasticsearch
   group: Data & Architecture
@@ -470,6 +512,8 @@ modules:
   - season-22-elasticsearch-deep-dive-15-go-integration
   - season-22-elasticsearch-deep-dive-16-elasticsearch-capstone
   order: 22
+  legacy_index_urls:
+  - /season-22-elasticsearch-deep-dive/index.html
 - id: architecture-patterns
   title: Architecture Patterns
   group: Data & Architecture
@@ -489,6 +533,8 @@ modules:
   - season-23-architecture-patterns-11-architecture-decisions
   - season-23-architecture-patterns-12-architecture-capstone
   order: 23
+  legacy_index_urls:
+  - /season-23-architecture-patterns/index.html
 - id: system-design
   title: System Design
   group: Data & Architecture
@@ -512,3 +558,5 @@ modules:
   - season-24-system-design-15-multi-region
   - season-24-system-design-16-system-design-capstone
   order: 24
+  legacy_index_urls:
+  - /season-24-system-design/index.html

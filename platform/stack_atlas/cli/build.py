@@ -9,7 +9,7 @@ from pathlib import Path
 
 from stack_atlas.catalog import CONTENT, ROOT, read_yaml
 from stack_atlas.links import validate_internal_links
-from stack_atlas.redirects import validate_legacy_redirects
+from stack_atlas.redirects import build_legacy_redirects, validate_legacy_redirects
 from stack_atlas.render import render_site
 from stack_atlas.validate import validate_catalog
 
@@ -54,10 +54,11 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  - {error}", file=sys.stderr)
         return 1
 
-    legacy_count = sum(len(article.get("legacy_urls", [])) for article in articles)
+    lesson_redirects, index_redirects = build_legacy_redirects(articles, paths)
     print(f"✓ {len(articles)} articles")
     print(f"✓ {len(paths)} learning paths · {sum(len(path.get('modules', [])) for path in paths)} modules")
-    print(f"✓ {legacy_count} legacy lesson redirects")
+    print(f"✓ {len(lesson_redirects)} legacy lesson redirects")
+    print(f"✓ {len(index_redirects)} season-index redirects")
     print(f"✓ Local links and fragments checked across {html_count} HTML pages")
     print(f"Built static site at {output}")
     return 0
