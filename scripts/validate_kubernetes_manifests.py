@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -69,8 +70,17 @@ def check_manifest(path: Path, obj: dict):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--server-side", action="store_true", help="validate each Kubernetes object against the active API server")
+    parser.add_argument("--context", default=os.environ.get("CONTEXT", f"kind-{os.environ.get('CLUSTER_NAME', 'stack-atlas')}"), help="kind context used for API-server validation")
+    parser.add_argument("--kubectl", default=os.environ.get("KUBECTL", "kubectl"), help="kubectl executable")
     args = parser.parse_args()
     errors = []
+    if args.server_side:
+        guard = ROOT / "scripts/kubernetes/assert_lab_context.sh"
+        guard_env = {**os.environ, "CONTEXT": args.context}
+        result = subprocess.run([str(guard)], cwd=ROOT, env=guard_env, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
+        if result.returncode:
+            print(result.stdout.rstrip(), file=sys.stderr)
+            return result.returncode
     manifests = sorted(MANIFEST_ROOT.rglob("*.yaml")) + sorted(MANIFEST_ROOT.rglob("*.yml"))
     objects = 0
     for path in manifests:
@@ -87,7 +97,7 @@ def main():
             errors.extend(check_manifest(path, obj))
         if args.server_side and path.name != "kind-config.yaml":
             result = subprocess.run(
-                ["kubectl", "apply", "--server-side", "--dry-run=server", "-f", str(path)],
+                [args.kubectl, "--context", args.context, "apply", "--server-side", "--dry-run=server", "-f", str(path)],
                 cwd=ROOT,
                 text=True,
                 stdout=subprocess.PIPE,

@@ -20,6 +20,8 @@ make cluster-info
 make cluster-down
 ```
 
+`doctor` prints the expected lab context (`kind-stack-atlas`). Lab Make targets verify that this context exists, points at the matching kind cluster, and has a responding API server before they operate. Every `kubectl` operation also passes `--context kind-stack-atlas`; the currently selected global context is never used.
+
 `cluster-up` uses context `kind-stack-atlas` and leaves an existing cluster with that name in place. `cluster-down` deletes only this named kind cluster. It does not modify other kubeconfig contexts or clusters.
 
 The default kind CNI is sufficient for the foundations lab. Later NetworkPolicy lessons must install and pin a policy-enforcing CNI explicitly; creating a NetworkPolicy object alone does not guarantee enforcement.
