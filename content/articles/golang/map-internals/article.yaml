@@ -1,0 +1,22 @@
+id: season-02-runtime-06-map-internals
+title: Map Internals và Performance
+description: Hashing, growth, key cost và cách suy nghĩ về map mà không phụ thuộc implementation cụ thể.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/map-internals/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/06-map-internals.html
+schema_version: 1

@@ -1,0 +1,23 @@
+id: season-07-redis-caching-11-redis-reliability-observability
+title: Redis Reliability & Observability
+description: Timeout, connection pools, memory pressure, eviction, persistence và cách cache fail mà không
+  kéo API chết theo.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/redis-reliability-observability/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/11-redis-reliability-observability.html
+schema_version: 1

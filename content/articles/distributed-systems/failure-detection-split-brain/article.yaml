@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-14-failure-detection-split-brain
+title: Failure Detection, Network Partition và Split Brain
+description: Không nhận heartbeat không đồng nghĩa node đã chết.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/failure-detection-split-brain/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/14-failure-detection-split-brain.html
+schema_version: 1

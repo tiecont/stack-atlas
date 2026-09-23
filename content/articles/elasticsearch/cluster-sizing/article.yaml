@@ -1,0 +1,22 @@
+id: season-22-elasticsearch-deep-dive-13-cluster-sizing
+title: Cluster Sizing và Capacity
+description: Sizing dựa trên data, query profile, shard size và retention.
+type: article
+domain: elasticsearch
+category: search
+tags:
+- elasticsearch
+- search
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: elasticsearch
+prerequisites: []
+related: []
+status: published
+url: /articles/elasticsearch/cluster-sizing/
+authors:
+- tiecont
+legacy_urls:
+- /season-22-elasticsearch-deep-dive/13-cluster-sizing.html
+schema_version: 1

@@ -1,0 +1,23 @@
+id: season-05-production-http-server-15-production-api-capstone
+title: 'Capstone: Ghép một Production API'
+description: Ghép routing, validation, auth, DB, timeout, observability, shutdown và testing thành một
+  service nhỏ hoàn chỉnh.
+type: article
+domain: golang
+category: http-services
+tags:
+- golang
+- http-services
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-http
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/production-api-capstone/
+authors:
+- tiecont
+legacy_urls:
+- /season-05-production-http-server/15-production-api-capstone.html
+schema_version: 1

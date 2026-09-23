@@ -1,0 +1,21 @@
+id: season-08-messaging-07-ordering-partitioning
+title: Ordering, Keys và Partitioning
+description: Thứ tự toàn cục rất đắt; thường chỉ cần ordering theo entity key.
+type: article
+domain: messaging
+category: messaging
+tags:
+- messaging
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: messaging-patterns
+prerequisites: []
+related: []
+status: published
+url: /articles/messaging/ordering-partitioning/
+authors:
+- tiecont
+legacy_urls:
+- /season-08-messaging/07-ordering-partitioning.html
+schema_version: 1

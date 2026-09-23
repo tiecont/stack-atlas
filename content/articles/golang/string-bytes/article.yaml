@@ -1,0 +1,22 @@
+id: season-02-runtime-07-string-bytes
+title: String và []byte Internals
+description: Immutable string, byte slices, conversion cost và streaming/text processing hiệu quả.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/string-bytes/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/07-string-bytes.html
+schema_version: 1

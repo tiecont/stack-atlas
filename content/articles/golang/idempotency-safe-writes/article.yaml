@@ -1,0 +1,23 @@
+id: season-05-production-http-server-09-idempotency-safe-writes
+title: Idempotency và Safe Writes
+description: Làm POST có thể retry an toàn khi network timeout khiến client không biết server đã commit
+  hay chưa.
+type: article
+domain: golang
+category: http-services
+tags:
+- golang
+- http-services
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-http
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/idempotency-safe-writes/
+authors:
+- tiecont
+legacy_urls:
+- /season-05-production-http-server/09-idempotency-safe-writes.html
+schema_version: 1

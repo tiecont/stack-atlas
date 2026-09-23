@@ -1,0 +1,22 @@
+id: season-06-postgresql-with-go-04-query-scan-types
+title: Query, Scan và Type Mapping
+description: Viết SQL explicit, scan an toàn và xử lý NULL mà không để mapping lỗi lan ra domain.
+type: article
+domain: postgresql
+category: databases
+tags:
+- postgresql
+- databases
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: postgresql-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/postgresql/query-scan-types/
+authors:
+- tiecont
+legacy_urls:
+- /season-06-postgresql-with-go/04-query-scan-types.html
+schema_version: 1

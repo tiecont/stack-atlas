@@ -1,0 +1,22 @@
+id: season-03-concurrency-15-timeout
+title: Timeout
+description: Không để một dependency chậm giữ goroutine và request vô thời hạn.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/timeout/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/15-timeout.html
+schema_version: 1

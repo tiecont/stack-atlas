@@ -1,0 +1,22 @@
+id: season-08-messaging-01-messaging-mental-model
+title: 'Messaging: tại sao Backend cần Queue?'
+description: Tách producer khỏi consumer, hấp thụ burst và đưa optional work ra khỏi request critical
+  path.
+type: article
+domain: messaging
+category: messaging
+tags:
+- messaging
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: messaging-patterns
+prerequisites: []
+related: []
+status: published
+url: /articles/messaging/messaging-mental-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-08-messaging/01-messaging-mental-model.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-08-messaging-03-producer-consumer-contract
+title: Producer, Consumer và Message Contract
+description: 'Thiết kế message như public contract: schema, key, metadata, version và semantic meaning.'
+type: article
+domain: messaging
+category: messaging
+tags:
+- messaging
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: messaging-patterns
+prerequisites: []
+related: []
+status: published
+url: /articles/messaging/producer-consumer-contract/
+authors:
+- tiecont
+legacy_urls:
+- /season-08-messaging/03-producer-consumer-contract.html
+schema_version: 1

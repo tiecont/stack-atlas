@@ -1,0 +1,22 @@
+id: season-20-distributed-data-09-read-repair-anti-entropy
+title: Read Repair và Anti-entropy
+description: Replica divergence cần cơ chế convergence.
+type: article
+domain: distributed-systems
+category: data-systems
+tags:
+- distributed-systems
+- data-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-data
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/read-repair-anti-entropy/
+authors:
+- tiecont
+legacy_urls:
+- /season-20-distributed-data/09-read-repair-anti-entropy.html
+schema_version: 1

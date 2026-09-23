@@ -1,0 +1,22 @@
+id: season-19-kubernetes-for-go-backend-06-requests-limits
+title: CPU/Memory Requests và Limits
+description: Scheduler và runtime đều phụ thuộc resource declarations đúng.
+type: article
+domain: kubernetes
+category: orchestration
+tags:
+- kubernetes
+- orchestration
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kubernetes
+prerequisites: []
+related: []
+status: published
+url: /articles/kubernetes/requests-limits/
+authors:
+- tiecont
+legacy_urls:
+- /season-19-kubernetes-for-go-backend/06-requests-limits.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-11-reliability-engineering-01-reliability-mental-model
+title: Reliability không phải là “không bao giờ lỗi”
+description: Thiết kế hệ thống để lỗi cục bộ không biến thành sự cố toàn hệ thống.
+type: article
+domain: reliability
+category: reliability
+tags:
+- reliability
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: reliability-engineering
+prerequisites: []
+related: []
+status: published
+url: /articles/reliability/reliability-mental-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-11-reliability-engineering/01-reliability-mental-model.html
+schema_version: 1

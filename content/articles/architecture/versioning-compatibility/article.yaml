@@ -1,0 +1,21 @@
+id: season-13-microservices-architecture-07-versioning-compatibility
+title: API Versioning và Backward Compatibility
+description: Distributed deploy nghĩa là version cũ và mới cùng tồn tại trong một khoảng thời gian.
+type: article
+domain: architecture
+category: architecture
+tags:
+- architecture
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: microservices-architecture
+prerequisites: []
+related: []
+status: published
+url: /articles/architecture/versioning-compatibility/
+authors:
+- tiecont
+legacy_urls:
+- /season-13-microservices-architecture/07-versioning-compatibility.html
+schema_version: 1

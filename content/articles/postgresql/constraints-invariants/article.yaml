@@ -1,0 +1,22 @@
+id: season-06-postgresql-with-go-13-constraints-invariants
+title: Constraints và Data Invariants
+description: Đưa invariant cuối cùng xuống database thay vì chỉ kiểm tra bằng if trước khi write.
+type: article
+domain: postgresql
+category: databases
+tags:
+- postgresql
+- databases
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: postgresql-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/postgresql/constraints-invariants/
+authors:
+- tiecont
+legacy_urls:
+- /season-06-postgresql-with-go/13-constraints-invariants.html
+schema_version: 1

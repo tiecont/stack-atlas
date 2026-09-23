@@ -1,0 +1,22 @@
+id: season-09-kafka-deep-dive-04-keys-partitioning
+title: Message key và partitioning strategy
+description: Key quyết định locality, ordering và nguy cơ hot partition.
+type: article
+domain: kafka
+category: stream-processing
+tags:
+- kafka
+- stream-processing
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kafka-deep-dive
+prerequisites: []
+related: []
+status: published
+url: /articles/kafka/keys-partitioning/
+authors:
+- tiecont
+legacy_urls:
+- /season-09-kafka-deep-dive/04-keys-partitioning.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-03-concurrency-07-waitgroup
+title: WaitGroup
+description: Chờ một nhóm goroutine hoàn thành mà không dùng sleep để đoán timing.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/waitgroup/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/07-waitgroup.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-01-fundamentals-05-maps
+title: Maps và Set-like Data
+description: Lookup O(1) kỳ vọng chỉ là phần đầu; còn nil map, iteration, key design và concurrency.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-fundamentals
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/maps/
+authors:
+- tiecont
+legacy_urls:
+- /season-01-fundamentals/05-maps.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-23-architecture-patterns-07-event-sourcing
+title: Event Sourcing
+description: Lưu chuỗi sự kiện làm source of truth thay vì chỉ trạng thái cuối.
+type: article
+domain: architecture
+category: architecture
+tags:
+- architecture
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: architecture-patterns
+prerequisites: []
+related: []
+status: published
+url: /articles/architecture/event-sourcing/
+authors:
+- tiecont
+legacy_urls:
+- /season-23-architecture-patterns/07-event-sourcing.html
+schema_version: 1

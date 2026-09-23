@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-12-runtime-diagnostics
+title: Runtime Diagnostics trong Production
+description: Chuẩn bị pprof, metrics và debug endpoints nhưng bảo vệ chúng.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/runtime-diagnostics/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/12-runtime-diagnostics.html
+schema_version: 1

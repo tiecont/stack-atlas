@@ -1,0 +1,21 @@
+id: season-15-observability-07-prometheus-model
+title: Prometheus Mental Model
+description: Time-series metrics, labels và cardinality.
+type: article
+domain: observability
+category: observability
+tags:
+- observability
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: observability
+prerequisites: []
+related: []
+status: published
+url: /articles/observability/prometheus-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-15-observability/07-prometheus-model.html
+schema_version: 1

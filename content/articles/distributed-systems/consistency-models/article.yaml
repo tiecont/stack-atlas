@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-04-consistency-models
+title: 'Consistency Models: đọc thấy dữ liệu nào?'
+description: Consistency là contract quan sát, không phải checkbox “strong/eventual”.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/consistency-models/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/04-consistency-models.html
+schema_version: 1

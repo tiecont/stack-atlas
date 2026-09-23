@@ -1,0 +1,22 @@
+id: season-03-concurrency-19-backpressure
+title: Backpressure
+description: 'Khi producer nhanh hơn consumer: chậm lại, drop, buffer hay scale?'
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/backpressure/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/19-backpressure.html
+schema_version: 1

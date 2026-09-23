@@ -1,0 +1,21 @@
+id: season-17-security-for-go-backend-05-oauth2-oidc
+title: OAuth 2.0 và OpenID Connect
+description: Phân biệt authorization framework với identity layer.
+type: article
+domain: security
+category: security
+tags:
+- security
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: security-for-backends
+prerequisites: []
+related: []
+status: published
+url: /articles/security/oauth2-oidc/
+authors:
+- tiecont
+legacy_urls:
+- /season-17-security-for-go-backend/05-oauth2-oidc.html
+schema_version: 1

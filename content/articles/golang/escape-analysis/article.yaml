@@ -1,0 +1,22 @@
+id: season-02-runtime-03-escape-analysis
+title: Escape Analysis
+description: Đọc compiler diagnostics để biết value nào phải sống trên heap và vì sao.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/escape-analysis/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/03-escape-analysis.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-07-redis-caching-03-redis-data-types
+title: Redis Data Types cho Backend Go
+description: String, Hash, Set, Sorted Set và khi nào chọn từng cấu trúc thay vì nhét JSON vào mọi key.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/redis-data-types/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/03-redis-data-types.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-12-distributed-transactions-04-inbox-deduplication
+title: Inbox Pattern và Deduplication
+description: At-least-once delivery đòi hỏi consumer xử lý duplicate có chủ ý.
+type: article
+domain: distributed-systems
+category: transactions
+tags:
+- distributed-systems
+- transactions
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-transactions
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/inbox-deduplication/
+authors:
+- tiecont
+legacy_urls:
+- /season-12-distributed-transactions/04-inbox-deduplication.html
+schema_version: 1

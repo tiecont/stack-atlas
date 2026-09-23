@@ -1,0 +1,22 @@
+id: season-02-runtime-01-source-to-binary
+title: Từ Source Code đến Binary
+description: Compiler, linker, package cache và vì sao Go build nhanh và deployment gọn.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/source-to-binary/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/01-source-to-binary.html
+schema_version: 1

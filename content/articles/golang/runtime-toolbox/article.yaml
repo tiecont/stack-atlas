@@ -1,0 +1,22 @@
+id: season-02-runtime-12-runtime-toolbox
+title: 'Runtime Toolbox: trace, GODEBUG và production diagnosis'
+description: Kết nối metrics, pprof, runtime trace và GODEBUG trước khi bước sang Go Concurrency.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/runtime-toolbox/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/12-runtime-toolbox.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-24-system-design-04-rate-limiter-design
+title: Design Distributed Rate Limiter
+description: Token bucket, sliding window và consistency trade-offs.
+type: article
+domain: system-design
+category: system-design
+tags:
+- system-design
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: system-design
+prerequisites: []
+related: []
+status: published
+url: /articles/system-design/rate-limiter-design/
+authors:
+- tiecont
+legacy_urls:
+- /season-24-system-design/04-rate-limiter-design.html
+schema_version: 1

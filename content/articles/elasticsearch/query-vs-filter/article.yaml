@@ -1,0 +1,22 @@
+id: season-22-elasticsearch-deep-dive-07-query-vs-filter
+title: Query Context vs Filter Context
+description: Một query cần scoring hay chỉ cần yes/no match?
+type: article
+domain: elasticsearch
+category: search
+tags:
+- elasticsearch
+- search
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: elasticsearch
+prerequisites: []
+related: []
+status: published
+url: /articles/elasticsearch/query-vs-filter/
+authors:
+- tiecont
+legacy_urls:
+- /season-22-elasticsearch-deep-dive/07-query-vs-filter.html
+schema_version: 1

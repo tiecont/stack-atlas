@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-11-leader-election-leases-fencing
+title: Leader Election, Lease và Fencing Token
+description: Có leader chưa đủ; phải ngăn leader cũ tiếp tục ghi.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/leader-election-leases-fencing/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/11-leader-election-leases-fencing.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-04-networking-with-go-14-reverse-proxy-gateway
+title: Reverse Proxy và API Gateway bằng Go
+description: Hiểu proxying, forwarding headers, upstream selection và vì sao gateway là một network boundary.
+type: article
+domain: networking
+category: networking
+tags:
+- networking
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: networking-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/networking/reverse-proxy-gateway/
+authors:
+- tiecont
+legacy_urls:
+- /season-04-networking-with-go/14-reverse-proxy-gateway.html
+schema_version: 1

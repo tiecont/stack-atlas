@@ -1,0 +1,23 @@
+id: season-02-runtime-10-memory-resource-leaks
+title: Memory Leak và Resource Leak
+description: GC không cứu được cache vô hạn, goroutine leak, timer/socket/file lifecycle hay reference
+  giữ quá lâu.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/memory-resource-leaks/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/10-memory-resource-leaks.html
+schema_version: 1

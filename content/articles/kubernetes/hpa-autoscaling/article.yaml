@@ -1,0 +1,22 @@
+id: season-19-kubernetes-for-go-backend-09-hpa-autoscaling
+title: Horizontal Pod Autoscaling
+description: Scale workload theo signal nhưng hiểu bottleneck thật.
+type: article
+domain: kubernetes
+category: orchestration
+tags:
+- kubernetes
+- orchestration
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kubernetes
+prerequisites: []
+related: []
+status: published
+url: /articles/kubernetes/hpa-autoscaling/
+authors:
+- tiecont
+legacy_urls:
+- /season-19-kubernetes-for-go-backend/09-hpa-autoscaling.html
+schema_version: 1

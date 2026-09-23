@@ -1,0 +1,22 @@
+id: season-07-redis-caching-06-write-through-write-behind
+title: Write-Through và Write-Behind
+description: So sánh các chiến lược ghi cache/database và trade-off correctness, latency, durability.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/write-through-write-behind/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/06-write-through-write-behind.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-09-kafka-deep-dive-06-idempotent-producer
+title: Idempotent Producer và duplicate do retry
+description: Retry network có thể tạo duplicate nếu broker đã ghi nhưng response bị mất.
+type: article
+domain: kafka
+category: stream-processing
+tags:
+- kafka
+- stream-processing
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kafka-deep-dive
+prerequisites: []
+related: []
+status: published
+url: /articles/kafka/idempotent-producer/
+authors:
+- tiecont
+legacy_urls:
+- /season-09-kafka-deep-dive/06-idempotent-producer.html
+schema_version: 1

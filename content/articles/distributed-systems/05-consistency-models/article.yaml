@@ -1,0 +1,22 @@
+id: season-20-distributed-data-05-consistency-models
+title: Consistency Models cho Data Store
+description: Strong, eventual và session guarantees ảnh hưởng trực tiếp app semantics.
+type: article
+domain: distributed-systems
+category: data-systems
+tags:
+- distributed-systems
+- data-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-data
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/05-consistency-models/
+authors:
+- tiecont
+legacy_urls:
+- /season-20-distributed-data/05-consistency-models.html
+schema_version: 1

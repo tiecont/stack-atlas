@@ -1,0 +1,22 @@
+id: season-22-elasticsearch-deep-dive-15-go-integration
+title: Go Integration Pattern
+description: Thiết kế indexing pipeline và search client có timeout, retry và idempotency.
+type: article
+domain: elasticsearch
+category: search
+tags:
+- elasticsearch
+- search
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: elasticsearch
+prerequisites: []
+related: []
+status: published
+url: /articles/elasticsearch/go-integration/
+authors:
+- tiecont
+legacy_urls:
+- /season-22-elasticsearch-deep-dive/15-go-integration.html
+schema_version: 1

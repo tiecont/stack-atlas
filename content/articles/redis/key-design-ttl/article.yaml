@@ -1,0 +1,22 @@
+id: season-07-redis-caching-04-key-design-ttl
+title: Key Design, TTL và Expiration
+description: Đặt key có namespace, chọn TTL theo business freshness và tránh tạo immortal cache vô tình.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/key-design-ttl/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/04-key-design-ttl.html
+schema_version: 1

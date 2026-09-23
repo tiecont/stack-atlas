@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-03-time-clocks-ordering
+title: Time, Clocks và Ordering
+description: Trong distributed system, “xảy ra trước” khó hơn nhìn timestamp.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/time-clocks-ordering/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/03-time-clocks-ordering.html
+schema_version: 1

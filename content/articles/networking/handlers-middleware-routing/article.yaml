@@ -1,0 +1,22 @@
+id: season-04-networking-with-go-08-handlers-middleware-routing
+title: Handler, Middleware và Request Context
+description: 'Thiết kế HTTP pipeline idiomatic: Handler interface, middleware chain, request-scoped context
+  và boundaries.'
+type: article
+domain: networking
+category: networking
+tags:
+- networking
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: networking-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/networking/handlers-middleware-routing/
+authors:
+- tiecont
+legacy_urls:
+- /season-04-networking-with-go/08-handlers-middleware-routing.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-24-system-design-09-file-storage
+title: Design File Storage
+description: Upload, object storage, metadata, CDN và multipart flows.
+type: article
+domain: system-design
+category: system-design
+tags:
+- system-design
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: system-design
+prerequisites: []
+related: []
+status: published
+url: /articles/system-design/file-storage/
+authors:
+- tiecont
+legacy_urls:
+- /season-24-system-design/09-file-storage.html
+schema_version: 1

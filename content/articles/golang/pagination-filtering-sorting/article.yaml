@@ -1,0 +1,22 @@
+id: season-05-production-http-server-08-pagination-filtering-sorting
+title: Pagination, Filtering và Sorting
+description: Thiết kế list endpoint không sập khi bảng lên hàng chục triệu row.
+type: article
+domain: golang
+category: http-services
+tags:
+- golang
+- http-services
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-http
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/pagination-filtering-sorting/
+authors:
+- tiecont
+legacy_urls:
+- /season-05-production-http-server/08-pagination-filtering-sorting.html
+schema_version: 1

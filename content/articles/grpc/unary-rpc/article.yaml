@@ -1,0 +1,22 @@
+id: season-14-grpc-with-go-04-unary-rpc
+title: Unary RPC
+description: 'Một request, một response: mô hình phổ biến nhất.'
+type: article
+domain: grpc
+category: rpc
+tags:
+- grpc
+- rpc
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: grpc-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/grpc/unary-rpc/
+authors:
+- tiecont
+legacy_urls:
+- /season-14-grpc-with-go/04-unary-rpc.html
+schema_version: 1

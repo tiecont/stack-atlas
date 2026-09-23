@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-01-production-mental-model
+title: Production Go Mental Model
+description: Binary chạy được chưa phải là service production-ready.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/production-mental-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/01-production-mental-model.html
+schema_version: 1

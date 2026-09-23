@@ -1,0 +1,22 @@
+id: season-09-kafka-deep-dive-05-replication-isr-acks
+title: Replication, ISR, acks và durability
+description: Record “đã gửi” không đồng nghĩa “đã durable”.
+type: article
+domain: kafka
+category: stream-processing
+tags:
+- kafka
+- stream-processing
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kafka-deep-dive
+prerequisites: []
+related: []
+status: published
+url: /articles/kafka/replication-isr-acks/
+authors:
+- tiecont
+legacy_urls:
+- /season-09-kafka-deep-dive/05-replication-isr-acks.html
+schema_version: 1

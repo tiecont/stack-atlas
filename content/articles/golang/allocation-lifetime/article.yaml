@@ -1,0 +1,22 @@
+id: season-02-runtime-04-allocation-lifetime
+title: Allocation và Object Lifetime
+description: Allocation rate, retention và vì sao “ít alloc” không đồng nghĩa “ít memory”.
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/allocation-lifetime/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/04-allocation-lifetime.html
+schema_version: 1

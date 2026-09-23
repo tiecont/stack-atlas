@@ -1,0 +1,23 @@
+id: season-01-fundamentals-13-io-standard-library
+title: io.Reader, io.Writer và Standard Library
+description: Hai interface nhỏ mở ra file, HTTP body, compression, hashing và streaming mà không cần load
+  tất cả vào RAM.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-fundamentals
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/io-standard-library/
+authors:
+- tiecont
+legacy_urls:
+- /season-01-fundamentals/13-io-standard-library.html
+schema_version: 1

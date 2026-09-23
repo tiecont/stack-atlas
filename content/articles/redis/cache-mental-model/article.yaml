@@ -1,0 +1,23 @@
+id: season-07-redis-caching-01-cache-mental-model
+title: Cache là gì và tại sao nó khó?
+description: 'Hiểu cache như một bản sao dữ liệu: nhanh hơn nhưng thêm consistency, expiry và failure
+  mode.'
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/cache-mental-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/01-cache-mental-model.html
+schema_version: 1

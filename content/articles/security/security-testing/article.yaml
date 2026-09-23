@@ -1,0 +1,21 @@
+id: season-17-security-for-go-backend-13-security-testing
+title: Security Testing cho Go Backend
+description: Kết hợp static checks, dependency scanning và abuse-case tests.
+type: article
+domain: security
+category: security
+tags:
+- security
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: security-for-backends
+prerequisites: []
+related: []
+status: published
+url: /articles/security/security-testing/
+authors:
+- tiecont
+legacy_urls:
+- /season-17-security-for-go-backend/13-security-testing.html
+schema_version: 1

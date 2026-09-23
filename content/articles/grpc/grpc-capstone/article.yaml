@@ -1,0 +1,22 @@
+id: season-14-grpc-with-go-13-grpc-capstone
+title: 'Capstone: Internal Service Mesh bằng gRPC'
+description: Xây User, Order và Payment services với deadline, auth, tracing và streaming.
+type: article
+domain: grpc
+category: rpc
+tags:
+- grpc
+- rpc
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: grpc-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/grpc/grpc-capstone/
+authors:
+- tiecont
+legacy_urls:
+- /season-14-grpc-with-go/13-grpc-capstone.html
+schema_version: 1

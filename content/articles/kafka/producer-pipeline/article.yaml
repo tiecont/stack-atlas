@@ -1,0 +1,22 @@
+id: season-09-kafka-deep-dive-03-producer-pipeline
+title: 'Producer internals: batch, linger và compression'
+description: Producer nhanh nhờ gom record thay vì gửi từng event một.
+type: article
+domain: kafka
+category: stream-processing
+tags:
+- kafka
+- stream-processing
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kafka-deep-dive
+prerequisites: []
+related: []
+status: published
+url: /articles/kafka/producer-pipeline/
+authors:
+- tiecont
+legacy_urls:
+- /season-09-kafka-deep-dive/03-producer-pipeline.html
+schema_version: 1

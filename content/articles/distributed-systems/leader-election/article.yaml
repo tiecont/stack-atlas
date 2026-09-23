@@ -1,0 +1,22 @@
+id: season-21-consensus-coordination-04-leader-election
+title: Leader Election
+description: Chọn một coordinator để serialize proposals.
+type: article
+domain: distributed-systems
+category: consensus
+tags:
+- distributed-systems
+- consensus
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: consensus
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/leader-election/
+authors:
+- tiecont
+legacy_urls:
+- /season-21-consensus-coordination/04-leader-election.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-02-configuration
+title: Configuration Design
+description: Tách config theo environment nhưng giữ schema và validation rõ ràng.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/configuration/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/02-configuration.html
+schema_version: 1

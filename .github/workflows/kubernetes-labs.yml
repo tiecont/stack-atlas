@@ -8,10 +8,13 @@ on:
       - "content/paths/kubernetes-engineer.yaml"
       - "labs/kubernetes/**"
       - "examples/atlas-demo-api/**"
-      - "scripts/build_site.py"
-      - "scripts/validate_kubernetes_manifests.py"
-      - "scripts/test_kubernetes_labs.sh"
-      - "requirements.txt"
+      - "platform/**"
+      - "scripts/ci/kubernetes/**"
+      - "scripts/ci/test_kubernetes_labs.sh"
+      - "scripts/ci/validate_kubernetes_manifests.py"
+      - "tests/kubernetes/**"
+      - "pyproject.toml"
+      - "Makefile"
       - ".github/workflows/kubernetes-labs.yml"
   push:
     branches: [main]
@@ -21,10 +24,13 @@ on:
       - "content/paths/kubernetes-engineer.yaml"
       - "labs/kubernetes/**"
       - "examples/atlas-demo-api/**"
-      - "scripts/build_site.py"
-      - "scripts/validate_kubernetes_manifests.py"
-      - "scripts/test_kubernetes_labs.sh"
-      - "requirements.txt"
+      - "platform/**"
+      - "scripts/ci/kubernetes/**"
+      - "scripts/ci/test_kubernetes_labs.sh"
+      - "scripts/ci/validate_kubernetes_manifests.py"
+      - "tests/kubernetes/**"
+      - "pyproject.toml"
+      - "Makefile"
       - ".github/workflows/kubernetes-labs.yml"
   workflow_dispatch:
 
@@ -34,6 +40,7 @@ permissions:
 jobs:
   fast:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -42,14 +49,16 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install -r requirements.txt
-      - run: python3 scripts/validate_kubernetes_manifests.py
+      - run: python3 -m pip install -e .
+      - run: make validate
+      - run: bash tests/kubernetes/context_safety.sh
       - run: go test -race ./...
         working-directory: examples/atlas-demo-api
-      - run: python3 scripts/build_site.py
+      - run: make build
 
   kind-smoke:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: fast
     steps:
       - uses: actions/checkout@v4
@@ -59,7 +68,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install -r requirements.txt
+      - run: python3 -m pip install -e .
       - name: Install pinned kind and kubectl
         run: |
           curl --fail --location --silent --show-error https://kind.sigs.k8s.io/dl/v0.33.0/kind-linux-amd64 --output /tmp/kind
@@ -68,10 +77,10 @@ jobs:
           curl --fail --location --silent --show-error https://dl.k8s.io/release/v1.37.0/bin/linux/amd64/kubectl --output /tmp/kubectl
           chmod +x /tmp/kubectl
           sudo install /tmp/kubectl /usr/local/bin/kubectl
-      - name: Create baseline cluster
-        run: kind create cluster --name stack-atlas --config labs/kubernetes/00-cluster/kind-config.yaml --wait 180s
+      - name: Print tool versions
+        run: |
+          kind version
+          kubectl version --client
+          docker version
       - name: Validate and run foundations lab
-        run: scripts/test_kubernetes_labs.sh
-      - name: Delete baseline cluster
-        if: always()
-        run: kind delete cluster --name stack-atlas
+        run: CLEANUP=1 make test-kubernetes

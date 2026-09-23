@@ -1,0 +1,22 @@
+id: season-14-grpc-with-go-12-grpc-observability-testing
+title: Testing và Observability cho gRPC
+description: Test handler, contract và network behavior; đo latency theo method/status.
+type: article
+domain: grpc
+category: rpc
+tags:
+- grpc
+- rpc
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: grpc-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/grpc/grpc-observability-testing/
+authors:
+- tiecont
+legacy_urls:
+- /season-14-grpc-with-go/12-grpc-observability-testing.html
+schema_version: 1
