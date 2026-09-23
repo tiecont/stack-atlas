@@ -9,6 +9,7 @@ Stack Atlas accepts standalone engineering articles as well as articles included
 
    ```json
    {
+     "schema_version": 1,
      "id": "postgres-connection-pools",
      "title": "Why PostgreSQL Connection Pools Fail Under Load",
      "description": "How pool saturation affects latency and throughput.",

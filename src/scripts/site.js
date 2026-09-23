@@ -1,6 +1,5 @@
-// GENERATED FILE — edit src/scripts/site.js
 (() => {
-  const BASE_PATH = "";
+  const BASE_PATH = __BASE_PATH__;
   const progressKey = 'stack-atlas-progress-v1';
   const memoryStore = { completed: [] };
   const LocalStorageProgressStore = {

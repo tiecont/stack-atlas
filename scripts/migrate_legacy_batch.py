@@ -11,7 +11,10 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote
 
-from build_site import ROOT, clean_text, read_json, slug
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from stack_atlas.catalog import clean_text, read_json, slug
 
 
 class CardParser(HTMLParser):
@@ -181,6 +184,7 @@ def collect_batch(season_names):
                 raise ValueError(f"{legacy_path.relative_to(ROOT)}: missing title or description")
             fragment = extract_fragment(original, legacy_path)
             record = {
+                "schema_version": 1,
                 "id": article_id,
                 "title": title,
                 "description": description,
@@ -264,7 +268,10 @@ def main():
         records = collect_batch(args.seasons)
         path_file, learning_path, updated_metadata, remaining = canonicalize_path_references(args.seasons, records)
         if args.dry_run:
-            lesson_count = sum(len(module.get("article_ids", [])) for module in learning_path["modules"] if not module.get("season"))
+            article_records = [read_json(path) for path in sorted((ROOT / "content/articles").rglob("*.json"))]
+            selected_modules = map_legacy_seasons_to_modules(learning_path, article_records)
+            selected_ids = {selected_modules[season]["id"] for season in args.seasons}
+            lesson_count = sum(len(module.get("article_ids", [])) for module in learning_path["modules"] if module["id"] in selected_ids)
             print(f"Ready to write {len(records)} article sources and canonical references for {lesson_count} lessons.")
             print(f"Will normalize legacy URL metadata in {len(updated_metadata)} article records.")
             if remaining:
