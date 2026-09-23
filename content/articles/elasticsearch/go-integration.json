@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/go-integration/",
   "source": "content/articles/elasticsearch/go-integration.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/15-go-integration.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/15-go-integration.html"
   ]
 }

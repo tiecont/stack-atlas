@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/source-to-binary/",
   "source": "content/articles/golang/source-to-binary.html",
-  "legacy_url": "/season-02-runtime/01-source-to-binary.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/01-source-to-binary.html"
   ]
 }

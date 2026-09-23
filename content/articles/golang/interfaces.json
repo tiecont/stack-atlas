@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/interfaces/",
   "source": "content/articles/golang/interfaces.html",
-  "legacy_url": "/season-01-fundamentals/08-interfaces.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/08-interfaces.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/producer-consumer-contract/",
   "source": "content/articles/messaging/producer-consumer-contract.html",
-  "legacy_url": "/season-08-messaging/03-producer-consumer-contract.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/03-producer-consumer-contract.html"
   ]
 }

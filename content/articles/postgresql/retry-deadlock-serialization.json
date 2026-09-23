@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/retry-deadlock-serialization/",
   "source": "content/articles/postgresql/retry-deadlock-serialization.html",
-  "legacy_url": "/season-06-postgresql-with-go/17-retry-deadlock-serialization.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/17-retry-deadlock-serialization.html"
   ]
 }

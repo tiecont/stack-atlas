@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/lease-fencing/",
   "source": "content/articles/distributed-systems/lease-fencing.html",
-  "legacy_url": "/season-21-consensus-coordination/10-lease-fencing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/10-lease-fencing.html"
   ]
 }

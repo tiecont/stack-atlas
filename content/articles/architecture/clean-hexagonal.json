@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/clean-hexagonal/",
   "source": "content/articles/architecture/clean-hexagonal.html",
-  "legacy_url": "/season-23-architecture-patterns/03-clean-hexagonal.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/03-clean-hexagonal.html"
   ]
 }

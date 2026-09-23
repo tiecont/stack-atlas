@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/http-on-the-wire/",
   "source": "content/articles/networking/http-on-the-wire.html",
-  "legacy_url": "/season-04-networking-with-go/06-http-on-the-wire.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/06-http-on-the-wire.html"
   ]
 }

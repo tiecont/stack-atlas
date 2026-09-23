@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/log-matching/",
   "source": "content/articles/distributed-systems/log-matching.html",
-  "legacy_url": "/season-21-consensus-coordination/07-log-matching.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/07-log-matching.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/pgx-native/",
   "source": "content/articles/postgresql/pgx-native.html",
-  "legacy_url": "/season-06-postgresql-with-go/03-pgx-native.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/03-pgx-native.html"
   ]
 }

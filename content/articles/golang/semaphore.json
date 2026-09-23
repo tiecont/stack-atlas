@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/semaphore/",
   "source": "content/articles/golang/semaphore.html",
-  "legacy_url": "/season-03-concurrency/11-semaphore.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/11-semaphore.html"
   ]
 }

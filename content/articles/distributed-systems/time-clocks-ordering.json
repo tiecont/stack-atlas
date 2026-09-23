@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/time-clocks-ordering/",
   "source": "content/articles/distributed-systems/time-clocks-ordering.html",
-  "legacy_url": "/season-10-distributed-systems/03-time-clocks-ordering.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/03-time-clocks-ordering.html"
   ]
 }

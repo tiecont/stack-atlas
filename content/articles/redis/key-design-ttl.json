@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/key-design-ttl/",
   "source": "content/articles/redis/key-design-ttl.html",
-  "legacy_url": "/season-07-redis-caching/04-key-design-ttl.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/04-key-design-ttl.html"
   ]
 }

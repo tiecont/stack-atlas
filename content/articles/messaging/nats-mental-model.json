@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/nats-mental-model/",
   "source": "content/articles/messaging/nats-mental-model.html",
-  "legacy_url": "/season-08-messaging/10-nats-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/10-nats-mental-model.html"
   ]
 }

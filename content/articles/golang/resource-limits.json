@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/resource-limits/",
   "source": "content/articles/golang/resource-limits.html",
-  "legacy_url": "/season-18-production-go-engineering/07-resource-limits.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/07-resource-limits.html"
   ]
 }

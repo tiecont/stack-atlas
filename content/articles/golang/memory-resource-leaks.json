@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/memory-resource-leaks/",
   "source": "content/articles/golang/memory-resource-leaks.html",
-  "legacy_url": "/season-02-runtime/10-memory-resource-leaks.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/10-memory-resource-leaks.html"
   ]
 }

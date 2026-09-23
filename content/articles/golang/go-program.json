@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/go-program/",
   "source": "content/articles/golang/go-program.html",
-  "legacy_url": "/season-01-fundamentals/01-go-program.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/01-go-program.html"
   ]
 }

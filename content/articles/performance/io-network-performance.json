@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/io-network-performance/",
   "source": "content/articles/performance/io-network-performance.html",
-  "legacy_url": "/season-16-performance-engineering/10-io-network-performance.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/10-io-network-performance.html"
   ]
 }

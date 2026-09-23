@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/bulk-indexing/",
   "source": "content/articles/elasticsearch/bulk-indexing.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/11-bulk-indexing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/11-bulk-indexing.html"
   ]
 }

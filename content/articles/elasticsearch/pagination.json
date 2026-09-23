@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/pagination/",
   "source": "content/articles/elasticsearch/pagination.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/10-pagination.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/10-pagination.html"
   ]
 }

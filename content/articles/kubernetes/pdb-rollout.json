@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/pdb-rollout/",
   "source": "content/articles/kubernetes/pdb-rollout.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/10-pdb-rollout.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/10-pdb-rollout.html"
   ]
 }

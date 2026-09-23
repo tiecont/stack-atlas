@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/opentelemetry/",
   "source": "content/articles/observability/opentelemetry.html",
-  "legacy_url": "/season-15-observability/10-opentelemetry.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/10-opentelemetry.html"
   ]
 }

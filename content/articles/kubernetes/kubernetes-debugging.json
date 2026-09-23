@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/kubernetes-debugging/",
   "source": "content/articles/kubernetes/kubernetes-debugging.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/12-kubernetes-debugging.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/12-kubernetes-debugging.html"
   ]
 }

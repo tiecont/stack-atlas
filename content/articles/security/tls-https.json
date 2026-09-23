@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/tls-https/",
   "source": "content/articles/security/tls-https.html",
-  "legacy_url": "/season-17-security-for-go-backend/02-tls-https.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/02-tls-https.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/io-standard-library/",
   "source": "content/articles/golang/io-standard-library.html",
-  "legacy_url": "/season-01-fundamentals/13-io-standard-library.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/13-io-standard-library.html"
   ]
 }

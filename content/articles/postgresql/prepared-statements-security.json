@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/prepared-statements-security/",
   "source": "content/articles/postgresql/prepared-statements-security.html",
-  "legacy_url": "/season-06-postgresql-with-go/16-prepared-statements-security.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/16-prepared-statements-security.html"
   ]
 }

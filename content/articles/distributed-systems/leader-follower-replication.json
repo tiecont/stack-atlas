@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/leader-follower-replication/",
   "source": "content/articles/distributed-systems/leader-follower-replication.html",
-  "legacy_url": "/season-10-distributed-systems/07-leader-follower-replication.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/07-leader-follower-replication.html"
   ]
 }

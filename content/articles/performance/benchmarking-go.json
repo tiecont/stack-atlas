@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/benchmarking-go/",
   "source": "content/articles/performance/benchmarking-go.html",
-  "legacy_url": "/season-16-performance-engineering/02-benchmarking-go.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/02-benchmarking-go.html"
   ]
 }

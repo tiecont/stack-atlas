@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/string-bytes/",
   "source": "content/articles/golang/string-bytes.html",
-  "legacy_url": "/season-02-runtime/07-string-bytes.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/07-string-bytes.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/jsonb-arrays-and-types/",
   "source": "content/articles/postgresql/jsonb-arrays-and-types.html",
-  "legacy_url": "/season-06-postgresql-with-go/15-jsonb-arrays-and-types.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/15-jsonb-arrays-and-types.html"
   ]
 }

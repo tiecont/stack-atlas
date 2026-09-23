@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/stateful-workloads/",
   "source": "content/articles/kubernetes/stateful-workloads.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/11-stateful-workloads.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/11-stateful-workloads.html"
   ]
 }

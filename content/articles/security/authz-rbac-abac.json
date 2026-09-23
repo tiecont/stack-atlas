@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/authz-rbac-abac/",
   "source": "content/articles/security/authz-rbac-abac.html",
-  "legacy_url": "/season-17-security-for-go-backend/06-authz-rbac-abac.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/06-authz-rbac-abac.html"
   ]
 }

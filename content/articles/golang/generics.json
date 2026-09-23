@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/generics/",
   "source": "content/articles/golang/generics.html",
-  "legacy_url": "/season-01-fundamentals/12-generics.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/12-generics.html"
   ]
 }

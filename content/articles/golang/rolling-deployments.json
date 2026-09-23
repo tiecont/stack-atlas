@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/rolling-deployments/",
   "source": "content/articles/golang/rolling-deployments.html",
-  "legacy_url": "/season-18-production-go-engineering/09-rolling-deployments.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/09-rolling-deployments.html"
   ]
 }

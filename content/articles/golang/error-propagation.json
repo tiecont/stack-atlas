@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/error-propagation/",
   "source": "content/articles/golang/error-propagation.html",
-  "legacy_url": "/season-03-concurrency/20-error-propagation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/20-error-propagation.html"
   ]
 }

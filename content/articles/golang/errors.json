@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/errors/",
   "source": "content/articles/golang/errors.html",
-  "legacy_url": "/season-01-fundamentals/09-errors.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/09-errors.html"
   ]
 }

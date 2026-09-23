@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/retry-dlq/",
   "source": "content/articles/kafka/retry-dlq.html",
-  "legacy_url": "/season-09-kafka-deep-dive/12-retry-dlq.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/12-retry-dlq.html"
   ]
 }

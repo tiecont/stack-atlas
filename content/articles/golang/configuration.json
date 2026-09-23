@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/configuration/",
   "source": "content/articles/golang/configuration.html",
-  "legacy_url": "/season-18-production-go-engineering/02-configuration.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/02-configuration.html"
   ]
 }

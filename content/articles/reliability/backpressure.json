@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/backpressure/",
   "source": "content/articles/reliability/backpressure.html",
-  "legacy_url": "/season-11-reliability-engineering/08-backpressure.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/08-backpressure.html"
   ]
 }

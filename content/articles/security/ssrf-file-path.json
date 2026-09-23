@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/ssrf-file-path/",
   "source": "content/articles/security/ssrf-file-path.html",
-  "legacy_url": "/season-17-security-for-go-backend/08-ssrf-file-path.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/08-ssrf-file-path.html"
   ]
 }

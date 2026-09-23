@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/gc-tuning/",
   "source": "content/articles/performance/gc-tuning.html",
-  "legacy_url": "/season-16-performance-engineering/09-gc-tuning.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/09-gc-tuning.html"
   ]
 }

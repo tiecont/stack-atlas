@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/orchestration/",
   "source": "content/articles/distributed-systems/orchestration.html",
-  "legacy_url": "/season-12-distributed-transactions/06-orchestration.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/06-orchestration.html"
   ]
 }

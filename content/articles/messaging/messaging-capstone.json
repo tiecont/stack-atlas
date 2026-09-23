@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/messaging-capstone/",
   "source": "content/articles/messaging/messaging-capstone.html",
-  "legacy_url": "/season-08-messaging/12-messaging-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/12-messaging-capstone.html"
   ]
 }

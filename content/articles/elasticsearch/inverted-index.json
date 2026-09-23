@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/inverted-index/",
   "source": "content/articles/elasticsearch/inverted-index.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/02-inverted-index.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/02-inverted-index.html"
   ]
 }

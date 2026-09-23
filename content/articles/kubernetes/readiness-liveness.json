@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/readiness-liveness/",
   "source": "content/articles/kubernetes/readiness-liveness.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/07-readiness-liveness.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/07-readiness-liveness.html"
   ]
 }

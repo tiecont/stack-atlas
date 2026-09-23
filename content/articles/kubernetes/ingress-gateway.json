@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/ingress-gateway/",
   "source": "content/articles/kubernetes/ingress-gateway.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/04-ingress-gateway.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/04-ingress-gateway.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/go-trace/",
   "source": "content/articles/performance/go-trace.html",
-  "legacy_url": "/season-16-performance-engineering/07-go-trace.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/07-go-trace.html"
   ]
 }

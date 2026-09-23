@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/timeouts-deadlines-cancellation/",
   "source": "content/articles/networking/timeouts-deadlines-cancellation.html",
-  "legacy_url": "/season-04-networking-with-go/10-timeouts-deadlines-cancellation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/10-timeouts-deadlines-cancellation.html"
   ]
 }

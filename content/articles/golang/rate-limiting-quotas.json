@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/rate-limiting-quotas/",
   "source": "content/articles/golang/rate-limiting-quotas.html",
-  "legacy_url": "/season-05-production-http-server/10-rate-limiting-quotas.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/10-rate-limiting-quotas.html"
   ]
 }

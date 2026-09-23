@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/pods-deployments/",
   "source": "content/articles/kubernetes/pods-deployments.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/02-pods-deployments.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/02-pods-deployments.html"
   ]
 }

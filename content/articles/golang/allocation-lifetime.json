@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/allocation-lifetime/",
   "source": "content/articles/golang/allocation-lifetime.html",
-  "legacy_url": "/season-02-runtime/04-allocation-lifetime.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/04-allocation-lifetime.html"
   ]
 }

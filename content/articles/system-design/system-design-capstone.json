@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/system-design-capstone/",
   "source": "content/articles/system-design/system-design-capstone.html",
-  "legacy_url": "/season-24-system-design/16-system-design-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/16-system-design-capstone.html"
   ]
 }

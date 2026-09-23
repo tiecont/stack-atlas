@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/cap-theorem/",
   "source": "content/articles/distributed-systems/cap-theorem.html",
-  "legacy_url": "/season-10-distributed-systems/05-cap-theorem.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/05-cap-theorem.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/isolation-levels/",
   "source": "content/articles/postgresql/isolation-levels.html",
-  "legacy_url": "/season-06-postgresql-with-go/07-isolation-levels.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/07-isolation-levels.html"
   ]
 }

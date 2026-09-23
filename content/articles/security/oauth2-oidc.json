@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/oauth2-oidc/",
   "source": "content/articles/security/oauth2-oidc.html",
-  "legacy_url": "/season-17-security-for-go-backend/05-oauth2-oidc.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/05-oauth2-oidc.html"
   ]
 }

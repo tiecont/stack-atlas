@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/leader-election-leases-fencing/",
   "source": "content/articles/distributed-systems/leader-election-leases-fencing.html",
-  "legacy_url": "/season-10-distributed-systems/11-leader-election-leases-fencing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/11-leader-election-leases-fencing.html"
   ]
 }

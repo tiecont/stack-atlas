@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/layered-architecture/",
   "source": "content/articles/architecture/layered-architecture.html",
-  "legacy_url": "/season-23-architecture-patterns/02-layered-architecture.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/02-layered-architecture.html"
   ]
 }

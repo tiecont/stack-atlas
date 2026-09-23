@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/capstone-distributed-design/",
   "source": "content/articles/distributed-systems/capstone-distributed-design.html",
-  "legacy_url": "/season-10-distributed-systems/16-capstone-distributed-design.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/16-capstone-distributed-design.html"
   ]
 }

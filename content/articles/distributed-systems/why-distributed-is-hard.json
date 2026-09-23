@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/why-distributed-is-hard/",
   "source": "content/articles/distributed-systems/why-distributed-is-hard.html",
-  "legacy_url": "/season-10-distributed-systems/01-why-distributed-is-hard.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/01-why-distributed-is-hard.html"
   ]
 }

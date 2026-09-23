@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/producer-pipeline/",
   "source": "content/articles/kafka/producer-pipeline.html",
-  "legacy_url": "/season-09-kafka-deep-dive/03-producer-pipeline.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/03-producer-pipeline.html"
   ]
 }

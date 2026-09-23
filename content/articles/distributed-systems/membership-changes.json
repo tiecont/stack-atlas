@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/membership-changes/",
   "source": "content/articles/distributed-systems/membership-changes.html",
-  "legacy_url": "/season-21-consensus-coordination/08-membership-changes.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/08-membership-changes.html"
   ]
 }

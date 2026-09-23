@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/net-http-server/",
   "source": "content/articles/networking/net-http-server.html",
-  "legacy_url": "/season-04-networking-with-go/07-net-http-server.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/07-net-http-server.html"
   ]
 }

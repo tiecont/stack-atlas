@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/grpc/grpc-observability-testing/",
   "source": "content/articles/grpc/grpc-observability-testing.html",
-  "legacy_url": "/season-14-grpc-with-go/12-grpc-observability-testing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-14-grpc-with-go/12-grpc-observability-testing.html"
   ]
 }

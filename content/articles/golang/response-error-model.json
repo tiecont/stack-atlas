@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/response-error-model/",
   "source": "content/articles/golang/response-error-model.html",
-  "legacy_url": "/season-05-production-http-server/04-response-error-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/04-response-error-model.html"
   ]
 }

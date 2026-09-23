@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/http-client-transport/",
   "source": "content/articles/networking/http-client-transport.html",
-  "legacy_url": "/season-04-networking-with-go/09-http-client-transport.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/09-http-client-transport.html"
   ]
 }

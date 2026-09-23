@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/transactions-eos/",
   "source": "content/articles/kafka/transactions-eos.html",
-  "legacy_url": "/season-09-kafka-deep-dive/13-transactions-eos.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/13-transactions-eos.html"
   ]
 }

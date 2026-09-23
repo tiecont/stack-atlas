@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/request-parsing-validation/",
   "source": "content/articles/golang/request-parsing-validation.html",
-  "legacy_url": "/season-05-production-http-server/03-request-parsing-validation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/03-request-parsing-validation.html"
   ]
 }

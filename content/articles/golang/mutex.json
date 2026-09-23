@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/mutex/",
   "source": "content/articles/golang/mutex.html",
-  "legacy_url": "/season-03-concurrency/04-mutex.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/04-mutex.html"
   ]
 }

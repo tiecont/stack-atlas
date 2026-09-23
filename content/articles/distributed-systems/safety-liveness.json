@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/safety-liveness/",
   "source": "content/articles/distributed-systems/safety-liveness.html",
-  "legacy_url": "/season-21-consensus-coordination/02-safety-liveness.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/02-safety-liveness.html"
   ]
 }

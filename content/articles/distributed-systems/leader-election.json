@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/leader-election/",
   "source": "content/articles/distributed-systems/leader-election.html",
-  "legacy_url": "/season-21-consensus-coordination/04-leader-election.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/04-leader-election.html"
   ]
 }

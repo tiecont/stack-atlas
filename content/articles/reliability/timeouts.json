@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/timeouts/",
   "source": "content/articles/reliability/timeouts.html",
-  "legacy_url": "/season-11-reliability-engineering/02-timeouts.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/02-timeouts.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/constraints-invariants/",
   "source": "content/articles/postgresql/constraints-invariants.html",
-  "legacy_url": "/season-06-postgresql-with-go/13-constraints-invariants.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/13-constraints-invariants.html"
   ]
 }

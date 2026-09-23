@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/latency-partial-failure/",
   "source": "content/articles/distributed-systems/latency-partial-failure.html",
-  "legacy_url": "/season-10-distributed-systems/02-latency-partial-failure.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/02-latency-partial-failure.html"
   ]
 }

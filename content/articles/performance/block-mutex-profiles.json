@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/block-mutex-profiles/",
   "source": "content/articles/performance/block-mutex-profiles.html",
-  "legacy_url": "/season-16-performance-engineering/06-block-mutex-profiles.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/06-block-mutex-profiles.html"
   ]
 }

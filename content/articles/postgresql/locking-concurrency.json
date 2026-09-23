@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/locking-concurrency/",
   "source": "content/articles/postgresql/locking-concurrency.html",
-  "legacy_url": "/season-06-postgresql-with-go/08-locking-concurrency.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/08-locking-concurrency.html"
   ]
 }

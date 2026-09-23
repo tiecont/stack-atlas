@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/reliability-capstone/",
   "source": "content/articles/reliability/reliability-capstone.html",
-  "legacy_url": "/season-11-reliability-engineering/12-reliability-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/12-reliability-capstone.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/handlers-middleware-routing/",
   "source": "content/articles/networking/handlers-middleware-routing.html",
-  "legacy_url": "/season-04-networking-with-go/08-handlers-middleware-routing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/08-handlers-middleware-routing.html"
   ]
 }

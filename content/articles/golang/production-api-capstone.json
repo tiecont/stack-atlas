@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/production-api-capstone/",
   "source": "content/articles/golang/production-api-capstone.html",
-  "legacy_url": "/season-05-production-http-server/15-production-api-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/15-production-api-capstone.html"
   ]
 }

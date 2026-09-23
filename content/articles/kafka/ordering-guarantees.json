@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/ordering-guarantees/",
   "source": "content/articles/kafka/ordering-guarantees.html",
-  "legacy_url": "/season-09-kafka-deep-dive/11-ordering-guarantees.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/11-ordering-guarantees.html"
   ]
 }

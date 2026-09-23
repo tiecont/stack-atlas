@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/upsert-conflict-handling/",
   "source": "content/articles/postgresql/upsert-conflict-handling.html",
-  "legacy_url": "/season-06-postgresql-with-go/14-upsert-conflict-handling.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/14-upsert-conflict-handling.html"
   ]
 }

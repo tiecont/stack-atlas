@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/microservices-capstone/",
   "source": "content/articles/architecture/microservices-capstone.html",
-  "legacy_url": "/season-13-microservices-architecture/12-microservices-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-13-microservices-architecture/12-microservices-capstone.html"
   ]
 }

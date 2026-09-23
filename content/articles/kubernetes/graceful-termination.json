@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/graceful-termination/",
   "source": "content/articles/kubernetes/graceful-termination.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/08-graceful-termination.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/08-graceful-termination.html"
   ]
 }

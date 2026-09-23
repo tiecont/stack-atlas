@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/aggregate-invariants/",
   "source": "content/articles/architecture/aggregate-invariants.html",
-  "legacy_url": "/season-23-architecture-patterns/05-aggregate-invariants.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/05-aggregate-invariants.html"
   ]
 }

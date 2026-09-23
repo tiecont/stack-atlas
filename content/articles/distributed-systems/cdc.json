@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/cdc/",
   "source": "content/articles/distributed-systems/cdc.html",
-  "legacy_url": "/season-12-distributed-transactions/08-cdc.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/08-cdc.html"
   ]
 }

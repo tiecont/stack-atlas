@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/event-driven-architecture/",
   "source": "content/articles/architecture/event-driven-architecture.html",
-  "legacy_url": "/season-23-architecture-patterns/08-event-driven-architecture.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/08-event-driven-architecture.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/testing-benchmarking/",
   "source": "content/articles/golang/testing-benchmarking.html",
-  "legacy_url": "/season-01-fundamentals/14-testing-benchmarking.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/14-testing-benchmarking.html"
   ]
 }

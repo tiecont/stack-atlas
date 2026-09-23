@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/pool-sizing-under-load/",
   "source": "content/articles/postgresql/pool-sizing-under-load.html",
-  "legacy_url": "/season-06-postgresql-with-go/18-pool-sizing-under-load.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/18-pool-sizing-under-load.html"
   ]
 }

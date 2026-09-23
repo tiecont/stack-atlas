@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/api-from-1k-to-10m/",
   "source": "content/articles/system-design/api-from-1k-to-10m.html",
-  "legacy_url": "/season-24-system-design/14-api-from-1k-to-10m.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/14-api-from-1k-to-10m.html"
   ]
 }

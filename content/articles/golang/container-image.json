@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/container-image/",
   "source": "content/articles/golang/container-image.html",
-  "legacy_url": "/season-18-production-go-engineering/04-container-image.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/04-container-image.html"
   ]
 }

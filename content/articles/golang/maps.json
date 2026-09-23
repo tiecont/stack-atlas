@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/maps/",
   "source": "content/articles/golang/maps.html",
-  "legacy_url": "/season-01-fundamentals/05-maps.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/05-maps.html"
   ]
 }

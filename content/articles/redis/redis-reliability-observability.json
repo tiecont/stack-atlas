@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/redis-reliability-observability/",
   "source": "content/articles/redis/redis-reliability-observability.html",
-  "legacy_url": "/season-07-redis-caching/11-redis-reliability-observability.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/11-redis-reliability-observability.html"
   ]
 }

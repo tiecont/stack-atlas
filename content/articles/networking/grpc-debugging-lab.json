@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/grpc-debugging-lab/",
   "source": "content/articles/networking/grpc-debugging-lab.html",
-  "legacy_url": "/season-04-networking-with-go/15-grpc-debugging-lab.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/15-grpc-debugging-lab.html"
   ]
 }

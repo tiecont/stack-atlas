@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/testing-http-services/",
   "source": "content/articles/golang/testing-http-services.html",
-  "legacy_url": "/season-05-production-http-server/14-testing-http-services.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/14-testing-http-services.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/middleware-composition/",
   "source": "content/articles/golang/middleware-composition.html",
-  "legacy_url": "/season-05-production-http-server/05-middleware-composition.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/05-middleware-composition.html"
   ]
 }

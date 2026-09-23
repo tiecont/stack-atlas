@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/retry-backoff-jitter/",
   "source": "content/articles/reliability/retry-backoff-jitter.html",
-  "legacy_url": "/season-11-reliability-engineering/03-retry-backoff-jitter.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/03-retry-backoff-jitter.html"
   ]
 }

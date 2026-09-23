@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/etcd-consul-kubernetes/",
   "source": "content/articles/distributed-systems/etcd-consul-kubernetes.html",
-  "legacy_url": "/season-21-consensus-coordination/11-etcd-consul-kubernetes.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/11-etcd-consul-kubernetes.html"
   ]
 }

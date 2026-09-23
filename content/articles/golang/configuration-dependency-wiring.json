@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/configuration-dependency-wiring/",
   "source": "content/articles/golang/configuration-dependency-wiring.html",
-  "legacy_url": "/season-05-production-http-server/06-configuration-dependency-wiring.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/06-configuration-dependency-wiring.html"
   ]
 }

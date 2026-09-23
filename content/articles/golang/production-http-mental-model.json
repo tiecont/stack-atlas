@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/production-http-mental-model/",
   "source": "content/articles/golang/production-http-mental-model.html",
-  "legacy_url": "/season-05-production-http-server/01-production-http-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/01-production-http-mental-model.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/api-abuse-rate-limit/",
   "source": "content/articles/security/api-abuse-rate-limit.html",
-  "legacy_url": "/season-17-security-for-go-backend/11-api-abuse-rate-limit.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/11-api-abuse-rate-limit.html"
   ]
 }

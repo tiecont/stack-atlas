@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/read-repair-anti-entropy/",
   "source": "content/articles/distributed-systems/read-repair-anti-entropy.html",
-  "legacy_url": "/season-20-distributed-data/09-read-repair-anti-entropy.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/09-read-repair-anti-entropy.html"
   ]
 }

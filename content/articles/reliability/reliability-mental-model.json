@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/reliability-mental-model/",
   "source": "content/articles/reliability/reliability-mental-model.html",
-  "legacy_url": "/season-11-reliability-engineering/01-reliability-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/01-reliability-mental-model.html"
   ]
 }

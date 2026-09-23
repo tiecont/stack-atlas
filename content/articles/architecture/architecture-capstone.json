@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/architecture-capstone/",
   "source": "content/articles/architecture/architecture-capstone.html",
-  "legacy_url": "/season-23-architecture-patterns/12-architecture-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/12-architecture-capstone.html"
   ]
 }

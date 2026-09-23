@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/http2-multiplexing/",
   "source": "content/articles/networking/http2-multiplexing.html",
-  "legacy_url": "/season-04-networking-with-go/12-http2-multiplexing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/12-http2-multiplexing.html"
   ]
 }

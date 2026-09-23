@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/defer-panic-recover/",
   "source": "content/articles/golang/defer-panic-recover.html",
-  "legacy_url": "/season-01-fundamentals/10-defer-panic-recover.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/10-defer-panic-recover.html"
   ]
 }

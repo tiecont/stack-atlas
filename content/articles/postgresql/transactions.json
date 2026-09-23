@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/transactions/",
   "source": "content/articles/postgresql/transactions.html",
-  "legacy_url": "/season-06-postgresql-with-go/06-transactions.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/06-transactions.html"
   ]
 }

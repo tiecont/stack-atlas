@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/transactional-outbox/",
   "source": "content/articles/distributed-systems/transactional-outbox.html",
-  "legacy_url": "/season-12-distributed-transactions/03-transactional-outbox.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/03-transactional-outbox.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/replication-basics/",
   "source": "content/articles/distributed-systems/replication-basics.html",
-  "legacy_url": "/season-20-distributed-data/02-replication-basics.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/02-replication-basics.html"
   ]
 }

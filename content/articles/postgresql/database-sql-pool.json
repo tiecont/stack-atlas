@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/database-sql-pool/",
   "source": "content/articles/postgresql/database-sql-pool.html",
-  "legacy_url": "/season-06-postgresql-with-go/02-database-sql-pool.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/02-database-sql-pool.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/health-degradation/",
   "source": "content/articles/reliability/health-degradation.html",
-  "legacy_url": "/season-11-reliability-engineering/10-health-degradation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/10-health-degradation.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/distributed-transactions-preview/",
   "source": "content/articles/distributed-systems/distributed-transactions-preview.html",
-  "legacy_url": "/season-10-distributed-systems/15-distributed-transactions-preview.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/15-distributed-transactions-preview.html"
   ]
 }

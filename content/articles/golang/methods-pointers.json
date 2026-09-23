@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/methods-pointers/",
   "source": "content/articles/golang/methods-pointers.html",
-  "legacy_url": "/season-01-fundamentals/07-methods-pointers.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/07-methods-pointers.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/consumer-fetch-offset/",
   "source": "content/articles/kafka/consumer-fetch-offset.html",
-  "legacy_url": "/season-09-kafka-deep-dive/07-consumer-fetch-offset.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/07-consumer-fetch-offset.html"
   ]
 }

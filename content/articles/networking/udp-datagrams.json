@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/udp-datagrams/",
   "source": "content/articles/networking/udp-datagrams.html",
-  "legacy_url": "/season-04-networking-with-go/04-udp-datagrams.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/04-udp-datagrams.html"
   ]
 }

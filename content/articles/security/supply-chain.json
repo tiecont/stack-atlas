@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/supply-chain/",
   "source": "content/articles/security/supply-chain.html",
-  "legacy_url": "/season-17-security-for-go-backend/12-supply-chain.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/12-supply-chain.html"
   ]
 }

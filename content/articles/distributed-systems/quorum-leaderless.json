@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/quorum-leaderless/",
   "source": "content/articles/distributed-systems/quorum-leaderless.html",
-  "legacy_url": "/season-10-distributed-systems/08-quorum-leaderless.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/08-quorum-leaderless.html"
   ]
 }

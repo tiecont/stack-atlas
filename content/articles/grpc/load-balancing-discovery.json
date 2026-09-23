@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/grpc/load-balancing-discovery/",
   "source": "content/articles/grpc/load-balancing-discovery.html",
-  "legacy_url": "/season-14-grpc-with-go/10-load-balancing-discovery.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-14-grpc-with-go/10-load-balancing-discovery.html"
   ]
 }

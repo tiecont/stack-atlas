@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/postgres-capstone/",
   "source": "content/articles/postgresql/postgres-capstone.html",
-  "legacy_url": "/season-06-postgresql-with-go/20-postgres-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/20-postgres-capstone.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/goroutine-leak/",
   "source": "content/articles/golang/goroutine-leak.html",
-  "legacy_url": "/season-03-concurrency/17-goroutine-leak.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/17-goroutine-leak.html"
   ]
 }

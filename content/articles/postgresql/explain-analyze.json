@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/explain-analyze/",
   "source": "content/articles/postgresql/explain-analyze.html",
-  "legacy_url": "/season-06-postgresql-with-go/10-explain-analyze.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/10-explain-analyze.html"
   ]
 }

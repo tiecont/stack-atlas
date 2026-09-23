@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/case-studies/",
   "source": "content/articles/distributed-systems/case-studies.html",
-  "legacy_url": "/season-20-distributed-data/12-case-studies.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/12-case-studies.html"
   ]
 }

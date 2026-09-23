@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/hpa-autoscaling/",
   "source": "content/articles/kubernetes/hpa-autoscaling.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/09-hpa-autoscaling.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/09-hpa-autoscaling.html"
   ]
 }

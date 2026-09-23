@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/tcp-server-with-net/",
   "source": "content/articles/networking/tcp-server-with-net.html",
-  "legacy_url": "/season-04-networking-with-go/03-tcp-server-with-net.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/03-tcp-server-with-net.html"
   ]
 }

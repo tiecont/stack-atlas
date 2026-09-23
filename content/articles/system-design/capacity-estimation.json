@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/capacity-estimation/",
   "source": "content/articles/system-design/capacity-estimation.html",
-  "legacy_url": "/season-24-system-design/02-capacity-estimation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/02-capacity-estimation.html"
   ]
 }

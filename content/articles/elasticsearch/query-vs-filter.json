@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/query-vs-filter/",
   "source": "content/articles/elasticsearch/query-vs-filter.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/07-query-vs-filter.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/07-query-vs-filter.html"
   ]
 }

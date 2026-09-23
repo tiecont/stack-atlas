@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/reindex-schema-evolution/",
   "source": "content/articles/elasticsearch/reindex-schema-evolution.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/12-reindex-schema-evolution.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/12-reindex-schema-evolution.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/retention-compaction/",
   "source": "content/articles/kafka/retention-compaction.html",
-  "legacy_url": "/season-09-kafka-deep-dive/14-retention-compaction.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/14-retention-compaction.html"
   ]
 }

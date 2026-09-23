@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/rabbitmq-mental-model/",
   "source": "content/articles/messaging/rabbitmq-mental-model.html",
-  "legacy_url": "/season-08-messaging/09-rabbitmq-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/09-rabbitmq-mental-model.html"
   ]
 }

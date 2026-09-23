@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/raft-mental-model/",
   "source": "content/articles/distributed-systems/raft-mental-model.html",
-  "legacy_url": "/season-21-consensus-coordination/06-raft-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/06-raft-mental-model.html"
   ]
 }

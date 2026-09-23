@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/consumer-groups/",
   "source": "content/articles/kafka/consumer-groups.html",
-  "legacy_url": "/season-09-kafka-deep-dive/08-consumer-groups.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/08-consumer-groups.html"
   ]
 }

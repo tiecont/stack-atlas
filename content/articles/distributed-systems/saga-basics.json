@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/saga-basics/",
   "source": "content/articles/distributed-systems/saga-basics.html",
-  "legacy_url": "/season-12-distributed-transactions/05-saga-basics.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/05-saga-basics.html"
   ]
 }

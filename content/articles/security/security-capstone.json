@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/security-capstone/",
   "source": "content/articles/security/security-capstone.html",
-  "legacy_url": "/season-17-security-for-go-backend/14-security-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/14-security-capstone.html"
   ]
 }

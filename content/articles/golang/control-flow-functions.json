@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/control-flow-functions/",
   "source": "content/articles/golang/control-flow-functions.html",
-  "legacy_url": "/season-01-fundamentals/03-control-flow-functions.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/03-control-flow-functions.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/event-sourcing/",
   "source": "content/articles/architecture/event-sourcing.html",
-  "legacy_url": "/season-23-architecture-patterns/07-event-sourcing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/07-event-sourcing.html"
   ]
 }

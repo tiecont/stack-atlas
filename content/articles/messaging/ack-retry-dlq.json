@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/ack-retry-dlq/",
   "source": "content/articles/messaging/ack-retry-dlq.html",
-  "legacy_url": "/season-08-messaging/05-ack-retry-dlq.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/05-ack-retry-dlq.html"
   ]
 }

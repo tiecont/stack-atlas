@@ -52,40 +52,6 @@ def slug(value: str) -> str:
     return value.strip("-")
 
 
-class CardParser(HTMLParser):
-    """Read lesson cards from both generations of legacy season indexes."""
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.card = None
-        self.field = None
-        self.cards = []
-
-    def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        if self.card is None and tag == "a" and {"card", "lesson"} & set(attrs.get("class", "").split()):
-            self.card = {"href": attrs.get("href"), "title": "", "description": ""}
-            return
-        if self.card is not None:
-            if tag in ("h2", "h3") and not self.card["title"]:
-                self.field = "title"
-            elif tag == "p" and not self.card["description"]:
-                self.field = "description"
-
-    def handle_data(self, data):
-        if self.card is not None and self.field:
-            self.card[self.field] += data
-
-    def handle_endtag(self, tag):
-        if tag in ("h2", "h3", "p"):
-            self.field = None
-        if tag == "a" and self.card is not None:
-            self.cards.append({key: " ".join(value.split()) if isinstance(value, str) else value
-                               for key, value in self.card.items()})
-            self.card = None
-            self.field = None
-
-
 class LinkParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -121,9 +87,6 @@ def make_catalog():
             continue
         record["metadata_file"] = file.relative_to(ROOT).as_posix()
         explicit.append(record)
-    explicit_by_id = {item.get("id"): item for item in explicit}
-    included_explicit = set()
-
     for kind, items in (("domain", domains), ("category", categories), ("learning path", paths)):
         ids = [item.get("id") for item in items]
         if len(ids) != len(set(ids)):
@@ -134,9 +97,18 @@ def make_catalog():
             if kind != "category" and not item.get("description"):
                 errors.append(f"{kind} {item.get('id')!r} is missing a description")
 
-    articles = []
-    path_members = defaultdict(list)
-    global_path_order = defaultdict(int)
+    articles = explicit
+    article_ids = [article.get("id") for article in articles]
+    if len(article_ids) != len(set(article_ids)):
+        duplicates = sorted({item for item in article_ids if article_ids.count(item) > 1})
+        errors.append("Duplicate article IDs: " + ", ".join(duplicates))
+    article_by_id = {article.get("id"): article for article in articles}
+    article_urls = [article.get("url") for article in articles if article.get("url")]
+    if len(article_urls) != len(set(article_urls)):
+        errors.append("Duplicate article URLs")
+
+    placements = defaultdict(list)
+    path_orders = defaultdict(set)
     for path in paths:
         modules = path.get("modules", [])
         module_ids = set()
@@ -146,7 +118,7 @@ def make_catalog():
             if not module_id or module_id in module_ids:
                 errors.append(f"{path['id']}: missing or duplicate module ID {module_id!r}")
             module_ids.add(module_id)
-            module_order = module.get("order", len(module_ids))
+            module_order = module.get("order")
             if not isinstance(module_order, int) or module_order < 1 or module_order in module_orders:
                 errors.append(f"{path['id']}: invalid or duplicate module order {module_order!r}")
             module_orders.add(module_order)
@@ -154,100 +126,23 @@ def make_catalog():
                 errors.append(f"{path['id']}/{module_id}: unknown domain {module.get('domain')!r}")
             if module.get("category") not in category_by_id:
                 errors.append(f"{path['id']}/{module_id}: unknown category {module.get('category')!r}")
-            season = module.get("season")
-            if season:
-                index_file = ROOT / season / "index.html"
-                if not index_file.is_file():
-                    errors.append(f"{path['id']}/{module_id}: missing source {season}/index.html")
-                    continue
-                parser = CardParser()
-                parser.feed(index_file.read_text(encoding="utf-8"))
-                if not parser.cards:
-                    errors.append(f"{path['id']}/{module_id}: no article cards found in {season}/index.html")
-                for card in parser.cards:
-                    href = card.get("href")
-                    target = (ROOT / season / unquote(href or "")).resolve()
-                    if not href or not target.is_file() or not target.is_relative_to(ROOT):
-                        errors.append(f"{path['id']}/{module_id}: missing article source {season}/{href}")
-                        continue
-                    title = clean_text(card.get("title", ""))
-                    description = clean_text(card.get("description", ""))
-                    if not title or not description:
-                        errors.append(f"{path['id']}/{module_id}: article {href} needs a title and description")
-                        continue
-                    article_id = slug(f"{season}-{Path(href).stem}")
-                    global_path_order[path["id"]] += 1
-                    migrated_article = explicit_by_id.get(article_id)
-                    if migrated_article:
-                        membership = next((item for item in migrated_article.get("learning_paths", [])
-                                           if isinstance(item, dict) and item.get("path_id") == path["id"]
-                                           and item.get("module_id") == module_id), None)
-                        if not membership:
-                            errors.append(f"{article_id}: migrated source must include its path and module membership")
-                            continue
-                        if membership.get("order") != global_path_order[path["id"]]:
-                            errors.append(f"{article_id}: path order should be {global_path_order[path['id']]}")
-                        migrated_article["path_order"] = membership.get("order")
-                        articles.append(migrated_article)
-                        path_members[(path["id"], module_id)].append(migrated_article)
-                        included_explicit.add(article_id)
-                        continue
-                    article = {
-                        "id": article_id,
-                        "title": title,
-                        "description": description,
-                        "type": "article",
-                        "domain": module["domain"],
-                        "category": module["category"],
-                        "tags": [module["domain"], module["category"]],
-                        "difficulty": "unspecified",
-                        "learning_paths": [{"path_id": path["id"], "module_id": module_id,
-                                            "order": global_path_order[path["id"]]}],
-                        "path_order": global_path_order[path["id"]],
-                        "prerequisites": [],
-                        "related": [],
-                        "status": "published",
-                        "url": "/" + (Path(season) / href).as_posix(),
-                        "source_file": (Path(season) / href).as_posix(),
-                        "legacy": True,
-                    }
-                    articles.append(article)
-                    path_members[(path["id"], module_id)].append(article)
-            else:
-                for article_id in module.get("article_ids", []):
-                    path_members[(path["id"], module_id)].append({"id": article_id})
+            module_articles = module.get("article_ids", [])
+            if not isinstance(module_articles, list):
+                errors.append(f"{path['id']}/{module_id}: article_ids must be a list")
+                module_articles = []
+            if len(module_articles) != len(set(module_articles)):
+                errors.append(f"{path['id']}/{module_id}: duplicate article placement")
+            for article_id in module_articles:
+                placements[(path["id"], article_id)].append(module_id)
+                if article_id not in article_by_id:
+                    errors.append(f"{path['id']}/{module_id}: unknown article {article_id!r}")
+            module["articles"] = [article_by_id[item] for item in module_articles if item in article_by_id]
 
-        for module in modules:
-            module["articles"] = path_members[(path["id"], module["id"])]
-            module["order"] = modules.index(module) + 1
+        for (path_id, article_id), module_ids in list(placements.items()):
+            if path_id == path["id"] and len(module_ids) > 1:
+                errors.append(f"{path_id}: article {article_id} is placed more than once")
 
-    articles.extend(article for article in explicit if article.get("id") not in included_explicit)
-    article_ids = [article.get("id") for article in articles]
-    if len(article_ids) != len(set(article_ids)):
-        duplicates = sorted({item for item in article_ids if article_ids.count(item) > 1})
-        errors.append("Duplicate article IDs: " + ", ".join(duplicates))
-    article_by_id = {article.get("id"): article for article in articles}
-    article_urls = [article.get("url") for article in articles if article.get("url")]
-    if len(article_urls) != len(set(article_urls)):
-        errors.append("Duplicate article URLs")
-    path_orders = defaultdict(set)
-
-    for path in paths:
-        for module in path.get("modules", []):
-            module["articles"] = [article_by_id.get(item.get("id"), item) for item in module.get("articles", [])]
-    for article in explicit:
-        for membership in article.get("learning_paths", []):
-            if isinstance(membership, str):
-                continue
-            path_id = membership.get("path_id")
-            module_id = membership.get("module_id")
-            if path_id in path_by_id and module_id:
-                module = next((item for item in path_by_id[path_id].get("modules", []) if item["id"] == module_id), None)
-                if module and all(item.get("id") != article.get("id") for item in module.get("articles", [])):
-                    article["path_order"] = membership.get("order", article.get("path_order"))
-                    module["articles"].append(article)
-                    module["articles"].sort(key=lambda item: item.get("path_order", 1_000_000))
-
+    legacy_url_owners = {}
     for article in explicit:
         for field in ("id", "title", "description", "domain", "status", "url", "source"):
             if not article.get(field):
@@ -269,8 +164,18 @@ def make_catalog():
             errors.append(f"{article.get('metadata_file')}: source must be an HTML fragment")
         if article.get("url") and (not article["url"].startswith("/articles/") or not article["url"].endswith("/")):
             errors.append(f"{article.get('metadata_file')}: canonical article URL must look like /articles/domain/slug/")
-        if article.get("legacy_url") and not article["legacy_url"].startswith("/season-"):
-            errors.append(f"{article.get('metadata_file')}: legacy_url must preserve the original season URL")
+        if "legacy_urls" in article and not isinstance(article["legacy_urls"], list):
+            errors.append(f"{article.get('metadata_file')}: legacy_urls must be a list")
+        for legacy_url in article.get("legacy_urls", []):
+            if not isinstance(legacy_url, str) or not legacy_url.startswith("/season-"):
+                errors.append(f"{article.get('metadata_file')}: each legacy URL must preserve an original season URL")
+                continue
+            if ".." in Path(legacy_url).parts or not legacy_url.endswith(".html"):
+                errors.append(f"{article.get('metadata_file')}: unsafe legacy redirect path {legacy_url!r}")
+            owner = legacy_url_owners.get(legacy_url)
+            if owner and owner != article.get("id"):
+                errors.append(f"Legacy URL {legacy_url} is assigned to both {owner} and {article.get('id')}")
+            legacy_url_owners[legacy_url] = article.get("id")
         for relation in ("learning_paths", "prerequisites", "related", "tags", "authors"):
             if relation in article and not isinstance(article[relation], list):
                 errors.append(f"{article.get('metadata_file')}: {relation} must be a list")
@@ -303,16 +208,9 @@ def make_catalog():
                 errors.append(f"{article.get('id')}: unknown learning path {path_id!r}")
             elif isinstance(membership, str):
                 path_modules = path_by_id[path_id].get("modules", [])
-                placed = any(any(item.get("id") == article.get("id") for item in module.get("articles", [])) for module in path_modules)
+                placed = any(article.get("id") in module.get("article_ids", []) for module in path_modules)
                 if not placed:
                     errors.append(f"{article.get('id')}: add it to a module in {path_id} using article_ids")
-                order = article.get("path_order")
-                if not isinstance(order, int) or order < 1:
-                    errors.append(f"{article.get('id')}: string path membership requires a positive path_order")
-                elif order in path_orders[path_id]:
-                    errors.append(f"{path_id}: duplicate article order {order}")
-                else:
-                    path_orders[path_id].add(order)
             elif isinstance(membership, dict):
                 module_id = membership.get("module_id")
                 path_modules = path_by_id[path_id].get("modules", [])
@@ -323,25 +221,19 @@ def make_catalog():
                     errors.append(f"{article.get('id')}: unknown module {module_id!r} in {path_id}")
                 if module_id:
                     module = next((item for item in path_modules if item["id"] == module_id), None)
-                    if module and not any(item.get("id") == article.get("id") for item in module.get("articles", [])):
+                    if module and article.get("id") not in module.get("article_ids", []):
                         errors.append(f"{article.get('id')}: module {module_id} in {path_id} does not reference this article")
-                if not isinstance(membership.get("order"), int) or membership["order"] < 1:
+                order = membership.get("order")
+                if not isinstance(order, int) or order < 1:
                     errors.append(f"{article.get('id')}: invalid path order for {path_id}")
-                else:
-                    if membership["order"] in path_orders[path_id]:
-                        errors.append(f"{path_id}: duplicate article order {membership['order']}")
-                    path_orders[path_id].add(membership["order"])
+                elif order in path_orders[path_id]:
+                    errors.append(f"{path_id}: duplicate article order {order}")
+                path_orders[path_id].add(order)
         article["tags"] = article.get("tags", [])
         article.setdefault("learning_paths", [])
         article.setdefault("prerequisites", [])
         article.setdefault("related", [])
         article.setdefault("difficulty", "unspecified")
-
-    for path in paths:
-        for module in path.get("modules", []):
-            for article_id in module.get("article_ids", []):
-                if article_id not in article_by_id:
-                    errors.append(f"{path['id']}/{module['id']}: unknown article {article_id!r}")
 
     return domains, categories, paths, articles, errors
 
@@ -460,11 +352,8 @@ def render_modern_article(article: dict, article_by_id: dict, paths: list, outpu
         path = next((item for item in paths if item["id"] == membership.get("path_id")), None)
         module = next((item for item in path.get("modules", []) if item["id"] == membership.get("module_id")), None) if path else None
         if path and module:
-            def selected_path_order(item):
-                current_membership = next((entry for entry in item.get("learning_paths", [])
-                                           if isinstance(entry, dict) and entry.get("path_id") == path["id"]), None)
-                return current_membership.get("order", 1_000_000) if current_membership else item.get("path_order", 1_000_000)
-            path_articles = sorted((item for current_module in path.get("modules", []) for item in current_module.get("articles", [])), key=selected_path_order)
+            path_modules = sorted(path.get("modules", []), key=lambda item: item["order"])
+            path_articles = [item for current_module in path_modules for item in current_module.get("articles", [])]
             path_position = next((index for index, item in enumerate(path_articles) if item.get("id") == article["id"]), -1)
             module_articles = module.get("articles", [])
             module_position = next((index for index, item in enumerate(module_articles) if item.get("id") == article["id"]), -1)
@@ -483,15 +372,16 @@ def render_modern_article(article: dict, article_by_id: dict, paths: list, outpu
     route = article["url"].strip("/")
     destination = output / route / "index.html"
     write_file(destination, shared_ui(article_html, article["title"], article["description"], article["url"], site, base_path))
-    legacy_url = article.get("legacy_url")
-    if legacy_url:
+    for legacy_url in article.get("legacy_urls", []):
         redirect_url = site_url(article["url"], base_path)
         canonical = ""
         if site.get("base_url"):
             canonical_url = site["base_url"].rstrip("/") + base_path + article["url"]
             canonical = f'<link rel="canonical" href="{esc(canonical_url)}">'
         redirect_page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url={esc(redirect_url)}">{canonical}<title>Article moved · Stack Atlas</title></head><body><p>This article moved to <a href="{esc(redirect_url)}">{esc(article["title"])}</a>.</p><script>window.location.replace({json.dumps(redirect_url)} + window.location.search + window.location.hash);</script></body></html>'''
-        write_file(output / legacy_url.lstrip("/"), redirect_page)
+        redirect_path = (output / legacy_url.lstrip("/")).resolve()
+        if redirect_path.is_relative_to(output.resolve()):
+            write_file(redirect_path, redirect_page)
 
 
 def topic_card(domain: dict, count: int, base_path: str) -> str:
@@ -534,7 +424,7 @@ def render_site(domains, categories, paths, articles, output: Path, site: dict):
     write("assets/site.js", JS.replace("__BASE_PATH__", json.dumps(base_path)))
     write("assets/favicon.svg", FAVICON)
     search_domains = [{"id": item["id"], "title": item["title"], "description": item["description"], "status": item.get("status"), "url": f"/topics/{item['id']}/"} for item in domains]
-    search_paths = [{"id": item["id"], "title": item["title"], "description": item["description"], "status": item.get("status"), "url": f"/paths/{item['id']}/", "modules": [{"id": module["id"], "title": module["title"], "order": module["order"], "article_ids": [article["id"] for article in module.get("articles", [])]} for module in item.get("modules", [])]} for item in paths]
+    search_paths = [{"id": item["id"], "title": item["title"], "description": item["description"], "status": item.get("status"), "url": f"/paths/{item['id']}/", "modules": [{"id": module["id"], "title": module["title"], "order": module["order"], "article_ids": [article["id"] for article in module.get("articles", [])]} for module in sorted(item.get("modules", []), key=lambda module: module["order"])]} for item in paths]
     write("search-index.json", json.dumps({"articles": articles, "domains": search_domains, "paths": search_paths}, ensure_ascii=False, indent=2) + "\n")
 
     published_domains = [domain for domain in domains if by_domain[domain["id"]] or domain.get("status") == "planned"]
@@ -799,10 +689,10 @@ JS = r'''(() => {
     const path = (searchIndex.paths || []).find(item => item.id === requestedPath);
     if (!path) return;
     const articleId = articlePage.dataset.articleId;
-    const sequence = (searchIndex.articles || []).flatMap(item => (item.learning_paths || []).filter(member => member === requestedPath || (typeof member === 'object' && member.path_id === requestedPath)).map(member => {
-      const moduleId = typeof member === 'object' ? member.module_id : path.modules.find(module => module.article_ids.includes(item.id))?.id;
-      return {...item, order: typeof member === 'object' ? member.order : item.path_order, module_id: moduleId};
-    })).sort((a, b) => a.order - b.order);
+    const articlesById = new Map((searchIndex.articles || []).map(item => [item.id, item]));
+    const sequence = [...path.modules].sort((a, b) => a.order - b.order).flatMap(module =>
+      (module.article_ids || []).map(id => ({...articlesById.get(id), module_id: module.id})).filter(item => item.id)
+    );
     const position = sequence.findIndex(item => item.id === articleId);
     if (position < 0) return;
     const makeLink = (item, label, side) => {

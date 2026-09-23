@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/garbage-collector/",
   "source": "content/articles/golang/garbage-collector.html",
-  "legacy_url": "/season-02-runtime/09-garbage-collector.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/09-garbage-collector.html"
   ]
 }

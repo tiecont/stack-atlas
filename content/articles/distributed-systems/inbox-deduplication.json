@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/inbox-deduplication/",
   "source": "content/articles/distributed-systems/inbox-deduplication.html",
-  "legacy_url": "/season-12-distributed-transactions/04-inbox-deduplication.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/04-inbox-deduplication.html"
   ]
 }

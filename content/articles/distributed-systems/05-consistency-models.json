@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/05-consistency-models/",
   "source": "content/articles/distributed-systems/05-consistency-models.html",
-  "legacy_url": "/season-20-distributed-data/05-consistency-models.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/05-consistency-models.html"
   ]
 }

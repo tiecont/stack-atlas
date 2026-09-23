@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/write-through-write-behind/",
   "source": "content/articles/redis/write-through-write-behind.html",
-  "legacy_url": "/season-07-redis-caching/06-write-through-write-behind.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/06-write-through-write-behind.html"
   ]
 }

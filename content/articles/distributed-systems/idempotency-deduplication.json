@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/idempotency-deduplication/",
   "source": "content/articles/distributed-systems/idempotency-deduplication.html",
-  "legacy_url": "/season-10-distributed-systems/12-idempotency-deduplication.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/12-idempotency-deduplication.html"
   ]
 }

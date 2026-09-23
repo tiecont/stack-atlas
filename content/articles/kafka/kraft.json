@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/kraft/",
   "source": "content/articles/kafka/kraft.html",
-  "legacy_url": "/season-09-kafka-deep-dive/16-kraft.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/16-kraft.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/session-jwt/",
   "source": "content/articles/security/session-jwt.html",
-  "legacy_url": "/season-17-security-for-go-backend/04-session-jwt.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/04-session-jwt.html"
   ]
 }

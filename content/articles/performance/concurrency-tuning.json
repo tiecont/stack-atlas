@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/concurrency-tuning/",
   "source": "content/articles/performance/concurrency-tuning.html",
-  "legacy_url": "/season-16-performance-engineering/12-concurrency-tuning.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/12-concurrency-tuning.html"
   ]
 }

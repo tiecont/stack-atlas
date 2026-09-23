@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/distributed-transaction-problem/",
   "source": "content/articles/distributed-systems/distributed-transaction-problem.html",
-  "legacy_url": "/season-12-distributed-transactions/01-distributed-transaction-problem.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/01-distributed-transaction-problem.html"
   ]
 }

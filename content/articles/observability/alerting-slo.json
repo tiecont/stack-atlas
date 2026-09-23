@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/alerting-slo/",
   "source": "content/articles/observability/alerting-slo.html",
-  "legacy_url": "/season-15-observability/11-alerting-slo.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/11-alerting-slo.html"
   ]
 }

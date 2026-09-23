@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/authentication-authorization/",
   "source": "content/articles/golang/authentication-authorization.html",
-  "legacy_url": "/season-05-production-http-server/07-authentication-authorization.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/07-authentication-authorization.html"
   ]
 }

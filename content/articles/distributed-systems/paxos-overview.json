@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/paxos-overview/",
   "source": "content/articles/distributed-systems/paxos-overview.html",
-  "legacy_url": "/season-21-consensus-coordination/12-paxos-overview.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/12-paxos-overview.html"
   ]
 }

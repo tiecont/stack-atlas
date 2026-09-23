@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/architecture-mental-model/",
   "source": "content/articles/architecture/architecture-mental-model.html",
-  "legacy_url": "/season-23-architecture-patterns/01-architecture-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/01-architecture-mental-model.html"
   ]
 }

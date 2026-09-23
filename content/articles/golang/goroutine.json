@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/goroutine/",
   "source": "content/articles/golang/goroutine.html",
-  "legacy_url": "/season-03-concurrency/01-goroutine.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/01-goroutine.html"
   ]
 }

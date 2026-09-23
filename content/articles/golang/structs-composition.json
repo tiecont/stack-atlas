@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/structs-composition/",
   "source": "content/articles/golang/structs-composition.html",
-  "legacy_url": "/season-01-fundamentals/06-structs-composition.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/06-structs-composition.html"
   ]
 }

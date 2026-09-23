@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/structured-logging/",
   "source": "content/articles/observability/structured-logging.html",
-  "legacy_url": "/season-15-observability/02-structured-logging.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/02-structured-logging.html"
   ]
 }

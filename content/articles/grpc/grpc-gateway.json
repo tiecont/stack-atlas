@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/grpc/grpc-gateway/",
   "source": "content/articles/grpc/grpc-gateway.html",
-  "legacy_url": "/season-14-grpc-with-go/11-grpc-gateway.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-14-grpc-with-go/11-grpc-gateway.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/postgres-mental-model/",
   "source": "content/articles/postgresql/postgres-mental-model.html",
-  "legacy_url": "/season-06-postgresql-with-go/01-postgres-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/01-postgres-mental-model.html"
   ]
 }

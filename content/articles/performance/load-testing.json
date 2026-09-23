@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/load-testing/",
   "source": "content/articles/performance/load-testing.html",
-  "legacy_url": "/season-16-performance-engineering/03-load-testing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/03-load-testing.html"
   ]
 }

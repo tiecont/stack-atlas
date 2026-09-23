@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/service-boundaries/",
   "source": "content/articles/architecture/service-boundaries.html",
-  "legacy_url": "/season-13-microservices-architecture/02-service-boundaries.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-13-microservices-architecture/02-service-boundaries.html"
   ]
 }

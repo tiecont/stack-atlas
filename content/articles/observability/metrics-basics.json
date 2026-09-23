@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/metrics-basics/",
   "source": "content/articles/observability/metrics-basics.html",
-  "legacy_url": "/season-15-observability/04-metrics-basics.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/04-metrics-basics.html"
   ]
 }

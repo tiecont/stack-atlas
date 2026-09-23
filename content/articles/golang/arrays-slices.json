@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/arrays-slices/",
   "source": "content/articles/golang/arrays-slices.html",
-  "legacy_url": "/season-01-fundamentals/04-arrays-slices.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/04-arrays-slices.html"
   ]
 }

@@ -79,10 +79,10 @@
     const path = (searchIndex.paths || []).find(item => item.id === requestedPath);
     if (!path) return;
     const articleId = articlePage.dataset.articleId;
-    const sequence = (searchIndex.articles || []).flatMap(item => (item.learning_paths || []).filter(member => member === requestedPath || (typeof member === 'object' && member.path_id === requestedPath)).map(member => {
-      const moduleId = typeof member === 'object' ? member.module_id : path.modules.find(module => module.article_ids.includes(item.id))?.id;
-      return {...item, order: typeof member === 'object' ? member.order : item.path_order, module_id: moduleId};
-    })).sort((a, b) => a.order - b.order);
+    const articlesById = new Map((searchIndex.articles || []).map(item => [item.id, item]));
+    const sequence = [...path.modules].sort((a, b) => a.order - b.order).flatMap(module =>
+      (module.article_ids || []).map(id => ({...articlesById.get(id), module_id: module.id})).filter(item => item.id)
+    );
     const position = sequence.findIndex(item => item.id === articleId);
     if (position < 0) return;
     const makeLink = (item, label, side) => {

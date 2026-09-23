@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/observability-mental-model/",
   "source": "content/articles/observability/observability-mental-model.html",
-  "legacy_url": "/season-15-observability/01-observability-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/01-observability-mental-model.html"
   ]
 }

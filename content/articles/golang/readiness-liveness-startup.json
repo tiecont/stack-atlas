@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/readiness-liveness-startup/",
   "source": "content/articles/golang/readiness-liveness-startup.html",
-  "legacy_url": "/season-18-production-go-engineering/06-readiness-liveness-startup.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/06-readiness-liveness-startup.html"
   ]
 }

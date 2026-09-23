@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/slo-error-budget/",
   "source": "content/articles/reliability/slo-error-budget.html",
-  "legacy_url": "/season-11-reliability-engineering/11-slo-error-budget.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/11-slo-error-budget.html"
   ]
 }

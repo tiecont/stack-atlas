@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/grafana-dashboards/",
   "source": "content/articles/observability/grafana-dashboards.html",
-  "legacy_url": "/season-15-observability/08-grafana-dashboards.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/08-grafana-dashboards.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/observability-capstone/",
   "source": "content/articles/observability/observability-capstone.html",
-  "legacy_url": "/season-15-observability/12-observability-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/12-observability-capstone.html"
   ]
 }

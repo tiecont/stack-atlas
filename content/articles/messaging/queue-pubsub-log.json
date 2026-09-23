@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/queue-pubsub-log/",
   "source": "content/articles/messaging/queue-pubsub-log.html",
-  "legacy_url": "/season-08-messaging/02-queue-pubsub-log.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/02-queue-pubsub-log.html"
   ]
 }

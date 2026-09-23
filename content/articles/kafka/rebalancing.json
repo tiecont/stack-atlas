@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/rebalancing/",
   "source": "content/articles/kafka/rebalancing.html",
-  "legacy_url": "/season-09-kafka-deep-dive/09-rebalancing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/09-rebalancing.html"
   ]
 }

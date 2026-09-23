@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/interface-internals/",
   "source": "content/articles/golang/interface-internals.html",
-  "legacy_url": "/season-02-runtime/08-interface-internals.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/08-interface-internals.html"
   ]
 }

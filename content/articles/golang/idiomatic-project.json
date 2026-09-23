@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/idiomatic-project/",
   "source": "content/articles/golang/idiomatic-project.html",
-  "legacy_url": "/season-01-fundamentals/15-idiomatic-project.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-01-fundamentals/15-idiomatic-project.html"
   ]
 }

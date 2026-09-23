@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/inventory-system/",
   "source": "content/articles/system-design/inventory-system.html",
-  "legacy_url": "/season-24-system-design/12-inventory-system.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/12-inventory-system.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/cache-invalidation/",
   "source": "content/articles/redis/cache-invalidation.html",
-  "legacy_url": "/season-07-redis-caching/07-cache-invalidation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/07-cache-invalidation.html"
   ]
 }

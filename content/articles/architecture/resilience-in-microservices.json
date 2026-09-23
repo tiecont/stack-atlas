@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/resilience-in-microservices/",
   "source": "content/articles/architecture/resilience-in-microservices.html",
-  "legacy_url": "/season-13-microservices-architecture/09-resilience-in-microservices.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-13-microservices-architecture/09-resilience-in-microservices.html"
   ]
 }

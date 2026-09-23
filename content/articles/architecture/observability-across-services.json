@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/observability-across-services/",
   "source": "content/articles/architecture/observability-across-services.html",
-  "legacy_url": "/season-13-microservices-architecture/08-observability-across-services.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-13-microservices-architecture/08-observability-across-services.html"
   ]
 }

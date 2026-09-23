@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/n-plus-one-batching/",
   "source": "content/articles/postgresql/n-plus-one-batching.html",
-  "legacy_url": "/season-06-postgresql-with-go/11-n-plus-one-batching.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/11-n-plus-one-batching.html"
   ]
 }

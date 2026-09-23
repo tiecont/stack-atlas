@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/build-reproducibility/",
   "source": "content/articles/golang/build-reproducibility.html",
-  "legacy_url": "/season-18-production-go-engineering/03-build-reproducibility.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/03-build-reproducibility.html"
   ]
 }

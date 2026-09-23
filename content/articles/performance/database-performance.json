@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/database-performance/",
   "source": "content/articles/performance/database-performance.html",
-  "legacy_url": "/season-16-performance-engineering/11-database-performance.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/11-database-performance.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/go-franz-go-capstone/",
   "source": "content/articles/kafka/go-franz-go-capstone.html",
-  "legacy_url": "/season-09-kafka-deep-dive/18-go-franz-go-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/18-go-franz-go-capstone.html"
   ]
 }

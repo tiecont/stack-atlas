@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/observability-capacity-share-groups/",
   "source": "content/articles/kafka/observability-capacity-share-groups.html",
-  "legacy_url": "/season-09-kafka-deep-dive/17-observability-capacity-share-groups.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/17-observability-capacity-share-groups.html"
   ]
 }

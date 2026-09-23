@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/cancellation/",
   "source": "content/articles/golang/cancellation.html",
-  "legacy_url": "/season-03-concurrency/16-cancellation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/16-cancellation.html"
   ]
 }

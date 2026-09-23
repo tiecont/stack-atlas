@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/pagination-filtering-sorting/",
   "source": "content/articles/golang/pagination-filtering-sorting.html",
-  "legacy_url": "/season-05-production-http-server/08-pagination-filtering-sorting.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/08-pagination-filtering-sorting.html"
   ]
 }

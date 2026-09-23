@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/rate-limiter-design/",
   "source": "content/articles/system-design/rate-limiter-design.html",
-  "legacy_url": "/season-24-system-design/04-rate-limiter-design.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/04-rate-limiter-design.html"
   ]
 }

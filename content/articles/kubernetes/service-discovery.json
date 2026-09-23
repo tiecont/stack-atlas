@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/service-discovery/",
   "source": "content/articles/kubernetes/service-discovery.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/03-service-discovery.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/03-service-discovery.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/rate-limiting/",
   "source": "content/articles/reliability/rate-limiting.html",
-  "legacy_url": "/season-11-reliability-engineering/06-rate-limiting.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/06-rate-limiting.html"
   ]
 }

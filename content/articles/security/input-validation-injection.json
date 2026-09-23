@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/input-validation-injection/",
   "source": "content/articles/security/input-validation-injection.html",
-  "legacy_url": "/season-17-security-for-go-backend/07-input-validation-injection.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/07-input-validation-injection.html"
   ]
 }

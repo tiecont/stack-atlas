@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/observability-failures/",
   "source": "content/articles/elasticsearch/observability-failures.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/14-observability-failures.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/14-observability-failures.html"
   ]
 }

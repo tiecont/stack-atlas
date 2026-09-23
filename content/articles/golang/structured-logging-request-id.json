@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/structured-logging-request-id/",
   "source": "content/articles/golang/structured-logging-request-id.html",
-  "legacy_url": "/season-05-production-http-server/13-structured-logging-request-id.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/13-structured-logging-request-id.html"
   ]
 }

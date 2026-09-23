@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/distributed-transactions-capstone/",
   "source": "content/articles/distributed-systems/distributed-transactions-capstone.html",
-  "legacy_url": "/season-12-distributed-transactions/10-distributed-transactions-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/10-distributed-transactions-capstone.html"
   ]
 }

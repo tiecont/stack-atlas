@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/cpu-profiling/",
   "source": "content/articles/performance/cpu-profiling.html",
-  "legacy_url": "/season-16-performance-engineering/04-cpu-profiling.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/04-cpu-profiling.html"
   ]
 }

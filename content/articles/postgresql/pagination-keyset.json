@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/pagination-keyset/",
   "source": "content/articles/postgresql/pagination-keyset.html",
-  "legacy_url": "/season-06-postgresql-with-go/12-pagination-keyset.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/12-pagination-keyset.html"
   ]
 }

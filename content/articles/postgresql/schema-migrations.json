@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/postgresql/schema-migrations/",
   "source": "content/articles/postgresql/schema-migrations.html",
-  "legacy_url": "/season-06-postgresql-with-go/05-schema-migrations.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-06-postgresql-with-go/05-schema-migrations.html"
   ]
 }

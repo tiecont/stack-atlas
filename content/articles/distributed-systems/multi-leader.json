@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/multi-leader/",
   "source": "content/articles/distributed-systems/multi-leader.html",
-  "legacy_url": "/season-20-distributed-data/03-multi-leader.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/03-multi-leader.html"
   ]
 }

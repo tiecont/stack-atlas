@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/tcp-byte-stream/",
   "source": "content/articles/networking/tcp-byte-stream.html",
-  "legacy_url": "/season-04-networking-with-go/02-tcp-byte-stream.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/02-tcp-byte-stream.html"
   ]
 }

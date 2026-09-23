@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/reliability/bulkhead-isolation/",
   "source": "content/articles/reliability/bulkhead-isolation.html",
-  "legacy_url": "/season-11-reliability-engineering/05-bulkhead-isolation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-11-reliability-engineering/05-bulkhead-isolation.html"
   ]
 }

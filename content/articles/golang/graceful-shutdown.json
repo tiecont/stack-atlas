@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/graceful-shutdown/",
   "source": "content/articles/golang/graceful-shutdown.html",
-  "legacy_url": "/season-05-production-http-server/11-graceful-shutdown.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/11-graceful-shutdown.html"
   ]
 }

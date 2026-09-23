@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/notification-service/",
   "source": "content/articles/system-design/notification-service.html",
-  "legacy_url": "/season-24-system-design/05-notification-service.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/05-notification-service.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/idempotency-safe-writes/",
   "source": "content/articles/golang/idempotency-safe-writes.html",
-  "legacy_url": "/season-05-production-http-server/09-idempotency-safe-writes.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/09-idempotency-safe-writes.html"
   ]
 }

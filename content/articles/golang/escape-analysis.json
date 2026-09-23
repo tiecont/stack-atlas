@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/escape-analysis/",
   "source": "content/articles/golang/escape-analysis.html",
-  "legacy_url": "/season-02-runtime/03-escape-analysis.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/03-escape-analysis.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/shards-replicas/",
   "source": "content/articles/elasticsearch/shards-replicas.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/05-shards-replicas.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/05-shards-replicas.html"
   ]
 }

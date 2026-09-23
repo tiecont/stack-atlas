@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/conflict-resolution/",
   "source": "content/articles/distributed-systems/conflict-resolution.html",
-  "legacy_url": "/season-20-distributed-data/10-conflict-resolution.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/10-conflict-resolution.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/local-cache-vs-redis/",
   "source": "content/articles/redis/local-cache-vs-redis.html",
-  "legacy_url": "/season-07-redis-caching/02-local-cache-vs-redis.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/02-local-cache-vs-redis.html"
   ]
 }

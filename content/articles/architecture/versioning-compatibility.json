@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/versioning-compatibility/",
   "source": "content/articles/architecture/versioning-compatibility.html",
-  "legacy_url": "/season-13-microservices-architecture/07-versioning-compatibility.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-13-microservices-architecture/07-versioning-compatibility.html"
   ]
 }

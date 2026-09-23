@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/elasticsearch-mental-model/",
   "source": "content/articles/elasticsearch/elasticsearch-mental-model.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/01-elasticsearch-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/01-elasticsearch-mental-model.html"
   ]
 }

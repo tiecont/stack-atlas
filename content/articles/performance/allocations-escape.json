@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/allocations-escape/",
   "source": "content/articles/performance/allocations-escape.html",
-  "legacy_url": "/season-16-performance-engineering/08-allocations-escape.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/08-allocations-escape.html"
   ]
 }

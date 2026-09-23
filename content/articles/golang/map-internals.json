@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/map-internals/",
   "source": "content/articles/golang/map-internals.html",
-  "legacy_url": "/season-02-runtime/06-map-internals.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/06-map-internals.html"
   ]
 }

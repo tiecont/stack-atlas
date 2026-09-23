@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/consensus-problem/",
   "source": "content/articles/distributed-systems/consensus-problem.html",
-  "legacy_url": "/season-10-distributed-systems/10-consensus-problem.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/10-consensus-problem.html"
   ]
 }

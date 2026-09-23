@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/red-use-method/",
   "source": "content/articles/observability/red-use-method.html",
-  "legacy_url": "/season-15-observability/05-red-use-method.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/05-red-use-method.html"
   ]
 }

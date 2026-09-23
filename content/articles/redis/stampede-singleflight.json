@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/stampede-singleflight/",
   "source": "content/articles/redis/stampede-singleflight.html",
-  "legacy_url": "/season-07-redis-caching/08-stampede-singleflight.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/08-stampede-singleflight.html"
   ]
 }

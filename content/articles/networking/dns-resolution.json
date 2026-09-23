@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/dns-resolution/",
   "source": "content/articles/networking/dns-resolution.html",
-  "legacy_url": "/season-04-networking-with-go/05-dns-resolution.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/05-dns-resolution.html"
   ]
 }

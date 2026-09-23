@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/failure-detection-split-brain/",
   "source": "content/articles/distributed-systems/failure-detection-split-brain.html",
-  "legacy_url": "/season-10-distributed-systems/14-failure-detection-split-brain.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/14-failure-detection-split-brain.html"
   ]
 }

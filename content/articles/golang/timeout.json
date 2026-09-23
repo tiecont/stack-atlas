@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/timeout/",
   "source": "content/articles/golang/timeout.html",
-  "legacy_url": "/season-03-concurrency/15-timeout.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/15-timeout.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/strangler-pattern/",
   "source": "content/articles/architecture/strangler-pattern.html",
-  "legacy_url": "/season-23-architecture-patterns/10-strangler-pattern.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-23-architecture-patterns/10-strangler-pattern.html"
   ]
 }

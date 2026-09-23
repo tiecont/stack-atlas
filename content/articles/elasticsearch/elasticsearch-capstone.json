@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/elasticsearch-capstone/",
   "source": "content/articles/elasticsearch/elasticsearch-capstone.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/16-elasticsearch-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/16-elasticsearch-capstone.html"
   ]
 }

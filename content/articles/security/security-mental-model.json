@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/security/security-mental-model/",
   "source": "content/articles/security/security-mental-model.html",
-  "legacy_url": "/season-17-security-for-go-backend/01-security-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-17-security-for-go-backend/01-security-mental-model.html"
   ]
 }

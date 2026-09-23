@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/network-mental-model/",
   "source": "content/articles/networking/network-mental-model.html",
-  "legacy_url": "/season-04-networking-with-go/01-network-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/01-network-mental-model.html"
   ]
 }

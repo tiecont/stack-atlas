@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/snapshots-compaction/",
   "source": "content/articles/distributed-systems/snapshots-compaction.html",
-  "legacy_url": "/season-21-consensus-coordination/09-snapshots-compaction.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-21-consensus-coordination/09-snapshots-compaction.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/architecture/data-ownership/",
   "source": "content/articles/architecture/data-ownership.html",
-  "legacy_url": "/season-13-microservices-architecture/03-data-ownership.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-13-microservices-architecture/03-data-ownership.html"
   ]
 }

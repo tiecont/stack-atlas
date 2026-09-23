@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/mappings-fields/",
   "source": "content/articles/elasticsearch/mappings-fields.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/04-mappings-fields.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/04-mappings-fields.html"
   ]
 }

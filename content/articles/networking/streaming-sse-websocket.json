@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/streaming-sse-websocket/",
   "source": "content/articles/networking/streaming-sse-websocket.html",
-  "legacy_url": "/season-04-networking-with-go/13-streaming-sse-websocket.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/13-streaming-sse-websocket.html"
   ]
 }

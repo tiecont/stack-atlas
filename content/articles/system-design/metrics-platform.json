@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/metrics-platform/",
   "source": "content/articles/system-design/metrics-platform.html",
-  "legacy_url": "/season-24-system-design/13-metrics-platform.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/13-metrics-platform.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/stack-heap/",
   "source": "content/articles/golang/stack-heap.html",
-  "legacy_url": "/season-02-runtime/02-stack-heap.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/02-stack-heap.html"
   ]
 }

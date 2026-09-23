@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/messaging-mental-model/",
   "source": "content/articles/messaging/messaging-mental-model.html",
-  "legacy_url": "/season-08-messaging/01-messaging-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/01-messaging-mental-model.html"
   ]
 }

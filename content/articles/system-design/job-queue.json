@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/job-queue/",
   "source": "content/articles/system-design/job-queue.html",
-  "legacy_url": "/season-24-system-design/06-job-queue.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/06-job-queue.html"
   ]
 }

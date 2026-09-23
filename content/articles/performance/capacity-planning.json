@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/capacity-planning/",
   "source": "content/articles/performance/capacity-planning.html",
-  "legacy_url": "/season-16-performance-engineering/13-capacity-planning.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/13-capacity-planning.html"
   ]
 }

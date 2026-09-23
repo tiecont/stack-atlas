@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/runtime-toolbox/",
   "source": "content/articles/golang/runtime-toolbox.html",
-  "legacy_url": "/season-02-runtime/12-runtime-toolbox.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-02-runtime/12-runtime-toolbox.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/grpc/interceptors/",
   "source": "content/articles/grpc/interceptors.html",
-  "legacy_url": "/season-14-grpc-with-go/07-interceptors.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-14-grpc-with-go/07-interceptors.html"
   ]
 }

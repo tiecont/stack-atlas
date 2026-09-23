@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/refresh-segments-merges/",
   "source": "content/articles/elasticsearch/refresh-segments-merges.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/06-refresh-segments-merges.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/06-refresh-segments-merges.html"
   ]
 }

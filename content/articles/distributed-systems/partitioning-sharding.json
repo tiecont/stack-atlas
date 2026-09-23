@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/partitioning-sharding/",
   "source": "content/articles/distributed-systems/partitioning-sharding.html",
-  "legacy_url": "/season-10-distributed-systems/09-partitioning-sharding.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-10-distributed-systems/09-partitioning-sharding.html"
   ]
 }

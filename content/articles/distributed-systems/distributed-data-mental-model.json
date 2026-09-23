@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/distributed-data-mental-model/",
   "source": "content/articles/distributed-systems/distributed-data-mental-model.html",
-  "legacy_url": "/season-20-distributed-data/01-distributed-data-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/01-distributed-data-mental-model.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/performance-capstone/",
   "source": "content/articles/performance/performance-capstone.html",
-  "legacy_url": "/season-16-performance-engineering/14-performance-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/14-performance-capstone.html"
   ]
 }

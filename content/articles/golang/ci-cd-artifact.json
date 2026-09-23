@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/ci-cd-artifact/",
   "source": "content/articles/golang/ci-cd-artifact.html",
-  "legacy_url": "/season-18-production-go-engineering/13-ci-cd-artifact.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/13-ci-cd-artifact.html"
   ]
 }

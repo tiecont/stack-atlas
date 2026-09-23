@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/messaging/backpressure-consumer-lag/",
   "source": "content/articles/messaging/backpressure-consumer-lag.html",
-  "legacy_url": "/season-08-messaging/08-backpressure-consumer-lag.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-08-messaging/08-backpressure-consumer-lag.html"
   ]
 }

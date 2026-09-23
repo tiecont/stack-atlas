@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/prometheus-model/",
   "source": "content/articles/observability/prometheus-model.html",
-  "legacy_url": "/season-15-observability/07-prometheus-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/07-prometheus-model.html"
   ]
 }

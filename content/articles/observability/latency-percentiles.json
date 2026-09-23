@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/latency-percentiles/",
   "source": "content/articles/observability/latency-percentiles.html",
-  "legacy_url": "/season-15-observability/06-latency-percentiles.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/06-latency-percentiles.html"
   ]
 }

@@ -9,8 +9,43 @@ import re
 import sys
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote
 
-from build_site import CardParser, ROOT, clean_text, read_json, slug
+from build_site import ROOT, clean_text, read_json, slug
+
+
+class CardParser(HTMLParser):
+    """Read lesson cards only while explicitly migrating legacy season pages."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.card = None
+        self.field = None
+        self.cards = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if self.card is None and tag == "a" and {"card", "lesson"} & set(attrs.get("class", "").split()):
+            self.card = {"href": attrs.get("href"), "title": "", "description": ""}
+            return
+        if self.card is not None:
+            if tag in ("h2", "h3") and not self.card["title"]:
+                self.field = "title"
+            elif tag == "p" and not self.card["description"]:
+                self.field = "description"
+
+    def handle_data(self, data):
+        if self.card is not None and self.field:
+            self.card[self.field] += data
+
+    def handle_endtag(self, tag):
+        if tag in ("h2", "h3", "p"):
+            self.field = None
+        if tag == "a" and self.card is not None:
+            self.cards.append({key: " ".join(value.split()) if isinstance(value, str) else value
+                               for key, value in self.card.items()})
+            self.card = None
+            self.field = None
 
 
 class ArticleMetadataParser(HTMLParser):
@@ -142,11 +177,56 @@ def collect_batch(season_names):
                 "status": "published",
                 "url": canonical_url,
                 "source": body_file.as_posix(),
-                "legacy_url": "/" + (Path(season) / card["href"]).as_posix(),
+                "legacy_urls": ["/" + (Path(season) / card["href"]).as_posix()],
                 "authors": ["tiecont"],
             }
             records.append((body_file, metadata_file, fragment, record))
     return records
+
+
+def canonicalize_path_references(seasons):
+    """Convert selected legacy season modules to explicit canonical ID lists."""
+    path_file = ROOT / "content/paths/golang-backend.json"
+    learning_path = read_json(path_file)
+    selected = set(seasons)
+    metadata_by_legacy_url = {}
+    metadata_files = sorted((ROOT / "content/articles").rglob("*.json"))
+    for metadata_file in metadata_files:
+        metadata = read_json(metadata_file)
+        legacy_urls = metadata.get("legacy_urls", [])
+        if metadata.get("legacy_url"):
+            legacy_urls = [*legacy_urls, metadata["legacy_url"]]
+        for legacy_url in legacy_urls:
+            metadata_by_legacy_url[legacy_url] = (metadata_file, metadata)
+
+    updated_metadata = {}
+    for module_order, module in enumerate(learning_path["modules"], start=1):
+        module.setdefault("order", module_order)
+        season = module.get("season")
+        if season not in selected:
+            continue
+        index_file = ROOT / season / "index.html"
+        cards = CardParser()
+        cards.feed(index_file.read_text(encoding="utf-8"))
+        article_ids = []
+        for card in cards.cards:
+            legacy_url = "/" + (Path(season) / unquote(card["href"])).as_posix()
+            match = metadata_by_legacy_url.get(legacy_url)
+            if not match:
+                raise ValueError(f"No canonical article metadata preserves {legacy_url}")
+            metadata_file, metadata = match
+            article_ids.append(metadata["id"])
+            normalized_urls = list(dict.fromkeys([*metadata.get("legacy_urls", []), legacy_url]))
+            metadata.pop("legacy_url", None)
+            metadata["legacy_urls"] = normalized_urls
+            updated_metadata[metadata_file] = metadata
+        if len(article_ids) != len(set(article_ids)):
+            raise ValueError(f"{season}: duplicate article reference in the legacy lesson index")
+        module["article_ids"] = article_ids
+        module.pop("season", None)
+
+    remaining = [module.get("season") for module in learning_path["modules"] if module.get("season")]
+    return path_file, learning_path, updated_metadata, remaining
 
 
 def main():
@@ -156,16 +236,28 @@ def main():
     args = parser.parse_args()
     try:
         records = collect_batch(args.seasons)
+        path_file, learning_path, updated_metadata, remaining = canonicalize_path_references(args.seasons)
         if args.dry_run:
-            print(f"Ready to migrate {len(records)} articles from {', '.join(args.seasons)}")
+            lesson_count = sum(len(module.get("article_ids", [])) for module in learning_path["modules"] if not module.get("season"))
+            print(f"Ready to write {len(records)} article sources and canonical references for {lesson_count} lessons.")
+            print(f"Will normalize legacy URL metadata in {len(updated_metadata)} article records.")
+            if remaining:
+                print("Legacy season modules remain: " + ", ".join(remaining))
             for body, _, _, record in records:
-                print(f"  {record['legacy_url']} -> {record['url']} ({record['title']})")
+                print(f"  {record['legacy_urls'][0]} -> {record['url']} ({record['title']})")
             return 0
         for body_file, metadata_file, fragment, record in records:
             body_file.parent.mkdir(parents=True, exist_ok=True)
             body_file.write_text(fragment + "\n", encoding="utf-8")
             metadata_file.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        for metadata_file, metadata in updated_metadata.items():
+            metadata_file.write_text(json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        path_file.write_text(json.dumps(learning_path, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(f"Extracted {len(records)} articles from {', '.join(args.seasons)}")
+        if remaining:
+            print("Legacy season modules remain: " + ", ".join(remaining))
+        else:
+            print("Every Golang path module now references canonical article IDs.")
         print("Run scripts/build_site.py to generate canonical pages and legacy redirects.")
         return 0
     except (OSError, ValueError, json.JSONDecodeError) as exc:

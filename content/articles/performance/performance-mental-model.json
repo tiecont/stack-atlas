@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/performance-mental-model/",
   "source": "content/articles/performance/performance-mental-model.html",
-  "legacy_url": "/season-16-performance-engineering/01-performance-mental-model.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/01-performance-mental-model.html"
   ]
 }

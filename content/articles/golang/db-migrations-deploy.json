@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/db-migrations-deploy/",
   "source": "content/articles/golang/db-migrations-deploy.html",
-  "legacy_url": "/season-18-production-go-engineering/08-db-migrations-deploy.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/08-db-migrations-deploy.html"
   ]
 }

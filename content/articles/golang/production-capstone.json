@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/production-capstone/",
   "source": "content/articles/golang/production-capstone.html",
-  "legacy_url": "/season-18-production-go-engineering/14-production-capstone.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-18-production-go-engineering/14-production-capstone.html"
   ]
 }

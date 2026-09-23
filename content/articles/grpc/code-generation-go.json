@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/grpc/code-generation-go/",
   "source": "content/articles/grpc/code-generation-go.html",
-  "legacy_url": "/season-14-grpc-with-go/03-code-generation-go.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-14-grpc-with-go/03-code-generation-go.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/networking/reverse-proxy-gateway/",
   "source": "content/articles/networking/reverse-proxy-gateway.html",
-  "legacy_url": "/season-04-networking-with-go/14-reverse-proxy-gateway.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-04-networking-with-go/14-reverse-proxy-gateway.html"
   ]
 }

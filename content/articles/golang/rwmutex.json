@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/rwmutex/",
   "source": "content/articles/golang/rwmutex.html",
-  "legacy_url": "/season-03-concurrency/05-rwmutex.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-03-concurrency/05-rwmutex.html"
   ]
 }

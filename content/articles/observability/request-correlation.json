@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/observability/request-correlation/",
   "source": "content/articles/observability/request-correlation.html",
-  "legacy_url": "/season-15-observability/03-request-correlation.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-15-observability/03-request-correlation.html"
   ]
 }

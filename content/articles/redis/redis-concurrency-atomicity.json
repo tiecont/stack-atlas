@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/redis/redis-concurrency-atomicity/",
   "source": "content/articles/redis/redis-concurrency-atomicity.html",
-  "legacy_url": "/season-07-redis-caching/10-redis-concurrency-atomicity.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-07-redis-caching/10-redis-concurrency-atomicity.html"
   ]
 }

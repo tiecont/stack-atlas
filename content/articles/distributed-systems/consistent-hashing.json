@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/consistent-hashing/",
   "source": "content/articles/distributed-systems/consistent-hashing.html",
-  "legacy_url": "/season-20-distributed-data/07-consistent-hashing.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-20-distributed-data/07-consistent-hashing.html"
   ]
 }

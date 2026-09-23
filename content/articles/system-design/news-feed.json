@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/system-design/news-feed/",
   "source": "content/articles/system-design/news-feed.html",
-  "legacy_url": "/season-24-system-design/08-news-feed.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-24-system-design/08-news-feed.html"
   ]
 }

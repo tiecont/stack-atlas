@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/replication-isr-acks/",
   "source": "content/articles/kafka/replication-isr-acks.html",
-  "legacy_url": "/season-09-kafka-deep-dive/05-replication-isr-acks.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/05-replication-isr-acks.html"
   ]
 }

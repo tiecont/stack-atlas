@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/elasticsearch/bm25-scoring/",
   "source": "content/articles/elasticsearch/bm25-scoring.html",
-  "legacy_url": "/season-22-elasticsearch-deep-dive/08-bm25-scoring.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-22-elasticsearch-deep-dive/08-bm25-scoring.html"
   ]
 }

@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kafka/idempotent-producer/",
   "source": "content/articles/kafka/idempotent-producer.html",
-  "legacy_url": "/season-09-kafka-deep-dive/06-idempotent-producer.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-09-kafka-deep-dive/06-idempotent-producer.html"
   ]
 }

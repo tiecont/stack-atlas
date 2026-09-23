@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/golang/routing-resource-design/",
   "source": "content/articles/golang/routing-resource-design.html",
-  "legacy_url": "/season-05-production-http-server/02-routing-resource-design.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-05-production-http-server/02-routing-resource-design.html"
   ]
 }

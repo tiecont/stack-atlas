@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/distributed-systems/two-phase-commit/",
   "source": "content/articles/distributed-systems/two-phase-commit.html",
-  "legacy_url": "/season-12-distributed-transactions/09-two-phase-commit.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-12-distributed-transactions/09-two-phase-commit.html"
   ]
 }

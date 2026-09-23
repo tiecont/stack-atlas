@@ -23,8 +23,10 @@
   "status": "published",
   "url": "/articles/kubernetes/requests-limits/",
   "source": "content/articles/kubernetes/requests-limits.html",
-  "legacy_url": "/season-19-kubernetes-for-go-backend/06-requests-limits.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-19-kubernetes-for-go-backend/06-requests-limits.html"
   ]
 }

@@ -22,8 +22,10 @@
   "status": "published",
   "url": "/articles/performance/memory-profiling/",
   "source": "content/articles/performance/memory-profiling.html",
-  "legacy_url": "/season-16-performance-engineering/05-memory-profiling.html",
   "authors": [
     "tiecont"
+  ],
+  "legacy_urls": [
+    "/season-16-performance-engineering/05-memory-profiling.html"
   ]
 }
