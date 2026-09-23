@@ -1,0 +1,21 @@
+id: season-24-system-design-10-search-system
+title: Design Search System
+description: Index pipeline, query service và eventual consistency.
+type: article
+domain: system-design
+category: system-design
+tags:
+- system-design
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: system-design
+prerequisites: []
+related: []
+status: published
+url: /articles/system-design/search-system/
+authors:
+- tiecont
+legacy_urls:
+- /season-24-system-design/10-search-system.html
+schema_version: 1

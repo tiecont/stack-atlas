@@ -1,0 +1,22 @@
+id: season-03-concurrency-13-pipeline
+title: Pipeline
+description: Ghép nhiều stage concurrent thành một dòng xử lý dữ liệu rõ ràng.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/pipeline/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/13-pipeline.html
+schema_version: 1

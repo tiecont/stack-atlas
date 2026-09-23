@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-05-cap-theorem
+title: 'CAP Theorem: dùng đúng, đừng dùng như slogan'
+description: CAP nói về lựa chọn khi network partition xảy ra.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/cap-theorem/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/05-cap-theorem.html
+schema_version: 1

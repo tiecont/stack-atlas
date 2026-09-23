@@ -1,0 +1,21 @@
+id: season-16-performance-engineering-07-go-trace
+title: go tool trace
+description: Quan sát scheduler, goroutine, network blocking và GC theo timeline.
+type: article
+domain: performance
+category: performance
+tags:
+- performance
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: performance-engineering
+prerequisites: []
+related: []
+status: published
+url: /articles/performance/go-trace/
+authors:
+- tiecont
+legacy_urls:
+- /season-16-performance-engineering/07-go-trace.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-12-distributed-transactions-03-transactional-outbox
+title: Transactional Outbox
+description: Ghi business data và event vào cùng một local database transaction.
+type: article
+domain: distributed-systems
+category: transactions
+tags:
+- distributed-systems
+- transactions
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-transactions
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/transactional-outbox/
+authors:
+- tiecont
+legacy_urls:
+- /season-12-distributed-transactions/03-transactional-outbox.html
+schema_version: 1

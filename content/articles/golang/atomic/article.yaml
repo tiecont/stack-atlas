@@ -1,0 +1,22 @@
+id: season-03-concurrency-06-atomic
+title: Atomic
+description: Những phép cập nhật rất nhỏ không cần khóa cả critical section.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/atomic/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/06-atomic.html
+schema_version: 1

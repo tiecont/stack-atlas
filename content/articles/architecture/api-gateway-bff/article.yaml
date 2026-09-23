@@ -1,0 +1,21 @@
+id: season-13-microservices-architecture-05-api-gateway-bff
+title: API Gateway và Backend for Frontend
+description: Đặt cross-cutting concern ở edge nhưng đừng biến gateway thành mega-service.
+type: article
+domain: architecture
+category: architecture
+tags:
+- architecture
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: microservices-architecture
+prerequisites: []
+related: []
+status: published
+url: /articles/architecture/api-gateway-bff/
+authors:
+- tiecont
+legacy_urls:
+- /season-13-microservices-architecture/05-api-gateway-bff.html
+schema_version: 1

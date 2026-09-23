@@ -1,0 +1,4 @@
+id: redis
+title: Redis
+description: Caching, data structures và các tradeoff khi dùng Redis trong hệ thống.
+status: published

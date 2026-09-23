@@ -1,0 +1,23 @@
+id: season-07-redis-caching-12-cache-capstone
+title: 'Capstone: Cache Layer chịu được Production'
+description: Ghép cache-aside, TTL, invalidation, singleflight, observability và failure policy vào một
+  Go service.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/cache-capstone/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/12-cache-capstone.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-22-elasticsearch-deep-dive-11-bulk-indexing
+title: Bulk Indexing và Throughput
+description: Batch writes để giảm protocol overhead và tăng indexing throughput.
+type: article
+domain: elasticsearch
+category: search
+tags:
+- elasticsearch
+- search
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: elasticsearch
+prerequisites: []
+related: []
+status: published
+url: /articles/elasticsearch/bulk-indexing/
+authors:
+- tiecont
+legacy_urls:
+- /season-22-elasticsearch-deep-dive/11-bulk-indexing.html
+schema_version: 1

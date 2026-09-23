@@ -1,0 +1,22 @@
+id: season-04-networking-with-go-15-grpc-debugging-lab
+title: 'gRPC + Network Debugging: Bài tốt nghiệp Season 04'
+description: 'Kết nối HTTP/2/gRPC với các công cụ debug: httptrace, httptest, curl, ss và packet-level
+  thinking.'
+type: article
+domain: networking
+category: networking
+tags:
+- networking
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: networking-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/networking/grpc-debugging-lab/
+authors:
+- tiecont
+legacy_urls:
+- /season-04-networking-with-go/15-grpc-debugging-lab.html
+schema_version: 1

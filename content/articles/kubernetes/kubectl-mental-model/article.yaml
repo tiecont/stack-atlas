@@ -1,0 +1,34 @@
+id: k8s-kubectl-mental-model
+title: 'kubectl Mental Model: context, API request và evidence'
+description: 'Dùng kubectl như client của Kubernetes API: chọn context đúng, khai báo thay đổi và điều
+  tra trạng thái bằng bằng chứng.'
+type: article
+domain: kubernetes
+category: cluster-operations
+tags:
+- kubernetes
+- kubectl
+- debugging
+difficulty: beginner
+learning_paths:
+- path_id: kubernetes-engineer
+  module_id: k8s-foundations
+prerequisites:
+- k8s-kubernetes-api-objects
+related:
+- k8s-kubernetes-architecture
+- k8s-local-kind-cluster
+labs:
+- kubernetes/00-cluster
+- kubernetes/01-foundations
+review:
+  kubernetes_baseline: '1.37'
+  last_reviewed: '2026-09-23'
+kubernetes:
+  min_version: '1.25'
+  feature_state: stable
+status: published
+url: /articles/kubernetes/kubectl-mental-model/
+authors:
+- tiecont
+schema_version: 1

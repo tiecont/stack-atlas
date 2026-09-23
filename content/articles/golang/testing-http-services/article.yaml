@@ -1,0 +1,22 @@
+id: season-05-production-http-server-14-testing-http-services
+title: Testing HTTP Services
+description: Unit test handler, integration test router và test behavior thay vì implementation detail.
+type: article
+domain: golang
+category: http-services
+tags:
+- golang
+- http-services
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-http
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/testing-http-services/
+authors:
+- tiecont
+legacy_urls:
+- /season-05-production-http-server/14-testing-http-services.html
+schema_version: 1

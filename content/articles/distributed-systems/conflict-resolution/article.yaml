@@ -1,0 +1,22 @@
+id: season-20-distributed-data-10-conflict-resolution
+title: Conflict Resolution và Versioning
+description: Concurrent writes cần biết cái nào supersede cái nào hoặc merge ra sao.
+type: article
+domain: distributed-systems
+category: data-systems
+tags:
+- distributed-systems
+- data-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-data
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/conflict-resolution/
+authors:
+- tiecont
+legacy_urls:
+- /season-20-distributed-data/10-conflict-resolution.html
+schema_version: 1

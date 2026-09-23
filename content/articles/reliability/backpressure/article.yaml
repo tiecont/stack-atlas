@@ -1,0 +1,21 @@
+id: season-11-reliability-engineering-08-backpressure
+title: Backpressure giữa các tầng
+description: Producer nhanh hơn consumer thì phải có tín hiệu chậm lại.
+type: article
+domain: reliability
+category: reliability
+tags:
+- reliability
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: reliability-engineering
+prerequisites: []
+related: []
+status: published
+url: /articles/reliability/backpressure/
+authors:
+- tiecont
+legacy_urls:
+- /season-11-reliability-engineering/08-backpressure.html
+schema_version: 1

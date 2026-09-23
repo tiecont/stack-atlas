@@ -1,0 +1,21 @@
+id: season-24-system-design-05-notification-service
+title: Design Notification Service
+description: Email, push và SMS với retries, preferences và provider failures.
+type: article
+domain: system-design
+category: system-design
+tags:
+- system-design
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: system-design
+prerequisites: []
+related: []
+status: published
+url: /articles/system-design/notification-service/
+authors:
+- tiecont
+legacy_urls:
+- /season-24-system-design/05-notification-service.html
+schema_version: 1

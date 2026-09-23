@@ -6,7 +6,7 @@ context="${CONTEXT:-kind-${CLUSTER_NAME:-stack-atlas}}"
 kubectl_bin="${KUBECTL:-kubectl}"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 root="$(cd "$script_dir/../../../.." && pwd)"
-"$root/scripts/kubernetes/assert_lab_context.sh"
+"$root/scripts/ci/kubernetes/assert_lab_context.sh"
 "$kubectl_bin" --context "$context" wait --for=condition=available deployment/atlas-demo-api --namespace "$namespace" --timeout=120s
 "$kubectl_bin" --context "$context" wait --for=jsonpath='{.status.availableReplicas}'=2 deployment/atlas-demo-api --namespace "$namespace" --timeout=120s
 "$kubectl_bin" --context "$context" wait --for=condition=Ready pod --selector=app.kubernetes.io/name=atlas-demo-api --namespace "$namespace" --timeout=120s

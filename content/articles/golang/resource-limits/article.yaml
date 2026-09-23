@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-07-resource-limits
+title: CPU, Memory và Runtime trong Container
+description: Go runtime vẫn phải sống trong resource boundary của container.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/resource-limits/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/07-resource-limits.html
+schema_version: 1

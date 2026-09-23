@@ -1,23 +1,22 @@
 id: kubernetes-engineer
 title: Kubernetes Engineer
-description: >-
-  Build a control-loop mental model, then practice workloads, networking,
-  security and production operations on a reproducible local cluster.
+description: Build a control-loop mental model, then practice workloads, networking, security and production
+  operations on a reproducible local cluster.
 status: published
 domain: kubernetes
 difficulty:
   start: beginner
   end: advanced
 modules:
-  - id: k8s-foundations
-    title: Kubernetes Foundations
-    order: 1
-    domain: kubernetes
-    category: orchestration
-    article_ids:
-      - season-19-kubernetes-for-go-backend-01-kubernetes-mental-model
-      - k8s-kubernetes-architecture
-      - k8s-kubernetes-api-objects
-      - k8s-desired-state-reconciliation
-      - k8s-kubectl-mental-model
-      - k8s-local-kind-cluster
+- id: k8s-foundations
+  title: Kubernetes Foundations
+  order: 1
+  domain: kubernetes
+  category: orchestration
+  article_ids:
+  - season-19-kubernetes-for-go-backend-01-kubernetes-mental-model
+  - k8s-kubernetes-architecture
+  - k8s-kubernetes-api-objects
+  - k8s-desired-state-reconciliation
+  - k8s-kubectl-mental-model
+  - k8s-local-kind-cluster

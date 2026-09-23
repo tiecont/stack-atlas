@@ -1,0 +1,21 @@
+id: season-24-system-design-02-capacity-estimation
+title: Capacity Estimation
+description: Ước lượng RPS, storage, bandwidth và concurrency trước khi chọn kiến trúc.
+type: article
+domain: system-design
+category: system-design
+tags:
+- system-design
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: system-design
+prerequisites: []
+related: []
+status: published
+url: /articles/system-design/capacity-estimation/
+authors:
+- tiecont
+legacy_urls:
+- /season-24-system-design/02-capacity-estimation.html
+schema_version: 1

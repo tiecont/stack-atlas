@@ -1,0 +1,22 @@
+id: season-07-redis-caching-05-cache-aside
+title: Cache-Aside Pattern
+description: 'Pattern phổ biến nhất: app tự đọc cache, fallback DB và populate lại cache.'
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/cache-aside/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/05-cache-aside.html
+schema_version: 1

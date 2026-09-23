@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-08-quorum-leaderless
+title: Quorum và Leaderless Replication
+description: Không nhất thiết mọi write phải đi qua một leader.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/quorum-leaderless/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/08-quorum-leaderless.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-13-microservices-architecture-06-service-discovery-load-balancing
+title: Service Discovery và Load Balancing
+description: Tên service phải được resolve thành instance khỏe mạnh.
+type: article
+domain: architecture
+category: architecture
+tags:
+- architecture
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: microservices-architecture
+prerequisites: []
+related: []
+status: published
+url: /articles/architecture/service-discovery-load-balancing/
+authors:
+- tiecont
+legacy_urls:
+- /season-13-microservices-architecture/06-service-discovery-load-balancing.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-12-distributed-transactions-01-distributed-transaction-problem
+title: Vấn đề Distributed Transaction
+description: Một business operation chạm nhiều service nhưng không còn một transaction database duy nhất.
+type: article
+domain: distributed-systems
+category: transactions
+tags:
+- distributed-systems
+- transactions
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-transactions
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/distributed-transaction-problem/
+authors:
+- tiecont
+legacy_urls:
+- /season-12-distributed-transactions/01-distributed-transaction-problem.html
+schema_version: 1

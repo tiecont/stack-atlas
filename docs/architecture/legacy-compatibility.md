@@ -1,25 +1,24 @@
 # Legacy URL compatibility
 
-Season directories are retained to keep historical links working. They are not canonical content and are not consulted by normal catalog discovery, article ordering, topic rendering, path rendering, or search generation.
+Historical lesson and season-index routes remain available as generated redirects in `dist/`. No season directories or copied season pages remain in the repository source tree.
 
-## Canonical ownership
+## Lesson URL ownership
 
-Every migrated lesson has canonical article metadata under `content/articles/`. Its metadata lists historical lesson paths in `legacy_urls`, for example:
+Each canonical article stores its historical lesson paths in `legacy_urls`:
 
-```json
-{
-  "legacy_urls": [
-    "/season-03-concurrency/01-goroutine.html"
-  ]
-}
+```yaml
+legacy_urls:
+  - /season-03-concurrency/01-goroutine.html
 ```
 
-The generator emits a small redirect page at every listed path. Redirects target the canonical article and preserve query strings and fragments in browser navigation. The catalog rejects malformed aliases and aliases assigned to multiple articles.
+The builder emits one redirect file per declared route. It validates exact equality between metadata aliases and generated lesson routes, then checks that each redirect targets an existing canonical article. Redirects preserve query strings and fragments in browser navigation.
 
-The renderer also copies the static season directories into a separately selected output such as `_site` so historic season index routes remain available. It does not parse those indexes; they contain no catalog or ordering authority. Generated article redirects replace corresponding copied lesson pages. Canonical discovery comes only from article, domain, category, and path metadata.
+## Season index URLs
 
-## Migration tooling
+The builder groups legacy lesson aliases by season and matches each group to the learning-path module containing those articles. It emits the old `/season-*/index.html` route as a redirect to that module anchor. The generated path module has a stable `module-<id>` fragment.
 
-`scripts/migrate_legacy_batch.py` is an explicit one-time migration aid. It may read old season HTML to extract a selected batch, then writes canonical article sources/metadata and path `article_ids` while retaining every historical lesson URL. Normal site builds do not call the migration parser.
+The verified inventory contains 341 lesson aliases and 24 season index routes. The complete route-to-canonical map is recorded in `docs/audits/legacy-url-inventory.md`.
 
-When consolidating lessons, first preserve all useful material, path memberships, and historical URLs in the retained canonical article. Do not remove a legacy alias until a deliberate redirect destination has been verified. Existing public canonical URLs and IDs are stable compatibility interfaces.
+## No legacy content reader
+
+Normal builds read only canonical YAML metadata and article HTML folders. They do not scrape, copy, or discover content from season pages. Do not move old directories into an archive; keep routing data on canonical articles.

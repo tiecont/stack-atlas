@@ -1,0 +1,21 @@
+id: season-04-networking-with-go-06-http-on-the-wire
+title: 'HTTP trên Wire: Request, Response và Connection'
+description: Bóc HTTP khỏi framework để hiểu method, headers, body, status và keep-alive.
+type: article
+domain: networking
+category: networking
+tags:
+- networking
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: networking-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/networking/http-on-the-wire/
+authors:
+- tiecont
+legacy_urls:
+- /season-04-networking-with-go/06-http-on-the-wire.html
+schema_version: 1

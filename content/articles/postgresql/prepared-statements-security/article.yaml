@@ -1,0 +1,22 @@
+id: season-06-postgresql-with-go-16-prepared-statements-security
+title: Prepared Statements và SQL Security
+description: Parameterization, statement lifecycle và dynamic SQL an toàn.
+type: article
+domain: postgresql
+category: databases
+tags:
+- postgresql
+- databases
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: postgresql-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/postgresql/prepared-statements-security/
+authors:
+- tiecont
+legacy_urls:
+- /season-06-postgresql-with-go/16-prepared-statements-security.html
+schema_version: 1

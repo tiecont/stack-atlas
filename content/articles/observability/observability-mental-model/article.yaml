@@ -1,0 +1,21 @@
+id: season-15-observability-01-observability-mental-model
+title: Observability Mental Model
+description: Biết hệ thống đang xảy ra chuyện gì mà không cần SSH vào production.
+type: article
+domain: observability
+category: observability
+tags:
+- observability
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: observability
+prerequisites: []
+related: []
+status: published
+url: /articles/observability/observability-mental-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-15-observability/01-observability-mental-model.html
+schema_version: 1

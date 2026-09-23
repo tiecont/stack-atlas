@@ -1,0 +1,22 @@
+id: season-07-redis-caching-09-penetration-avalanche-hotkeys
+title: Cache Penetration, Avalanche và Hot Keys
+description: Ba failure pattern phổ biến và cách nhận biết qua metrics thay vì thuộc tên.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/penetration-avalanche-hotkeys/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/09-penetration-avalanche-hotkeys.html
+schema_version: 1

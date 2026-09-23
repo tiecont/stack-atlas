@@ -1,0 +1,22 @@
+id: season-03-concurrency-05-rwmutex
+title: RWMutex
+description: Cho nhiều reader đi cùng nhau nhưng vẫn bảo vệ write an toàn.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/rwmutex/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/05-rwmutex.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-14-grpc-with-go-06-metadata-auth
+title: Metadata và Authentication
+description: Truyền request metadata như token, trace context hoặc tenant id.
+type: article
+domain: grpc
+category: rpc
+tags:
+- grpc
+- rpc
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: grpc-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/grpc/metadata-auth/
+authors:
+- tiecont
+legacy_urls:
+- /season-14-grpc-with-go/06-metadata-auth.html
+schema_version: 1

@@ -1,0 +1,21 @@
+id: season-08-messaging-09-rabbitmq-mental-model
+title: RabbitMQ Mental Model
+description: Exchange, queue, binding, routing key và acknowledgement cho work queues/routing.
+type: article
+domain: messaging
+category: messaging
+tags:
+- messaging
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: messaging-patterns
+prerequisites: []
+related: []
+status: published
+url: /articles/messaging/rabbitmq-mental-model/
+authors:
+- tiecont
+legacy_urls:
+- /season-08-messaging/09-rabbitmq-mental-model.html
+schema_version: 1

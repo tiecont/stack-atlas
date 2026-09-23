@@ -1,0 +1,22 @@
+id: season-03-concurrency-09-buffered-unbuffered
+title: Buffered vs Unbuffered Channel
+description: Hiểu rendezvous, queue nhỏ, throughput và tác động của buffer.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/buffered-unbuffered/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/09-buffered-unbuffered.html
+schema_version: 1

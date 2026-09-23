@@ -1,0 +1,22 @@
+id: season-06-postgresql-with-go-14-upsert-conflict-handling
+title: UPSERT và Conflict Handling
+description: INSERT ... ON CONFLICT để biến race insert thành operation atomic hơn.
+type: article
+domain: postgresql
+category: databases
+tags:
+- postgresql
+- databases
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: postgresql-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/postgresql/upsert-conflict-handling/
+authors:
+- tiecont
+legacy_urls:
+- /season-06-postgresql-with-go/14-upsert-conflict-handling.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-20-distributed-data-11-distributed-locks
+title: Distributed Locks, Lease và Fencing
+description: Lock qua network cần bảo vệ cả stale owner.
+type: article
+domain: distributed-systems
+category: data-systems
+tags:
+- distributed-systems
+- data-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-data
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/11-distributed-locks/
+authors:
+- tiecont
+legacy_urls:
+- /season-20-distributed-data/11-distributed-locks.html
+schema_version: 1

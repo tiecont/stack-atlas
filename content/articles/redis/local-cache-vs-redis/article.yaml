@@ -1,0 +1,22 @@
+id: season-07-redis-caching-02-local-cache-vs-redis
+title: Local Cache vs Redis
+description: So sánh cache trong memory của process với distributed cache dùng chung giữa nhiều instances.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/local-cache-vs-redis/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/02-local-cache-vs-redis.html
+schema_version: 1

@@ -1,0 +1,23 @@
+id: season-05-production-http-server-12-health-readiness-liveness
+title: Health, Readiness và Liveness
+description: Để orchestrator biết khi nào nên route traffic, khi nào nên restart và khi nào app chỉ đang
+  chờ dependency.
+type: article
+domain: golang
+category: http-services
+tags:
+- golang
+- http-services
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-http
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/health-readiness-liveness/
+authors:
+- tiecont
+legacy_urls:
+- /season-05-production-http-server/12-health-readiness-liveness.html
+schema_version: 1

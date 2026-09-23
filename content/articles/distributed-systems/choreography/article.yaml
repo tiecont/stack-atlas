@@ -1,0 +1,22 @@
+id: season-12-distributed-transactions-07-choreography
+title: Saga Choreography
+description: Các service phản ứng với event thay vì có coordinator trung tâm.
+type: article
+domain: distributed-systems
+category: transactions
+tags:
+- distributed-systems
+- transactions
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-transactions
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/choreography/
+authors:
+- tiecont
+legacy_urls:
+- /season-12-distributed-transactions/07-choreography.html
+schema_version: 1

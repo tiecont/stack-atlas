@@ -1,0 +1,22 @@
+id: season-14-grpc-with-go-11-grpc-gateway
+title: gRPC + HTTP/JSON Gateway
+description: Expose REST/JSON ra ngoài nhưng giữ gRPC contract nội bộ.
+type: article
+domain: grpc
+category: rpc
+tags:
+- grpc
+- rpc
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: grpc-with-go
+prerequisites: []
+related: []
+status: published
+url: /articles/grpc/grpc-gateway/
+authors:
+- tiecont
+legacy_urls:
+- /season-14-grpc-with-go/11-grpc-gateway.html
+schema_version: 1

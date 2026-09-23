@@ -1,0 +1,21 @@
+id: season-11-reliability-engineering-12-reliability-capstone
+title: 'Capstone: Resilient Go API'
+description: Kết hợp timeout, retry, breaker, bulkhead, rate limit và observability.
+type: article
+domain: reliability
+category: reliability
+tags:
+- reliability
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: reliability-engineering
+prerequisites: []
+related: []
+status: published
+url: /articles/reliability/reliability-capstone/
+authors:
+- tiecont
+legacy_urls:
+- /season-11-reliability-engineering/12-reliability-capstone.html
+schema_version: 1

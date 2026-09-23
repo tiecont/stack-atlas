@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-04-container-image
+title: Container hóa Go Service
+description: Tận dụng single binary và image tối giản mà vẫn giữ debugability cần thiết.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/container-image/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/04-container-image.html
+schema_version: 1

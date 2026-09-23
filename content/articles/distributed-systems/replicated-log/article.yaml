@@ -1,0 +1,22 @@
+id: season-21-consensus-coordination-05-replicated-log
+title: Replicated Log
+description: Consensus thường được dùng để đồng thuận thứ tự command.
+type: article
+domain: distributed-systems
+category: consensus
+tags:
+- distributed-systems
+- consensus
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: consensus
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/replicated-log/
+authors:
+- tiecont
+legacy_urls:
+- /season-21-consensus-coordination/05-replicated-log.html
+schema_version: 1

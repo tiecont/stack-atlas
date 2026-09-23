@@ -1,0 +1,22 @@
+id: season-19-kubernetes-for-go-backend-02-pods-deployments
+title: Pod và Deployment
+description: Pod là unit chạy; Deployment quản lý rollout và replica lifecycle.
+type: article
+domain: kubernetes
+category: orchestration
+tags:
+- kubernetes
+- orchestration
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kubernetes
+prerequisites: []
+related: []
+status: published
+url: /articles/kubernetes/pods-deployments/
+authors:
+- tiecont
+legacy_urls:
+- /season-19-kubernetes-for-go-backend/02-pods-deployments.html
+schema_version: 1

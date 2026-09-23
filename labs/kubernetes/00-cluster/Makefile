@@ -18,12 +18,12 @@ doctor:
 
 cluster-up:
 	@KIND_EXPERIMENTAL_PROVIDER=docker $(KIND) get clusters | grep -qx "$(CLUSTER_NAME)" || KIND_EXPERIMENTAL_PROVIDER=docker $(KIND) create cluster --name $(CLUSTER_NAME) --config kind-config.yaml --wait 180s
-	@../../../scripts/kubernetes/assert_lab_context.sh
+	@../../../scripts/ci/kubernetes/assert_lab_context.sh
 	@$(KUBECTL) --context $(CONTEXT) wait --for=condition=Ready nodes --all --timeout=180s
 	@$(MAKE) cluster-info
 
 cluster-info:
-	@../../../scripts/kubernetes/assert_lab_context.sh
+	@../../../scripts/ci/kubernetes/assert_lab_context.sh
 	$(KUBECTL) --context $(CONTEXT) cluster-info
 	$(KUBECTL) --context $(CONTEXT) get nodes -o wide
 

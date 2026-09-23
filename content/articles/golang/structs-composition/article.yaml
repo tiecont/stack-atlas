@@ -1,0 +1,22 @@
+id: season-01-fundamentals-06-structs-composition
+title: Structs và Composition
+description: Mô hình hóa domain bằng struct, embedding và composition thay vì inheritance hierarchy.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-fundamentals
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/structs-composition/
+authors:
+- tiecont
+legacy_urls:
+- /season-01-fundamentals/06-structs-composition.html
+schema_version: 1

@@ -3,34 +3,26 @@ name: Kubernetes labs
 on:
   pull_request:
     paths:
-      - "content/articles/kubernetes/**"
-      - "content/domains/kubernetes.yaml"
-      - "content/paths/kubernetes-engineer.yaml"
+      - "content/**"
       - "labs/kubernetes/**"
       - "examples/atlas-demo-api/**"
-      - "scripts/build_site.py"
-      - "scripts/validate_kubernetes_manifests.py"
-      - "scripts/test_kubernetes_labs.sh"
-      - "scripts/kubernetes/**"
-      - "tests/test_kubernetes_context_safety.sh"
+      - "platform/**"
+      - "scripts/ci/**"
       - "tests/kubernetes/**"
-      - "requirements.txt"
+      - "pyproject.toml"
+      - "Makefile"
       - ".github/workflows/kubernetes-labs.yml"
   push:
     branches: [main]
     paths:
-      - "content/articles/kubernetes/**"
-      - "content/domains/kubernetes.yaml"
-      - "content/paths/kubernetes-engineer.yaml"
+      - "content/**"
       - "labs/kubernetes/**"
       - "examples/atlas-demo-api/**"
-      - "scripts/build_site.py"
-      - "scripts/validate_kubernetes_manifests.py"
-      - "scripts/test_kubernetes_labs.sh"
-      - "scripts/kubernetes/**"
-      - "tests/test_kubernetes_context_safety.sh"
+      - "platform/**"
+      - "scripts/ci/**"
       - "tests/kubernetes/**"
-      - "requirements.txt"
+      - "pyproject.toml"
+      - "Makefile"
       - ".github/workflows/kubernetes-labs.yml"
   workflow_dispatch:
 
@@ -49,12 +41,12 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install -r requirements.txt
-      - run: python3 scripts/validate_kubernetes_manifests.py
-      - run: bash tests/test_kubernetes_context_safety.sh
+      - run: python3 -m pip install -e .
+      - run: make validate
+      - run: bash tests/kubernetes/context_safety.sh
       - run: go test -race ./...
         working-directory: examples/atlas-demo-api
-      - run: python3 scripts/build_site.py
+      - run: make build
 
   kind-smoke:
     runs-on: ubuntu-latest
@@ -68,7 +60,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install -r requirements.txt
+      - run: python3 -m pip install -e .
       - name: Install pinned kind and kubectl
         run: |
           curl --fail --location --silent --show-error https://kind.sigs.k8s.io/dl/v0.33.0/kind-linux-amd64 --output /tmp/kind
@@ -83,4 +75,4 @@ jobs:
           kubectl version --client
           docker version
       - name: Validate and run foundations lab
-        run: CLEANUP=1 scripts/test_kubernetes_labs.sh
+        run: CLEANUP=1 make test-kubernetes

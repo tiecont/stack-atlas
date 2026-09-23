@@ -1,0 +1,22 @@
+id: season-12-distributed-transactions-05-saga-basics
+title: 'Saga: Chuỗi Local Transaction'
+description: Thay atomic rollback bằng chuỗi bước và compensation.
+type: article
+domain: distributed-systems
+category: transactions
+tags:
+- distributed-systems
+- transactions
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-transactions
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/saga-basics/
+authors:
+- tiecont
+legacy_urls:
+- /season-12-distributed-transactions/05-saga-basics.html
+schema_version: 1

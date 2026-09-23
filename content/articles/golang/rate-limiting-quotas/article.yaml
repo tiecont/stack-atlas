@@ -1,0 +1,22 @@
+id: season-05-production-http-server-10-rate-limiting-quotas
+title: Rate Limiting, Quota và Load Shedding
+description: Bảo vệ service trước burst, noisy neighbor và overload thay vì để mọi request cùng timeout.
+type: article
+domain: golang
+category: http-services
+tags:
+- golang
+- http-services
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-http
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/rate-limiting-quotas/
+authors:
+- tiecont
+legacy_urls:
+- /season-05-production-http-server/10-rate-limiting-quotas.html
+schema_version: 1

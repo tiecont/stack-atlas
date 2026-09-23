@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-05-signals-graceful-shutdown
+title: Signals và Graceful Shutdown
+description: SIGTERM phải dẫn tới drain có kiểm soát, không phải kill giữa request.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/signals-graceful-shutdown/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/05-signals-graceful-shutdown.html
+schema_version: 1

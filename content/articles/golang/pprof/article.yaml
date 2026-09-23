@@ -1,0 +1,22 @@
+id: season-02-runtime-11-pprof
+title: Profiling với pprof
+description: 'CPU, heap, allocs, goroutine, mutex/block: chọn đúng profile cho đúng câu hỏi.'
+type: article
+domain: golang
+category: runtime
+tags:
+- golang
+- runtime
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-runtime
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/pprof/
+authors:
+- tiecont
+legacy_urls:
+- /season-02-runtime/11-pprof.html
+schema_version: 1

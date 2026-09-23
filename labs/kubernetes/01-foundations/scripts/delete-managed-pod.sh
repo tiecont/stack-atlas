@@ -6,7 +6,7 @@ context="${CONTEXT:-kind-${CLUSTER_NAME:-stack-atlas}}"
 kubectl_bin="${KUBECTL:-kubectl}"
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 root="$(cd "$script_dir/../../../.." && pwd)"
-"$root/scripts/kubernetes/assert_lab_context.sh"
+"$root/scripts/ci/kubernetes/assert_lab_context.sh"
 selector="app.kubernetes.io/name=atlas-demo-api"
 pod="$("$kubectl_bin" --context "$context" get pods --namespace "$namespace" --selector="$selector" -o jsonpath='{.items[0].metadata.name}')"
 if [[ -z "$pod" ]]; then

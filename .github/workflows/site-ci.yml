@@ -20,16 +20,10 @@ jobs:
         with:
           node-version: "22"
       - name: Install build dependencies
-        run: python3 -m pip install -r requirements.txt
-      - name: Run catalog, rendering, link, search, and determinism regressions
-        run: python3 -m unittest discover -s tests -p 'test_*.py'
-      - name: Verify progress migration
-        run: node tests/test_progress_migration.js
-      - name: Verify path-context selection
-        run: node tests/test_path_context.js
-      - name: Verify checked-in generated site is current
-        run: |
-          python3 scripts/build_site.py
-          git diff --exit-code
+        run: python3 -m pip install -e .
+      - name: Validate source catalog and repository structure
+        run: make validate
+      - name: Run platform regressions
+        run: make test-site
       - name: Build deployable site preview
-        run: python3 scripts/build_site.py --output _site --base-path "/${{ github.event.repository.name }}" --site-url "https://${{ github.repository_owner }}.github.io"
+        run: make build BASE_PATH="/${{ github.event.repository.name }}" SITE_URL="https://${{ github.repository_owner }}.github.io"

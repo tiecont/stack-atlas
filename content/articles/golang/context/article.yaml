@@ -1,0 +1,22 @@
+id: season-03-concurrency-14-context
+title: Context
+description: Mang deadline, cancellation và request-scoped signal xuyên call graph.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/context/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/14-context.html
+schema_version: 1

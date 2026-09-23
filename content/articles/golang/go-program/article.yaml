@@ -1,0 +1,22 @@
+id: season-01-fundamentals-01-go-program
+title: Một chương trình Go thực sự là gì?
+description: 'Từ file .go, package main đến binary: mental model đầu tiên trước khi học syntax.'
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-fundamentals
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/go-program/
+authors:
+- tiecont
+legacy_urls:
+- /season-01-fundamentals/01-go-program.html
+schema_version: 1

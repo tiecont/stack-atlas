@@ -1,0 +1,22 @@
+id: season-19-kubernetes-for-go-backend-03-service-discovery
+title: Service và DNS
+description: Expose một tập pod bằng stable virtual endpoint.
+type: article
+domain: kubernetes
+category: orchestration
+tags:
+- kubernetes
+- orchestration
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kubernetes
+prerequisites: []
+related: []
+status: published
+url: /articles/kubernetes/service-discovery/
+authors:
+- tiecont
+legacy_urls:
+- /season-19-kubernetes-for-go-backend/03-service-discovery.html
+schema_version: 1

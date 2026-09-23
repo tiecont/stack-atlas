@@ -1,0 +1,22 @@
+id: season-20-distributed-data-13-distributed-data-capstone
+title: 'Capstone: Chọn Data Architecture cho Global App'
+description: Thiết kế data layer theo invariant, latency và failure mode thay vì theo brand.
+type: article
+domain: distributed-systems
+category: data-systems
+tags:
+- distributed-systems
+- data-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-data
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/distributed-data-capstone/
+authors:
+- tiecont
+legacy_urls:
+- /season-20-distributed-data/13-distributed-data-capstone.html
+schema_version: 1

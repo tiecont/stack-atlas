@@ -1,0 +1,22 @@
+id: season-12-distributed-transactions-08-cdc
+title: CDC — Change Data Capture
+description: Đọc thay đổi từ database log để phát event mà không cần application polling outbox liên tục.
+type: article
+domain: distributed-systems
+category: transactions
+tags:
+- distributed-systems
+- transactions
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-transactions
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/cdc/
+authors:
+- tiecont
+legacy_urls:
+- /season-12-distributed-transactions/08-cdc.html
+schema_version: 1

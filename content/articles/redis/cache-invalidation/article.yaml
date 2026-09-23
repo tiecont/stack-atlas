@@ -1,0 +1,22 @@
+id: season-07-redis-caching-07-cache-invalidation
+title: 'Cache Invalidation: bài toán khó thật sự'
+description: Delete-on-write, versioned keys, event-driven invalidation và race giữa reader với writer.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/cache-invalidation/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/07-cache-invalidation.html
+schema_version: 1

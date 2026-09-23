@@ -1,0 +1,22 @@
+id: season-07-redis-caching-10-redis-concurrency-atomicity
+title: Atomicity, Transactions và Lua trong Redis
+description: Hiểu command atomicity, race read-modify-write và khi cần MULTI/EXEC hoặc server-side script.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/redis-concurrency-atomicity/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/10-redis-concurrency-atomicity.html
+schema_version: 1

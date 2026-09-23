@@ -1,52 +1,57 @@
 # Static build pipeline
 
-The modern site is generated from canonical metadata and article fragments. Normal catalog loading never reads `season-*/index.html` to discover lessons or infer their order.
+The repository stores source. The public site is generated from the catalog into ignored `dist/`.
 
 ```text
-content metadata + article fragments + source templates/assets
-                         |
-                         v
-                 catalog loading
-                         |
-                         v
-                 catalog validation
-                         |
-                         v
-                  static rendering
-                    /   |   \
-             topics articles paths
-                    \   |   /
-               search / SEO / redirects
-                         |
-                         v
-                   link validation
-                         |
-                         v
-                 deployable _site
+content/ + platform/ + labs/
+          |
+          v
+      validation
+          |
+          v
+      rendering
+       /   |   \
+ articles topics paths + assets + search/SEO
+          |
+          +--> lesson redirects from legacy_urls
+          +--> season-index redirects from path memberships
+          |
+          v
+        dist/
+          |
+          v
+   link and redirect validation
 ```
 
-## Source and generated files
+## Source and build output
 
-- `content/` holds domains, categories, paths, article metadata and HTML fragments.
-- `src/templates/`, `src/styles/`, `src/scripts/`, and `src/assets/` hold maintained presentation sources.
-- `stack_atlas/catalog.py` loads and validates the content graph. `render.py`, `templates.py`, `search.py`, `links.py`, and `files.py` handle distinct build responsibilities.
-- `scripts/build_site.py` parses options, loads the catalog, validates it, renders output, then validates generated links.
-- `assets/site.css`, `assets/site.js`, and `assets/progress-store.js` are generated from `src/` and carry generated-file notices.
-- `_site/` is a deployable build output when selected with `--output _site`.
+- `content/` contains YAML metadata and article folders with `article.yaml` and `article.html`.
+- `platform/stack_atlas/` contains catalog, models, validation, rendering, links, search, redirects and CLI code.
+- `platform/templates/` and `platform/assets/` contain maintained templates, styles, scripts and icons.
+- `labs/`, `examples/`, `tests/`, `scripts/` and `docs/` hold executable labs and project support material.
+- `dist/` contains generated public pages, assets, search data, sitemap, robots file and historical redirects. It is ignored by Git and must not be hand-edited.
 
-The renderer sorts modules by their declared integer order and preserves each module's `article_ids` order. The same flattened sequence supplies path lesson numbering and Previous/Next navigation. Content lists that have no semantic order use stable source ordering. “Recently Updated” is sorted by explicit `updated_at` descending; dates are not inferred from traversal order.
+The renderer sorts modules by their declared integer order and preserves each module's `article_ids` order. The same flattened sequence supplies path lesson numbering and Previous/Next navigation.
 
-## Validation and routes
+## Validation
 
-Catalog validation checks IDs, references, path placement, source files, metadata schema version, and legacy URL ownership. Output validation checks local links and fragments. Search data is emitted as `search-index.json`; sitemap and robots files are generated from canonical routes. Legacy URL redirects are emitted from `legacy_urls`.
+Catalog validation checks IDs, references, path placement, article schema and legacy URL ownership. Repository validation rejects root season directories, checked-in generated site trees and flat article metadata. Output validation checks local links, fragments, exact legacy redirect coverage and every redirect target.
 
 Useful commands:
 
 ```sh
-python3 scripts/build_site.py
-python3 scripts/build_site.py --output _site --base-path /stack-atlas
-python3 -m unittest discover -s tests -p 'test_*.py'
-node tests/test_progress_migration.js
+make install
+make validate
+make build
+make serve
+make test-site
+make test-kubernetes
 ```
 
-The build is deterministic: it introduces no build timestamp, and the regression suite compares hashes from repeated builds.
+Set `BASE_PATH` and `SITE_URL` when building a project site:
+
+```sh
+make build BASE_PATH=/stack-atlas SITE_URL=https://tiecont.github.io
+```
+
+Builds contain no timestamp. The regression suite compares hashes from repeated builds.

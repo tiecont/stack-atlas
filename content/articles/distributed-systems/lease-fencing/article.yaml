@@ -1,0 +1,22 @@
+id: season-21-consensus-coordination-10-lease-fencing
+title: Lease, Epoch và Fencing Tokens
+description: Leader cũ sống lại có thể nguy hiểm dù election đã chọn leader mới.
+type: article
+domain: distributed-systems
+category: consensus
+tags:
+- distributed-systems
+- consensus
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: consensus
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/lease-fencing/
+authors:
+- tiecont
+legacy_urls:
+- /season-21-consensus-coordination/10-lease-fencing.html
+schema_version: 1

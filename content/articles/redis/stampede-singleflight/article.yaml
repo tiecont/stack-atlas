@@ -1,0 +1,23 @@
+id: season-07-redis-caching-08-stampede-singleflight
+title: Cache Stampede và Singleflight
+description: Khi một hot key hết hạn, hàng nghìn request có thể cùng query database; gom miss concurrent
+  thành một load.
+type: article
+domain: redis
+category: caching
+tags:
+- redis
+- caching
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: redis-caching
+prerequisites: []
+related: []
+status: published
+url: /articles/redis/stampede-singleflight/
+authors:
+- tiecont
+legacy_urls:
+- /season-07-redis-caching/08-stampede-singleflight.html
+schema_version: 1

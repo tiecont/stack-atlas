@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-01-why-distributed-is-hard
+title: Tại sao Distributed Systems khó?
+description: Không phải vì có nhiều server, mà vì không thể biết chắc trạng thái của server khác.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/why-distributed-is-hard/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/01-why-distributed-is-hard.html
+schema_version: 1

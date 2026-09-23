@@ -1,0 +1,22 @@
+id: season-19-kubernetes-for-go-backend-10-pdb-rollout
+title: PDB và Rolling Update
+description: Bảo vệ availability trong planned disruption và deployment.
+type: article
+domain: kubernetes
+category: orchestration
+tags:
+- kubernetes
+- orchestration
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: kubernetes
+prerequisites: []
+related: []
+status: published
+url: /articles/kubernetes/pdb-rollout/
+authors:
+- tiecont
+legacy_urls:
+- /season-19-kubernetes-for-go-backend/10-pdb-rollout.html
+schema_version: 1

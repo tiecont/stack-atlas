@@ -1,0 +1,22 @@
+id: season-18-production-go-engineering-09-rolling-deployments
+title: Rolling Deployment và Zero-downtime
+description: Thay instance từng phần mà không mất capacity hoặc request.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: production-go
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/rolling-deployments/
+authors:
+- tiecont
+legacy_urls:
+- /season-18-production-go-engineering/09-rolling-deployments.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-01-fundamentals-15-idiomatic-project
+title: Idiomatic Go và Mini Project đầu tiên
+description: Gom fundamentals thành một CLI/service nhỏ, ưu tiên readability, boundaries và toolchain.
+type: article
+domain: golang
+category: fundamentals
+tags:
+- golang
+- fundamentals
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-fundamentals
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/idiomatic-project/
+authors:
+- tiecont
+legacy_urls:
+- /season-01-fundamentals/15-idiomatic-project.html
+schema_version: 1

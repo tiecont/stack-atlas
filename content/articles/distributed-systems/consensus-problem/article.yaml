@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-10-consensus-problem
+title: 'Consensus: nhiều node đồng ý một lịch sử'
+description: Consensus giải quyết agreement dưới failure assumptions cụ thể.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/consensus-problem/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/10-consensus-problem.html
+schema_version: 1

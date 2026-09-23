@@ -1,0 +1,21 @@
+id: season-10-distributed-systems-09-partitioning-sharding
+title: Partitioning, Sharding và Consistent Hashing
+description: Scale data bằng cách chia ownership.
+type: article
+domain: distributed-systems
+category: distributed-systems
+tags:
+- distributed-systems
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: distributed-systems
+prerequisites: []
+related: []
+status: published
+url: /articles/distributed-systems/partitioning-sharding/
+authors:
+- tiecont
+legacy_urls:
+- /season-10-distributed-systems/09-partitioning-sharding.html
+schema_version: 1

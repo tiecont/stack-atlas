@@ -1,0 +1,22 @@
+id: season-03-concurrency-04-mutex
+title: Mutex
+description: Bảo vệ shared state đúng cách với Lock, Unlock và critical section.
+type: article
+domain: golang
+category: concurrency
+tags:
+- golang
+- concurrency
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: go-concurrency
+prerequisites: []
+related: []
+status: published
+url: /articles/golang/mutex/
+authors:
+- tiecont
+legacy_urls:
+- /season-03-concurrency/04-mutex.html
+schema_version: 1

@@ -1,0 +1,22 @@
+id: season-08-messaging-04-delivery-semantics
+title: At-most-once, At-least-once và “Exactly-once”
+description: Hiểu delivery semantics ở broker và tại business side effect để không nhầm marketing với
+  end-to-end correctness.
+type: article
+domain: messaging
+category: messaging
+tags:
+- messaging
+difficulty: unspecified
+learning_paths:
+- path_id: golang-backend
+  module_id: messaging-patterns
+prerequisites: []
+related: []
+status: published
+url: /articles/messaging/delivery-semantics/
+authors:
+- tiecont
+legacy_urls:
+- /season-08-messaging/04-delivery-semantics.html
+schema_version: 1
