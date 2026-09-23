@@ -32,6 +32,8 @@ Stack Atlas accepts standalone engineering articles as well as articles included
 
 An article may have no learning path. To place it in a path, add an object to `learning_paths` with `path_id` and `module_id`, for example `{ "path_id": "golang-backend", "module_id": "go-concurrency" }`. One article can have several such memberships without duplicating its source. The path module's `article_ids` list owns lesson order.
 
+New metadata uses `schema_version: 1`. Existing records without the field are read as version 1 for compatibility. Optional `created_at` and `updated_at` values use `YYYY-MM-DD`; only maintained `updated_at` values appear in the Recently Updated section. Do not infer dates from file order or add dates to legacy articles without a trustworthy source.
+
 ## Add a domain
 
 Add an entry to `content/domains.json`, or add a YAML record at `content/domains/<domain>.yaml`, with a unique lowercase `id`, a title, a short description and a status (`published` or `planned`). The build creates its topic page automatically. A planned domain can be listed before it has articles.
@@ -46,7 +48,7 @@ Add `content/paths/<path-id>.json` or `.yaml`. Define its title, description, st
 
 Metadata may be JSON or YAML. Existing JSON remains supported; YAML is preferred for new human-authored domain and learning-path metadata. Generated machine-readable output remains JSON. Convert existing files incrementally rather than as a bulk formatting change.
 
-Version-sensitive article metadata may include `review: { kubernetes_baseline, last_reviewed }` and a `kubernetes` feature/version block. Runnable lab references belong in the article's `labs` list and must point to a directory containing `README.md`.
+Version-sensitive article metadata may include `review: { kubernetes_baseline, last_reviewed }` and a `kubernetes` feature/version block. Kubernetes-specific fields are optional and are not required for other domains. Runnable lab references belong in the article's `labs` list and must point to a directory containing `README.md`.
 
 ## Build and validate
 

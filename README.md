@@ -30,7 +30,7 @@ Open `http://localhost:8000`. The build validates metadata and checks local HTML
 
 The first Kubernetes slice includes a pinned kind v0.33.0 / Kubernetes v1.37.0 cluster and a reusable API demo app. Install Docker, kind and kubectl as described in `labs/kubernetes/00-cluster/README.md`, then run `make -C labs/kubernetes/01-foundations test`. The test builds and loads the local image, checks two replicas, deletes one managed Pod and verifies reconciliation.
 
-Search downloads a static `search-index.json`. Theme choice and learning progress are stored in browser local storage; no account or backend is required.
+Search downloads a static `search-index.json`. Theme choice and learning progress are stored in browser local storage; no account or backend is required. Progress remembers the active learning path and last visited article for each path. Existing completed article IDs migrate from progress schema v1 without loss.
 
 ## Content model
 

@@ -16,8 +16,9 @@ class LinkParser(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        if "href" in attrs:
-            self.hrefs.append(attrs["href"])
+        for attribute in ("href", "src"):
+            if attribute in attrs:
+                self.hrefs.append(attrs[attribute])
         if "id" in attrs:
             self.ids.add(attrs["id"])
 

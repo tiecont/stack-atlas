@@ -29,6 +29,7 @@ def shared_ui(content: str, title: str, description: str, canonical_path: str, s
         "__CANONICAL__": canonical,
         "__FAVICON_URL__": html.escape(site_url("/assets/favicon.svg", base_path), quote=True),
         "__CSS_URL__": html.escape(site_url("/assets/site.css", base_path), quote=True),
+        "__PROGRESS_JS_URL__": html.escape(site_url("/assets/progress-store.js", base_path), quote=True),
         "__JS_URL__": html.escape(site_url("/assets/site.js", base_path), quote=True),
         "__HOME_URL__": html.escape(site_url("/", base_path), quote=True),
         "__EXPLORE_URL__": html.escape(site_url("/#topics", base_path), quote=True),
@@ -113,10 +114,14 @@ def render_modern_article(article: dict, article_by_id: dict, paths: list, outpu
             prev_link = f'<a href="{esc(previous_url)}"><small>Previous</small><strong>{esc(previous["title"])}</strong></a>' if previous else '<span></span>'
             next_link = f'<a href="{esc(following_url)}"><small>Next</small><strong>{esc(following["title"])}</strong></a>' if following else '<span></span>'
             prev_next = f'<nav class="article-previous-next" data-path-navigation="{esc(path["id"])}" aria-label="Learning path navigation">{prev_link}{next_link}</nav>'
-    status_date = article.get("updated_at") or article.get("last_reviewed") or article.get("review", {}).get("last_reviewed")
+    updated_date = article.get("updated_at")
+    review = article.get("review") or {}
+    review_date = article.get("last_reviewed") or review.get("last_reviewed")
+    status_date = updated_date or review_date
+    status_label = "Updated" if updated_date else "Reviewed"
     article_level = article.get("difficulty") if article.get("difficulty") != "unspecified" else ""
     eyebrow = " · ".join(part for part in (article["domain"].replace("-", " ").title(), category_title.replace("-", " ").title(), article_level.title()) if part)
-    article_html = f'''<main id="main" class="page-shell article-page" data-article-id="{esc(article["id"])}"><div class="breadcrumbs"><a href="{esc(site_url("/", base_path))}">Stack Atlas</a><span>/</span>{crumbs}<span>/</span>{esc(article["title"])}</div><header class="article-header"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(article["title"])}</h1><p>{esc(article["description"])}</p><div class="article-meta"><span>{esc(article["domain"].replace("-", " ").title())}</span>{f'<span>Updated {esc(status_date)}</span>' if status_date else ''}<button class="complete-toggle" type="button" data-progress-toggle="{esc(article["id"])}" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar">{f'<nav class="article-toc"><strong>On this page</strong>{contents}</nav>' if contents else ''}{path_context}</aside><article class="article-body">{body}{labs_section}{f'<section class="article-related"><h2>Before reading</h2><div>{prereqs}</div></section>' if prereqs else ''}{f'<section class="article-related"><h2>Related Articles</h2><div>{related}</div></section>' if related else ''}{prev_next}</article></div></main>'''
+    article_html = f'''<main id="main" class="page-shell article-page" data-article-id="{esc(article["id"])}"><div class="breadcrumbs"><a href="{esc(site_url("/", base_path))}">Stack Atlas</a><span>/</span>{crumbs}<span>/</span>{esc(article["title"])}</div><header class="article-header"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(article["title"])}</h1><p>{esc(article["description"])}</p><div class="article-meta"><span>{esc(article["domain"].replace("-", " ").title())}</span>{f'<span>{status_label} {esc(status_date)}</span>' if status_date else ''}<button class="complete-toggle" type="button" data-progress-toggle="{esc(article["id"])}" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar">{f'<nav class="article-toc"><strong>On this page</strong>{contents}</nav>' if contents else ''}{path_context}</aside><article class="article-body">{body}{labs_section}{f'<section class="article-related"><h2>Before reading</h2><div>{prereqs}</div></section>' if prereqs else ''}{f'<section class="article-related"><h2>Related Articles</h2><div>{related}</div></section>' if related else ''}{prev_next}</article></div></main>'''
     route = article["url"].strip("/")
     destination = output / route / "index.html"
     write_file(destination, shared_ui(article_html, article["title"], article["description"], article["url"], site, base_path))

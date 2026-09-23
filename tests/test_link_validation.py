@@ -16,7 +16,9 @@ class LinkValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "topics/demo").mkdir(parents=True)
-            (root / "index.html").write_text('<a href="/stack-atlas/topics/demo/#details">Open</a>')
+            (root / "assets").mkdir()
+            (root / "assets/site.js").write_text("// asset")
+            (root / "index.html").write_text('<a href="/stack-atlas/topics/demo/#details">Open</a><script src="/stack-atlas/assets/site.js"></script>')
             (root / "topics/demo/index.html").write_text('<section id="details"></section>')
             errors, _ = validate_internal_links(root, "/stack-atlas")
         self.assertEqual(errors, [])

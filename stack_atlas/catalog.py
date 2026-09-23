@@ -181,6 +181,9 @@ def make_catalog():
                 errors.append(f"{article.get('metadata_file')}: review must be an object")
             elif review.get("last_reviewed") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(review["last_reviewed"])):
                 errors.append(f"{article.get('metadata_file')}: review.last_reviewed must use YYYY-MM-DD")
+        for date_field in ("created_at", "updated_at"):
+            if article.get(date_field) and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(article[date_field])):
+                errors.append(f"{article.get('metadata_file')}: {date_field} must use YYYY-MM-DD")
 
     for article in articles:
         for relation in ("prerequisites", "related"):

@@ -35,8 +35,10 @@ def render_site(domains, categories, paths, articles, output: Path, site: dict):
     write = lambda relative, content: write_file(output / relative, content)
     css = (ROOT / "src/styles/site.css").read_text(encoding="utf-8")
     javascript = (ROOT / "src/scripts/site.js").read_text(encoding="utf-8")
+    progress_store = (ROOT / "src/scripts/progress-store.js").read_text(encoding="utf-8")
     favicon = (ROOT / "src/assets/favicon.svg").read_text(encoding="utf-8")
     write("assets/site.css", "/* GENERATED FILE — edit src/styles/site.css */\n" + css)
+    write("assets/progress-store.js", "// GENERATED FILE — edit src/scripts/progress-store.js\n" + progress_store)
     write("assets/site.js", "// GENERATED FILE — edit src/scripts/site.js\n" + javascript.replace("__BASE_PATH__", json.dumps(base_path)))
     write("assets/favicon.svg", favicon)
     write("search-index.json", json.dumps(build_search_index(domains, paths, articles), ensure_ascii=False, indent=2) + "\n")
@@ -44,15 +46,21 @@ def render_site(domains, categories, paths, articles, output: Path, site: dict):
     published_domains = [domain for domain in domains if by_domain[domain["id"]] or domain.get("status") == "planned"]
     topic_grid = "".join(topic_card(domain, len(by_domain[domain["id"]]), base_path) for domain in published_domains)
     path_cards = "".join(path_card(path, base_path) for path in paths if path.get("status") == "published")
-    newest = list(reversed(articles))[:8]
-    continue_path = site_url(f"/paths/{paths[0]['id']}/" if paths else "/paths/", base_path)
-    continue_refs = "".join(f'<span hidden data-article-id="{esc(article["id"])}" data-article-url="{esc(article["url"])}" data-article-title="{esc(article["title"])}"></span>' for _, article in (path_sequence(paths[0]) if paths else []))
+    recently_updated = sorted(
+        (article for article in articles if article.get("updated_at")),
+        key=lambda article: article["updated_at"],
+        reverse=True,
+    )[:8]
+    recent_articles_markup = (
+        f'<div class="article-grid">{"".join(article_card(article, base_path) for article in recently_updated)}</div>'
+        if recently_updated else '<p class="empty-state">No article update dates have been recorded yet.</p>'
+    )
     home = f'''<main id="main">
       <section class="hero-wrap"><div class="hero"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> Engineering Knowledge Base</span><h1>Engineering knowledge,<br><em>from code to infrastructure.</em></h1><p>Explore practical articles, deep dives and structured learning paths across the systems engineers build and run.</p><div class="hero-actions"><a class="button button-primary" href="{esc(site_url('/topics/', base_path))}">Explore topics <span aria-hidden="true">→</span></a><button class="button button-secondary" type="button" data-open-search>Search the Atlas <kbd>/</kbd></button></div><div class="hero-proof"><span><strong>{len(articles)}</strong> articles</span><span><strong>{len([d for d in domains if by_domain[d['id']]])}</strong> topics with content</span><span><strong>{sum(len(p.get('modules', [])) for p in paths)}</strong> learning modules</span></div></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core"><span class="core-symbol">S</span><b>STACK<br>ATLAS</b></div><span class="orbit-node node-code">{{</span><span class="orbit-node node-data">DB</span><span class="orbit-node node-cloud">☁</span><span class="orbit-node node-ops">⌘</span><span class="orbit-caption">one map · many routes</span></div></div></section>
       <section class="section section-soft" id="topics"><div class="section-heading"><div><span class="eyebrow">Explore the Atlas</span><h2>Explore by topic</h2><p>Find knowledge by the technology or engineering subject you want to understand.</p></div><a class="text-link" href="{esc(site_url('/topics/', base_path))}">All topics <span aria-hidden="true">→</span></a></div><div class="topic-grid">{topic_grid}</div></section>
       <section class="section"><div class="section-heading"><div><span class="eyebrow">Curated routes</span><h2>Learning paths</h2><p>Study selected articles in an order that builds useful mental models.</p></div><a class="text-link" href="{esc(site_url('/paths/', base_path))}">All paths <span aria-hidden="true">→</span></a></div><div class="path-grid">{path_cards}</div></section>
-      <section class="section section-soft" id="latest"><div class="section-heading"><div><span class="eyebrow">From the library</span><h2>Latest articles</h2><p>Browse the current library, including every lesson retained from the original site.</p></div><a class="text-link" href="{esc(site_url('/articles/', base_path))}">Browse all {len(articles)} articles <span aria-hidden="true">→</span></a></div><div class="article-grid">{''.join(article_card(article, base_path) for article in newest)}</div></section>
-      <section class="section continue-section" data-continue-learning data-progress-path="{esc(paths[0]['id'] if paths else '')}"><div class="continue-card"><div><span class="eyebrow">Your learning</span><h2>Continue learning</h2><p data-continue-copy>Progress is saved in this browser.</p><div class="progress-track"><span data-progress-bar></span></div><small data-progress-label>0 lessons completed</small></div><a class="button button-primary" data-continue-link href="{esc(continue_path)}">Open learning path <span aria-hidden="true">→</span></a></div>{continue_refs}</section>
+      <section class="section section-soft" id="latest"><div class="section-heading"><div><span class="eyebrow">From the library</span><h2>Recently Updated</h2><p>Articles appear here after their update date is recorded.</p></div><a class="text-link" href="{esc(site_url('/articles/', base_path))}">Browse all {len(articles)} articles <span aria-hidden="true">→</span></a></div>{recent_articles_markup}</section>
+      <section class="section continue-section" data-continue-learning><div class="continue-card" data-active-path-panel hidden><div><span class="eyebrow">Your active path</span><h2 data-active-path-title>Continue learning</h2><p data-continue-copy>Progress is saved in this browser.</p><div class="progress-track"><span data-progress-bar></span></div><small data-progress-label>0 lessons completed</small></div><a class="button button-primary" data-continue-link href="{esc(site_url('/paths/', base_path))}">Continue learning <span aria-hidden="true">→</span></a></div><div data-path-choices><div class="section-heading"><div><span class="eyebrow">Your learning</span><h2>Choose a learning path</h2><p>Open a path to make it active and keep your place as you learn.</p></div></div><div class="path-grid">{path_cards}</div></div></section>
     </main>'''
     write("index.html", shared_ui(home, site["name"], site["description"], "/", site, base_path))
 
