@@ -1,0 +1,29 @@
+name: Site CI
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install build dependencies
+        run: python3 -m pip install -r requirements.txt
+      - name: Run catalog, rendering, link, search, and determinism regressions
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - name: Verify progress migration
+        run: node tests/test_progress_migration.js
+      - name: Build deployable site preview
+        run: python3 scripts/build_site.py --output _site --base-path "/${{ github.event.repository.name }}" --site-url "https://${{ github.repository_owner }}.github.io"
