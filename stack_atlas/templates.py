@@ -7,7 +7,7 @@ import json
 import re
 from pathlib import Path
 
-from stack_atlas.catalog import ROOT, clean_text, ordered_modules, path_sequence, slug
+from stack_atlas.catalog import ROOT, clean_text, ordered_modules, slug
 from stack_atlas.files import write_file
 
 def site_url(path: str, base_path: str) -> str:
@@ -30,6 +30,7 @@ def shared_ui(content: str, title: str, description: str, canonical_path: str, s
         "__FAVICON_URL__": html.escape(site_url("/assets/favicon.svg", base_path), quote=True),
         "__CSS_URL__": html.escape(site_url("/assets/site.css", base_path), quote=True),
         "__PROGRESS_JS_URL__": html.escape(site_url("/assets/progress-store.js", base_path), quote=True),
+        "__PATH_CONTEXT_JS_URL__": html.escape(site_url("/assets/path-context.js", base_path), quote=True),
         "__JS_URL__": html.escape(site_url("/assets/site.js", base_path), quote=True),
         "__HOME_URL__": html.escape(site_url("/", base_path), quote=True),
         "__EXPLORE_URL__": html.escape(site_url("/#topics", base_path), quote=True),
@@ -60,11 +61,31 @@ def article_body(source_path: Path):
     body = source_path.read_text(encoding="utf-8")
     headings = []
     pattern = re.compile(r"<h([23])([^>]*)>(.*?)</h\1>", re.IGNORECASE | re.DOTALL)
-    for match in list(pattern.finditer(body)):
+    matches = list(pattern.finditer(body))
+    reserved_ids = {
+        found.group(1)
+        for match in matches
+        if (found := re.search(r'\bid=["\']([^"\']+)["\']', match.group(2)))
+    }
+    used_ids = set()
+    slug_counts = {}
+    for match in matches:
         level, attrs, raw_title = match.group(1), match.group(2), match.group(3)
         title = clean_text(re.sub(r"<[^>]+>", " ", raw_title))
         id_match = re.search(r'\bid=["\']([^"\']+)["\']', attrs)
-        heading_id = id_match.group(1) if id_match else slug(title)
+        if id_match:
+            heading_id = id_match.group(1)
+            used_ids.add(heading_id)
+        else:
+            base_id = slug(title) or "section"
+            candidate = base_id
+            suffix = slug_counts.get(base_id, 1)
+            while candidate in used_ids or candidate in reserved_ids:
+                suffix += 1
+                candidate = f"{base_id}-{suffix}"
+            heading_id = candidate
+            slug_counts[base_id] = suffix
+            used_ids.add(heading_id)
         if not id_match:
             replacement = f'<h{level}{attrs} id="{esc(heading_id)}">{raw_title}</h{level}>'
             body = body.replace(match.group(0), replacement, 1)
@@ -88,32 +109,23 @@ def render_modern_article(article: dict, article_by_id: dict, paths: list, outpu
         for lab in article.get("labs", [])
     )
     labs_section = f'<section class="article-related"><h2>Hands-on Labs</h2><div>{lab_links}</div></section>' if lab_links else ""
-    path_context = ""
-    prev_next = ""
-    membership = next((item for item in path_memberships if isinstance(item, dict)), None)
-    if not membership:
-        simple_path_id = next((item for item in path_memberships if isinstance(item, str)), None)
-        simple_path = next((item for item in paths if item["id"] == simple_path_id), None)
-        simple_module = next((module for module in simple_path.get("modules", []) if any(member.get("id") == article["id"] for member in module.get("articles", []))), None) if simple_path else None
-        if simple_path and simple_module:
-            membership = {"path_id": simple_path_id, "module_id": simple_module["id"]}
-    if membership:
-        path = next((item for item in paths if item["id"] == membership.get("path_id")), None)
-        module = next((item for item in path.get("modules", []) if item["id"] == membership.get("module_id")), None) if path else None
-        if path and module:
-            ordered_entries = path_sequence(path)
-            path_articles = [item for _, item in ordered_entries]
-            path_position = next((index for index, item in enumerate(path_articles) if item.get("id") == article["id"]), -1)
-            module_articles = module.get("articles", [])
-            module_position = next((index for index, item in enumerate(module_articles) if item.get("id") == article["id"]), -1)
-            path_context = f'<a class="path-context" data-path-context="{esc(path["id"])}" href="{esc(site_url("/paths/" + path["id"] + "/", base_path))}"><span>Part of {esc(path["title"])}</span><strong>{esc(module["title"])} · Lesson {max(module_position + 1, 1):02d}</strong></a>'
-            previous = path_articles[path_position - 1] if path_position > 0 else None
-            following = path_articles[path_position + 1] if 0 <= path_position < len(path_articles) - 1 else None
-            previous_url = site_url(previous["url"] + "?path=" + path["id"], base_path) if previous else ""
-            following_url = site_url(following["url"] + "?path=" + path["id"], base_path) if following else ""
-            prev_link = f'<a href="{esc(previous_url)}"><small>Previous</small><strong>{esc(previous["title"])}</strong></a>' if previous else '<span></span>'
-            next_link = f'<a href="{esc(following_url)}"><small>Next</small><strong>{esc(following["title"])}</strong></a>' if following else '<span></span>'
-            prev_next = f'<nav class="article-previous-next" data-path-navigation="{esc(path["id"])}" aria-label="Learning path navigation">{prev_link}{next_link}</nav>'
+    membership_links = []
+    for membership in path_memberships:
+        path_id = membership.get("path_id") if isinstance(membership, dict) else membership
+        path = next((item for item in paths if item["id"] == path_id), None)
+        module_id = membership.get("module_id") if isinstance(membership, dict) else None
+        module = next((item for item in path.get("modules", []) if item["id"] == module_id), None) if path else None
+        if not path or not module or not any(item.get("id") == article["id"] for item in module.get("articles", [])):
+            continue
+        label = path["title"]
+        if len(path_memberships) > 1:
+            label += f" · {module['title']}"
+        href = site_url(article["url"] + "?path=" + path_id, base_path)
+        membership_links.append(f'<a class="related-link" href="{esc(href)}">{esc(label)}</a>')
+    path_context = (
+        f'<section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div>{"".join(membership_links)}</div></section>'
+        if membership_links else ""
+    )
     updated_date = article.get("updated_at")
     review = article.get("review") or {}
     review_date = article.get("last_reviewed") or review.get("last_reviewed")
@@ -121,7 +133,7 @@ def render_modern_article(article: dict, article_by_id: dict, paths: list, outpu
     status_label = "Updated" if updated_date else "Reviewed"
     article_level = article.get("difficulty") if article.get("difficulty") != "unspecified" else ""
     eyebrow = " · ".join(part for part in (article["domain"].replace("-", " ").title(), category_title.replace("-", " ").title(), article_level.title()) if part)
-    article_html = f'''<main id="main" class="page-shell article-page" data-article-id="{esc(article["id"])}"><div class="breadcrumbs"><a href="{esc(site_url("/", base_path))}">Stack Atlas</a><span>/</span>{crumbs}<span>/</span>{esc(article["title"])}</div><header class="article-header"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(article["title"])}</h1><p>{esc(article["description"])}</p><div class="article-meta"><span>{esc(article["domain"].replace("-", " ").title())}</span>{f'<span>{status_label} {esc(status_date)}</span>' if status_date else ''}<button class="complete-toggle" type="button" data-progress-toggle="{esc(article["id"])}" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar">{f'<nav class="article-toc"><strong>On this page</strong>{contents}</nav>' if contents else ''}{path_context}</aside><article class="article-body">{body}{labs_section}{f'<section class="article-related"><h2>Before reading</h2><div>{prereqs}</div></section>' if prereqs else ''}{f'<section class="article-related"><h2>Related Articles</h2><div>{related}</div></section>' if related else ''}{prev_next}</article></div></main>'''
+    article_html = f'''<main id="main" class="page-shell article-page" data-article-id="{esc(article["id"])}"><div class="breadcrumbs"><a href="{esc(site_url("/", base_path))}">Stack Atlas</a><span>/</span>{crumbs}<span>/</span>{esc(article["title"])}</div><header class="article-header"><span class="eyebrow">{esc(eyebrow)}</span><h1>{esc(article["title"])}</h1><p>{esc(article["description"])}</p><div class="article-meta"><span>{esc(article["domain"].replace("-", " ").title())}</span>{f'<span>{status_label} {esc(status_date)}</span>' if status_date else ''}<button class="complete-toggle" type="button" data-progress-toggle="{esc(article["id"])}" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar">{f'<nav class="article-toc"><strong>On this page</strong>{contents}</nav>' if contents else ''}{path_context}</aside><article class="article-body">{body}{labs_section}{f'<section class="article-related"><h2>Before reading</h2><div>{prereqs}</div></section>' if prereqs else ''}{f'<section class="article-related"><h2>Related Articles</h2><div>{related}</div></section>' if related else ''}</article></div></main>'''
     route = article["url"].strip("/")
     destination = output / route / "index.html"
     write_file(destination, shared_ui(article_html, article["title"], article["description"], article["url"], site, base_path))

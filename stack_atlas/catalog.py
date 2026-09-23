@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -35,8 +36,9 @@ def read_domains():
     return domains
 
 def slug(value: str) -> str:
-    value = value.lower().strip()
-    value = re.sub(r"[^a-z0-9]+", "-", value)
+    value = unicodedata.normalize("NFKD", value).casefold().strip()
+    value = "".join(char for char in value if unicodedata.category(char) != "Mn")
+    value = re.sub(r"[^\w]+|_+", "-", value, flags=re.UNICODE)
     return value.strip("-")
 
 def clean_text(value: str) -> str:

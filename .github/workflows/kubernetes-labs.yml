@@ -11,6 +11,9 @@ on:
       - "scripts/build_site.py"
       - "scripts/validate_kubernetes_manifests.py"
       - "scripts/test_kubernetes_labs.sh"
+      - "scripts/kubernetes/**"
+      - "tests/test_kubernetes_context_safety.sh"
+      - "tests/kubernetes/**"
       - "requirements.txt"
       - ".github/workflows/kubernetes-labs.yml"
   push:
@@ -24,6 +27,9 @@ on:
       - "scripts/build_site.py"
       - "scripts/validate_kubernetes_manifests.py"
       - "scripts/test_kubernetes_labs.sh"
+      - "scripts/kubernetes/**"
+      - "tests/test_kubernetes_context_safety.sh"
+      - "tests/kubernetes/**"
       - "requirements.txt"
       - ".github/workflows/kubernetes-labs.yml"
   workflow_dispatch:
@@ -76,10 +82,5 @@ jobs:
           kind version
           kubectl version --client
           docker version
-      - name: Create baseline cluster
-        run: kind create cluster --name stack-atlas --config labs/kubernetes/00-cluster/kind-config.yaml --wait 180s
       - name: Validate and run foundations lab
-        run: scripts/test_kubernetes_labs.sh
-      - name: Delete baseline cluster
-        if: always()
-        run: kind delete cluster --name stack-atlas
+        run: CLEANUP=1 scripts/test_kubernetes_labs.sh
