@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-15-observability-10-opentelemetry"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/observability/">Observability</a><span>/</span><a href="/topics/observability/#category-observability">Observability</a><span>/</span>OpenTelemetry với Go</div><header class="article-header"><span class="eyebrow">Observability · Observability</span><h1>OpenTelemetry với Go</h1><p>Chuẩn hóa instrumentation cho traces, metrics và context propagation.</p><div class="article-meta"><span>Observability</span><button class="complete-toggle" type="button" data-progress-toggle="season-15-observability-10-opentelemetry" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#pipeline">Pipeline</a><a class="toc-level-2" href="#instrumentation">Instrumentation</a><a class="toc-level-2" href="#boundary">Boundary</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Observability · Lesson 10</strong></a></aside><article class="article-body"><section id="pipeline"><h2 id="pipeline">Pipeline</h2><div class="diagram"><pre>Go App
+  <main id="main" class="page-shell article-page" data-article-id="season-15-observability-10-opentelemetry"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/observability/">Observability</a><span>/</span><a href="/topics/observability/#category-observability">Observability</a><span>/</span>OpenTelemetry với Go</div><header class="article-header"><span class="eyebrow">Observability · Observability</span><h1>OpenTelemetry với Go</h1><p>Chuẩn hóa instrumentation cho traces, metrics và context propagation.</p><div class="article-meta"><span>Observability</span><button class="complete-toggle" type="button" data-progress-toggle="season-15-observability-10-opentelemetry" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#pipeline">Pipeline</a><a class="toc-level-2" href="#instrumentation">Instrumentation</a><a class="toc-level-2" href="#boundary">Boundary</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/observability/opentelemetry/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><section id="pipeline"><h2 id="pipeline">Pipeline</h2><div class="diagram"><pre>Go App
   |
 OpenTelemetry SDK
   |
@@ -29,7 +30,7 @@ OTLP Export
 Collector
   |-&gt; tracing backend
   |-&gt; metrics backend</pre></div></section><section id="instrumentation"><h2 id="instrumentation">Instrumentation</h2><p>Có thể dùng auto/contrib instrumentation cho HTTP, gRPC và DB, nhưng custom business spans vẫn cần thiết.</p></section><section id="boundary"><h2 id="boundary">Boundary</h2><div class="callout ">Đừng tạo span cho mọi function. Span nên đại diện work có giá trị điều tra.</div></section>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/observability/distributed-tracing/?path=golang-backend"><small>Previous</small><strong>Distributed Tracing</strong></a><a href="/articles/observability/alerting-slo/?path=golang-backend"><small>Next</small><strong>Alerting, SLI, SLO và Error Budget</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>

@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-11-reliability-engineering-06-rate-limiting"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/reliability/">Reliability</a><span>/</span><a href="/topics/reliability/#category-reliability">Reliability</a><span>/</span>Rate Limiting và Quota</div><header class="article-header"><span class="eyebrow">Reliability · Reliability</span><h1>Rate Limiting và Quota</h1><p>Kiểm soát lượng work đi vào trước khi backend bị quá tải.</p><div class="article-meta"><span>Reliability</span><button class="complete-toggle" type="button" data-progress-toggle="season-11-reliability-engineering-06-rate-limiting" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#b-o-v-theo-scope">Bảo vệ theo scope</a><a class="toc-level-2" href="#token-bucket">Token bucket</a><a class="toc-level-2" href="#go-sketch">Go sketch</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Reliability Engineering · Lesson 06</strong></a></aside><article class="article-body"><section id="b-o-v-theo-scope"><h2 id="b-o-v-theo-scope">Bảo vệ theo scope</h2><p>Bạn có thể giới hạn toàn hệ thống, theo tenant, API key hoặc endpoint đắt tiền.</p></section><section id="token-bucket"><h2 id="token-bucket">Token bucket</h2><div class="diagram"><pre>tokens refill ---&gt; [ bucket ]
+  <main id="main" class="page-shell article-page" data-article-id="season-11-reliability-engineering-06-rate-limiting"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/reliability/">Reliability</a><span>/</span><a href="/topics/reliability/#category-reliability">Reliability</a><span>/</span>Rate Limiting và Quota</div><header class="article-header"><span class="eyebrow">Reliability · Reliability</span><h1>Rate Limiting và Quota</h1><p>Kiểm soát lượng work đi vào trước khi backend bị quá tải.</p><div class="article-meta"><span>Reliability</span><button class="complete-toggle" type="button" data-progress-toggle="season-11-reliability-engineering-06-rate-limiting" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#bao-ve-theo-scope">Bảo vệ theo scope</a><a class="toc-level-2" href="#token-bucket">Token bucket</a><a class="toc-level-2" href="#go-sketch">Go sketch</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/reliability/rate-limiting/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><section id="b-o-v-theo-scope"><h2 id="bao-ve-theo-scope">Bảo vệ theo scope</h2><p>Bạn có thể giới hạn toàn hệ thống, theo tenant, API key hoặc endpoint đắt tiền.</p></section><section id="token-bucket"><h2 id="token-bucket">Token bucket</h2><div class="diagram"><pre>tokens refill ---&gt; [ bucket ]
 request -------&gt; take 1 token
 no token ------&gt; reject / wait</pre></div></section><section id="go-sketch"><h2 id="go-sketch">Go sketch</h2><pre><code>select {
 case &lt;-tokens:
@@ -28,7 +29,7 @@ case &lt;-tokens:
 default:
     // reject with 429
 }</code></pre></section>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/reliability/bulkhead-isolation/?path=golang-backend"><small>Previous</small><strong>Bulkhead và Failure Isolation</strong></a><a href="/articles/reliability/load-shedding/?path=golang-backend"><small>Next</small><strong>Load Shedding</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>

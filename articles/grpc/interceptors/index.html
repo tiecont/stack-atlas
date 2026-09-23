@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-14-grpc-with-go-07-interceptors"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/grpc/">Grpc</a><span>/</span><a href="/topics/grpc/#category-rpc">Rpc</a><span>/</span>Unary và Stream Interceptors</div><header class="article-header"><span class="eyebrow">Grpc · Rpc</span><h1>Unary và Stream Interceptors</h1><p>Middleware của gRPC cho auth, logging, tracing và metrics.</p><div class="article-meta"><span>Grpc</span><button class="complete-toggle" type="button" data-progress-toggle="season-14-grpc-with-go-07-interceptors" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#chain">Chain</a><a class="toc-level-2" href="#unary-interceptor">Unary interceptor</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>gRPC · Lesson 07</strong></a></aside><article class="article-body"><section id="chain"><h2 id="chain">Chain</h2><div class="diagram"><pre>Client -&gt; Interceptor -&gt; Handler
+  <main id="main" class="page-shell article-page" data-article-id="season-14-grpc-with-go-07-interceptors"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/grpc/">Grpc</a><span>/</span><a href="/topics/grpc/#category-rpc">Rpc</a><span>/</span>Unary và Stream Interceptors</div><header class="article-header"><span class="eyebrow">Grpc · Rpc</span><h1>Unary và Stream Interceptors</h1><p>Middleware của gRPC cho auth, logging, tracing và metrics.</p><div class="article-meta"><span>Grpc</span><button class="complete-toggle" type="button" data-progress-toggle="season-14-grpc-with-go-07-interceptors" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#chain">Chain</a><a class="toc-level-2" href="#unary-interceptor">Unary interceptor</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/grpc/interceptors/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><section id="chain"><h2 id="chain">Chain</h2><div class="diagram"><pre>Client -&gt; Interceptor -&gt; Handler
             | auth
             | logging
             | tracing</pre></div></section><section id="unary-interceptor"><h2 id="unary-interceptor">Unary interceptor</h2><pre><code>func loggingInterceptor(
@@ -34,7 +35,7 @@
     log.Printf(&quot;%s %s&quot;, info.FullMethod, time.Since(start))
     return resp, err
 }</code></pre></section>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/grpc/metadata-auth/?path=golang-backend"><small>Previous</small><strong>Metadata và Authentication</strong></a><a href="/articles/grpc/status-errors/?path=golang-backend"><small>Next</small><strong>gRPC Status Codes và Error Model</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>

@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-14-grpc-with-go-04-unary-rpc"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/grpc/">Grpc</a><span>/</span><a href="/topics/grpc/#category-rpc">Rpc</a><span>/</span>Unary RPC</div><header class="article-header"><span class="eyebrow">Grpc · Rpc</span><h1>Unary RPC</h1><p>Một request, một response: mô hình phổ biến nhất.</p><div class="article-meta"><span>Grpc</span><button class="complete-toggle" type="button" data-progress-toggle="season-14-grpc-with-go-04-unary-rpc" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#server">Server</a><a class="toc-level-2" href="#client">Client</a><a class="toc-level-2" href="#deadline">Deadline</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>gRPC · Lesson 04</strong></a></aside><article class="article-body"><section id="server"><h2 id="server">Server</h2><pre><code>func (s *Server) GetUser(
+  <main id="main" class="page-shell article-page" data-article-id="season-14-grpc-with-go-04-unary-rpc"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/grpc/">Grpc</a><span>/</span><a href="/topics/grpc/#category-rpc">Rpc</a><span>/</span>Unary RPC</div><header class="article-header"><span class="eyebrow">Grpc · Rpc</span><h1>Unary RPC</h1><p>Một request, một response: mô hình phổ biến nhất.</p><div class="article-meta"><span>Grpc</span><button class="complete-toggle" type="button" data-progress-toggle="season-14-grpc-with-go-04-unary-rpc" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#server">Server</a><a class="toc-level-2" href="#client">Client</a><a class="toc-level-2" href="#deadline">Deadline</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/grpc/unary-rpc/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><section id="server"><h2 id="server">Server</h2><pre><code>func (s *Server) GetUser(
     ctx context.Context,
     req *pb.GetUserRequest,
 ) (*pb.User, error) {
@@ -28,7 +29,7 @@
 }</code></pre></section><section id="client"><h2 id="client">Client</h2><pre><code>ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 defer cancel()
 res, err := client.GetUser(ctx, &amp;pb.GetUserRequest{Id: &quot;42&quot;})</code></pre></section><section id="deadline"><h2 id="deadline">Deadline</h2><p>Client nên truyền deadline thực tế thay vì để RPC chờ vô hạn.</p></section>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/grpc/code-generation-go/?path=golang-backend"><small>Previous</small><strong>Generate Go Code từ .proto</strong></a><a href="/articles/grpc/streaming/?path=golang-backend"><small>Next</small><strong>Server, Client và Bidirectional Streaming</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>

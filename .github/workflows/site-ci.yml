@@ -27,5 +27,9 @@ jobs:
         run: node tests/test_progress_migration.js
       - name: Verify path-context selection
         run: node tests/test_path_context.js
+      - name: Verify checked-in generated site is current
+        run: |
+          python3 scripts/build_site.py
+          git diff --exit-code
       - name: Build deployable site preview
         run: python3 scripts/build_site.py --output _site --base-path "/${{ github.event.repository.name }}" --site-url "https://${{ github.repository_owner }}.github.io"

@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-03-concurrency-01-goroutine"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-concurrency">Concurrency</a><span>/</span>Goroutine trong Go: hiểu từ con số 0</div><header class="article-header"><span class="eyebrow">Golang · Concurrency</span><h1>Goroutine trong Go: hiểu từ con số 0</h1><p>Bài viết nhập môn Goroutine trong Go dành cho người mới: concurrency, WaitGroup, I/O, race condition, goroutine leak và bounded concurrency.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-03-concurrency-01-goroutine" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#problem">1. Bắt đầu từ một vấn đề rất đời thường</a><a class="toc-level-2" href="#what">2. Goroutine là gì?</a><a class="toc-level-3" href="#goroutine-kh-ng-ph-i-m-t-os-thread-ri-ng">Goroutine không phải một OS thread riêng</a><a class="toc-level-2" href="#go-keyword">3. Chỉ một từ khóa: go</a><a class="toc-level-2" href="#main">4. Khi main() kết thúc, chương trình cũng kết thúc</a><a class="toc-level-2" href="#waitgroup">5. Chờ goroutine bằng sync.WaitGroup</a><a class="toc-level-2" href="#io">6. Goroutine đặc biệt hữu ích với I/O</a><a class="toc-level-3" href="#v-d-ba-api-c-l-p">Ví dụ ba API độc lập</a><a class="toc-level-2" href="#race">7. Concurrency tạo ra vấn đề mới: Race Condition</a><a class="toc-level-2" href="#leak">8. Goroutine leak: công việc không bao giờ kết thúc</a><a class="toc-level-2" href="#bounded">9. Đừng tạo goroutine vô hạn</a><a class="toc-level-2" href="#summary">10. Tóm lại: hãy nhớ mental model trước syntax</a><a class="toc-level-3" href="#b-i-ti-p-theo-channel-l-g">Bài tiếp theo: Channel là gì?</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Go Concurrency · Lesson 01</strong></a></aside><article class="article-body"><p class="lead">Khi mới học Go, sớm hay muộn bạn cũng gặp từ <strong>goroutine</strong>. Nghe có vẻ là một khái niệm “hệ thống” khó nhằn, nhưng trực giác ban đầu thực ra rất đơn giản: <strong>một công việc không nhất thiết phải đứng chờ một công việc độc lập khác hoàn thành.</strong></p>
+  <main id="main" class="page-shell article-page" data-article-id="season-03-concurrency-01-goroutine"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-concurrency">Concurrency</a><span>/</span>Goroutine trong Go: hiểu từ con số 0</div><header class="article-header"><span class="eyebrow">Golang · Concurrency</span><h1>Goroutine trong Go: hiểu từ con số 0</h1><p>Bài viết nhập môn Goroutine trong Go dành cho người mới: concurrency, WaitGroup, I/O, race condition, goroutine leak và bounded concurrency.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-03-concurrency-01-goroutine" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#problem">1. Bắt đầu từ một vấn đề rất đời thường</a><a class="toc-level-2" href="#what">2. Goroutine là gì?</a><a class="toc-level-3" href="#goroutine-khong-phai-mot-os-thread-rieng">Goroutine không phải một OS thread riêng</a><a class="toc-level-2" href="#go-keyword">3. Chỉ một từ khóa: go</a><a class="toc-level-2" href="#main">4. Khi main() kết thúc, chương trình cũng kết thúc</a><a class="toc-level-2" href="#waitgroup">5. Chờ goroutine bằng sync.WaitGroup</a><a class="toc-level-2" href="#io">6. Goroutine đặc biệt hữu ích với I/O</a><a class="toc-level-3" href="#vi-du-ba-api-đoc-lap">Ví dụ ba API độc lập</a><a class="toc-level-2" href="#race">7. Concurrency tạo ra vấn đề mới: Race Condition</a><a class="toc-level-2" href="#leak">8. Goroutine leak: công việc không bao giờ kết thúc</a><a class="toc-level-2" href="#bounded">9. Đừng tạo goroutine vô hạn</a><a class="toc-level-2" href="#summary">10. Tóm lại: hãy nhớ mental model trước syntax</a><a class="toc-level-3" href="#bai-tiep-theo-channel-la-gi">Bài tiếp theo: Channel là gì?</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/golang/goroutine/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><p class="lead">Khi mới học Go, sớm hay muộn bạn cũng gặp từ <strong>goroutine</strong>. Nghe có vẻ là một khái niệm “hệ thống” khó nhằn, nhưng trực giác ban đầu thực ra rất đơn giản: <strong>một công việc không nhất thiết phải đứng chờ một công việc độc lập khác hoàn thành.</strong></p>
 
     <h2 id="problem">1. Bắt đầu từ một vấn đề rất đời thường</h2>
     <p>Giả sử bạn đang chuẩn bị bữa sáng. Có hai việc: pha cà phê và nướng bánh. Nếu làm theo kiểu tuần tự, bạn sẽ đứng chờ máy pha cà phê xong rồi mới bật máy nướng bánh.</p>
@@ -79,7 +80,7 @@ goroutine C → gọi Redis
 goroutine D → chạy background job
 goroutine E → ghi log</code></pre>
 
-    <h3 id="goroutine-kh-ng-ph-i-m-t-os-thread-ri-ng">Goroutine không phải một OS thread riêng</h3>
+    <h3 id="goroutine-khong-phai-mot-os-thread-rieng">Goroutine không phải một OS thread riêng</h3>
     <p>Goroutine được Go runtime quản lý và thường nhẹ hơn việc tạo một OS thread cho từng công việc. Runtime sẽ phân phối nhiều goroutine lên một số OS thread để thực thi.</p>
 
     <figure class="figure">
@@ -208,7 +209,7 @@ func main() {
       <figcaption>Đây là một trong những lý do Go phù hợp với network service và backend có nhiều I/O.</figcaption>
     </figure>
 
-    <h3 id="v-d-ba-api-c-l-p">Ví dụ ba API độc lập</h3>
+    <h3 id="vi-du-ba-api-đoc-lap">Ví dụ ba API độc lập</h3>
     <p>Nếu ba call không phụ thuộc nhau, chạy tuần tự có thể mất gần tổng thời gian của cả ba.</p>
     <pre><span class="code-label">Pseudo Go</span><code>user := getUser()        // ~500ms
 orders := getOrders()    // ~500ms
@@ -322,10 +323,10 @@ C ──────────────────────────
     <p>Đừng bắt đầu bằng việc cố thuộc scheduler, M:N hay các chi tiết runtime. Trước tiên chỉ cần hiểu rằng nhiều công việc có thể cùng tồn tại và được Go runtime phối hợp.</p>
 
     <div class="kicker">
-      <h3 id="b-i-ti-p-theo-channel-l-g">Bài tiếp theo: Channel là gì?</h3>
+      <h3 id="bai-tiep-theo-channel-la-gi">Bài tiếp theo: Channel là gì?</h3>
       <p>Goroutine giải quyết câu hỏi “làm sao có nhiều công việc cùng tồn tại?”. Channel sẽ giải quyết câu hỏi tiếp theo: <strong>những công việc đó trao đổi dữ liệu và phối hợp với nhau như thế nào?</strong></p>
     </div>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/runtime-toolbox/?path=golang-backend"><small>Previous</small><strong>Runtime Toolbox: trace, GODEBUG và production diagnosis</strong></a><a href="/articles/golang/channel/?path=golang-backend"><small>Next</small><strong>Channel trong Go là gì?</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>

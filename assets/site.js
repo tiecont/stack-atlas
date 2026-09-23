@@ -2,6 +2,7 @@
 (() => {
   const BASE_PATH = "";
   const LocalStorageProgressStore = window.StackAtlasProgressStore;
+  const PathContext = window.StackAtlasPathContext;
 
   const themeButton = document.querySelector('[data-theme-toggle]');
   const savedTheme = localStorage.getItem('stack-atlas-theme');
@@ -54,21 +55,15 @@
     document.querySelectorAll('[data-search-filter]').forEach(item => item.classList.toggle('is-active', item === button)); renderResults();
   }));
   const syncPathNavigation = async () => {
-    const navigation = document.querySelector('[data-path-navigation]');
     const articlePage = document.querySelector('.article-page[data-article-id]');
-    if (!navigation || !articlePage || !searchIndex) return;
+    if (!articlePage || !searchIndex) return;
     const requestedPathParam = new URLSearchParams(location.search).get('path');
-    const requestedPath = requestedPathParam || navigation.dataset.pathNavigation;
-    const path = (searchIndex.paths || []).find(item => item.id === requestedPath);
-    if (!path) return;
     const articleId = articlePage.dataset.articleId;
-    const articlesById = new Map((searchIndex.articles || []).map(item => [item.id, item]));
-    const sequence = [...path.modules].sort((a, b) => a.order - b.order).flatMap(module =>
-      (module.article_ids || []).map(id => ({...articlesById.get(id), module_id: module.id})).filter(item => item.id)
-    );
-    const position = sequence.findIndex(item => item.id === articleId);
-    if (position < 0) return;
-    if (requestedPathParam) await LocalStorageProgressStore.recordVisit(requestedPath, articleId);
+    const selection = PathContext.resolve(searchIndex, requestedPathParam, articleId);
+    if (!selection) return;
+    const {path, sequence, position} = selection;
+    const requestedPath = path.id;
+    await LocalStorageProgressStore.recordVisit(requestedPath, articleId);
     const makeLink = (item, label, side) => {
       if (!item) return document.createElement('span');
       const anchor = document.createElement('a');
@@ -79,16 +74,24 @@
       anchor.append(small, strong);
       return anchor;
     };
-    navigation.replaceChildren(makeLink(sequence[position - 1], 'Previous', 'previous'), makeLink(sequence[position + 1], 'Next', 'next'));
+    const navigation = document.createElement('nav');
+    navigation.className = 'article-previous-next';
     navigation.dataset.pathNavigation = requestedPath;
-    const context = document.querySelector('[data-path-context]');
-    if (context) {
-      const currentModule = path.modules.find(module => module.id === sequence[position].module_id);
-      const modulePosition = currentModule?.article_ids.indexOf(articleId) ?? -1;
-      context.href = `${BASE_PATH}${path.url}`;
-      context.querySelector('span').textContent = `Part of ${path.title}`;
-      context.querySelector('strong').textContent = currentModule ? `${currentModule.title} · Lesson ${String(modulePosition + 1).padStart(2, '0')}` : path.title;
-    }
+    navigation.setAttribute('aria-label', 'Learning path navigation');
+    navigation.replaceChildren(makeLink(sequence[position - 1], 'Previous', 'previous'), makeLink(sequence[position + 1], 'Next', 'next'));
+    document.querySelector('.article-previous-next')?.remove();
+    document.querySelector('.article-body')?.append(navigation);
+
+    const currentModule = path.modules.find(module => module.id === sequence[position].module_id);
+    const modulePosition = currentModule?.article_ids.indexOf(articleId) ?? -1;
+    const context = document.createElement('a');
+    context.className = 'path-context';
+    context.dataset.pathContext = path.id;
+    context.href = `${BASE_PATH}${path.url}`;
+    const contextLabel = document.createElement('span'); contextLabel.textContent = `Part of ${path.title}`;
+    const contextDetail = document.createElement('strong'); contextDetail.textContent = currentModule ? `${currentModule.title} · Lesson ${String(modulePosition + 1).padStart(2, '0')}` : path.title;
+    context.append(contextLabel, contextDetail);
+    document.querySelector('[data-article-paths]')?.replaceChildren(context);
   };
   if (dialog) fetch(`${BASE_PATH}/search-index.json`).then(response => response.json()).then(async index => { searchIndex = index; renderResults(); await syncPathNavigation(); await paintProgress(); }).catch(() => { if (results) results.innerHTML = '<p class="empty-state">Search is temporarily unavailable.</p>'; });
 

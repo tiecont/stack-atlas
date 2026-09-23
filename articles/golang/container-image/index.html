@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,14 +21,14 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-18-production-go-engineering-04-container-image"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-fundamentals">Fundamentals</a><span>/</span>Container hóa Go Service</div><header class="article-header"><span class="eyebrow">Golang · Fundamentals</span><h1>Container hóa Go Service</h1><p>Tận dụng single binary và image tối giản mà vẫn giữ debugability cần thiết.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-18-production-go-engineering-04-container-image" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#multi-stage">Multi-stage</a><a class="toc-level-2" href="#trade-off">Trade-off</a><a class="toc-level-2" href="#checklist">Checklist</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Production Go · Lesson 04</strong></a></aside><article class="article-body"><section id="multi-stage"><h2 id="multi-stage">Multi-stage</h2><div class="diagram"><pre>builder image
+  <main id="main" class="page-shell article-page" data-article-id="season-18-production-go-engineering-04-container-image"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-fundamentals">Fundamentals</a><span>/</span>Container hóa Go Service</div><header class="article-header"><span class="eyebrow">Golang · Fundamentals</span><h1>Container hóa Go Service</h1><p>Tận dụng single binary và image tối giản mà vẫn giữ debugability cần thiết.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-18-production-go-engineering-04-container-image" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#multi-stage">Multi-stage</a><a class="toc-level-2" href="#trade-off">Trade-off</a><a class="toc-level-2" href="#checklist">Checklist</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/golang/container-image/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><section id="multi-stage"><h2 id="multi-stage">Multi-stage</h2><div class="diagram"><pre>builder image
   |
 go build
   v
 runtime image
   |
 single Go binary</pre></div></section><section id="trade-off"><h2 id="trade-off">Trade-off</h2><p>Distroless/scratch giảm attack surface nhưng debugging shell-based khó hơn. Chọn theo operating model.</p></section><section id="checklist"><h2 id="checklist">Checklist</h2><ul><li>non-root</li><li>read-only filesystem khi phù hợp</li><li>CA certificates</li><li>timezone nếu cần</li><li>no build tools in runtime image</li></ul></section>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/build-reproducibility/?path=golang-backend"><small>Previous</small><strong>Reproducible Build và Version Metadata</strong></a><a href="/articles/golang/signals-graceful-shutdown/?path=golang-backend"><small>Next</small><strong>Signals và Graceful Shutdown</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>

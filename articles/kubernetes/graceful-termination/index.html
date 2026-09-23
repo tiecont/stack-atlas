@@ -8,6 +8,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
   <script defer src="/assets/progress-store.js"></script>
+  <script defer src="/assets/path-context.js"></script>
   <script defer src="/assets/site.js"></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
       <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
     </nav>
   </div></header>
-  <main id="main" class="page-shell article-page" data-article-id="season-19-kubernetes-for-go-backend-08-graceful-termination"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/kubernetes/">Kubernetes</a><span>/</span><a href="/topics/kubernetes/#category-orchestration">Orchestration</a><span>/</span>SIGTERM và Graceful Termination</div><header class="article-header"><span class="eyebrow">Kubernetes · Orchestration</span><h1>SIGTERM và Graceful Termination</h1><p>Điều gì xảy ra với request khi Kubernetes terminate pod?</p><div class="article-meta"><span>Kubernetes</span><button class="complete-toggle" type="button" data-progress-toggle="season-19-kubernetes-for-go-backend-08-graceful-termination" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#lifecycle">Lifecycle</a><a class="toc-level-2" href="#go-server">Go server</a><a class="toc-level-2" href="#goal">Goal</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Kubernetes · Lesson 08</strong></a></aside><article class="article-body"><section id="lifecycle"><h2 id="lifecycle">Lifecycle</h2><div class="diagram"><pre>Pod termination
+  <main id="main" class="page-shell article-page" data-article-id="season-19-kubernetes-for-go-backend-08-graceful-termination"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/kubernetes/">Kubernetes</a><span>/</span><a href="/topics/kubernetes/#category-orchestration">Orchestration</a><span>/</span>SIGTERM và Graceful Termination</div><header class="article-header"><span class="eyebrow">Kubernetes · Orchestration</span><h1>SIGTERM và Graceful Termination</h1><p>Điều gì xảy ra với request khi Kubernetes terminate pod?</p><div class="article-meta"><span>Kubernetes</span><button class="complete-toggle" type="button" data-progress-toggle="season-19-kubernetes-for-go-backend-08-graceful-termination" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#lifecycle">Lifecycle</a><a class="toc-level-2" href="#go-server">Go server</a><a class="toc-level-2" href="#goal">Goal</a></nav><section class="article-path-memberships" data-article-paths><strong>Appears in</strong><div><a class="related-link" href="/articles/kubernetes/graceful-termination/?path=golang-backend">Golang Backend Engineering</a></div></section></aside><article class="article-body"><section id="lifecycle"><h2 id="lifecycle">Lifecycle</h2><div class="diagram"><pre>Pod termination
   |
 SIGTERM
   |
@@ -38,7 +39,7 @@ defer stop()
 shutdownCtx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 defer cancel()
 _ = server.Shutdown(shutdownCtx)</code></pre></section><section id="goal"><h2 id="goal">Goal</h2><p>Không drop request chỉ vì rollout hoặc scale down.</p></section>
-<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/kubernetes/readiness-liveness/?path=golang-backend"><small>Previous</small><strong>Readiness, Liveness và Startup Probes</strong></a><a href="/articles/kubernetes/hpa-autoscaling/?path=golang-backend"><small>Next</small><strong>Horizontal Pod Autoscaling</strong></a></nav></article></div></main>
+</article></div></main>
   <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
   <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
     <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
