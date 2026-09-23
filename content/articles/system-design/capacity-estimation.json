@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "system-design",
-      "order": 327
+      "module_id": "system-design"
     }
   ],
-  "path_order": 327,
   "prerequisites": [],
   "related": [],
   "status": "published",

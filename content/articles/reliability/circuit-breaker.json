@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "reliability-engineering",
-      "order": 161
+      "module_id": "reliability-engineering"
     }
   ],
-  "path_order": 161,
   "prerequisites": [],
   "related": [],
   "status": "published",

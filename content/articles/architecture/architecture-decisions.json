@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "architecture-patterns",
-      "order": 324
+      "module_id": "architecture-patterns"
     }
   ],
-  "path_order": 324,
   "prerequisites": [],
   "related": [],
   "status": "published",

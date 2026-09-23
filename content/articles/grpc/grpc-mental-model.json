@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "grpc-with-go",
-      "order": 192
+      "module_id": "grpc-with-go"
     }
   ],
-  "path_order": 192,
   "prerequisites": [],
   "related": [],
   "status": "published",

@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "kubernetes",
-      "order": 265
+      "module_id": "kubernetes"
     }
   ],
-  "path_order": 265,
   "prerequisites": [],
   "related": [],
   "status": "published",

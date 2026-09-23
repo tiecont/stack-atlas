@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "redis-caching",
-      "order": 110
+      "module_id": "redis-caching"
     }
   ],
-  "path_order": 110,
   "prerequisites": [],
   "related": [],
   "status": "published",

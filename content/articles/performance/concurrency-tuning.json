@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "performance-engineering",
-      "order": 228
+      "module_id": "performance-engineering"
     }
   ],
-  "path_order": 228,
   "prerequisites": [],
   "related": [],
   "status": "published",

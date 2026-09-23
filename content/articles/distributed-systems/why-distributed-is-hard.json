@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "distributed-systems",
-      "order": 142
+      "module_id": "distributed-systems"
     }
   ],
-  "path_order": 142,
   "prerequisites": [],
   "related": [],
   "status": "published",

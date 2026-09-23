@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "messaging-patterns",
-      "order": 120
+      "module_id": "messaging-patterns"
     }
   ],
-  "path_order": 120,
   "prerequisites": [],
   "related": [],
   "status": "published",

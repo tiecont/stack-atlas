@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "consensus",
-      "order": 290
+      "module_id": "consensus"
     }
   ],
-  "path_order": 290,
   "prerequisites": [],
   "related": [],
   "status": "published",

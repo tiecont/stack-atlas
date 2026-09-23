@@ -70,6 +70,15 @@ def clean_text(value: str) -> str:
     return " ".join(html.unescape(value).split())
 
 
+def ordered_modules(path: dict) -> list[dict]:
+    return sorted(path.get("modules", []), key=lambda module: module["order"])
+
+
+def path_sequence(path: dict) -> list[tuple[dict, dict]]:
+    """Return the one authoritative module/article sequence declared by a path."""
+    return [(module, article) for module in ordered_modules(path) for article in module.get("articles", [])]
+
+
 def make_catalog():
     domains = read_domains()
     categories = read_json(CONTENT / "categories.json")
@@ -108,7 +117,6 @@ def make_catalog():
         errors.append("Duplicate article URLs")
 
     placements = defaultdict(list)
-    path_orders = defaultdict(set)
     for path in paths:
         modules = path.get("modules", [])
         module_ids = set()
@@ -138,9 +146,17 @@ def make_catalog():
                     errors.append(f"{path['id']}/{module_id}: unknown article {article_id!r}")
             module["articles"] = [article_by_id[item] for item in module_articles if item in article_by_id]
 
-        for (path_id, article_id), module_ids in list(placements.items()):
-            if path_id == path["id"] and len(module_ids) > 1:
-                errors.append(f"{path_id}: article {article_id} is placed more than once")
+    for (path_id, article_id), module_ids in placements.items():
+        if len(module_ids) > 1:
+            errors.append(f"{path_id}: article {article_id} is placed more than once")
+        elif article_id in article_by_id:
+            declared_pairs = {
+                (item.get("path_id"), item.get("module_id"))
+                for item in article_by_id[article_id].get("learning_paths", [])
+                if isinstance(item, dict)
+            }
+            if (path_id, module_ids[0]) not in declared_pairs:
+                errors.append(f"{article_id}: path {path_id} references it without matching article membership")
 
     legacy_url_owners = {}
     for article in explicit:
@@ -199,19 +215,19 @@ def make_catalog():
             for reference in article.get(relation, []):
                 if reference not in article_by_id:
                     errors.append(f"{article.get('id')}: unknown {relation} article {reference!r}")
+        membership_keys = set()
         for membership in article.get("learning_paths", []):
-            if not isinstance(membership, (str, dict)):
+            if not isinstance(membership, dict):
                 errors.append(f"{article.get('id')}: invalid learning path membership {membership!r}")
                 continue
-            path_id = membership if isinstance(membership, str) else membership.get("path_id")
+            path_id = membership.get("path_id")
+            membership_key = (path_id, membership.get("module_id"))
+            if membership_key in membership_keys:
+                errors.append(f"{article.get('id')}: duplicate learning path membership {membership_key!r}")
+            membership_keys.add(membership_key)
             if path_id not in path_by_id:
                 errors.append(f"{article.get('id')}: unknown learning path {path_id!r}")
-            elif isinstance(membership, str):
-                path_modules = path_by_id[path_id].get("modules", [])
-                placed = any(article.get("id") in module.get("article_ids", []) for module in path_modules)
-                if not placed:
-                    errors.append(f"{article.get('id')}: add it to a module in {path_id} using article_ids")
-            elif isinstance(membership, dict):
+            else:
                 module_id = membership.get("module_id")
                 path_modules = path_by_id[path_id].get("modules", [])
                 module_ids = {module["id"] for module in path_modules}
@@ -223,12 +239,6 @@ def make_catalog():
                     module = next((item for item in path_modules if item["id"] == module_id), None)
                     if module and article.get("id") not in module.get("article_ids", []):
                         errors.append(f"{article.get('id')}: module {module_id} in {path_id} does not reference this article")
-                order = membership.get("order")
-                if not isinstance(order, int) or order < 1:
-                    errors.append(f"{article.get('id')}: invalid path order for {path_id}")
-                elif order in path_orders[path_id]:
-                    errors.append(f"{path_id}: duplicate article order {order}")
-                path_orders[path_id].add(order)
         article["tags"] = article.get("tags", [])
         article.setdefault("learning_paths", [])
         article.setdefault("prerequisites", [])
@@ -352,8 +362,8 @@ def render_modern_article(article: dict, article_by_id: dict, paths: list, outpu
         path = next((item for item in paths if item["id"] == membership.get("path_id")), None)
         module = next((item for item in path.get("modules", []) if item["id"] == membership.get("module_id")), None) if path else None
         if path and module:
-            path_modules = sorted(path.get("modules", []), key=lambda item: item["order"])
-            path_articles = [item for current_module in path_modules for item in current_module.get("articles", [])]
+            ordered_entries = path_sequence(path)
+            path_articles = [item for _, item in ordered_entries]
             path_position = next((index for index, item in enumerate(path_articles) if item.get("id") == article["id"]), -1)
             module_articles = module.get("articles", [])
             module_position = next((index for index, item in enumerate(module_articles) if item.get("id") == article["id"]), -1)
@@ -424,7 +434,7 @@ def render_site(domains, categories, paths, articles, output: Path, site: dict):
     write("assets/site.js", JS.replace("__BASE_PATH__", json.dumps(base_path)))
     write("assets/favicon.svg", FAVICON)
     search_domains = [{"id": item["id"], "title": item["title"], "description": item["description"], "status": item.get("status"), "url": f"/topics/{item['id']}/"} for item in domains]
-    search_paths = [{"id": item["id"], "title": item["title"], "description": item["description"], "status": item.get("status"), "url": f"/paths/{item['id']}/", "modules": [{"id": module["id"], "title": module["title"], "order": module["order"], "article_ids": [article["id"] for article in module.get("articles", [])]} for module in sorted(item.get("modules", []), key=lambda module: module["order"])]} for item in paths]
+    search_paths = [{"id": item["id"], "title": item["title"], "description": item["description"], "status": item.get("status"), "url": f"/paths/{item['id']}/", "modules": [{"id": module["id"], "title": module["title"], "order": module["order"], "article_ids": [article["id"] for article in module.get("articles", [])]} for module in ordered_modules(item)]} for item in paths]
     write("search-index.json", json.dumps({"articles": articles, "domains": search_domains, "paths": search_paths}, ensure_ascii=False, indent=2) + "\n")
 
     published_domains = [domain for domain in domains if by_domain[domain["id"]] or domain.get("status") == "planned"]
@@ -432,7 +442,7 @@ def render_site(domains, categories, paths, articles, output: Path, site: dict):
     path_cards = "".join(path_card(path, base_path) for path in paths if path.get("status") == "published")
     newest = list(reversed(articles))[:8]
     continue_path = site_url(f"/paths/{paths[0]['id']}/" if paths else "/paths/", base_path)
-    continue_refs = "".join(f'<span hidden data-article-id="{esc(article["id"])}" data-article-url="{esc(article["url"])}" data-article-title="{esc(article["title"])}"></span>' for module in (paths[0].get("modules", []) if paths else []) for article in module.get("articles", []))
+    continue_refs = "".join(f'<span hidden data-article-id="{esc(article["id"])}" data-article-url="{esc(article["url"])}" data-article-title="{esc(article["title"])}"></span>' for _, article in (path_sequence(paths[0]) if paths else []))
     home = f'''<main id="main">
       <section class="hero-wrap"><div class="hero"><div class="hero-copy"><span class="eyebrow"><span class="status-dot"></span> Engineering Knowledge Base</span><h1>Engineering knowledge,<br><em>from code to infrastructure.</em></h1><p>Explore practical articles, deep dives and structured learning paths across the systems engineers build and run.</p><div class="hero-actions"><a class="button button-primary" href="{esc(site_url('/topics/', base_path))}">Explore topics <span aria-hidden="true">→</span></a><button class="button button-secondary" type="button" data-open-search>Search the Atlas <kbd>/</kbd></button></div><div class="hero-proof"><span><strong>{len(articles)}</strong> articles</span><span><strong>{len([d for d in domains if by_domain[d['id']]])}</strong> topics with content</span><span><strong>{sum(len(p.get('modules', [])) for p in paths)}</strong> learning modules</span></div></div><div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core"><span class="core-symbol">S</span><b>STACK<br>ATLAS</b></div><span class="orbit-node node-code">{{</span><span class="orbit-node node-data">DB</span><span class="orbit-node node-cloud">☁</span><span class="orbit-node node-ops">⌘</span><span class="orbit-caption">one map · many routes</span></div></div></section>
       <section class="section section-soft" id="topics"><div class="section-heading"><div><span class="eyebrow">Explore the Atlas</span><h2>Explore by topic</h2><p>Find knowledge by the technology or engineering subject you want to understand.</p></div><a class="text-link" href="{esc(site_url('/topics/', base_path))}">All topics <span aria-hidden="true">→</span></a></div><div class="topic-grid">{topic_grid}</div></section>
@@ -452,13 +462,13 @@ def render_site(domains, categories, paths, articles, output: Path, site: dict):
     for path in paths:
         groups = []
         group_order = []
-        for module in path.get("modules", []):
+        for module in ordered_modules(path):
             if module.get("group") not in group_order:
                 group_order.append(module.get("group"))
         for group in group_order:
-            modules = [module for module in path.get("modules", []) if module.get("group") == group]
+            modules = [module for module in ordered_modules(path) if module.get("group") == group]
             groups.append(f'<section class="path-group"><div class="group-heading"><span class="eyebrow">Learning path section</span><h2>{esc(group)}</h2></div>{"".join(module_block(module, path["id"], base_path) for module in modules)}</section>')
-        lesson_count = sum(len(module.get("articles", [])) for module in path.get("modules", []))
+        lesson_count = len(path_sequence(path))
         path_html = f'''<main id="main" class="page-shell path-page" data-progress-path="{esc(path['id'])}"><div class="breadcrumbs"><a href="{esc(site_url('/', base_path))}">Stack Atlas</a><span>/</span><a href="{esc(site_url('/paths/', base_path))}">Learning Paths</a><span>/</span>{esc(path['title'])}</div><header class="path-hero"><div><span class="eyebrow">Learning Path · {len(path.get('modules', []))} modules</span><h1>{esc(path['title'])}</h1><p>{esc(path['description'])}</p><div class="path-stats"><span>{lesson_count} lessons</span><span>Progress saved on this device</span></div></div><div class="path-progress"><strong data-progress-label>0 / {lesson_count} complete</strong><div class="progress-track"><span data-progress-bar></span></div><small>Pick up where you left off anytime.</small></div></header><div class="path-content">{''.join(groups)}</div></main>'''
         write(f"paths/{path['id']}/index.html", shared_ui(path_html, path["title"], path["description"], f"/paths/{path['id']}/", site, base_path))
 

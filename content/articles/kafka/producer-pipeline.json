@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "kafka-deep-dive",
-      "order": 126
+      "module_id": "kafka-deep-dive"
     }
   ],
-  "path_order": 126,
   "prerequisites": [],
   "related": [],
   "status": "published",

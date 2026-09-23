@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "observability",
-      "order": 207
+      "module_id": "observability"
     }
   ],
-  "path_order": 207,
   "prerequisites": [],
   "related": [],
   "status": "published",

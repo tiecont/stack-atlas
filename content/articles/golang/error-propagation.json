@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "go-concurrency",
-      "order": 47
+      "module_id": "go-concurrency"
     }
   ],
-  "path_order": 47,
   "prerequisites": [],
   "related": [],
   "status": "published",

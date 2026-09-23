@@ -13,16 +13,13 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "kubernetes",
-      "order": 259
+      "module_id": "kubernetes"
     },
     {
       "path_id": "kubernetes-engineer",
-      "module_id": "k8s-foundations",
-      "order": 1
+      "module_id": "k8s-foundations"
     }
   ],
-  "path_order": 259,
   "prerequisites": [],
   "related": [],
   "status": "published",

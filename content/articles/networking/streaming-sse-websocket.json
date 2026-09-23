@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "networking-with-go",
-      "order": 62
+      "module_id": "networking-with-go"
     }
   ],
-  "path_order": 62,
   "prerequisites": [],
   "related": [],
   "status": "published",

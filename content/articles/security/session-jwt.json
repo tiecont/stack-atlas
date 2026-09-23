@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "security-for-backends",
-      "order": 234
+      "module_id": "security-for-backends"
     }
   ],
-  "path_order": 234,
   "prerequisites": [],
   "related": [],
   "status": "published",

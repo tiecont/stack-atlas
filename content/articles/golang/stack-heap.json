@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "go-runtime",
-      "order": 17
+      "module_id": "go-runtime"
     }
   ],
-  "path_order": 17,
   "prerequisites": [],
   "related": [],
   "status": "published",

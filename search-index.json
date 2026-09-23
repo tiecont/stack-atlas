@@ -14,11 +14,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 318
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 318,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -46,11 +44,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 190
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 190,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -78,11 +74,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 184
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 184,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -110,11 +104,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 325
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 325,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -142,11 +134,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 324
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 324,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -174,11 +164,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 314
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 314,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -206,11 +194,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 316
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 316,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -238,11 +224,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 319
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 319,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -270,11 +254,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 182
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 182,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -302,11 +284,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 317
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 317,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -334,11 +314,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 189
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 189,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -366,11 +344,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 321
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 321,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -398,11 +374,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 320
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 320,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -430,11 +404,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 315
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 315,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -462,11 +434,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 191
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 191,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -494,11 +464,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 322
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 322,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -526,11 +494,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 180
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 180,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -558,11 +524,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 187
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 187,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -590,11 +554,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 188
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 188,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -622,11 +584,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 181
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 181,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -654,11 +614,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 185
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 185,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -686,11 +644,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "architecture-patterns",
-          "order": 323
+          "module_id": "architecture-patterns"
         }
       ],
-      "path_order": 323,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -718,11 +674,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 183
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 183,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -750,11 +704,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "microservices-architecture",
-          "order": 186
+          "module_id": "microservices-architecture"
         }
       ],
-      "path_order": 186,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -783,11 +735,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 285
+          "module_id": "consensus"
         }
       ],
-      "path_order": 285,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -816,11 +766,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 276
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 276,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -849,11 +797,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 277
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 277,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -882,11 +828,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 282
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 282,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -914,11 +858,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 146
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 146,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -946,11 +888,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 157
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 157,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -979,11 +919,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 283
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 283,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1012,11 +950,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 177
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 177,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1045,11 +981,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 176
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 176,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1078,11 +1012,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 281
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 281,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1111,11 +1043,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 297
+          "module_id": "consensus"
         }
       ],
-      "path_order": 297,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1143,11 +1073,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 151
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 151,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1175,11 +1103,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 145
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 145,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1208,11 +1134,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 278
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 278,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1241,11 +1165,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 284
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 284,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1274,11 +1196,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 272
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 272,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1306,11 +1226,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 154
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 154,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1339,11 +1257,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 170
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 170,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1372,11 +1288,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 179
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 179,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1404,11 +1318,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 156
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 156,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1437,11 +1349,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 171
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 171,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1470,11 +1380,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 295
+          "module_id": "consensus"
         }
       ],
-      "path_order": 295,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1502,11 +1410,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 155
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 155,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1534,11 +1440,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 153
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 153,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1567,11 +1471,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 173
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 173,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1599,11 +1501,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 143
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 143,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1631,11 +1531,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 152
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 152,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1664,11 +1562,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 288
+          "module_id": "consensus"
         }
       ],
-      "path_order": 288,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1696,11 +1592,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 148
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 148,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1729,11 +1623,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 275
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 275,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1762,11 +1654,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 294
+          "module_id": "consensus"
         }
       ],
-      "path_order": 294,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1795,11 +1685,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 291
+          "module_id": "consensus"
         }
       ],
-      "path_order": 291,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1828,11 +1716,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 292
+          "module_id": "consensus"
         }
       ],
-      "path_order": 292,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1861,11 +1747,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 274
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 274,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1894,11 +1778,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 175
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 175,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1926,11 +1808,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 147
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 147,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1958,11 +1838,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 150
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 150,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -1991,11 +1869,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 296
+          "module_id": "consensus"
         }
       ],
-      "path_order": 296,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2023,11 +1899,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 149
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 149,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2056,11 +1930,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 287
+          "module_id": "consensus"
         }
       ],
-      "path_order": 287,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2089,11 +1961,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 290
+          "module_id": "consensus"
         }
       ],
-      "path_order": 290,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2122,11 +1992,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 280
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 280,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2155,11 +2023,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 279
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 279,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2188,11 +2054,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 289
+          "module_id": "consensus"
         }
       ],
-      "path_order": 289,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2221,11 +2085,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-data",
-          "order": 273
+          "module_id": "distributed-data"
         }
       ],
-      "path_order": 273,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2254,11 +2116,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 286
+          "module_id": "consensus"
         }
       ],
-      "path_order": 286,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2287,11 +2147,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 174
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 174,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2320,11 +2178,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "consensus",
-          "order": 293
+          "module_id": "consensus"
         }
       ],
-      "path_order": 293,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2352,11 +2208,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 144
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 144,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2385,11 +2239,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 172
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 172,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2418,11 +2270,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-transactions",
-          "order": 178
+          "module_id": "distributed-transactions"
         }
       ],
-      "path_order": 178,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2450,11 +2300,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "distributed-systems",
-          "order": 142
+          "module_id": "distributed-systems"
         }
       ],
-      "path_order": 142,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2483,11 +2331,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 306
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 306,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2516,11 +2362,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 300
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 300,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2549,11 +2393,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 305
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 305,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2582,11 +2424,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 308
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 308,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2615,11 +2455,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 310
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 310,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2648,11 +2486,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 313
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 313,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2681,11 +2517,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 298
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 298,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2714,11 +2548,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 312
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 312,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2747,11 +2579,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 299
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 299,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2780,11 +2610,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 301
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 301,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2813,11 +2641,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 311
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 311,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2846,11 +2672,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 307
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 307,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2879,11 +2703,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 304
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 304,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2912,11 +2734,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 303
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 303,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2945,11 +2765,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 309
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 309,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -2978,11 +2796,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "elasticsearch",
-          "order": 302
+          "module_id": "elasticsearch"
         }
       ],
-      "path_order": 302,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3011,11 +2827,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 19
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 19,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3044,11 +2858,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 4
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 4,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3077,11 +2889,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 33
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 33,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3110,11 +2920,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 71
+          "module_id": "production-http"
         }
       ],
-      "path_order": 71,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3143,11 +2951,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 255
+          "module_id": "production-go"
         }
       ],
-      "path_order": 255,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3176,11 +2982,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 46
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 46,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3209,11 +3013,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 36
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 36,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3242,11 +3044,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 247
+          "module_id": "production-go"
         }
       ],
-      "path_order": 247,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3275,11 +3075,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 43
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 43,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3308,11 +3106,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 29
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 29,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3341,11 +3137,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 257
+          "module_id": "production-go"
         }
       ],
-      "path_order": 257,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3374,11 +3168,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 70
+          "module_id": "production-http"
         }
       ],
-      "path_order": 70,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3407,11 +3199,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 246
+          "module_id": "production-go"
         }
       ],
-      "path_order": 246,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3440,11 +3230,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 248
+          "module_id": "production-go"
         }
       ],
-      "path_order": 248,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3473,11 +3261,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 41
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 41,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3506,11 +3292,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 3
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 3,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3539,11 +3323,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 252
+          "module_id": "production-go"
         }
       ],
-      "path_order": 252,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3572,11 +3354,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 45
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 45,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3605,11 +3385,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 10
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 10,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3638,11 +3416,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 47
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 47,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3671,11 +3447,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 9
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 9,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3704,11 +3478,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 18
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 18,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3737,11 +3509,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 39
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 39,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3770,11 +3540,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 254
+          "module_id": "production-go"
         }
       ],
-      "path_order": 254,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3803,11 +3571,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 24
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 24,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3836,11 +3602,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 12
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 12,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3869,11 +3633,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 49
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 49,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3902,11 +3664,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 1
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 1,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3935,11 +3695,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 48
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 48,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -3968,11 +3726,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 44
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 44,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4001,11 +3757,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 28
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 28,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4034,11 +3788,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 75
+          "module_id": "production-http"
         }
       ],
-      "path_order": 75,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4067,11 +3819,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 76
+          "module_id": "production-http"
         }
       ],
-      "path_order": 76,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4100,11 +3850,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 73
+          "module_id": "production-http"
         }
       ],
-      "path_order": 73,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4133,11 +3881,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 15
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 15,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4166,11 +3912,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 23
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 23,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4199,11 +3943,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 8
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 8,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4232,11 +3974,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 13
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 13,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4265,11 +4005,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 21
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 21,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4298,11 +4036,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 5
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 5,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4331,11 +4067,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 25
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 25,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4364,11 +4098,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 7
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 7,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4397,11 +4129,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 69
+          "module_id": "production-http"
         }
       ],
-      "path_order": 69,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4430,11 +4160,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 31
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 31,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4463,11 +4191,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 11
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 11,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4496,11 +4222,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 72
+          "module_id": "production-http"
         }
       ],
-      "path_order": 72,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4529,11 +4253,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 40
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 40,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4562,11 +4284,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 26
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 26,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4595,11 +4315,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 79
+          "module_id": "production-http"
         }
       ],
-      "path_order": 79,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4628,11 +4346,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 258
+          "module_id": "production-go"
         }
       ],
-      "path_order": 258,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4661,11 +4377,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 65
+          "module_id": "production-http"
         }
       ],
-      "path_order": 65,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4694,11 +4408,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 245
+          "module_id": "production-go"
         }
       ],
-      "path_order": 245,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4727,11 +4439,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 30
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 30,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4760,11 +4470,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 74
+          "module_id": "production-http"
         }
       ],
-      "path_order": 74,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4793,11 +4501,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 250
+          "module_id": "production-go"
         }
       ],
-      "path_order": 250,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4826,11 +4532,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 67
+          "module_id": "production-http"
         }
       ],
-      "path_order": 67,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4859,11 +4563,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 251
+          "module_id": "production-go"
         }
       ],
-      "path_order": 251,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4892,11 +4594,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 68
+          "module_id": "production-http"
         }
       ],
-      "path_order": 68,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4925,11 +4625,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 253
+          "module_id": "production-go"
         }
       ],
-      "path_order": 253,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4958,11 +4656,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 66
+          "module_id": "production-http"
         }
       ],
-      "path_order": 66,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -4991,11 +4687,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 256
+          "module_id": "production-go"
         }
       ],
-      "path_order": 256,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5024,11 +4718,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 27
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 27,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5057,11 +4749,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 32
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 32,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5090,11 +4780,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 35
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 35,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5123,11 +4811,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 38
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 38,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5156,11 +4842,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-go",
-          "order": 249
+          "module_id": "production-go"
         }
       ],
-      "path_order": 249,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5189,11 +4873,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 20
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 20,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5222,11 +4904,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 16
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 16,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5255,11 +4935,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 17
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 17,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5288,11 +4966,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-runtime",
-          "order": 22
+          "module_id": "go-runtime"
         }
       ],
-      "path_order": 22,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5321,11 +4997,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 6
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 6,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5354,11 +5028,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 77
+          "module_id": "production-http"
         }
       ],
-      "path_order": 77,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5387,11 +5059,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 14
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 14,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5420,11 +5090,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "production-http",
-          "order": 78
+          "module_id": "production-http"
         }
       ],
-      "path_order": 78,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5453,11 +5121,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 42
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 42,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5486,11 +5152,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-fundamentals",
-          "order": 2
+          "module_id": "go-fundamentals"
         }
       ],
-      "path_order": 2,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5519,11 +5183,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 34
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 34,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5552,11 +5214,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "go-concurrency",
-          "order": 37
+          "module_id": "go-concurrency"
         }
       ],
-      "path_order": 37,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5585,11 +5245,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 194
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 194,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5618,11 +5276,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 200
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 200,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5651,11 +5307,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 204
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 204,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5684,11 +5338,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 202
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 202,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5717,11 +5369,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 192
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 192,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5750,11 +5400,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 203
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 203,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5783,11 +5431,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 198
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 198,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5816,11 +5462,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 201
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 201,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5849,11 +5493,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 197
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 197,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5882,11 +5524,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 193
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 193,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5915,11 +5555,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 199
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 199,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5948,11 +5586,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 196
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 196,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -5981,11 +5617,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "grpc-with-go",
-          "order": 195
+          "module_id": "grpc-with-go"
         }
       ],
-      "path_order": 195,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6014,11 +5648,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 133
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 133,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6047,11 +5679,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 130
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 130,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6080,11 +5710,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 131
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 131,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6113,11 +5741,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 141
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 141,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6146,11 +5772,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 129
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 129,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6179,11 +5803,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 124
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 124,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6212,11 +5834,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 127
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 127,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6245,11 +5865,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 139
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 139,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6278,11 +5896,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 140
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 140,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6311,11 +5927,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 134
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 134,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6344,11 +5958,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 126
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 126,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6377,11 +5989,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 132
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 132,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6410,11 +6020,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 128
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 128,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6443,11 +6051,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 137
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 137,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6476,11 +6082,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 135
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 135,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6509,11 +6113,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 138
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 138,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6542,11 +6144,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 125
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 125,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6575,11 +6175,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kafka-deep-dive",
-          "order": 136
+          "module_id": "kafka-deep-dive"
         }
       ],
-      "path_order": 136,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6608,11 +6206,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 263
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 263,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6642,11 +6238,9 @@
       "learning_paths": [
         {
           "path_id": "kubernetes-engineer",
-          "module_id": "k8s-foundations",
-          "order": 4
+          "module_id": "k8s-foundations"
         }
       ],
-      "path_order": 4,
       "prerequisites": [
         "k8s-kubernetes-api-objects"
       ],
@@ -6688,11 +6282,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 266
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 266,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6721,11 +6313,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 267
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 267,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6754,11 +6344,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 262
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 262,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6788,11 +6376,9 @@
       "learning_paths": [
         {
           "path_id": "kubernetes-engineer",
-          "module_id": "k8s-foundations",
-          "order": 5
+          "module_id": "k8s-foundations"
         }
       ],
-      "path_order": 5,
       "prerequisites": [
         "k8s-kubernetes-api-objects"
       ],
@@ -6836,11 +6422,9 @@
       "learning_paths": [
         {
           "path_id": "kubernetes-engineer",
-          "module_id": "k8s-foundations",
-          "order": 3
+          "module_id": "k8s-foundations"
         }
       ],
-      "path_order": 3,
       "prerequisites": [
         "k8s-kubernetes-architecture"
       ],
@@ -6883,11 +6467,9 @@
       "learning_paths": [
         {
           "path_id": "kubernetes-engineer",
-          "module_id": "k8s-foundations",
-          "order": 2
+          "module_id": "k8s-foundations"
         }
       ],
-      "path_order": 2,
       "prerequisites": [
         "season-19-kubernetes-for-go-backend-01-kubernetes-mental-model"
       ],
@@ -6929,11 +6511,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 271
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 271,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6962,11 +6542,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 270
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 270,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -6995,16 +6573,13 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 259
+          "module_id": "kubernetes"
         },
         {
           "path_id": "kubernetes-engineer",
-          "module_id": "k8s-foundations",
-          "order": 1
+          "module_id": "k8s-foundations"
         }
       ],
-      "path_order": 259,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7042,11 +6617,9 @@
       "learning_paths": [
         {
           "path_id": "kubernetes-engineer",
-          "module_id": "k8s-foundations",
-          "order": 6
+          "module_id": "k8s-foundations"
         }
       ],
-      "path_order": 6,
       "prerequisites": [
         "k8s-kubectl-mental-model"
       ],
@@ -7088,11 +6661,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 268
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 268,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7121,11 +6692,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 260
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 260,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7154,11 +6723,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 265
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 265,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7187,11 +6754,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 264
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 264,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7220,11 +6785,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 261
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 261,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7253,11 +6816,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "kubernetes",
-          "order": 269
+          "module_id": "kubernetes"
         }
       ],
-      "path_order": 269,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7285,11 +6846,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 116
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 116,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7317,11 +6876,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 119
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 119,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7349,11 +6906,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 115
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 115,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7381,11 +6936,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 117
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 117,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7413,11 +6966,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 122
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 122,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7445,11 +6996,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 123
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 123,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7477,11 +7026,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 112
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 112,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7509,11 +7056,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 121
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 121,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7541,11 +7086,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 118
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 118,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7573,11 +7116,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 114
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 114,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7605,11 +7146,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 113
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 113,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7637,11 +7176,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "messaging-patterns",
-          "order": 120
+          "module_id": "messaging-patterns"
         }
       ],
-      "path_order": 120,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7669,11 +7206,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 54
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 54,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7701,11 +7236,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 64
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 64,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7733,11 +7266,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 57
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 57,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7765,11 +7296,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 58
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 58,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7797,11 +7326,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 55
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 55,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7829,11 +7356,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 61
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 61,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7861,11 +7386,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 56
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 56,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7893,11 +7416,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 50
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 50,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7925,11 +7446,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 63
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 63,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7957,11 +7476,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 62
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 62,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -7989,11 +7506,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 51
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 51,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8021,11 +7536,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 52
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 52,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8053,11 +7566,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 59
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 59,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8085,11 +7596,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 60
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 60,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8117,11 +7626,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "networking-with-go",
-          "order": 53
+          "module_id": "networking-with-go"
         }
       ],
-      "path_order": 53,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8149,11 +7656,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 215
+          "module_id": "observability"
         }
       ],
-      "path_order": 215,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8181,11 +7686,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 213
+          "module_id": "observability"
         }
       ],
-      "path_order": 213,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8213,11 +7716,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 212
+          "module_id": "observability"
         }
       ],
-      "path_order": 212,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8245,11 +7746,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 210
+          "module_id": "observability"
         }
       ],
-      "path_order": 210,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8277,11 +7776,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 208
+          "module_id": "observability"
         }
       ],
-      "path_order": 208,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8309,11 +7806,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 216
+          "module_id": "observability"
         }
       ],
-      "path_order": 216,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8341,11 +7836,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 205
+          "module_id": "observability"
         }
       ],
-      "path_order": 205,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8373,11 +7866,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 214
+          "module_id": "observability"
         }
       ],
-      "path_order": 214,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8405,11 +7896,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 211
+          "module_id": "observability"
         }
       ],
-      "path_order": 211,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8437,11 +7926,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 209
+          "module_id": "observability"
         }
       ],
-      "path_order": 209,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8469,11 +7956,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 207
+          "module_id": "observability"
         }
       ],
-      "path_order": 207,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8501,11 +7986,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "observability",
-          "order": 206
+          "module_id": "observability"
         }
       ],
-      "path_order": 206,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8533,11 +8016,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 224
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 224,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8565,11 +8046,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 218
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 218,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8597,11 +8076,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 222
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 222,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8629,11 +8106,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 229
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 229,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8661,11 +8136,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 228
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 228,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8693,11 +8166,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 220
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 220,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8725,11 +8196,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 227
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 227,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8757,11 +8226,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 225
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 225,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8789,11 +8256,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 223
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 223,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8821,11 +8286,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 226
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 226,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8853,11 +8316,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 219
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 219,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8885,11 +8346,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 221
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 221,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8917,11 +8376,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 230
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 230,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8949,11 +8406,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "performance-engineering",
-          "order": 217
+          "module_id": "performance-engineering"
         }
       ],
-      "path_order": 217,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -8982,11 +8437,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 92
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 92,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9015,11 +8468,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 81
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 81,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9048,11 +8499,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 89
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 89,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9081,11 +8530,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 88
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 88,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9114,11 +8561,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 86
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 86,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9147,11 +8592,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 94
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 94,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9180,11 +8623,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 87
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 87,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9213,11 +8654,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 90
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 90,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9246,11 +8685,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 91
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 91,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9279,11 +8716,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 82
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 82,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9312,11 +8747,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 97
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 97,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9345,11 +8778,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 99
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 99,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9378,11 +8809,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 80
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 80,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9411,11 +8840,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 95
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 95,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9444,11 +8871,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 83
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 83,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9477,11 +8902,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 96
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 96,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9510,11 +8933,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 84
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 84,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9543,11 +8964,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 98
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 98,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9576,11 +8995,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 85
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 85,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9609,11 +9026,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "postgresql-with-go",
-          "order": 93
+          "module_id": "postgresql-with-go"
         }
       ],
-      "path_order": 93,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9642,11 +9057,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 104
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 104,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9675,11 +9088,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 111
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 111,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9708,11 +9119,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 106
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 106,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9741,11 +9150,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 100
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 100,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9774,11 +9181,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 103
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 103,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9807,11 +9212,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 101
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 101,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9840,11 +9243,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 108
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 108,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9873,11 +9274,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 109
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 109,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9906,11 +9305,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 102
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 102,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9939,11 +9336,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 110
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 110,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -9972,11 +9367,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 107
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 107,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10005,11 +9398,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "redis-caching",
-          "order": 105
+          "module_id": "redis-caching"
         }
       ],
-      "path_order": 105,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10037,11 +9428,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 165
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 165,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10069,11 +9458,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 162
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 162,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10101,11 +9488,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 161
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 161,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10133,11 +9518,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 167
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 167,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10165,11 +9548,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 164
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 164,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10197,11 +9578,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 163
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 163,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10229,11 +9608,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 169
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 169,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10261,11 +9638,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 158
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 158,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10293,11 +9668,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 160
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 160,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10325,11 +9698,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 166
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 166,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10357,11 +9728,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 168
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 168,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10389,11 +9758,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "reliability-engineering",
-          "order": 159
+          "module_id": "reliability-engineering"
         }
       ],
-      "path_order": 159,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10421,11 +9788,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 241
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 241,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10453,11 +9818,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 236
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 236,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10485,11 +9848,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 239
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 239,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10517,11 +9878,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 237
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 237,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10549,11 +9908,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 235
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 235,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10581,11 +9938,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 233
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 233,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10613,11 +9968,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 240
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 240,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10645,11 +9998,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 244
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 244,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10677,11 +10028,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 231
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 231,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10709,11 +10058,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 243
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 243,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10741,11 +10088,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 234
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 234,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10773,11 +10118,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 238
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 238,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10805,11 +10148,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 242
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 242,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10837,11 +10178,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "security-for-backends",
-          "order": 232
+          "module_id": "security-for-backends"
         }
       ],
-      "path_order": 232,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10869,11 +10208,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 339
+          "module_id": "system-design"
         }
       ],
-      "path_order": 339,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10901,11 +10238,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 327
+          "module_id": "system-design"
         }
       ],
-      "path_order": 327,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10933,11 +10268,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 332
+          "module_id": "system-design"
         }
       ],
-      "path_order": 332,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10965,11 +10298,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 334
+          "module_id": "system-design"
         }
       ],
-      "path_order": 334,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -10997,11 +10328,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 337
+          "module_id": "system-design"
         }
       ],
-      "path_order": 337,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11029,11 +10358,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 331
+          "module_id": "system-design"
         }
       ],
-      "path_order": 331,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11061,11 +10388,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 338
+          "module_id": "system-design"
         }
       ],
-      "path_order": 338,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11093,11 +10418,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 340
+          "module_id": "system-design"
         }
       ],
-      "path_order": 340,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11125,11 +10448,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 333
+          "module_id": "system-design"
         }
       ],
-      "path_order": 333,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11157,11 +10478,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 330
+          "module_id": "system-design"
         }
       ],
-      "path_order": 330,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11189,11 +10508,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 336
+          "module_id": "system-design"
         }
       ],
-      "path_order": 336,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11221,11 +10538,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 329
+          "module_id": "system-design"
         }
       ],
-      "path_order": 329,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11253,11 +10568,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 335
+          "module_id": "system-design"
         }
       ],
-      "path_order": 335,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11285,11 +10598,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 341
+          "module_id": "system-design"
         }
       ],
-      "path_order": 341,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11317,11 +10628,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 326
+          "module_id": "system-design"
         }
       ],
-      "path_order": 326,
       "prerequisites": [],
       "related": [],
       "status": "published",
@@ -11349,11 +10658,9 @@
       "learning_paths": [
         {
           "path_id": "golang-backend",
-          "module_id": "system-design",
-          "order": 328
+          "module_id": "system-design"
         }
       ],
-      "path_order": 328,
       "prerequisites": [],
       "related": [],
       "status": "published",

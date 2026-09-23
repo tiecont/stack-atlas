@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "distributed-data",
-      "order": 282
+      "module_id": "distributed-data"
     }
   ],
-  "path_order": 282,
   "prerequisites": [],
   "related": [],
   "status": "published",

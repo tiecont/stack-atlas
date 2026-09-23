@@ -90,26 +90,46 @@ def extract_fragment(page: str, legacy_path: Path):
     return body
 
 
+def legacy_aliases(metadata):
+    aliases = list(metadata.get("legacy_urls", []))
+    if metadata.get("legacy_url"):
+        aliases.append(metadata["legacy_url"])
+    return aliases
+
+
+def map_legacy_seasons_to_modules(learning_path, metadata_records):
+    modules_by_id = {module["id"]: module for module in learning_path["modules"]}
+    seasons = {}
+    for module in learning_path["modules"]:
+        if module.get("season"):
+            seasons[module["season"]] = module
+    for metadata in metadata_records:
+        for membership in metadata.get("learning_paths", []):
+            if not isinstance(membership, dict) or membership.get("path_id") != learning_path["id"]:
+                continue
+            module = modules_by_id.get(membership.get("module_id"))
+            if not module:
+                continue
+            for alias in legacy_aliases(metadata):
+                parts = Path(alias).parts
+                if len(parts) < 3 or not parts[1].startswith("season-"):
+                    continue
+                season = parts[1]
+                previous = seasons.get(season)
+                if previous and previous["id"] != module["id"]:
+                    raise ValueError(f"Legacy season {season} maps to multiple path modules")
+                seasons[season] = module
+    return seasons
+
+
 def collect_batch(season_names):
     path_file = ROOT / "content/paths/golang-backend.json"
     learning_path = read_json(path_file)
-    module_by_season = {module["season"]: module for module in learning_path["modules"]}
+    article_records = [read_json(path) for path in sorted((ROOT / "content/articles").rglob("*.json"))]
+    module_by_season = map_legacy_seasons_to_modules(learning_path, article_records)
     unknown = sorted(set(season_names) - set(module_by_season))
     if unknown:
         raise ValueError("Unknown season(s): " + ", ".join(unknown))
-
-    order_by_source = {}
-    order = 0
-    for module in learning_path["modules"]:
-        season_dir = ROOT / module["season"]
-        index_path = season_dir / "index.html"
-        if not index_path.is_file():
-            raise ValueError(f"Missing {index_path.relative_to(ROOT)}")
-        cards = CardParser()
-        cards.feed(index_path.read_text(encoding="utf-8"))
-        for card in cards.cards:
-            order += 1
-            order_by_source[(module["season"], card["href"])] = order
 
     records = []
     used_urls = set()
@@ -160,7 +180,6 @@ def collect_batch(season_names):
             if not title or not description:
                 raise ValueError(f"{legacy_path.relative_to(ROOT)}: missing title or description")
             fragment = extract_fragment(original, legacy_path)
-            order = order_by_source[(season, card["href"])]
             record = {
                 "id": article_id,
                 "title": title,
@@ -170,8 +189,7 @@ def collect_batch(season_names):
                 "category": module["category"],
                 "tags": list(dict.fromkeys([module["domain"], module["category"]])),
                 "difficulty": "unspecified",
-                "learning_paths": [{"path_id": learning_path["id"], "module_id": module["id"], "order": order}],
-                "path_order": order,
+                "learning_paths": [{"path_id": learning_path["id"], "module_id": module["id"]}],
                 "prerequisites": [],
                 "related": [],
                 "status": "published",
@@ -184,26 +202,34 @@ def collect_batch(season_names):
     return records
 
 
-def canonicalize_path_references(seasons):
+def canonicalize_path_references(seasons, new_records=()):
     """Convert selected legacy season modules to explicit canonical ID lists."""
     path_file = ROOT / "content/paths/golang-backend.json"
     learning_path = read_json(path_file)
     selected = set(seasons)
     metadata_by_legacy_url = {}
+    metadata_by_file = {}
     metadata_files = sorted((ROOT / "content/articles").rglob("*.json"))
     for metadata_file in metadata_files:
         metadata = read_json(metadata_file)
-        legacy_urls = metadata.get("legacy_urls", [])
-        if metadata.get("legacy_url"):
-            legacy_urls = [*legacy_urls, metadata["legacy_url"]]
-        for legacy_url in legacy_urls:
+        metadata_by_file[metadata_file] = metadata
+        for legacy_url in legacy_aliases(metadata):
             metadata_by_legacy_url[legacy_url] = (metadata_file, metadata)
+    for _, metadata_file, _, metadata in new_records:
+        metadata_by_file[ROOT / metadata_file] = metadata
+        for legacy_url in legacy_aliases(metadata):
+            metadata_by_legacy_url[legacy_url] = (ROOT / metadata_file, metadata)
+
+    module_by_season = map_legacy_seasons_to_modules(learning_path, list(metadata_by_file.values()))
+    unknown = sorted(set(seasons) - set(module_by_season))
+    if unknown:
+        raise ValueError("Unknown season(s): " + ", ".join(unknown))
 
     updated_metadata = {}
     for module_order, module in enumerate(learning_path["modules"], start=1):
         module.setdefault("order", module_order)
-        season = module.get("season")
-        if season not in selected:
+        season = next((season for season in selected if module_by_season.get(season, {}).get("id") == module["id"]), None)
+        if not season:
             continue
         index_file = ROOT / season / "index.html"
         cards = CardParser()
@@ -236,7 +262,7 @@ def main():
     args = parser.parse_args()
     try:
         records = collect_batch(args.seasons)
-        path_file, learning_path, updated_metadata, remaining = canonicalize_path_references(args.seasons)
+        path_file, learning_path, updated_metadata, remaining = canonicalize_path_references(args.seasons, records)
         if args.dry_run:
             lesson_count = sum(len(module.get("article_ids", [])) for module in learning_path["modules"] if not module.get("season"))
             print(f"Ready to write {len(records)} article sources and canonical references for {lesson_count} lessons.")

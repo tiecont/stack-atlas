@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "distributed-transactions",
-      "order": 173
+      "module_id": "distributed-transactions"
     }
   ],
-  "path_order": 173,
   "prerequisites": [],
   "related": [],
   "status": "published",

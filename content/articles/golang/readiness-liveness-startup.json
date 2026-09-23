@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "production-go",
-      "order": 250
+      "module_id": "production-go"
     }
   ],
-  "path_order": 250,
   "prerequisites": [],
   "related": [],
   "status": "published",

@@ -12,11 +12,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "microservices-architecture",
-      "order": 189
+      "module_id": "microservices-architecture"
     }
   ],
-  "path_order": 189,
   "prerequisites": [],
   "related": [],
   "status": "published",

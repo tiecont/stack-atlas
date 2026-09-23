@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "postgresql-with-go",
-      "order": 82
+      "module_id": "postgresql-with-go"
     }
   ],
-  "path_order": 82,
   "prerequisites": [],
   "related": [],
   "status": "published",

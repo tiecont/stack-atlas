@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "elasticsearch",
-      "order": 302
+      "module_id": "elasticsearch"
     }
   ],
-  "path_order": 302,
   "prerequisites": [],
   "related": [],
   "status": "published",

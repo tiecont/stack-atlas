@@ -13,11 +13,9 @@
   "learning_paths": [
     {
       "path_id": "golang-backend",
-      "module_id": "go-fundamentals",
-      "order": 1
+      "module_id": "go-fundamentals"
     }
   ],
-  "path_order": 1,
   "prerequisites": [],
   "related": [],
   "status": "published",
