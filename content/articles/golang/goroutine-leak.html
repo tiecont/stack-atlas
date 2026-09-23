@@ -1,0 +1,14 @@
+<h2 id="s1">1. Goroutine leak là gì?</h2><p class="lead">Một goroutine leak không nhất thiết tiêu CPU; nó chỉ cần tồn tại mãi dù công việc logic của nó đã không còn cần thiết.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Goroutine bị mắc kẹt">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Goroutine bị mắc kẹt</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Request gone</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Blocked goroutine</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Memory/resources</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Leak tích lũy theo thời gian trong service chạy lâu.</text></svg><figcaption>Leak tích lũy theo thời gian trong service chạy lâu.</figcaption></figure><h2 id="s2">2. Blocked send</h2><pre><span class="code-label">Go</span><code>go func() {
+    resultCh &lt;- expensiveWork() // không còn receiver
+}()</code></pre><p>Nếu caller timeout và bỏ đi nhưng channel không có buffer/receiver, goroutine có thể kẹt ở send mãi.</p><h2 id="s3">3. Blocked receive</h2><pre><span class="code-label">Go</span><code>for {
+    job := &lt;-jobs // jobs không bao giờ close và không còn producer
+    process(job)
+}</code></pre><h2 id="s4">4. Cách phát hiện</h2><p>Dùng goroutine profile qua <code>pprof</code>, theo dõi số goroutine theo thời gian, và xem stack traces của các goroutine có pattern lặp bất thường.</p><pre><span class="code-label">Tools</span><code>runtime.NumGoroutine()
+
+go tool pprof http://localhost:6060/debug/pprof/goroutine</code></pre><h2 id="s5">5. Phòng tránh</h2><p>Thiết kế ownership của channel, dùng context cancellation, đảm bảo mọi blocking point đều có đường thoát, và test shutdown path chứ không chỉ happy path.</p>

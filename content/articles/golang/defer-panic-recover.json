@@ -1,0 +1,30 @@
+{
+  "id": "season-01-fundamentals-10-defer-panic-recover",
+  "title": "defer, panic và recover",
+  "description": "Cleanup đáng tin cậy, panic boundary và tại sao panic không phải error handling thông thường.",
+  "type": "article",
+  "domain": "golang",
+  "category": "fundamentals",
+  "tags": [
+    "golang",
+    "fundamentals"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-fundamentals",
+      "order": 10
+    }
+  ],
+  "path_order": 10,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/defer-panic-recover/",
+  "source": "content/articles/golang/defer-panic-recover.html",
+  "legacy_url": "/season-01-fundamentals/10-defer-panic-recover.html",
+  "authors": [
+    "tiecont"
+  ]
+}

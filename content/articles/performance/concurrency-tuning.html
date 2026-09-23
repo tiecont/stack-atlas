@@ -1,0 +1,3 @@
+<section id="bounded-concurrency"><h2>Bounded concurrency</h2><div class="diagram"><pre>jobs -&gt; 32 workers -&gt; downstream capacity
+not
+jobs -&gt; 100,000 goroutines -&gt; downstream collapse</pre></div></section><section id="tune-by-bottleneck"><h2>Tune by bottleneck</h2><p>CPU-bound thường gần số core; I/O-bound có thể cao hơn nhưng vẫn bị giới hạn bởi DB, network hoặc remote quota.</p></section><section id="metric"><h2>Metric</h2><p>Quan sát queue time, active workers, downstream saturation và tail latency khi tăng concurrency.</p></section>

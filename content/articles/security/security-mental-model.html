@@ -1,0 +1,9 @@
+<section id="trust-boundary"><h2>Trust boundary</h2><div class="diagram"><pre>Internet
+   |
+[ Edge ]
+   |
+[ API ] -&gt; [ DB ]
+   |
+[ Queue ] -&gt; [ Worker ]
+
+Mỗi mũi tên là một trust boundary cần kiểm soát.</pre></div></section><section id="threat-thinking"><h2>Threat thinking</h2><ul><li>ai có thể gọi?</li><li>input nào không đáng tin?</li><li>secret nằm ở đâu?</li><li>nếu credential lộ thì blast radius bao nhiêu?</li></ul></section><section id="nguy-n-t-c"><h2>Nguyên tắc</h2><div class="callout ">Default deny, least privilege và defense in depth là mental model hữu ích hơn việc săn từng CVE một cách rời rạc.</div></section>

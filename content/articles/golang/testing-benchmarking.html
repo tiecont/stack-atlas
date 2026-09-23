@@ -1,0 +1,25 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Go tích hợp testing vào toolchain: file `_test.go`, package `testing`, benchmark và fuzzing. Điều đáng học không phải chỉ cú pháp assertion, mà là cách thiết kế code có dependency nhỏ để test không cần boot cả application.</p><p>Table-driven tests là pattern phổ biến vì Go khuyến khích data + loop thay vì DSL test phức tạp.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Test case</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">go test</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Confidence</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>func TestNormalize(t *testing.T) {
+    tests := []struct{
+        in, want string
+    }{{&quot; Go &quot;, &quot;go&quot;}, {&quot;API&quot;, &quot;api&quot;}}
+
+    for _, tt := range tests {
+        if got := Normalize(tt.in); got != tt.want {
+            t.Fatalf(&quot;got %q want %q&quot;, got, tt.want)
+        }
+    }
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Benchmark dùng `go test -bench=.` và nên tránh đo setup không liên quan. Với allocation, `-benchmem` cho bạn thêm signal. Race detector và fuzzing mở rộng feedback loop cho concurrency/input edge cases.</p><p>Không phải test nào cũng cần mock. Fake/in-memory implementation nhỏ thường dễ hiểu hơn framework mock nặng.</p><pre><span class="code-label">Example</span><code>go test ./...
+go test -race ./...
+go test -bench=. -benchmem ./...</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Backend nên có nhiều tầng test: unit cho logic; integration cho PostgreSQL/Redis contract; HTTP test bằng `httptest`; benchmark cho hot path đã chứng minh cần tối ưu. Test theo risk, không theo mục tiêu coverage 100%.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Benchmark micro-code nhưng bỏ qua network/DB bottleneck thật.</li><li>Test implementation detail khiến refactor nhỏ cũng vỡ hàng loạt test.</li><li>Mock mọi dependency và cuối cùng test chỉ chứng minh mock hoạt động.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Testing là feedback loop, không phải ceremony.</li><li>Benchmark trước khi tối ưu.</li><li>Test behavior và contract quan trọng hơn internal call sequence.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

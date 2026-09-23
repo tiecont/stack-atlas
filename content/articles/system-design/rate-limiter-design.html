@@ -1,0 +1,7 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>API Gateway
+   |
+Rate Limiter
+   |
+Redis / local counters
+   |
+Decision allow/deny</pre></div></section><section id="questions"><h2>Questions</h2><ul><li>per user/IP/key?</li><li>global hay regional?</li><li>burst allowance?</li><li>strict hay approximate?</li></ul></section><section id="trade-off"><h2>Trade-off</h2><p>Strict global limits qua nhiều region đắt hơn approximate regional limits.</p></section>

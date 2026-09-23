@@ -1,0 +1,7 @@
+<section id="pipeline"><h2>Pipeline</h2><div class="diagram"><pre>commit
+  -&gt; test
+  -&gt; build image
+  -&gt; scan/sign
+  -&gt; registry
+  -&gt; staging
+  -&gt; production</pre></div></section><section id="why"><h2>Why</h2><p>Rebuild riêng cho production tạo khác biệt artifact khó audit.</p></section><section id="gate"><h2>Gate</h2><ul><li>tests</li><li>vulnerability policy</li><li>migration checks</li><li>deployment health</li><li>rollback path</li></ul></section>

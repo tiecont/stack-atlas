@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-19-sqlc-repository-design",
+  "title": "sqlc và Repository Design",
+  "description": "Giữ SQL explicit nhưng có generated typed Go code; repository boundary không cần che mọi chi tiết database.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 98
+    }
+  ],
+  "path_order": 98,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/sqlc-repository-design/",
+  "source": "content/articles/postgresql/sqlc-repository-design.html",
+  "legacy_url": "/season-06-postgresql-with-go/19-sqlc-repository-design.html",
+  "authors": [
+    "tiecont"
+  ]
+}

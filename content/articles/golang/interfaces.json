@@ -1,0 +1,30 @@
+{
+  "id": "season-01-fundamentals-08-interfaces",
+  "title": "Interfaces và Composition",
+  "description": "Interface nhỏ, implicit implementation và dependency inversion theo phong cách Go.",
+  "type": "article",
+  "domain": "golang",
+  "category": "fundamentals",
+  "tags": [
+    "golang",
+    "fundamentals"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-fundamentals",
+      "order": 8
+    }
+  ],
+  "path_order": 8,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/interfaces/",
+  "source": "content/articles/golang/interfaces.html",
+  "legacy_url": "/season-01-fundamentals/08-interfaces.html",
+  "authors": [
+    "tiecont"
+  ]
+}

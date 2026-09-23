@@ -1,0 +1,5 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Agents -&gt; Ingest -&gt; Partitioned Log -&gt; TSDB
+                                   |
+                               Downsampling
+                                   |
+                                Query API</pre></div></section><section id="concerns"><h2>Concerns</h2><ul><li>write volume</li><li>retention</li><li>cardinality</li><li>compression</li><li>rollups</li><li>alert evaluation</li></ul></section><section id="trade-off"><h2>Trade-off</h2><p>Raw high-resolution retention dài rất đắt; downsampling và tiered storage thường cần thiết.</p></section>

@@ -1,0 +1,4 @@
+<section id="hash"><h2>Hash</h2><div class="diagram"><pre>key -&gt; hash -&gt; shard
+user42 -&gt; shard 3</pre></div></section><section id="range"><h2>Range</h2><div class="diagram"><pre>A-F -&gt; shard1
+G-M -&gt; shard2
+N-Z -&gt; shard3</pre></div></section><section id="trade-off"><h2>Trade-off</h2><p>Hash phân tán đều hơn; range tốt cho range scan nhưng dễ hotspot nếu key tăng tuần tự.</p></section>

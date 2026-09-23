@@ -1,0 +1,30 @@
+{
+  "id": "season-12-distributed-transactions-10-distributed-transactions-capstone",
+  "title": "Capstone: Order → Inventory → Payment",
+  "description": "Thiết kế workflow production với Outbox, Saga, Idempotency và recovery.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "transactions",
+  "tags": [
+    "distributed-systems",
+    "transactions"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-transactions",
+      "order": 179
+    }
+  ],
+  "path_order": 179,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/distributed-transactions-capstone/",
+  "source": "content/articles/distributed-systems/distributed-transactions-capstone.html",
+  "legacy_url": "/season-12-distributed-transactions/10-distributed-transactions-capstone.html",
+  "authors": [
+    "tiecont"
+  ]
+}

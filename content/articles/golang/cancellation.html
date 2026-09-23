@@ -1,0 +1,14 @@
+<h2 id="s1">1. Cancellation tiết kiệm tài nguyên</h2><p class="lead">Khi kết quả không còn cần thiết, tiếp tục compute, query DB hay gọi API chỉ tạo tải vô ích.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Cancel propagation">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Cancel propagation</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Client disconnect</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Context canceled</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Workers stop</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Cancellation nên lan theo dependency tree.</text></svg><figcaption>Cancellation nên lan theo dependency tree.</figcaption></figure><h2 id="s2">2. Lắng nghe ctx.Done()</h2><pre><span class="code-label">Go</span><code>for {
+    select {
+    case &lt;-ctx.Done():
+        return ctx.Err()
+    case job := &lt;-jobs:
+        process(job)
+    }
+}</code></pre><h2 id="s3">3. Context tạo thành cây</h2><p>Cancel parent context sẽ cancel tất cả child context của nó. Đây là cách một request dừng cả những goroutine phụ thuộc.</p><h2 id="s4">4. Cleanup vẫn cần defer</h2><p>Cancellation không tự đóng file, release semaphore hay rollback state của bạn. Hãy dùng defer để cleanup resource local.</p><h2 id="s5">5. Cancellation là cooperative</h2><div class="callout note"><strong>Quan trọng</strong>Go không “kill” goroutine tùy ý. Goroutine phải tự quan sát tín hiệu cancellation và return ở điểm phù hợp.</div>

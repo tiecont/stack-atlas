@@ -1,0 +1,243 @@
+<p class="lead">Ở bài trước, chúng ta đã biết <strong>goroutine</strong> giúp nhiều công việc cùng tồn tại. Nhưng khi các goroutine cần trao đổi dữ liệu hoặc phối hợp với nhau, ta cần một “cây cầu”. Trong Go, cây cầu đó thường là <strong>Channel</strong>.</p>
+
+    <h2 id="why">1. Vì sao Goroutine cần Channel?</h2>
+    <p>Giả sử có ba goroutine: một cái tải dữ liệu, một cái xử lý dữ liệu và một cái lưu kết quả. Chúng không chỉ cần chạy độc lập — chúng còn phải truyền kết quả cho nhau.</p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 900 250" role="img" aria-label="Pipeline Goroutine qua Channel">
+        <defs><linearGradient id="pipe" x1="0" x2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#14b8a6"/></linearGradient></defs>
+        <rect x="40" y="74" width="180" height="102" rx="22" fill="#e0f2fe" stroke="#7dd3fc"/>
+        <rect x="360" y="74" width="180" height="102" rx="22" fill="#f0fdfa" stroke="#5eead4"/>
+        <rect x="680" y="74" width="180" height="102" rx="22" fill="#ede9fe" stroke="#c4b5fd"/>
+        <text x="130" y="115" text-anchor="middle" fill="#0f172a" font-size="22" font-weight="800">Downloader</text>
+        <text x="130" y="145" text-anchor="middle" fill="#64748b" font-size="14">Goroutine A</text>
+        <text x="450" y="115" text-anchor="middle" fill="#0f172a" font-size="22" font-weight="800">Processor</text>
+        <text x="450" y="145" text-anchor="middle" fill="#64748b" font-size="14">Goroutine B</text>
+        <text x="770" y="115" text-anchor="middle" fill="#0f172a" font-size="22" font-weight="800">Storage</text>
+        <text x="770" y="145" text-anchor="middle" fill="#64748b" font-size="14">Goroutine C</text>
+        <line x1="220" y1="125" x2="360" y2="125" stroke="url(#pipe)" stroke-width="8" stroke-linecap="round"/>
+        <line x1="540" y1="125" x2="680" y2="125" stroke="url(#pipe)" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="290" cy="125" r="24" fill="#fff" stroke="#38bdf8" stroke-width="2"/>
+        <circle cx="610" cy="125" r="24" fill="#fff" stroke="#2dd4bf" stroke-width="2"/>
+        <text x="290" y="130" text-anchor="middle" fill="#0284c7" font-size="12" font-weight="700">chan</text>
+        <text x="610" y="130" text-anchor="middle" fill="#0f766e" font-size="12" font-weight="700">chan</text>
+      </svg>
+      <figcaption>Channel có thể trở thành “đường ống” nối các goroutine thành một pipeline.</figcaption>
+    </figure>
+
+    <div class="callout"><strong>Mental model đơn giản</strong>Goroutine tạo ra <em>concurrency</em>. Channel tạo ra <em>communication</em> và <em>coordination</em>.</div>
+
+    <h2 id="basic">2. Gửi và nhận dữ liệu</h2>
+    <p>Tạo một channel kiểu <code>string</code>:</p>
+    <pre><span class="code-label">Go</span><code>ch := make(chan string)</code></pre>
+    <p>Gửi dữ liệu vào channel:</p>
+    <pre><span class="code-label">Go</span><code>ch &lt;- "Hello"</code></pre>
+    <p>Nhận dữ liệu từ channel:</p>
+    <pre><span class="code-label">Go</span><code>message := &lt;-ch</code></pre>
+    <p>Ký hiệu <code>&lt;-</code> cho thấy hướng dữ liệu đang di chuyển.</p>
+
+    <pre><span class="code-label">Go</span><code>package main
+
+import "fmt"
+
+func main() {
+    ch := make(chan string)
+
+    go func() {
+        ch &lt;- "Hello from goroutine"
+    }()
+
+    message := &lt;-ch
+    fmt.Println(message)
+}</code></pre>
+
+    <h2 id="blocking">3. Channel mặc định là blocking</h2>
+    <p>Với <strong>unbuffered channel</strong>, người gửi và người nhận phải gặp nhau. Nếu một phía chưa sẵn sàng, phía còn lại sẽ chờ.</p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 920 340" role="img" aria-label="So sánh unbuffered channel">
+        <rect x="38" y="55" width="250" height="88" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/>
+        <rect x="632" y="55" width="250" height="88" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+        <text x="163" y="92" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="800">Sender</text>
+        <text x="757" y="92" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="800">Receiver</text>
+        <line x1="288" y1="99" x2="632" y2="99" stroke="#0ea5e9" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="460" cy="99" r="35" fill="#fff" stroke="#0ea5e9" stroke-width="3"/>
+        <text x="460" y="104" text-anchor="middle" fill="#0284c7" font-size="14" font-weight="800">value</text>
+        <text x="460" y="165" text-anchor="middle" fill="#475569" font-size="15">Hai phía cần đồng bộ tại thời điểm truyền dữ liệu</text>
+        <rect x="130" y="220" width="660" height="70" rx="16" fill="#fff7ed" stroke="#fdba74"/>
+        <text x="460" y="251" text-anchor="middle" fill="#9a3412" font-size="16" font-weight="800">Không có receiver?</text>
+        <text x="460" y="275" text-anchor="middle" fill="#9a3412" font-size="14">Sender sẽ block. Nếu không ai có thể tiến lên nữa → deadlock.</text>
+      </svg>
+      <figcaption>Unbuffered channel giống như đưa trực tiếp món đồ từ tay người này sang tay người kia.</figcaption>
+    </figure>
+
+    <pre><span class="code-label">Go</span><code>func main() {
+    ch := make(chan int)
+
+    fmt.Println("before send")
+    ch &lt;- 10 // block ở đây nếu không có receiver
+    fmt.Println("after send")
+}</code></pre>
+
+    <div class="callout note"><strong>Điều đáng nhớ</strong>Channel không chỉ là “container chứa dữ liệu”. Nó còn là một cơ chế đồng bộ hóa giữa goroutine.</div>
+
+    <h2 id="buffered">4. Buffered Channel: có chỗ để “xếp hàng”</h2>
+    <p>Nếu tạo channel với capacity:</p>
+    <pre><span class="code-label">Go</span><code>jobs := make(chan Job, 3)</code></pre>
+    <p>channel có thể giữ tạm 3 phần tử trước khi người gửi bị block.</p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 940 360" role="img" aria-label="Buffered channel minh họa">
+        <rect x="40" y="115" width="190" height="90" rx="20" fill="#e0f2fe" stroke="#7dd3fc"/>
+        <text x="135" y="153" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="800">Producer</text>
+        <text x="135" y="181" text-anchor="middle" fill="#64748b" font-size="13">ch &lt;- value</text>
+        <rect x="710" y="115" width="190" height="90" rx="20" fill="#ccfbf1" stroke="#5eead4"/>
+        <text x="805" y="153" text-anchor="middle" fill="#0f172a" font-size="20" font-weight="800">Consumer</text>
+        <text x="805" y="181" text-anchor="middle" fill="#64748b" font-size="13">&lt;- ch</text>
+        <text x="470" y="66" text-anchor="middle" fill="#334155" font-size="16" font-weight="700">buffer capacity = 3</text>
+        <g transform="translate(285,116)">
+          <rect x="0" y="0" width="100" height="90" rx="16" fill="#fff" stroke="#38bdf8" stroke-width="2"/>
+          <rect x="105" y="0" width="100" height="90" rx="16" fill="#fff" stroke="#38bdf8" stroke-width="2"/>
+          <rect x="210" y="0" width="100" height="90" rx="16" fill="#fff" stroke="#38bdf8" stroke-width="2"/>
+          <text x="50" y="53" text-anchor="middle" fill="#0284c7" font-size="22" font-weight="800">A</text>
+          <text x="155" y="53" text-anchor="middle" fill="#0284c7" font-size="22" font-weight="800">B</text>
+          <text x="260" y="53" text-anchor="middle" fill="#0284c7" font-size="22" font-weight="800">C</text>
+        </g>
+        <line x1="230" y1="160" x2="285" y2="160" stroke="#0ea5e9" stroke-width="5" stroke-linecap="round"/>
+        <line x1="595" y1="160" x2="710" y2="160" stroke="#14b8a6" stroke-width="5" stroke-linecap="round"/>
+        <rect x="280" y="255" width="320" height="58" rx="15" fill="#fef2f2" stroke="#fca5a5"/>
+        <text x="440" y="279" text-anchor="middle" fill="#991b1b" font-size="14" font-weight="700">A, B, C đã đầy buffer</text>
+        <text x="440" y="299" text-anchor="middle" fill="#991b1b" font-size="13">D tiếp theo sẽ phải chờ</text>
+      </svg>
+      <figcaption>Buffered Channel hấp thụ được một lượng nhỏ burst, nhưng không phải hàng đợi vô hạn.</figcaption>
+    </figure>
+
+    <div class="compare">
+      <div class="card"><h4>Unbuffered</h4><p>Sender và receiver cần phối hợp trực tiếp tại mỗi lần truyền.</p></div>
+      <div class="card"><h4>Buffered</h4><p>Sender có thể đi trước một đoạn, cho tới khi buffer đầy.</p></div>
+    </div>
+
+    <h2 id="close">5. Đóng Channel khi không còn dữ liệu</h2>
+    <p>Khi producer chắc chắn sẽ không gửi thêm dữ liệu, nó có thể đóng channel:</p>
+    <pre><span class="code-label">Go</span><code>close(ch)</code></pre>
+    <p>Receiver có thể đọc tới khi channel đóng:</p>
+    <pre><span class="code-label">Go</span><code>for value := range ch {
+    fmt.Println(value)
+}</code></pre>
+    <p>Một nguyên tắc tốt cho người mới: <strong>phía gửi thường là phía chịu trách nhiệm đóng channel</strong>.</p>
+
+    <h2 id="select">6. Select: chờ nhiều Channel cùng lúc</h2>
+    <p>Worker thực tế có thể vừa chờ job mới, vừa phải nghe tín hiệu shutdown. <code>select</code> giúp chờ nhiều channel operation:</p>
+    <pre><span class="code-label">Go</span><code>select {
+case job := &lt;-jobs:
+    process(job)
+
+case &lt;-done:
+    return
+}</code></pre>
+    <p>Channel nào sẵn sàng trước thì case tương ứng được chạy.</p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 860 310" role="img" aria-label="Select chờ jobs và done">
+        <rect x="330" y="40" width="200" height="72" rx="18" fill="#ede9fe" stroke="#c4b5fd"/>
+        <text x="430" y="84" text-anchor="middle" fill="#5b21b6" font-size="22" font-weight="800">select</text>
+        <rect x="90" y="196" width="220" height="74" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/>
+        <rect x="550" y="196" width="220" height="74" rx="18" fill="#fee2e2" stroke="#fca5a5"/>
+        <text x="200" y="229" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="800">jobs</text>
+        <text x="200" y="252" text-anchor="middle" fill="#64748b" font-size="13">có job → xử lý</text>
+        <text x="660" y="229" text-anchor="middle" fill="#0f172a" font-size="18" font-weight="800">done</text>
+        <text x="660" y="252" text-anchor="middle" fill="#64748b" font-size="13">shutdown → return</text>
+        <line x1="385" y1="112" x2="235" y2="196" stroke="#38bdf8" stroke-width="4"/>
+        <line x1="475" y1="112" x2="625" y2="196" stroke="#f87171" stroke-width="4"/>
+      </svg>
+      <figcaption><code>select</code> là nơi nhiều “tín hiệu” concurrency gặp nhau.</figcaption>
+    </figure>
+
+    <h2 id="worker">7. Worker Pool: ứng dụng rất thực tế của Channel</h2>
+    <p>Giả sử có 100.000 jobs. Thay vì tạo 100.000 goroutine cùng lúc, ta có thể giới hạn chỉ 5 hoặc 20 worker xử lý song song.</p>
+
+    <pre><span class="code-label">Go</span><code>func worker(id int, jobs &lt;-chan int) {
+    for job := range jobs {
+        fmt.Println("worker", id, "processing", job)
+    }
+}
+
+func main() {
+    jobs := make(chan int, 100)
+
+    for i := 1; i &lt;= 5; i++ {
+        go worker(i, jobs)
+    }
+
+    for job := 1; job &lt;= 1000; job++ {
+        jobs &lt;- job
+    }
+
+    close(jobs)
+}</code></pre>
+
+    <figure class="figure">
+      <svg viewBox="0 0 960 420" role="img" aria-label="Worker pool">
+        <rect x="45" y="147" width="180" height="105" rx="20" fill="#e0f2fe" stroke="#7dd3fc"/>
+        <text x="135" y="188" text-anchor="middle" fill="#0f172a" font-size="22" font-weight="800">Jobs</text>
+        <text x="135" y="219" text-anchor="middle" fill="#64748b" font-size="14">1 ... 1000</text>
+        <rect x="330" y="136" width="170" height="126" rx="20" fill="#f8fafc" stroke="#94a3b8"/>
+        <text x="415" y="182" text-anchor="middle" fill="#0f172a" font-size="21" font-weight="800">Channel</text>
+        <text x="415" y="214" text-anchor="middle" fill="#64748b" font-size="13">buffer = 100</text>
+        <line x1="225" y1="199" x2="330" y2="199" stroke="#0ea5e9" stroke-width="5"/>
+        <line x1="500" y1="199" x2="590" y2="199" stroke="#14b8a6" stroke-width="5"/>
+        <g>
+          <rect x="590" y="30" width="300" height="62" rx="16" fill="#ecfeff" stroke="#5eead4"/>
+          <rect x="590" y="106" width="300" height="62" rx="16" fill="#ecfeff" stroke="#5eead4"/>
+          <rect x="590" y="182" width="300" height="62" rx="16" fill="#ecfeff" stroke="#5eead4"/>
+          <rect x="590" y="258" width="300" height="62" rx="16" fill="#ecfeff" stroke="#5eead4"/>
+          <rect x="590" y="334" width="300" height="62" rx="16" fill="#ecfeff" stroke="#5eead4"/>
+          <text x="740" y="68" text-anchor="middle" fill="#115e59" font-size="17" font-weight="800">Worker 1</text>
+          <text x="740" y="144" text-anchor="middle" fill="#115e59" font-size="17" font-weight="800">Worker 2</text>
+          <text x="740" y="220" text-anchor="middle" fill="#115e59" font-size="17" font-weight="800">Worker 3</text>
+          <text x="740" y="296" text-anchor="middle" fill="#115e59" font-size="17" font-weight="800">Worker 4</text>
+          <text x="740" y="372" text-anchor="middle" fill="#115e59" font-size="17" font-weight="800">Worker 5</text>
+        </g>
+      </svg>
+      <figcaption>Worker Pool biến Channel thành “cổng điều tiết” giữa số lượng job lớn và tài nguyên xử lý hữu hạn.</figcaption>
+    </figure>
+
+    <h2 id="backpressure">8. Từ Channel đến Backpressure</h2>
+    <p>Nếu producer tạo 1.000 jobs/giây nhưng consumer chỉ xử lý 100 jobs/giây, hàng đợi sẽ lớn dần. Với buffered channel, khi buffer đầy, producer bị block.</p>
+
+    <div class="callout"><strong>Đó chính là backpressure.</strong>Hệ thống đang nói: “Tôi không xử lý kịp nữa. Hãy chậm lại.” Trong nhiều hệ thống, đây là cơ chế bảo vệ rất quan trọng.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Khái niệm trong Go</th><th>Ý nghĩa hệ thống</th><th>Liên hệ backend</th></tr></thead>
+        <tbody>
+          <tr><td>Producer</td><td>Nơi tạo dữ liệu / job</td><td>HTTP handler, crawler, scheduler</td></tr>
+          <tr><td>Channel</td><td>Đường truyền hoặc buffer nội bộ</td><td>In-memory queue trong process</td></tr>
+          <tr><td>Consumer</td><td>Nơi xử lý dữ liệu</td><td>Worker</td></tr>
+          <tr><td>Buffer đầy</td><td>Producer phải chậm lại</td><td>Backpressure</td></tr>
+          <tr><td>Consumer chậm</td><td>Hàng đợi tăng</td><td>Queue saturation / lag</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="small">Channel và Kafka không phải cùng một thứ: Channel nằm trong memory của một process; Kafka là distributed, durable messaging system. Nhưng mental model producer → queue → consumer có nhiều điểm tương đồng.</p>
+
+    <h2 id="mutex">9. Khi nào dùng Channel, khi nào dùng Mutex?</h2>
+    <p>Không phải code Go tốt là code dùng Channel mọi nơi. Nếu chỉ cần bảo vệ một vùng shared state, <code>sync.Mutex</code> đôi khi đơn giản hơn nhiều.</p>
+
+    <div class="compare">
+      <div class="card"><h4>Hãy nghĩ đến Channel khi...</h4><p>Bạn cần truyền dữ liệu, gửi signal, xây pipeline, producer–consumer hoặc chuyển ownership giữa các goroutine.</p></div>
+      <div class="card"><h4>Hãy nghĩ đến Mutex khi...</h4><p>Nhiều goroutine cần truy cập cùng một vùng state và bạn chỉ cần kiểm soát critical section.</p></div>
+    </div>
+
+    <h2 id="summary">10. Nếu chỉ nhớ 5 điều</h2>
+    <p><strong>1.</strong> Channel giúp goroutine truyền dữ liệu và phối hợp với nhau.</p>
+    <p><strong>2.</strong> <code>ch &lt;- value</code> là gửi; <code>&lt;-ch</code> là nhận.</p>
+    <p><strong>3.</strong> Unbuffered channel đồng bộ sender và receiver trực tiếp.</p>
+    <p><strong>4.</strong> Buffered channel cho phép producer đi trước một đoạn, nhưng khi buffer đầy thì vẫn block.</p>
+    <p><strong>5.</strong> Worker Pool + Channel là cách rất thực tế để giới hạn concurrency và tạo backpressure.</p>
+
+    <div class="kicker">
+      <h3>Bài tiếp theo: Race Condition và Mutex</h3>
+      <p>Khi hai goroutine cùng đọc và ghi một vùng memory, bug có thể xuất hiện dù code nhìn hoàn toàn “đúng”. Đó là lúc ta cần hiểu race condition, critical section và mutex.</p>
+    </div>

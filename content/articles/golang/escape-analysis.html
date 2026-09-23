@@ -1,0 +1,21 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Escape analysis trả lời câu hỏi: compiler có thể chứng minh storage chỉ cần sống trong scope/frame an toàn hay không? Nếu không, value có thể phải escape sang heap.</p><p>Đây là analysis tĩnh và thay đổi khi compiler cải tiến; output diagnostic là công cụ học/điều tra, không phải API stability contract.</p></div><div class="note callout"><strong>Runtime note</strong>Nội dung runtime được viết theo Go 1.27 hiện hành. Các chi tiết implementation có thể thay đổi; language/spec behavior mới là contract ổn định.</div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Value lifetime</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Compiler proves?</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Stay / Escape</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>func value() User {
+    return User{Name: &quot;A&quot;}
+}
+
+func pointer() *User {
+    u := User{Name: &quot;B&quot;}
+    return &amp;u
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Capture bởi closure, lưu pointer vào object sống lâu hơn, conversion/interface boxing trong một số context, hoặc trả pointer có thể ảnh hưởng escape. Nhưng optimizer có thể làm kết quả khác trực giác đơn giản.</p><p>Dùng `-gcflags=-m` để xem lý do. Sau đó xác nhận bằng benchmark `-benchmem` vì “escape” không tự động nói cho bạn mức ảnh hưởng production.</p><pre><span class="code-label">Example</span><code>go test -run=^$ -bench=. -benchmem ./internal/hotpath
+go test -gcflags=&quot;-m=2&quot; ./internal/hotpath</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Escape analysis hữu ích khi tối ưu serializer, parser, hot loop, pool object hoặc middleware chạy trên mọi request. Nó ít quan trọng hơn correctness và tail latency từ dependency ở hầu hết endpoint bình thường.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Refactor code khó đọc chỉ để làm một value “does not escape”.</li><li>Tin vào blog cũ về compiler behavior mà không kiểm tra toolchain hiện tại.</li><li>Đếm allocation mà không đo bytes/op, CPU và end-to-end latency.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Escape analysis giải thích allocation, không thay thế benchmark.</li><li>Compiler internals thay đổi; kiểm tra phiên bản đang dùng.</li><li>Optimize hot path đã được profile.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">Go Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Diagnostics: <a href="https://go.dev/doc/diagnostics" target="_blank" rel="noreferrer">go.dev/doc/diagnostics</a> · GC Guide: <a href="https://go.dev/doc/gc-guide" target="_blank" rel="noreferrer">go.dev/doc/gc-guide</a></p>

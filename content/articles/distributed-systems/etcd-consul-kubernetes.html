@@ -1,0 +1,7 @@
+<section id="etcd"><h2>etcd</h2><p>etcd dùng consensus để duy trì replicated key-value state với strong consistency semantics.</p></section><section id="kubernetes"><h2>Kubernetes</h2><div class="diagram"><pre>kubectl/API clients
+      |
+API Server
+      |
+etcd consensus cluster
+      |
+cluster desired state</pre></div></section><section id="lesson"><h2>Lesson</h2><p>Kubernetes control plane phụ thuộc một metadata store có consensus; đây là lý do etcd health cực kỳ quan trọng.</p></section>

@@ -1,0 +1,7 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Client -&gt; Payment API
+            |
+      Idempotency Store
+            |
+          Ledger
+            |
+      Payment Provider</pre></div></section><section id="hard-parts"><h2>Hard parts</h2><ul><li>double charge</li><li>provider timeout ambiguity</li><li>webhook duplication</li><li>reconciliation</li><li>refunds</li></ul></section><section id="invariant"><h2>Invariant</h2><div class="callout ">Money movement cần audit trail và business invariant rõ hơn mọi tối ưu throughput.</div></section>

@@ -1,0 +1,30 @@
+{
+  "id": "season-01-fundamentals-04-arrays-slices",
+  "title": "Arrays và Slices",
+  "description": "Slice là abstraction xuất hiện khắp Go; hiểu len, cap và shared backing storage để tránh bug.",
+  "type": "article",
+  "domain": "golang",
+  "category": "fundamentals",
+  "tags": [
+    "golang",
+    "fundamentals"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-fundamentals",
+      "order": 4
+    }
+  ],
+  "path_order": 4,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/arrays-slices/",
+  "source": "content/articles/golang/arrays-slices.html",
+  "legacy_url": "/season-01-fundamentals/04-arrays-slices.html",
+  "authors": [
+    "tiecont"
+  ]
+}

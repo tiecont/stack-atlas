@@ -1,0 +1,33 @@
+<p class="lead"><code>net/http</code> đủ mạnh để xây nhiều backend service mà không cần framework. Học nó trước giúp bạn biết framework đang thêm ergonomics gì và runtime behavior nào vẫn thuộc standard library.</p>
+<h2 id="mux">1. ServeMux và route hiện đại</h2>
+<p>Từ Go 1.22, <code>ServeMux</code> hỗ trợ method matching và wildcard path patterns. Bạn có thể viết route khá rõ ràng chỉ với standard library.</p>
+<pre><span class="code-label">go</span><code>mux := http.NewServeMux()
+
+mux.HandleFunc("GET /users/{id}", func(w http.ResponseWriter, r *http.Request) {
+    id := r.PathValue("id")
+    fmt.Fprintf(w, "user=%s", id)
+})</code></pre>
+<h2 id="server">2. Dùng http.Server thay vì chỉ gọi helper mặc định</h2>
+<pre><span class="code-label">go</span><code>srv := &amp;http.Server{
+    Addr:              ":8080",
+    Handler:           mux,
+    ReadHeaderTimeout: 5 * time.Second,
+    IdleTimeout:       60 * time.Second,
+}
+
+if err := srv.ListenAndServe(); err != nil &amp;&amp; err != http.ErrServerClosed {
+    log.Fatal(err)
+}</code></pre>
+<p>Server production cần policy về thời gian chờ và lifecycle. Không nên coi default là thiết kế đầy đủ cho mọi workload.</p>
+<h2 id="concurrency">3. Handler chạy concurrent</h2>
+<p><code>net/http</code> phục vụ các connection/request concurrently. Điều này có nghĩa mọi shared state mà handler truy cập phải an toàn cho concurrent access.</p>
+<div class="callout "><strong>Liên kết Season 03</strong>Nếu handler cùng sửa map, cache local hoặc counters, kiến thức Mutex/Atomic/Race Condition của Season 03 quay trở lại ngay tại đây.</div>
+<h2 id="shutdown">4. Graceful shutdown</h2>
+<pre><span class="code-label">go</span><code>ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+defer cancel()
+
+if err := srv.Shutdown(ctx); err != nil {
+    log.Printf("shutdown: %v", err)
+}</code></pre>
+<p><code>Shutdown</code> cho server cơ hội dừng nhận công việc mới và chờ active connections phù hợp thay vì kill process thô bạo.</p>
+<section id="sources" class="sources"><h3>Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net/http#Server" target="_blank" rel="noreferrer">net/http Server</a></li><li><a href="https://go.dev/blog/routing-enhancements" target="_blank" rel="noreferrer">Go 1.22 routing enhancements</a></li></ul></section>

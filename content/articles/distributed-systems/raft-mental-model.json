@@ -1,0 +1,30 @@
+{
+  "id": "season-21-consensus-coordination-06-raft-mental-model",
+  "title": "Raft Mental Model",
+  "description": "Leader election + log replication + safety theo một mô hình dễ reasoning.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "consensus",
+  "tags": [
+    "distributed-systems",
+    "consensus"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "consensus",
+      "order": 290
+    }
+  ],
+  "path_order": 290,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/raft-mental-model/",
+  "source": "content/articles/distributed-systems/raft-mental-model.html",
+  "legacy_url": "/season-21-consensus-coordination/06-raft-mental-model.html",
+  "authors": [
+    "tiecont"
+  ]
+}

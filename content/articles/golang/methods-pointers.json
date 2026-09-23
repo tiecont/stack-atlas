@@ -1,0 +1,30 @@
+{
+  "id": "season-01-fundamentals-07-methods-pointers",
+  "title": "Methods, Receivers và Pointers",
+  "description": "Khi nào dùng value receiver, pointer receiver và cách suy nghĩ về mutation/identity.",
+  "type": "article",
+  "domain": "golang",
+  "category": "fundamentals",
+  "tags": [
+    "golang",
+    "fundamentals"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-fundamentals",
+      "order": 7
+    }
+  ],
+  "path_order": 7,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/methods-pointers/",
+  "source": "content/articles/golang/methods-pointers.html",
+  "legacy_url": "/season-01-fundamentals/07-methods-pointers.html",
+  "authors": [
+    "tiecont"
+  ]
+}

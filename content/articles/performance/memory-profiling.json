@@ -1,0 +1,29 @@
+{
+  "id": "season-16-performance-engineering-05-memory-profiling",
+  "title": "Heap, Allocation và Memory Profile",
+  "description": "Tìm nơi cấp phát và giữ memory nhiều nhất.",
+  "type": "article",
+  "domain": "performance",
+  "category": "performance",
+  "tags": [
+    "performance"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "performance-engineering",
+      "order": 221
+    }
+  ],
+  "path_order": 221,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/performance/memory-profiling/",
+  "source": "content/articles/performance/memory-profiling.html",
+  "legacy_url": "/season-16-performance-engineering/05-memory-profiling.html",
+  "authors": [
+    "tiecont"
+  ]
+}

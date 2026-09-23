@@ -1,0 +1,18 @@
+<section id="lifecycle"><h2>Lifecycle</h2><div class="diagram"><pre>Pod termination
+  |
+SIGTERM
+  |
+mark unready / traffic drains
+  |
+finish in-flight requests
+  |
+shutdown before grace period ends</pre></div></section><section id="go-server"><h2>Go server</h2><pre><code>ctx, stop := signal.NotifyContext(
+    context.Background(),
+    syscall.SIGTERM,
+)
+defer stop()
+&lt;-ctx.Done()
+
+shutdownCtx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
+defer cancel()
+_ = server.Shutdown(shutdownCtx)</code></pre></section><section id="goal"><h2>Goal</h2><p>Không drop request chỉ vì rollout hoặc scale down.</p></section>

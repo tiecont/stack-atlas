@@ -1,0 +1,2 @@
+<section id="version-vars"><h2>Version vars</h2><pre><code>var version = &quot;dev&quot;
+var commit = &quot;unknown&quot;</code></pre></section><section id="build"><h2>Build</h2><pre><code>go build -trimpath   -ldflags &quot;-X main.version=v1.4.2 -X main.commit=abc123&quot;   ./cmd/api</code></pre></section><section id="why"><h2>Why</h2><p>Version metadata giúp incident response, rollback và trace artifact về source.</p></section>

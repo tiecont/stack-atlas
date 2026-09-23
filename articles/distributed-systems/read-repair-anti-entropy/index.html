@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Read Repair và Anti-entropy · Stack Atlas</title><meta name="description" content="Replica divergence cần cơ chế convergence.">
+  <meta property="og:title" content="Read Repair và Anti-entropy · Stack Atlas"><meta property="og:description" content="Replica divergence cần cơ chế convergence.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-20-distributed-data-09-read-repair-anti-entropy"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/distributed-systems/">Distributed Systems</a><span>/</span><a href="/topics/distributed-systems/#category-data-systems">Data Systems</a><span>/</span>Read Repair và Anti-entropy</div><header class="article-header"><span class="eyebrow">Distributed Systems · Data Systems</span><h1>Read Repair và Anti-entropy</h1><p>Replica divergence cần cơ chế convergence.</p><div class="article-meta"><span>Distributed Systems</span><button class="complete-toggle" type="button" data-progress-toggle="season-20-distributed-data-09-read-repair-anti-entropy" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#read-repair">Read repair</a><a class="toc-level-2" href="#anti-entropy">Anti-entropy</a><a class="toc-level-2" href="#trade-off">Trade-off</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Distributed Data · Lesson 09</strong></a></aside><article class="article-body"><section id="read-repair"><h2 id="read-repair">Read repair</h2><p>Khi read thấy version khác nhau, hệ thống có thể sửa replica stale dựa trên reconciliation logic.</p></section><section id="anti-entropy"><h2 id="anti-entropy">Anti-entropy</h2><p>Background process so sánh/đồng bộ replica ngay cả khi key không được đọc.</p></section><section id="trade-off"><h2 id="trade-off">Trade-off</h2><p>Eventual consistency không có nghĩa tự động hội tụ nếu system không có repair strategy.</p></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/distributed-systems/rebalancing-hotspots/?path=golang-backend"><small>Previous</small><strong>Rebalancing và Hot Partition</strong></a><a href="/articles/distributed-systems/conflict-resolution/?path=golang-backend"><small>Next</small><strong>Conflict Resolution và Versioning</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

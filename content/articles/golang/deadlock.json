@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-18-deadlock",
+  "title": "Deadlock",
+  "description": "Khi các goroutine cùng chờ nhau và toàn hệ thống không thể tiến lên.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 45
+    }
+  ],
+  "path_order": 45,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/deadlock/",
+  "source": "content/articles/golang/deadlock.html",
+  "legacy_url": "/season-03-concurrency/18-deadlock.html",
+  "authors": [
+    "tiecont"
+  ]
+}

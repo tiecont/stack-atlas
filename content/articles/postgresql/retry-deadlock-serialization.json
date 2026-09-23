@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-17-retry-deadlock-serialization",
+  "title": "Retry Deadlock và Serialization Failures",
+  "description": "Retry đúng lỗi, có backoff và chỉ khi transaction operation đủ an toàn để chạy lại.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 96
+    }
+  ],
+  "path_order": 96,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/retry-deadlock-serialization/",
+  "source": "content/articles/postgresql/retry-deadlock-serialization.html",
+  "legacy_url": "/season-06-postgresql-with-go/17-retry-deadlock-serialization.html",
+  "authors": [
+    "tiecont"
+  ]
+}

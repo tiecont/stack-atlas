@@ -1,0 +1,5 @@
+<section id="lease-expiry"><h2>Lease expiry</h2><div class="diagram"><pre>Client A gets lease
+A pauses
+lease expires
+Client B gets lease
+A wakes up -&gt; both may act</pre></div></section><section id="fencing-token"><h2>Fencing token</h2><p>Mỗi lease mới nhận token tăng dần; resource downstream reject token cũ.</p></section><section id="lesson"><h2>Lesson</h2><div class="callout ">Distributed lock không chỉ là SETNX + TTL; failure pause và stale owner mới là phần khó.</div></section>

@@ -1,0 +1,6 @@
+<section id="ngu-n-g-c"><h2>Nguồn gốc</h2><p>Bulkhead là vách ngăn tàu: một khoang ngập nước không làm chìm toàn tàu.</p></section><section id="backend-version"><h2>Backend version</h2><div class="diagram"><pre>API
+├─ payment pool: 20 workers
+├─ email pool: 10 workers
+└─ search pool: 30 workers
+
+Email treo ≠ Payment hết worker.</pre></div></section><section id="c-c-d-ng-isolation"><h2>Các dạng isolation</h2><ul><li>worker pool riêng</li><li>connection pool riêng</li><li>queue riêng</li><li>resource quota riêng</li><li>service/deployment riêng khi cần tách blast radius</li></ul></section>

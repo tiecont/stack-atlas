@@ -1,0 +1,5 @@
+<section id="benchmark"><h2>Benchmark</h2><pre><code>func BenchmarkEncode(b *testing.B) {
+    for i := 0; i &lt; b.N; i++ {
+        _ = encode(sample)
+    }
+}</code></pre></section><section id="memory"><h2>Memory</h2><pre><code>go test -bench=. -benchmem</code></pre></section><section id="l-u"><h2>Lưu ý</h2><p>Microbenchmark dễ bị compiler optimization, cache state và unrealistic input làm sai lệch.</p></section>

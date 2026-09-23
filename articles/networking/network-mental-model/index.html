@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Network Mental Model cho Backend Engineer · Stack Atlas</title><meta name="description" content="IP, port, socket, protocol và cách một request đi từ code Go ra ngoài network.">
+  <meta property="og:title" content="Network Mental Model cho Backend Engineer · Stack Atlas"><meta property="og:description" content="IP, port, socket, protocol và cách một request đi từ code Go ra ngoài network.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-04-networking-with-go-01-network-mental-model"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/networking/">Networking</a><span>/</span><a href="/topics/networking/#category-networking">Networking</a><span>/</span>Network Mental Model cho Backend Engineer</div><header class="article-header"><span class="eyebrow">Networking · Networking</span><h1>Network Mental Model cho Backend Engineer</h1><p>IP, port, socket, protocol và cách một request đi từ code Go ra ngoài network.</p><div class="article-meta"><span>Networking</span><button class="complete-toggle" type="button" data-progress-toggle="season-04-networking-with-go-01-network-mental-model" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#endpoint">1. Endpoint = địa chỉ để nói chuyện</a><a class="toc-level-2" href="#socket">2. Socket không phải connection</a><a class="toc-level-2" href="#latency">3. Latency không chỉ là thời gian xử lý code</a><a class="toc-level-2" href="#backend">4. Điều backend engineer cần nhớ</a><a class="toc-level-3" href="#ngu-n-c-th-m">Nguồn &amp; đọc thêm</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Networking with Go · Lesson 01</strong></a></aside><article class="article-body"><p class="lead">Backend code thường bắt đầu bằng <code>http.Get</code> hoặc <code>ListenAndServe</code>, nhưng request thật sự đi qua nhiều tầng. Bài đầu tiên xây một mental model đủ đơn giản để bạn biết lỗi đang nằm ở DNS, TCP, TLS hay HTTP.</p>
+<figure class="figure"><svg viewBox="0 0 900 360"><text x="450" y="36" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Một request đi qua nhiều tầng</text>
+        <rect x="90" y="75" width="720" height="52" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/><text x="450" y="108" text-anchor="middle" font-weight="800">HTTP / gRPC — ý nghĩa của request</text>
+        <rect x="130" y="143" width="640" height="52" rx="16" fill="#f3e8ff" stroke="#d8b4fe"/><text x="450" y="176" text-anchor="middle" font-weight="800">TLS — mã hóa & xác thực</text>
+        <rect x="170" y="211" width="560" height="52" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="450" y="244" text-anchor="middle" font-weight="800">TCP / UDP — truyền dữ liệu giữa endpoints</text>
+        <rect x="210" y="279" width="480" height="52" rx="16" fill="#fef3c7" stroke="#fcd34d"/><text x="450" y="312" text-anchor="middle" font-weight="800">IP / Network — tìm đường tới host</text></svg><figcaption>Bạn không cần thuộc OSI 7 tầng để debug backend, nhưng phải biết abstraction nào đang chịu trách nhiệm cho việc gì.</figcaption></figure>
+<h2 id="endpoint">1. Endpoint = địa chỉ để nói chuyện</h2>
+<p>Một service network thường được nhận diện bởi <strong>IP + port + protocol</strong>. IP giúp packet tới đúng machine/network namespace, còn port giúp kernel chuyển traffic tới đúng socket/process.</p>
+<pre><span class="code-label">go</span><code>addr := "10.0.0.12:5432"
+conn, err := net.Dial("tcp", addr)
+if err != nil {
+    log.Fatal(err)
+}
+defer conn.Close()</code></pre>
+<p>Địa chỉ <code>10.0.0.12:5432</code> chưa nói đây là PostgreSQL. TCP chỉ nhìn thấy byte stream. Chính PostgreSQL protocol mới quyết định các bytes có nghĩa gì.</p>
+<div class="callout "><strong>Mental model</strong>TCP/UDP vận chuyển bytes hoặc datagrams. HTTP, PostgreSQL, Redis, Kafka, gRPC... là protocol ở tầng ứng dụng đặt ý nghĩa lên dữ liệu đó.</div>
+<h2 id="socket">2. Socket không phải connection</h2>
+<p>Socket là abstraction của hệ điều hành cho network I/O. Một TCP listening socket có thể chấp nhận nhiều TCP connections. Trong Go, <code>net.Listener</code> đại diện cho phía đang lắng nghe, còn <code>net.Conn</code> đại diện cho một connection đã thiết lập.</p>
+<figure class="figure"><svg viewBox="0 0 900 270" role="img" aria-label="Server từ một listener tạo nhiều connections"><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><text x="450" y="36" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Server từ một listener tạo nhiều connections</text><path d="M250 142.5 C280 142.5,325 100.0,355 100.0" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M535 100.0 C565 100.0,325 180.0,355 180.0" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M535 180.0 C565 180.0,620 142.5,650 142.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><rect x="70" y="110" width="180" height="65" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/><text x="160.0" y="147.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Listener :8080</text><rect x="355" y="70" width="180" height="60" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="445.0" y="105.0" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Conn A</text><rect x="355" y="150" width="180" height="60" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="445.0" y="185.0" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Conn B</text><rect x="650" y="110" width="180" height="65" rx="16" fill="#f3e8ff" stroke="#d8b4fe"/><text x="740.0" y="147.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Handlers</text></svg><figcaption>Một listener tồn tại lâu dài; mỗi client connection có lifecycle riêng.</figcaption></figure>
+<h2 id="latency">3. Latency không chỉ là thời gian xử lý code</h2>
+<p>Một outbound HTTP call có thể tốn thời gian ở DNS lookup, TCP connect, TLS handshake, chờ connection pool, gửi request, chờ server và đọc response. Vì vậy “API chậm” không đồng nghĩa “function Go chậm”.</p>
+<ul class="checklist"><li>DNS: hostname được resolve ra IP nào?</li><li>Connect: có tạo TCP connection mới hay reuse connection?</li><li>TLS: có handshake mới không?</li><li>Server: time-to-first-byte mất bao lâu?</li><li>Body: response lớn hay downstream đọc chậm?</li></ul>
+<h2 id="backend">4. Điều backend engineer cần nhớ</h2>
+<p>Khi debug, đừng bắt đầu bằng việc tăng timeout. Hãy hỏi tầng nào đang giữ request. <code>connection refused</code> khác hoàn toàn <code>i/o timeout</code>; TLS certificate error khác HTTP 503.</p>
+<div class="callout good"><strong>Một câu hỏi tốt</strong>“Request đã tới server chưa?” thường chia bài toán làm đôi: nếu chưa, nhìn DNS/TCP/TLS/load balancer; nếu rồi, nhìn HTTP handler/dependency/application.</div>
+<section id="sources" class="sources"><h3 id="ngu-n-c-th-m">Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net" target="_blank" rel="noreferrer">Go net package</a></li><li><a href="https://pkg.go.dev/net/http" target="_blank" rel="noreferrer">Go net/http package</a></li></ul></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/gmp-model/?path=golang-backend"><small>Previous</small><strong>G-M-P Model</strong></a><a href="/articles/networking/tcp-byte-stream/?path=golang-backend"><small>Next</small><strong>TCP: Connection, Byte Stream và Framing</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

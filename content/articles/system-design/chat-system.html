@@ -1,0 +1,9 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Clients
+  |
+WebSocket Gateways
+  |
+Message Service -&gt; Kafka
+  |
+Conversation store
+  |
+Fanout / push</pre></div></section><section id="questions"><h2>Questions</h2><ul><li>1:1 vs group</li><li>ordering scope</li><li>delivery/read receipts</li><li>offline sync</li><li>multi-device</li></ul></section><section id="scale"><h2>Scale</h2><p>Ordering toàn hệ thống không cần thiết; thường chỉ cần ordering theo conversation/partition.</p></section>

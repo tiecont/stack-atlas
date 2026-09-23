@@ -1,0 +1,29 @@
+{
+  "id": "season-24-system-design-08-news-feed",
+  "title": "Design News Feed",
+  "description": "Fanout-on-write vs fanout-on-read.",
+  "type": "article",
+  "domain": "system-design",
+  "category": "system-design",
+  "tags": [
+    "system-design"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "system-design",
+      "order": 333
+    }
+  ],
+  "path_order": 333,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/system-design/news-feed/",
+  "source": "content/articles/system-design/news-feed.html",
+  "legacy_url": "/season-24-system-design/08-news-feed.html",
+  "authors": [
+    "tiecont"
+  ]
+}

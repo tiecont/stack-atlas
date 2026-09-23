@@ -1,0 +1,29 @@
+{
+  "id": "season-08-messaging-06-idempotent-consumers",
+  "title": "Idempotent Consumer",
+  "description": "Làm cùng một message 2 lần nhưng business state vẫn đúng.",
+  "type": "article",
+  "domain": "messaging",
+  "category": "messaging",
+  "tags": [
+    "messaging"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "messaging-patterns",
+      "order": 117
+    }
+  ],
+  "path_order": 117,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/messaging/idempotent-consumers/",
+  "source": "content/articles/messaging/idempotent-consumers.html",
+  "legacy_url": "/season-08-messaging/06-idempotent-consumers.html",
+  "authors": [
+    "tiecont"
+  ]
+}

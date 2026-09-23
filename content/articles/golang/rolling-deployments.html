@@ -1,0 +1,3 @@
+<section id="capacity"><h2>Capacity</h2><div class="diagram"><pre>Before: 10 pods
+Rollout: old + new coexist
+Need headroom for replacement and surge</pre></div></section><section id="readiness-gate"><h2>Readiness gate</h2><p>Pod mới chỉ nhận traffic sau khi app thực sự ready, không chỉ process đã start.</p></section><section id="drain"><h2>Drain</h2><p>Pod cũ phải rời load balancing trước khi shutdown listener hoàn toàn.</p></section>

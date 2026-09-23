@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Unary và Stream Interceptors · Stack Atlas</title><meta name="description" content="Middleware của gRPC cho auth, logging, tracing và metrics.">
+  <meta property="og:title" content="Unary và Stream Interceptors · Stack Atlas"><meta property="og:description" content="Middleware của gRPC cho auth, logging, tracing và metrics.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-14-grpc-with-go-07-interceptors"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/grpc/">Grpc</a><span>/</span><a href="/topics/grpc/#category-rpc">Rpc</a><span>/</span>Unary và Stream Interceptors</div><header class="article-header"><span class="eyebrow">Grpc · Rpc</span><h1>Unary và Stream Interceptors</h1><p>Middleware của gRPC cho auth, logging, tracing và metrics.</p><div class="article-meta"><span>Grpc</span><button class="complete-toggle" type="button" data-progress-toggle="season-14-grpc-with-go-07-interceptors" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#chain">Chain</a><a class="toc-level-2" href="#unary-interceptor">Unary interceptor</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>gRPC · Lesson 07</strong></a></aside><article class="article-body"><section id="chain"><h2 id="chain">Chain</h2><div class="diagram"><pre>Client -&gt; Interceptor -&gt; Handler
+            | auth
+            | logging
+            | tracing</pre></div></section><section id="unary-interceptor"><h2 id="unary-interceptor">Unary interceptor</h2><pre><code>func loggingInterceptor(
+    ctx context.Context,
+    req any,
+    info *grpc.UnaryServerInfo,
+    handler grpc.UnaryHandler,
+) (any, error) {
+    start := time.Now()
+    resp, err := handler(ctx, req)
+    log.Printf(&quot;%s %s&quot;, info.FullMethod, time.Since(start))
+    return resp, err
+}</code></pre></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/grpc/metadata-auth/?path=golang-backend"><small>Previous</small><strong>Metadata và Authentication</strong></a><a href="/articles/grpc/status-errors/?path=golang-backend"><small>Next</small><strong>gRPC Status Codes và Error Model</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

@@ -1,0 +1,19 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Users
+  |
+CDN / Edge
+  |
+API Gateway
+  |
++ Identity
++ Jobs
++ Applications
++ Payments
+     |
+Postgres / Redis
+     |
+Kafka
+ |      Search   Notifications
+ |
+Elasticsearch
+
+Observability + Kubernetes + Multi-region</pre></div></section><section id="deliverables"><h2>Deliverables</h2><ul><li>requirements</li><li>capacity estimates</li><li>API/data model</li><li>cache strategy</li><li>partitioning</li><li>messaging</li><li>consistency</li><li>failure handling</li><li>SLOs</li><li>cost/headroom</li></ul></section><section id="final-standard"><h2>Final standard</h2><div class="callout ">Không cần kiến trúc &#x27;hoành tráng&#x27;. Cần kiến trúc có assumptions rõ, bottleneck rõ và trade-off được giải thích.</div></section>

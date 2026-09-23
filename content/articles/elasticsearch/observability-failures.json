@@ -1,0 +1,30 @@
+{
+  "id": "season-22-elasticsearch-deep-dive-14-observability-failures",
+  "title": "Observability và Failure Modes",
+  "description": "Theo dõi cluster health, shard allocation, latency và indexing pressure.",
+  "type": "article",
+  "domain": "elasticsearch",
+  "category": "search",
+  "tags": [
+    "elasticsearch",
+    "search"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "elasticsearch",
+      "order": 311
+    }
+  ],
+  "path_order": 311,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/elasticsearch/observability-failures/",
+  "source": "content/articles/elasticsearch/observability-failures.html",
+  "legacy_url": "/season-22-elasticsearch-deep-dive/14-observability-failures.html",
+  "authors": [
+    "tiecont"
+  ]
+}

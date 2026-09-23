@@ -1,0 +1,23 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>`io.Reader` và `io.Writer` là hai abstraction trung tâm của Go ecosystem. Nếu một component có thể đọc bytes tuần tự, nó có thể trở thành nguồn cho rất nhiều API mà không cần biết dữ liệu đến từ file, network hay memory.</p><p>Đây là ví dụ điển hình cho triết lý interface nhỏ + composition.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Reader</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Stream bytes</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Writer</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>func hash(r io.Reader) (string, error) {
+    h := sha256.New()
+    if _, err := io.Copy(h, r); err != nil {
+        return &quot;&quot;, err
+    }
+    return hex.EncodeToString(h.Sum(nil)), nil
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Streaming giúp tránh `ReadAll` cho payload lớn. `io.Copy` nối Reader và Writer hiệu quả. Nhiều package như `gzip`, `bufio`, `http`, `os`, `crypto` có thể compose quanh hai interface này.</p><p>Đọc standard library là cách học Go rất tốt: naming, error semantics và interface design đều phản ánh idiom của ecosystem.</p><pre><span class="code-label">Example</span><code>src, _ := os.Open(&quot;large.bin&quot;)
+defer src.Close()
+dst, _ := os.Create(&quot;copy.bin&quot;)
+defer dst.Close()
+_, err := io.Copy(dst, src)</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Upload file, proxy response, compress stream, hash object, parse request body — tất cả đều hưởng lợi từ streaming. Một backend engineer nên mặc định hỏi “có cần materialize toàn bộ dữ liệu vào memory không?”</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>`io.ReadAll` với body không giới hạn.</li><li>Quên đóng resource khi bạn sở hữu lifecycle của nó.</li><li>Bọc quá nhiều buffer mà không đo performance.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Reader/Writer là protocol nhỏ cho streaming.</li><li>Composition của standard library thường tốt hơn tự tạo framework.</li><li>Đối với dữ liệu lớn, stream trước, buffer khi có lý do.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

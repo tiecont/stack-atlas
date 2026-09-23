@@ -1,0 +1,30 @@
+{
+  "id": "season-20-distributed-data-04-leaderless-quorum",
+  "title": "Leaderless và Quorum",
+  "description": "Client hoặc coordinator ghi/đọc từ nhiều replica thay vì một leader duy nhất.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "data-systems",
+  "tags": [
+    "distributed-systems",
+    "data-systems"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-data",
+      "order": 275
+    }
+  ],
+  "path_order": 275,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/leaderless-quorum/",
+  "source": "content/articles/distributed-systems/leaderless-quorum.html",
+  "legacy_url": "/season-20-distributed-data/04-leaderless-quorum.html",
+  "authors": [
+    "tiecont"
+  ]
+}

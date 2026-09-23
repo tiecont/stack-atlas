@@ -1,0 +1,30 @@
+{
+  "id": "season-20-distributed-data-07-consistent-hashing",
+  "title": "Consistent Hashing",
+  "description": "Giảm lượng key phải di chuyển khi thêm/bớt node.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "data-systems",
+  "tags": [
+    "distributed-systems",
+    "data-systems"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-data",
+      "order": 278
+    }
+  ],
+  "path_order": 278,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/consistent-hashing/",
+  "source": "content/articles/distributed-systems/consistent-hashing.html",
+  "legacy_url": "/season-20-distributed-data/07-consistent-hashing.html",
+  "authors": [
+    "tiecont"
+  ]
+}

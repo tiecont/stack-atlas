@@ -1,0 +1,30 @@
+{
+  "id": "season-05-production-http-server-07-authentication-authorization",
+  "title": "Authentication và Authorization",
+  "description": "Tách “bạn là ai” khỏi “bạn được phép làm gì”, và đưa principal qua request lifecycle an toàn.",
+  "type": "article",
+  "domain": "golang",
+  "category": "http-services",
+  "tags": [
+    "golang",
+    "http-services"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "production-http",
+      "order": 71
+    }
+  ],
+  "path_order": 71,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/authentication-authorization/",
+  "source": "content/articles/golang/authentication-authorization.html",
+  "legacy_url": "/season-05-production-http-server/07-authentication-authorization.html",
+  "authors": [
+    "tiecont"
+  ]
+}

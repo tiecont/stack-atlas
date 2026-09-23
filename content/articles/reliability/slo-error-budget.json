@@ -1,0 +1,29 @@
+{
+  "id": "season-11-reliability-engineering-11-slo-error-budget",
+  "title": "SLI, SLO và Error Budget",
+  "description": "Reliability cần được đo bằng mục tiêu cụ thể, không bằng cảm giác.",
+  "type": "article",
+  "domain": "reliability",
+  "category": "reliability",
+  "tags": [
+    "reliability"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "reliability-engineering",
+      "order": 168
+    }
+  ],
+  "path_order": 168,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/reliability/slo-error-budget/",
+  "source": "content/articles/reliability/slo-error-budget.html",
+  "legacy_url": "/season-11-reliability-engineering/11-slo-error-budget.html",
+  "authors": [
+    "tiecont"
+  ]
+}

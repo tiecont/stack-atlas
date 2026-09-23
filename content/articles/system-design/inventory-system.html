@@ -1,0 +1,5 @@
+<section id="state"><h2>State</h2><div class="diagram"><pre>available
+  -&gt; reserved
+  -&gt; sold
+or
+  -&gt; reservation expired -&gt; available</pre></div></section><section id="concurrency"><h2>Concurrency</h2><ul><li>atomic update</li><li>optimistic locking</li><li>reservation token</li><li>expiry worker</li></ul></section><section id="distributed-flow"><h2>Distributed flow</h2><p>Inventory + payment thường cần Saga thay vì transaction xuyên service.</p></section>

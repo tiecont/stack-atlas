@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: atlas-foundations
+  labels:
+    app.kubernetes.io/name: atlas-foundations
+    app.kubernetes.io/part-of: stack-atlas

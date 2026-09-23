@@ -1,0 +1,2 @@
+<section id="hotspot"><h2>Hotspot</h2><div class="diagram"><pre>Normal keys -&gt; shards spread evenly
+Celebrity ID -&gt; one shard receives 40% traffic</pre></div></section><section id="mitigation"><h2>Mitigation</h2><ul><li>better partition key</li><li>salting</li><li>request coalescing/cache</li><li>split hot range</li><li>application-level fanout</li></ul></section><section id="rebalance"><h2>Rebalance</h2><p>Data movement phải kiểm soát để không chiếm hết disk/network và làm production chậm.</p></section>

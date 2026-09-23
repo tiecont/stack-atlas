@@ -1,0 +1,30 @@
+{
+  "id": "season-02-runtime-09-garbage-collector",
+  "title": "Garbage Collector trong Go",
+  "description": "Tracing GC, live heap, allocation rate, GOGC và memory limit theo mental model production.",
+  "type": "article",
+  "domain": "golang",
+  "category": "runtime",
+  "tags": [
+    "golang",
+    "runtime"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-runtime",
+      "order": 24
+    }
+  ],
+  "path_order": 24,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/garbage-collector/",
+  "source": "content/articles/golang/garbage-collector.html",
+  "legacy_url": "/season-02-runtime/09-garbage-collector.html",
+  "authors": [
+    "tiecont"
+  ]
+}

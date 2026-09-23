@@ -1,0 +1,5 @@
+<section id="json-log"><h2>JSON log</h2><pre><code>logger.Info(&quot;payment failed&quot;,
+    &quot;order_id&quot;, orderID,
+    &quot;user_id&quot;, userID,
+    &quot;error&quot;, err,
+)</code></pre></section><section id="context-c-n-c"><h2>Context cần có</h2><ul><li>request id</li><li>trace id</li><li>service/version</li><li>tenant/user khi phù hợp</li><li>error classification</li><li>latency hoặc operation</li></ul></section><section id="anti-pattern"><h2>Anti-pattern</h2><p>Log một câu text dài không cấu trúc làm search, aggregation và alert khó hơn.</p></section>

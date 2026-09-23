@@ -1,0 +1,7 @@
+<section id="structure"><h2>Structure</h2><div class="diagram"><pre>app
+├─ identity
+├─ jobs
+├─ applications
+└─ billing
+
+one process, explicit module APIs</pre></div></section><section id="why-useful"><h2>Why useful</h2><p>Giữ transaction/local calls đơn giản trong khi vẫn chuẩn bị boundary cho tương lai.</p></section><section id="discipline"><h2>Discipline</h2><ul><li>no cross-module table access</li><li>module API rõ</li><li>dependency direction rõ</li><li>tests per module</li></ul></section>

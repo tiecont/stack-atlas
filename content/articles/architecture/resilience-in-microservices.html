@@ -1,0 +1,2 @@
+<section id="call-amplification"><h2>Call amplification</h2><div class="diagram"><pre>API -&gt; A -&gt; B -&gt; C
+retry 3x ở mỗi tầng có thể khuếch đại request mạnh</pre></div></section><section id="nguy-n-t-c"><h2>Nguyên tắc</h2><ul><li>deadline propagation</li><li>retry ở ít tầng</li><li>idempotency</li><li>bulkhead</li><li>circuit breaker</li><li>load shedding</li></ul></section><section id="c-nh-b-o"><h2>Cảnh báo</h2><div class="callout warn">Không copy một retry policy cho mọi service. Side effect và latency budget khác nhau.</div></section>

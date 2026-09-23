@@ -1,0 +1,29 @@
+{
+  "id": "season-10-distributed-systems-12-idempotency-deduplication",
+  "title": "Idempotency và Deduplication",
+  "description": "Retry là inevitability; side effect phải chịu được retry.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "distributed-systems",
+  "tags": [
+    "distributed-systems"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-systems",
+      "order": 153
+    }
+  ],
+  "path_order": 153,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/idempotency-deduplication/",
+  "source": "content/articles/distributed-systems/idempotency-deduplication.html",
+  "legacy_url": "/season-10-distributed-systems/12-idempotency-deduplication.html",
+  "authors": [
+    "tiecont"
+  ]
+}

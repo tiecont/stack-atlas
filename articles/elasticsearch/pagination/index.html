@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pagination: from/size vs search_after · Stack Atlas</title><meta name="description" content="Deep pagination bằng offset có thể rất đắt.">
+  <meta property="og:title" content="Pagination: from/size vs search_after · Stack Atlas"><meta property="og:description" content="Deep pagination bằng offset có thể rất đắt.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-22-elasticsearch-deep-dive-10-pagination"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/elasticsearch/">Elasticsearch</a><span>/</span><a href="/topics/elasticsearch/#category-search">Search</a><span>/</span>Pagination: from/size vs search_after</div><header class="article-header"><span class="eyebrow">Elasticsearch · Search</span><h1>Pagination: from/size vs search_after</h1><p>Deep pagination bằng offset có thể rất đắt.</p><div class="article-meta"><span>Elasticsearch</span><button class="complete-toggle" type="button" data-progress-toggle="season-22-elasticsearch-deep-dive-10-pagination" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#from-size">from/size</a><a class="toc-level-2" href="#search-after">search_after</a><a class="toc-level-2" href="#stable-sort">Stable sort</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Elasticsearch · Lesson 10</strong></a></aside><article class="article-body"><section id="from-size"><h2 id="from-size">from/size</h2><p>Phù hợp trang nông, nhưng mỗi shard phải giữ nhiều candidates khi offset rất sâu.</p></section><section id="search-after"><h2 id="search-after">search_after</h2><p>Dùng sort values của hit cuối làm cursor cho trang tiếp theo.</p></section><section id="stable-sort"><h2 id="stable-sort">Stable sort</h2><p>Cần sort deterministic, thường thêm tie-breaker field.</p></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/elasticsearch/aggregations/?path=golang-backend"><small>Previous</small><strong>Aggregations</strong></a><a href="/articles/elasticsearch/bulk-indexing/?path=golang-backend"><small>Next</small><strong>Bulk Indexing và Throughput</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

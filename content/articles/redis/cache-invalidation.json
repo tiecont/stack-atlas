@@ -1,0 +1,30 @@
+{
+  "id": "season-07-redis-caching-07-cache-invalidation",
+  "title": "Cache Invalidation: bài toán khó thật sự",
+  "description": "Delete-on-write, versioned keys, event-driven invalidation và race giữa reader với writer.",
+  "type": "article",
+  "domain": "redis",
+  "category": "caching",
+  "tags": [
+    "redis",
+    "caching"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "redis-caching",
+      "order": 106
+    }
+  ],
+  "path_order": 106,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/redis/cache-invalidation/",
+  "source": "content/articles/redis/cache-invalidation.html",
+  "legacy_url": "/season-07-redis-caching/07-cache-invalidation.html",
+  "authors": [
+    "tiecont"
+  ]
+}

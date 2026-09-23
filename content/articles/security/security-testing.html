@@ -1,0 +1,6 @@
+<section id="test-layers"><h2>Test layers</h2><ul><li>unit tests cho authz</li><li>integration tests cho tenant isolation</li><li>fuzzing parsers</li><li>dependency vulnerability scan</li><li>DAST trên staging phù hợp</li></ul></section><section id="fuzz"><h2>Fuzz</h2><pre><code>func FuzzParseToken(f *testing.F) {
+    f.Add(&quot;seed&quot;)
+    f.Fuzz(func(t *testing.T, s string) {
+        _, _ = ParseToken(s)
+    })
+}</code></pre></section><section id="goal"><h2>Goal</h2><p>Security regression nên được tự động hóa giống functional regression.</p></section>

@@ -1,0 +1,13 @@
+<h2 id="s1">1. Semaphore dùng để làm gì?</h2><p class="lead">Semaphore giới hạn bao nhiêu công việc được phép ở trong một vùng concurrent cùng lúc.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Concurrency limit">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Concurrency limit</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">1000 tasks</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Semaphore = 20</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Downstream</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Chỉ tối đa 20 task cùng đi qua.</text></svg><figcaption>Chỉ tối đa 20 task cùng đi qua.</figcaption></figure><h2 id="s2">2. Dùng buffered channel làm semaphore</h2><pre><span class="code-label">Go</span><code>sem := make(chan struct{}, 20)
+
+sem &lt;- struct{}{}
+go func() {
+    defer func() { &lt;-sem }()
+    process()
+}()</code></pre><h2 id="s3">3. Weighted semaphore</h2><p>Package <code>golang.org/x/sync/semaphore</code> hỗ trợ weighted semaphore, hữu ích khi mỗi task có “trọng lượng” tài nguyên khác nhau.</p><h2 id="s4">4. Khi semaphore phù hợp</h2><p>Khi task đã có lifecycle riêng nhưng bạn chỉ cần giới hạn concurrency: outbound HTTP requests, parallel file processing, database-heavy jobs.</p><h2 id="s5">5. Worker Pool hay Semaphore?</h2><div class="callout note"><strong>Khác nhau</strong>Worker pool có worker sống lâu và nhận job từ queue. Semaphore không cần worker cố định; nó chỉ kiểm soát số task đang chạy cùng lúc.</div>

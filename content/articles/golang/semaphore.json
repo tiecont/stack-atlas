@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-11-semaphore",
+  "title": "Semaphore",
+  "description": "Đặt giới hạn số công việc được chạy đồng thời mà không cần worker cố định.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 38
+    }
+  ],
+  "path_order": 38,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/semaphore/",
+  "source": "content/articles/golang/semaphore.html",
+  "legacy_url": "/season-03-concurrency/11-semaphore.html",
+  "authors": [
+    "tiecont"
+  ]
+}

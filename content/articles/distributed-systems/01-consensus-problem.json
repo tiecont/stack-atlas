@@ -1,0 +1,30 @@
+{
+  "id": "season-21-consensus-coordination-01-consensus-problem",
+  "title": "Consensus Problem",
+  "description": "Làm sao nhiều node đồng ý cùng một quyết định khi network và node đều có thể lỗi?",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "consensus",
+  "tags": [
+    "distributed-systems",
+    "consensus"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "consensus",
+      "order": 285
+    }
+  ],
+  "path_order": 285,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/01-consensus-problem/",
+  "source": "content/articles/distributed-systems/01-consensus-problem.html",
+  "legacy_url": "/season-21-consensus-coordination/01-consensus-problem.html",
+  "authors": [
+    "tiecont"
+  ]
+}

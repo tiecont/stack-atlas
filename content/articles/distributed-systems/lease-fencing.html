@@ -1,0 +1,4 @@
+<section id="stale-leader"><h2>Stale leader</h2><div class="diagram"><pre>Leader A pauses
+lease expires
+Leader B elected
+A resumes and still thinks it can write</pre></div></section><section id="fencing"><h2>Fencing</h2><p>Downstream resource chỉ chấp nhận operation có epoch/token mới hơn.</p></section><section id="rule"><h2>Rule</h2><div class="callout ">Lease dựa vào thời gian một mình không đủ nếu resource không reject stale owner.</div></section>

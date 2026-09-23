@@ -1,0 +1,29 @@
+{
+  "id": "season-16-performance-engineering-02-benchmarking-go",
+  "title": "Benchmark trong Go",
+  "description": "Đo function và component nhỏ bằng go test -bench.",
+  "type": "article",
+  "domain": "performance",
+  "category": "performance",
+  "tags": [
+    "performance"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "performance-engineering",
+      "order": 218
+    }
+  ],
+  "path_order": 218,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/performance/benchmarking-go/",
+  "source": "content/articles/performance/benchmarking-go.html",
+  "legacy_url": "/season-16-performance-engineering/02-benchmarking-go.html",
+  "authors": [
+    "tiecont"
+  ]
+}

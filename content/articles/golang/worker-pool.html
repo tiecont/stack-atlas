@@ -1,0 +1,19 @@
+<h2 id="s1">1. Vì sao không tạo một goroutine cho mọi item?</h2><p class="lead">Goroutine nhẹ nhưng downstream thì không vô hạn. Một triệu goroutine gọi database vẫn có thể làm database chết.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Bounded concurrency">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Bounded concurrency</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Jobs</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">N workers</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Database/API</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Worker pool biến concurrency thành một tài nguyên có giới hạn.</text></svg><figcaption>Worker pool biến concurrency thành một tài nguyên có giới hạn.</figcaption></figure><h2 id="s2">2. Worker Pool</h2><pre><span class="code-label">Go</span><code>func worker(jobs &lt;-chan Job) {
+    for job := range jobs {
+        process(job)
+    }
+}
+
+for i := 0; i &lt; 20; i++ {
+    go worker(jobs)
+}</code></pre><h2 id="s3">3. Jobs và Results</h2><pre><span class="code-label">Go</span><code>func worker(jobs &lt;-chan Job, results chan&lt;- Result) {
+    for job := range jobs {
+        results &lt;- process(job)
+    }
+}</code></pre><h2 id="s4">4. Sizing worker pool</h2><p>Đừng chọn worker count chỉ theo CPU. Với I/O-bound workload, số worker còn phụ thuộc connection pool, API quota, latency và mức concurrency downstream cho phép.</p><h2 id="s5">5. Shutdown sạch</h2><p>Producer đóng jobs channel khi hết việc; worker thoát khỏi range; main dùng WaitGroup hoặc errgroup để chờ tất cả kết thúc.</p>

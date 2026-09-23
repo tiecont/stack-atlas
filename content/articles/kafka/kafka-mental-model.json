@@ -1,0 +1,30 @@
+{
+  "id": "season-09-kafka-deep-dive-01-kafka-mental-model",
+  "title": "Kafka là distributed append-only log, không chỉ là queue",
+  "description": "Hiểu event log, retention và replay trước khi học config.",
+  "type": "article",
+  "domain": "kafka",
+  "category": "stream-processing",
+  "tags": [
+    "kafka",
+    "stream-processing"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kafka-deep-dive",
+      "order": 124
+    }
+  ],
+  "path_order": 124,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kafka/kafka-mental-model/",
+  "source": "content/articles/kafka/kafka-mental-model.html",
+  "legacy_url": "/season-09-kafka-deep-dive/01-kafka-mental-model.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,7 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>OrderCreated
+   |
+InventoryReserved
+   |
+PaymentCharged
+   |
+OrderConfirmed</pre></div></section><section id="u-i-m"><h2>Ưu điểm</h2><p>Service ít phụ thuộc trực tiếp vào coordinator và event flow có thể mở rộng tự nhiên.</p></section><section id="r-i-ro"><h2>Rủi ro</h2><p>Workflow dài dễ bị phân tán khắp nhiều consumer, khiến debug và thay đổi business flow khó hơn.</p><div class="callout warn">Choreography tốt không đồng nghĩa mọi thứ đều phải là event.</div></section>

@@ -1,0 +1,23 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Struct là cách Go gom dữ liệu có liên quan thành một type. Go không xây object model quanh class inheritance; thay vào đó code thường dùng composition, nhỏ và tường minh.</p><p>Điều quan trọng không phải biến mọi database table thành struct 1:1, mà là tạo type diễn đạt đúng boundary: request DTO, domain model, database row hoặc response có thể là những type khác nhau.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Domain data</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Struct</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Behavior around it</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>type Money struct {
+    Amount   int64
+    Currency string
+}
+
+type Order struct {
+    ID    string
+    Total Money
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Field viết hoa được export khỏi package; field chữ thường là package-private. Embedding cho phép promote method/field nhưng vẫn là composition, không biến type thành subclass theo nghĩa OOP cổ điển.</p><p>Struct value có semantics copy khi assign/pass-by-value. Nếu chứa slice/map/pointer thì copy struct không đồng nghĩa deep copy toàn bộ graph.</p><pre><span class="code-label">Example</span><code>type CreateOrderRequest struct { /* transport */ }
+type Order struct { /* domain */ }
+type orderRow struct { /* persistence */ }</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Một codebase Go dễ bảo trì thường phân biệt transport model và domain behavior. Ví dụ HTTP request có field optional/string raw; domain model có type đã validate; persistence model có metadata phục vụ database.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Một `User` struct dùng cho DB, JSON request, JSON response, Kafka event và domain cùng lúc.</li><li>Embedding chỉ để “giả inheritance”.</li><li>Giả định copy struct sẽ deep-copy slice/map bên trong.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Struct nên diễn đạt một vai trò rõ ràng.</li><li>Composition thường đơn giản hơn inheritance hierarchy.</li><li>Boundary type rõ giúp validation và migration an toàn hơn.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

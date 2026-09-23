@@ -1,0 +1,22 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Interface trong Go được implement ngầm: type không cần khai báo “implements”. Điều này đảo cách thiết kế quen thuộc từ nhiều ngôn ngữ OOP — interface thường nên được định nghĩa gần nơi sử dụng, theo behavior mà caller thật sự cần.</p><p>Một interface tốt thường nhỏ. `io.Reader` chỉ cần một method nhưng trở thành abstraction cực kỳ mạnh.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Caller need</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Small interface</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Implementation</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>type UserFinder interface {
+    FindByID(ctx context.Context, id string) (User, error)
+}
+
+type Service struct {
+    users UserFinder
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Implicit implementation giúp implementation không phụ thuộc package consumer chỉ để “đăng ký” interface. Bạn có thể thay database repo bằng fake trong test miễn satisfy behavior.</p><p>Interface value có cả dynamic type và dynamic value. Vì vậy “typed nil inside interface” là một pitfall nổi tiếng: interface có thể khác nil dù value bên trong là nil pointer.</p><pre><span class="code-label">Example</span><code>type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+// tiny interface, huge ecosystem</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Hãy tạo interface ở boundary có nhiều implementation hoặc cần test seam. Đừng tạo interface cho mọi struct ngay lập tức. Concrete types đơn giản thường dễ đọc hơn cho đến khi abstraction thực sự cần thiết.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Interface “God object” có 20 method.</li><li>Định nghĩa interface theo implementation thay vì nhu cầu caller.</li><li>Tạo interface chỉ vì “best practice” dù chỉ có một usage concrete và không cần seam.</li><li>Typed nil trong interface.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Accept interfaces khi caller cần behavior; return concrete types thường đơn giản.</li><li>Interface nhỏ dễ implement, test và compose.</li><li>Implicit implementation là một trong những điểm mạnh nhất của Go.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

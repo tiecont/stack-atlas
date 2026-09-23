@@ -1,0 +1,5 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Producer -&gt; Queue -&gt; Workers
+                |
+             retry/DLQ
+                |
+             scheduler</pre></div></section><section id="hard-parts"><h2>Hard parts</h2><ul><li>visibility timeout/lease</li><li>duplicate processing</li><li>delayed jobs</li><li>priority</li><li>backpressure</li></ul></section><section id="invariant"><h2>Invariant</h2><p>Worker crash không được làm job biến mất im lặng.</p></section>

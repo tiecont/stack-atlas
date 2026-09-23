@@ -1,0 +1,1 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>client pod -&gt; service DNS -&gt; Service -&gt; backend Pods</pre></div></section><section id="why"><h2>Why</h2><p>Pod IP thay đổi; Service cho stable name và load balancing abstraction.</p></section><section id="gotcha"><h2>Gotcha</h2><p>Service availability phụ thuộc readiness của endpoints phía sau.</p></section>

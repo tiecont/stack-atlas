@@ -1,0 +1,3 @@
+<section id="ba-tr-ng-th-i"><h2>Ba trạng thái</h2><div class="diagram"><pre>CLOSED -- failures --&gt; OPEN -- cooldown --&gt; HALF-OPEN
+  ^                                  |
+  +----------- success --------------+</pre></div></section><section id="t-c-d-ng"><h2>Tác dụng</h2><p>Breaker ngắt nhanh request tới dependency đang lỗi, giảm latency chờ timeout và giảm áp lực lên hệ thống đang phục hồi.</p></section><section id="fallback"><h2>Fallback</h2><p>Fallback có thể là cache hoặc degraded response. Circuit breaker chỉ quyết định có nên gọi dependency hay không.</p></section>

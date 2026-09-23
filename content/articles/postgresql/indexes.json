@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-09-indexes",
+  "title": "Indexes: từ B-tree đến Composite Index",
+  "description": "Index tăng tốc access pattern cụ thể nhưng làm write tốn hơn và chiếm storage.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 88
+    }
+  ],
+  "path_order": 88,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/indexes/",
+  "source": "content/articles/postgresql/indexes.html",
+  "legacy_url": "/season-06-postgresql-with-go/09-indexes.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,11 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Client
+  |
+TLS
+  |
+AuthN
+  |
+AuthZ + Tenant Guard
+  |
+API -&gt; PostgreSQL
+  |
+Audit / Metrics</pre></div></section><section id="checklist"><h2>Checklist</h2><ul><li>OIDC/JWT validation</li><li>tenant isolation</li><li>object-level auth</li><li>parameterized SQL</li><li>rate limits</li><li>secret rotation</li><li>audit events</li><li>security tests</li></ul></section><section id="definition-of-done"><h2>Definition of done</h2><div class="callout ">Phải giải thích trust boundary, least privilege và failure mode khi credential/token bị compromise.</div></section>

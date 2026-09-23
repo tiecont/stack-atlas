@@ -1,0 +1,12 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Client
+  |
+Order API
+  |
+Postgres: orders + outbox
+  |
+Kafka
+  |
+Saga Orchestrator
+ /        Inventory  Payment
+   \        /
+   events / compensation</pre></div></section><section id="failure-drills"><h2>Failure drills</h2><ul><li>publish duplicate</li><li>consumer crash sau DB commit</li><li>payment timeout nhưng charge có thể đã thành công</li><li>inventory reserve xong rồi payment fail</li><li>event đến sai thứ tự</li><li>service restart giữa saga</li></ul></section><section id="definition-of-done"><h2>Definition of done</h2><div class="callout ">Phải chỉ ra state machine, idempotency boundary, retry policy, compensation, audit trail và cách replay/recover sau crash.</div></section>

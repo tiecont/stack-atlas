@@ -1,0 +1,3 @@
+<section id="mental-model"><h2>Mental model</h2><div class="diagram"><pre>Go Client --HTTP/2--&gt; gRPC Server
+     |                   |
+ generated stub      generated handler</pre></div></section><section id="i-m-m-nh"><h2>Điểm mạnh</h2><ul><li>typed contract</li><li>code generation</li><li>HTTP/2</li><li>streaming</li><li>deadline/cancellation</li><li>interceptor ecosystem</li></ul></section><section id="c-nh-b-o"><h2>Cảnh báo</h2><div class="callout warn">gRPC làm remote call trông giống function call; đừng quên latency, timeout và partial failure.</div></section>

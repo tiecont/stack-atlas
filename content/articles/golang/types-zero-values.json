@@ -1,0 +1,30 @@
+{
+  "id": "season-01-fundamentals-02-types-zero-values",
+  "title": "Types, Variables và Zero Value",
+  "description": "Hiểu type system đơn giản của Go và tại sao zero value làm API dễ dùng hơn.",
+  "type": "article",
+  "domain": "golang",
+  "category": "fundamentals",
+  "tags": [
+    "golang",
+    "fundamentals"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-fundamentals",
+      "order": 2
+    }
+  ],
+  "path_order": 2,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/types-zero-values/",
+  "source": "content/articles/golang/types-zero-values.html",
+  "legacy_url": "/season-01-fundamentals/02-types-zero-values.html",
+  "authors": [
+    "tiecont"
+  ]
+}

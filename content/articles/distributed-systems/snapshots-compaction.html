@@ -1,0 +1,7 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>replicated log
+  |
+apply to state machine
+  |
+snapshot at index N
+  |
+discard compactable old entries</pre></div></section><section id="install-snapshot"><h2>Install snapshot</h2><p>Follower quá chậm có thể nhận snapshot thay vì replay hàng triệu log entries.</p></section><section id="durability"><h2>Durability</h2><p>Snapshot/compaction phải giữ đủ metadata để consensus safety không bị phá.</p></section>

@@ -1,0 +1,29 @@
+{
+  "id": "season-24-system-design-07-chat-system",
+  "title": "Design Real-time Chat",
+  "description": "Connection fanout, message ordering và offline delivery.",
+  "type": "article",
+  "domain": "system-design",
+  "category": "system-design",
+  "tags": [
+    "system-design"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "system-design",
+      "order": 332
+    }
+  ],
+  "path_order": 332,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/system-design/chat-system/",
+  "source": "content/articles/system-design/chat-system.html",
+  "legacy_url": "/season-24-system-design/07-chat-system.html",
+  "authors": [
+    "tiecont"
+  ]
+}

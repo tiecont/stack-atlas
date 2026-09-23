@@ -1,0 +1,29 @@
+{
+  "id": "season-16-performance-engineering-06-block-mutex-profiles",
+  "title": "Block và Mutex Profiling",
+  "description": "CPU thấp nhưng latency cao có thể do chờ lock hoặc channel.",
+  "type": "article",
+  "domain": "performance",
+  "category": "performance",
+  "tags": [
+    "performance"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "performance-engineering",
+      "order": 222
+    }
+  ],
+  "path_order": 222,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/performance/block-mutex-profiles/",
+  "source": "content/articles/performance/block-mutex-profiles.html",
+  "legacy_url": "/season-16-performance-engineering/06-block-mutex-profiles.html",
+  "authors": [
+    "tiecont"
+  ]
+}

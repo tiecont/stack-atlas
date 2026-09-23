@@ -1,0 +1,3 @@
+<section id="forward-flow"><h2>Forward flow</h2><div class="diagram"><pre>Create Order -&gt; Reserve Stock -&gt; Charge Payment -&gt; Confirm
+      |              |              |
+ cancel order   release stock    refund payment</pre></div></section><section id="compensation"><h2>Compensation</h2><p>Compensation không phải time travel. Nó là business action mới để sửa hậu quả của bước trước.</p></section><section id="state-machine"><h2>State machine</h2><p>Saga nên có trạng thái rõ ràng và có thể resume sau crash, thay vì chỉ là chuỗi function call trong memory.</p></section>

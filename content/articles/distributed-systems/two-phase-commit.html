@@ -1,0 +1,4 @@
+<section id="hai-pha"><h2>Hai pha</h2><div class="diagram"><pre>Coordinator
+  |-- PREPARE --&gt; participants
+  |&lt;-- READY ----
+  |-- COMMIT ---&gt; participants</pre></div></section><section id="v-n"><h2>Vấn đề</h2><ul><li>failure coordinator/participant phức tạp</li><li>lock có thể giữ lâu</li><li>latency qua network</li><li>availability giảm khi participant unreachable</li></ul></section><section id="khi-n-o-g-p"><h2>Khi nào gặp</h2><p>Bạn vẫn nên hiểu 2PC vì database/XA systems dùng coordination mạnh. Nhưng microservice workflow thường chọn saga/outbox thay vì distributed ACID xuyên service.</p></section>

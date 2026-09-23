@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-22-gmp-model",
+  "title": "G-M-P Model",
+  "description": "Goroutine, Machine và Processor: mental model để hiểu scheduler sâu hơn.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 49
+    }
+  ],
+  "path_order": 49,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/gmp-model/",
+  "source": "content/articles/golang/gmp-model.html",
+  "legacy_url": "/season-03-concurrency/22-gmp-model.html",
+  "authors": [
+    "tiecont"
+  ]
+}

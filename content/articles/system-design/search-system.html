@@ -1,0 +1,2 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Source DB -&gt; CDC/Kafka -&gt; Indexer -&gt; Elasticsearch
+Client -&gt; Search API -----------------&gt; Elasticsearch</pre></div></section><section id="decisions"><h2>Decisions</h2><ul><li>mapping/analyzer</li><li>ranking</li><li>filtering</li><li>pagination</li><li>reindex</li><li>freshness SLO</li></ul></section><section id="failure"><h2>Failure</h2><p>Search có thể lag source of truth; product cần định nghĩa freshness chấp nhận được.</p></section>

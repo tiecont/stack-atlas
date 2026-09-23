@@ -1,0 +1,9 @@
+<section id="pipeline"><h2>Pipeline</h2><div class="diagram"><pre>Go App
+  |
+OpenTelemetry SDK
+  |
+OTLP Export
+  |
+Collector
+  |-&gt; tracing backend
+  |-&gt; metrics backend</pre></div></section><section id="instrumentation"><h2>Instrumentation</h2><p>Có thể dùng auto/contrib instrumentation cho HTTP, gRPC và DB, nhưng custom business spans vẫn cần thiết.</p></section><section id="boundary"><h2>Boundary</h2><div class="callout ">Đừng tạo span cho mọi function. Span nên đại diện work có giá trị điều tra.</div></section>

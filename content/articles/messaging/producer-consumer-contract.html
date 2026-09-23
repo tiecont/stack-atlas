@@ -1,0 +1,8 @@
+<p class="lead">Một message sống lâu hơn function call. Nó có thể nằm trong broker vài giờ, được replay sau nhiều tháng hoặc được consume bởi service deploy ở phiên bản khác.</p><h2 id="1-event-vs-command">1. Event vs command</h2><p><b>Command</b> thường diễn đạt ý định: <code>SendWelcomeEmail</code>. <b>Event</b> mô tả fact đã xảy ra: <code>UserRegistered</code>.</p><h2 id="2-envelope">2. Envelope</h2><pre><span class="code-label">go</span><code>type Event struct {
+    ID          string
+    Type        string
+    Version     int
+    OccurredAt  time.Time
+    TraceID     string
+    Payload     json.RawMessage
+}</code></pre><h2 id="3-backward-compatibility">3. Backward compatibility</h2><p>Consumer cũ và mới có thể cùng chạy. Thêm field optional thường dễ hơn đổi meaning hoặc remove field.</p><h2 id="4-event-id">4. Event ID</h2><p>Stable unique event ID hữu ích cho deduplication, tracing và audit.</p><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Message schema là API contract.</li><li>Event name mô tả fact, command mô tả intent.</li><li>Thiết kế evolution ngay từ đầu.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Thiết kế envelope cho JobPublished event có versioning và trace metadata.</div>

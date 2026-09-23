@@ -1,0 +1,23 @@
+<p class="lead">kubectl là client gửi HTTP requests tới Kubernetes API server. Nó không phải agent chạy workload và cũng không tự biết cluster đúng là cluster nào: kubeconfig, context, user credentials và flags quyết định request sẽ đi đâu.</p>
+<section id="outcomes"><h2>Sau bài này, bạn có thể</h2><ul><li>Giải thích cluster, user và context trong kubeconfig.</li><li>Chọn context rõ ràng trước thao tác có tác động.</li><li>Phân biệt khai báo bằng apply với lệnh imperative tiện cho thử nghiệm.</li><li>Dùng lệnh đọc trạng thái trước khi quyết định thay đổi.</li></ul></section>
+<section id="request-path"><h2>Đường đi của một lệnh</h2><div class="diagram"><pre>kubectl command
+      |
+      v
+load kubeconfig: context -> cluster + user
+      |
+      v
+authenticate / authorize with API server
+      |
+      v
+read or mutate Kubernetes API objects</pre></div><p>Kubeconfig có thể chứa nhiều cluster, user và context. Context là tổ hợp tên cluster, user và namespace mặc định. Cờ <code>-n</code> có thể override namespace cho command; <code>--context</code> chọn target cluster rõ ràng. Quyền thực sự vẫn được API server quyết định qua authorization.</p></section>
+<section id="safe-start"><h2>Trước khi chạy command, xác nhận target</h2><pre><code>kubectl config current-context
+kubectl config get-contexts
+kubectl cluster-info --context kind-stack-atlas
+kubectl get namespaces --context kind-stack-atlas</code></pre><p>Đối với thao tác ghi, truyền <code>--context kind-stack-atlas</code> khi làm lab nếu context hiện tại chưa được xác nhận. Không dán kubeconfig chứa credentials vào issue, log công khai hay bài lab.</p><div class="callout warn"><strong>Context không phải guardrail bảo mật</strong>Đổi context nhầm có thể gửi request tới production. RBAC, least privilege, review và policy phía cluster mới là boundary thực thi.</div></section>
+<section id="command-map"><h2>Nhóm lệnh theo câu hỏi</h2><ul><li><code>get</code>: object nào đang tồn tại, labels/status của chúng là gì?</li><li><code>describe</code>: resource events và các condition diễn giải ra sao?</li><li><code>get events</code>: component nào vừa báo thay đổi hoặc lỗi?</li><li><code>logs</code> / <code>logs --previous</code>: process hiện tại hay lần chạy trước ghi gì?</li><li><code>exec</code>: cần kiểm tra từ bên trong container nào, với quyền nào?</li><li><code>explain</code>: field này thuộc schema/API version nào?</li><li><code>api-resources</code>: cluster đang phục vụ loại resource nào?</li></ul><p>Bắt đầu bằng read commands, scope namespace/labels, rồi mở rộng phạm vi nếu evidence chỉ sang control plane hay node.</p></section>
+<section id="declarative"><h2>Apply: mô tả intent có thể review</h2><p><code>kubectl apply -f</code> gửi resource configuration tới API để tạo hoặc cập nhật object. File trong Git cho phép review, diff và lặp lại. Các lệnh như <code>kubectl run</code> hữu ích cho thử nghiệm nhanh nhưng thường khó audit hơn khi dùng làm nguồn production.</p><pre><code>kubectl apply --context kind-stack-atlas -f labs/kubernetes/01-foundations/manifests/
+kubectl get deploy,rs,pods -n atlas-foundations
+kubectl describe deployment atlas-demo-api -n atlas-foundations</code></pre><p>Apply success chỉ xác nhận object request được chấp nhận. Dùng rollout status, readiness, events và application endpoint để xác nhận kết quả thực tế.</p></section>
+<section id="exercise"><h2>Thử nghiệm khám phá</h2><ol><li>Chạy <code>kubectl config get-contexts</code>; xác định context, cluster và namespace hiện tại.</li><li>Chạy <code>kubectl api-resources</code>, rồi lọc resource namespaced.</li><li>Dùng <code>kubectl explain deployment.spec</code> và lần lượt mở selector, template và containers.</li><li>Sau lab Foundations, dùng <code>get -o yaml</code>, <code>describe</code> và events để giải thích owner chain.</li><li>So sánh kết quả khi truyền <code>--context kind-stack-atlas</code> và khi dùng current context; không chạy lệnh ghi vào context chưa xác nhận.</li></ol></section>
+<section id="production-notes"><h2>Production Notes</h2><p>Automation nên pin context/credentials và dùng service identity giới hạn quyền. Tránh dùng tài khoản cluster-admin cho workflow thường ngày. Audit logs, API errors và request scope giúp xác định ai đã thay đổi resource nào. Không coi output của một lệnh duy nhất là toàn bộ trạng thái hệ thống.</p></section>
+<section id="references"><h2>Nguồn chính thức</h2><ul class="refs"><li><a href="https://kubernetes.io/docs/concepts/overview/kubectl/">The kubectl command-line tool</a></li><li><a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl overview and commands</a></li><li><a href="https://kubernetes.io/docs/reference/kubectl/quick-reference/">kubectl Quick Reference (v1.37)</a></li></ul></section>

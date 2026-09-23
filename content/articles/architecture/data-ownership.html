@@ -1,0 +1,5 @@
+<section id="ownership"><h2>Ownership</h2><div class="diagram"><pre>Order Service ---&gt; Orders DB
+Payment Service -&gt; Payments DB
+
+Không:
+Order + Payment -&gt; shared tables</pre></div></section><section id="c-d-li-u-service-kh-c"><h2>Đọc dữ liệu service khác</h2><ul><li>API call</li><li>event-driven projection</li><li>materialized view riêng</li><li>data warehouse cho analytics</li></ul></section><section id="trade-off"><h2>Trade-off</h2><p>Data ownership tăng autonomy nhưng làm join và transaction xuyên service khó hơn. Đây là cái giá thật của decomposition.</p></section>

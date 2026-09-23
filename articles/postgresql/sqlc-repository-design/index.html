@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>sqlc và Repository Design · Stack Atlas</title><meta name="description" content="Giữ SQL explicit nhưng có generated typed Go code; repository boundary không cần che mọi chi tiết database.">
+  <meta property="og:title" content="sqlc và Repository Design · Stack Atlas"><meta property="og:description" content="Giữ SQL explicit nhưng có generated typed Go code; repository boundary không cần che mọi chi tiết database.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-06-postgresql-with-go-19-sqlc-repository-design"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/postgresql/">Postgresql</a><span>/</span><a href="/topics/postgresql/#category-databases">Databases</a><span>/</span>sqlc và Repository Design</div><header class="article-header"><span class="eyebrow">Postgresql · Databases</span><h1>sqlc và Repository Design</h1><p>Giữ SQL explicit nhưng có generated typed Go code; repository boundary không cần che mọi chi tiết database.</p><div class="article-meta"><span>Postgresql</span><button class="complete-toggle" type="button" data-progress-toggle="season-06-postgresql-with-go-19-sqlc-repository-design" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#1-sql-source-of-truth">1. SQL source of truth</a><a class="toc-level-2" href="#2-generated-methods">2. Generated methods</a><a class="toc-level-2" href="#3-repository-v-a">3. Repository vừa đủ</a><a class="toc-level-2" href="#4-transaction-integration">4. Transaction integration</a><a class="toc-level-2" href="#takeaways">Điểm cần nhớ</a><a class="toc-level-3" href="#c-th-m">Đọc thêm</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>PostgreSQL with Go · Lesson 19</strong></a></aside><article class="article-body"><p class="lead">sqlc phù hợp khi bạn muốn viết SQL thật và để tool generate type-safe wrappers. Điều quan trọng vẫn là boundary giữa use case và persistence.</p><h2 id="1-sql-source-of-truth">1. SQL source of truth</h2><pre><span class="code-label">sql</span><code>-- name: GetUser :one
+SELECT id, email, created_at
+FROM users
+WHERE id = $1;</code></pre><h2 id="2-generated-methods">2. Generated methods</h2><p>sqlc sinh Go types/methods dựa trên schema/query. Bạn vẫn review execution plan và transaction semantics như SQL bình thường.</p><h2 id="3-repository-v-a">3. Repository vừa đủ</h2><p>Không cần tạo generic IRepository[T] chỉ để che SQL. Interface nên xuất phát từ use case cần gì.</p><h2 id="4-transaction-integration">4. Transaction integration</h2><p>Generated queries thường có thể bind vào transaction handle để workflow dùng cùng transaction.</p><div class="callout note"><strong>Design</strong>Abstraction tốt làm business code rõ hơn; abstraction chỉ đổi tên QueryRow thành Get không tạo nhiều giá trị.</div><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Viết SQL, generate plumbing.</li><li>Repository interface theo use case.</li><li>Generated code không thay query tuning.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Tạo 3 sqlc queries cho users và một service interface chỉ expose operations business cần.</div><div class="sources"><h3 id="c-th-m">Đọc thêm</h3><ul><li><a href="https://docs.sqlc.dev/" target="_blank" rel="noopener">sqlc docs</a></li></ul></div>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/postgresql/pool-sizing-under-load/?path=golang-backend"><small>Previous</small><strong>Pool Sizing dưới Load</strong></a><a href="/articles/postgresql/postgres-capstone/?path=golang-backend"><small>Next</small><strong>Capstone: Persistence Layer chịu được Production</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

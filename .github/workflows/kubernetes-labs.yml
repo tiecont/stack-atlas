@@ -1,0 +1,77 @@
+name: Kubernetes labs
+
+on:
+  pull_request:
+    paths:
+      - "content/articles/kubernetes/**"
+      - "content/domains/kubernetes.yaml"
+      - "content/paths/kubernetes-engineer.yaml"
+      - "labs/kubernetes/**"
+      - "examples/atlas-demo-api/**"
+      - "scripts/build_site.py"
+      - "scripts/validate_kubernetes_manifests.py"
+      - "scripts/test_kubernetes_labs.sh"
+      - "requirements.txt"
+      - ".github/workflows/kubernetes-labs.yml"
+  push:
+    branches: [main]
+    paths:
+      - "content/articles/kubernetes/**"
+      - "content/domains/kubernetes.yaml"
+      - "content/paths/kubernetes-engineer.yaml"
+      - "labs/kubernetes/**"
+      - "examples/atlas-demo-api/**"
+      - "scripts/build_site.py"
+      - "scripts/validate_kubernetes_manifests.py"
+      - "scripts/test_kubernetes_labs.sh"
+      - "requirements.txt"
+      - ".github/workflows/kubernetes-labs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: examples/atlas-demo-api/go.mod
+      - run: python3 -m pip install -r requirements.txt
+      - run: python3 scripts/validate_kubernetes_manifests.py
+      - run: go test -race ./...
+        working-directory: examples/atlas-demo-api
+      - run: python3 scripts/build_site.py
+
+  kind-smoke:
+    runs-on: ubuntu-latest
+    needs: fast
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: examples/atlas-demo-api/go.mod
+      - run: python3 -m pip install -r requirements.txt
+      - name: Install pinned kind and kubectl
+        run: |
+          curl --fail --location --silent --show-error https://kind.sigs.k8s.io/dl/v0.33.0/kind-linux-amd64 --output /tmp/kind
+          chmod +x /tmp/kind
+          sudo install /tmp/kind /usr/local/bin/kind
+          curl --fail --location --silent --show-error https://dl.k8s.io/release/v1.37.0/bin/linux/amd64/kubectl --output /tmp/kubectl
+          chmod +x /tmp/kubectl
+          sudo install /tmp/kubectl /usr/local/bin/kubectl
+      - name: Create baseline cluster
+        run: kind create cluster --name stack-atlas --config labs/kubernetes/00-cluster/kind-config.yaml --wait 180s
+      - name: Validate and run foundations lab
+        run: scripts/test_kubernetes_labs.sh
+      - name: Delete baseline cluster
+        if: always()
+        run: kind delete cluster --name stack-atlas

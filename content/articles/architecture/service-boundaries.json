@@ -1,0 +1,29 @@
+{
+  "id": "season-13-microservices-architecture-02-service-boundaries",
+  "title": "Service Boundary và Bounded Context",
+  "description": "Tách theo business capability thay vì tách theo bảng hoặc technical layer.",
+  "type": "article",
+  "domain": "architecture",
+  "category": "architecture",
+  "tags": [
+    "architecture"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "microservices-architecture",
+      "order": 181
+    }
+  ],
+  "path_order": 181,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/architecture/service-boundaries/",
+  "source": "content/articles/architecture/service-boundaries.html",
+  "legacy_url": "/season-13-microservices-architecture/02-service-boundaries.html",
+  "authors": [
+    "tiecont"
+  ]
+}

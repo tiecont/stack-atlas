@@ -1,0 +1,9 @@
+<section id="proto"><h2>Proto</h2><pre><code>syntax = &quot;proto3&quot;;
+package user.v1;
+
+message GetUserRequest { string id = 1; }
+message User { string id = 1; string name = 2; }
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User);
+}</code></pre></section><section id="field-number"><h2>Field number</h2><p>Field number là identity trên wire. Không tái sử dụng number của field đã xóa.</p></section><section id="compatibility"><h2>Compatibility</h2><p>Thay đổi additive thường an toàn hơn remove/rename semantics.</p></section>

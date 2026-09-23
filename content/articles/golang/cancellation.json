@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-16-cancellation",
+  "title": "Cancellation",
+  "description": "Dừng công việc thừa sớm và truyền tín hiệu dừng đúng cách.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 43
+    }
+  ],
+  "path_order": 43,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/cancellation/",
+  "source": "content/articles/golang/cancellation.html",
+  "legacy_url": "/season-03-concurrency/16-cancellation.html",
+  "authors": [
+    "tiecont"
+  ]
+}

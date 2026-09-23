@@ -1,0 +1,8 @@
+<section id="b-i-to-n"><h2>Bài toán</h2><p>Xây API gọi Payment + Inventory + Email. Payment là critical path; email async. Hệ thống phải chịu được một dependency chậm mà không collapse.</p></section><section id="ki-n-tr-c"><h2>Kiến trúc</h2><div class="diagram"><pre>Client
+  |
+Rate Limit
+  |
+API -----&gt; Payment (timeout + breaker)
+ |  |  \----&gt; Inventory (timeout)
+ |
+ +-------&gt; Queue -&gt; Email Worker</pre></div></section><section id="checklist"><h2>Checklist</h2><ul><li>deadline propagation</li><li>bounded concurrency</li><li>retry + jitter</li><li>idempotency key</li><li>load shedding</li><li>p95/p99</li><li>queue depth</li><li>breaker state</li><li>dependency error rate</li></ul></section>

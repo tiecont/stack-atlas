@@ -1,0 +1,30 @@
+{
+  "id": "season-09-kafka-deep-dive-08-consumer-groups",
+  "title": "Consumer Group và parallelism",
+  "description": "Một group chia partition giữa các consumer để scale work.",
+  "type": "article",
+  "domain": "kafka",
+  "category": "stream-processing",
+  "tags": [
+    "kafka",
+    "stream-processing"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kafka-deep-dive",
+      "order": 131
+    }
+  ],
+  "path_order": 131,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kafka/consumer-groups/",
+  "source": "content/articles/kafka/consumer-groups.html",
+  "legacy_url": "/season-09-kafka-deep-dive/08-consumer-groups.html",
+  "authors": [
+    "tiecont"
+  ]
+}

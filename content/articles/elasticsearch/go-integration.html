@@ -1,0 +1,9 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>PostgreSQL (source of truth)
+   |
+Outbox / CDC
+   |
+Kafka
+   |
+Indexer Worker (Go)
+   |
+Elasticsearch</pre></div></section><section id="why-async"><h2>Why async</h2><p>Tách write transaction khỏi search indexing và chấp nhận eventual consistency có kiểm soát.</p></section><section id="client-concerns"><h2>Client concerns</h2><ul><li>reuse transport</li><li>deadline</li><li>bulk indexing</li><li>partial failure</li><li>versioning</li><li>metrics</li></ul></section>

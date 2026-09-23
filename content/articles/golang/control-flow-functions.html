@@ -1,0 +1,25 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Go cố tình có ít control-flow construct. Không có `while`; một từ khóa `for` bao phủ loop truyền thống, while-style loop và range loop. Sự đơn giản này khiến code backend của nhiều team trông khá giống nhau.</p><p>Functions trong Go đặc biệt quan trọng vì nhiều API trả về `(value, error)`. Đó không chỉ là syntax mà là cách control flow lỗi được làm rõ tại call site.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Input</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Function</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Result + error</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>func findUser(id int64) (User, error) {
+    if id &lt;= 0 {
+        return User{}, errors.New(&quot;invalid id&quot;)
+    }
+
+    user, err := repo.Get(id)
+    if err != nil {
+        return User{}, err
+    }
+    return user, nil
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>`if` có thể có short statement trước condition, rất thường thấy với `if err := do(); err != nil`. `switch` trong Go không tự fallthrough mặc định. `for range` làm việc với nhiều collection nhưng bạn cần hiểu giá trị nó trả về cho từng type.</p><p>Multiple return values thường được dùng cho result + status/error. Named return values có chỗ dùng, nhưng nếu làm function dài khó đọc hơn thì không đáng.</p><pre><span class="code-label">Example</span><code>for i := 0; i &lt; 3; i++ { /* ... */ }
+for condition { /* ... */ }
+for key, value := range m { /* ... */ }</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Một handler tốt thường là chuỗi decision rõ ràng: validate → gọi service → map error → response. Go khuyến khích early return, nên happy path ít bị lồng nhiều tầng `if`. Đây là một style rất hợp với backend code.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Lồng `if` quá sâu thay vì early return.</li><li>Dùng `panic` như exception cho lỗi nghiệp vụ thông thường.</li><li>Viết function vừa query DB, gọi HTTP, format response và log mọi thứ — khó test và khó reuse.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Go ưu tiên control flow tường minh.</li><li>Multiple return values là nền tảng của error handling.</li><li>Function nhỏ với dependency rõ ràng dễ test hơn function “thông minh”.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

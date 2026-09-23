@@ -1,0 +1,30 @@
+{
+  "id": "season-14-grpc-with-go-04-unary-rpc",
+  "title": "Unary RPC",
+  "description": "Một request, một response: mô hình phổ biến nhất.",
+  "type": "article",
+  "domain": "grpc",
+  "category": "rpc",
+  "tags": [
+    "grpc",
+    "rpc"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "grpc-with-go",
+      "order": 195
+    }
+  ],
+  "path_order": 195,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/grpc/unary-rpc/",
+  "source": "content/articles/grpc/unary-rpc.html",
+  "legacy_url": "/season-14-grpc-with-go/04-unary-rpc.html",
+  "authors": [
+    "tiecont"
+  ]
+}

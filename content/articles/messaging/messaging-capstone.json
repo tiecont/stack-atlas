@@ -1,0 +1,29 @@
+{
+  "id": "season-08-messaging-12-messaging-capstone",
+  "title": "Capstone: Reliable Background Processing",
+  "description": "Ghép producer, broker, idempotent consumer, retry, DLQ, backpressure và observability thành một pipeline production.",
+  "type": "article",
+  "domain": "messaging",
+  "category": "messaging",
+  "tags": [
+    "messaging"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "messaging-patterns",
+      "order": 123
+    }
+  ],
+  "path_order": 123,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/messaging/messaging-capstone/",
+  "source": "content/articles/messaging/messaging-capstone.html",
+  "legacy_url": "/season-08-messaging/12-messaging-capstone.html",
+  "authors": [
+    "tiecont"
+  ]
+}

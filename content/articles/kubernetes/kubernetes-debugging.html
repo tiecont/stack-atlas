@@ -1,0 +1,7 @@
+<section id="workflow"><h2>Workflow</h2><div class="diagram"><pre>User error
+ -&gt; ingress/service
+ -&gt; endpoints
+ -&gt; pod readiness
+ -&gt; logs/metrics
+ -&gt; CPU/memory
+ -&gt; dependency connectivity</pre></div></section><section id="common-cases"><h2>Common cases</h2><ul><li>CrashLoopBackOff</li><li>OOMKilled</li><li>readiness failing</li><li>DNS failure</li><li>connection timeout</li><li>CPU throttling</li></ul></section><section id="mindset"><h2>Mindset</h2><p>Đừng bắt đầu bằng restart. Trước hết cần biết failure domain và evidence.</p></section>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Arrays và Slices · Stack Atlas</title><meta name="description" content="Slice là abstraction xuất hiện khắp Go; hiểu len, cap và shared backing storage để tránh bug.">
+  <meta property="og:title" content="Arrays và Slices · Stack Atlas"><meta property="og:description" content="Slice là abstraction xuất hiện khắp Go; hiểu len, cap và shared backing storage để tránh bug.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-01-fundamentals-04-arrays-slices"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-fundamentals">Fundamentals</a><span>/</span>Arrays và Slices</div><header class="article-header"><span class="eyebrow">Golang · Fundamentals</span><h1>Arrays và Slices</h1><p>Slice là abstraction xuất hiện khắp Go; hiểu len, cap và shared backing storage để tránh bug.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-01-fundamentals-04-arrays-slices" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#s1">1. Mental model</a><a class="toc-level-2" href="#s2">2. Code đầu tiên</a><a class="toc-level-2" href="#s3">3. Hiểu sâu hơn</a><a class="toc-level-2" href="#s4">4. Khi đặt vào backend thật</a><a class="toc-level-2" href="#s5">5. Sai lầm thường gặp &amp; điều cần nhớ</a><a class="toc-level-3" href="#sai-l-m-th-ng-g-p">Sai lầm thường gặp</a><a class="toc-level-3" href="#i-u-c-n-mang-sang-b-i-ti-p-theo">Điều cần mang sang bài tiếp theo</a><a class="toc-level-2" href="#refs">6. Tài liệu chính thức nên đọc</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Go Fundamentals · Lesson 04</strong></a></aside><article class="article-body"><h2 id="s1">1. Mental model</h2><div class="lead"><p>Array `[N]T` có length là một phần của type. Slice `[]T` linh hoạt hơn và là thứ bạn gặp hàng ngày khi xử lý request, database rows, bytes hoặc collections.</p><p>Mental model hữu ích: slice mô tả một cửa sổ nhìn vào một vùng lưu trữ phía sau, cùng `len` và `cap`. Đây là implementation-oriented model, nhưng rất tốt để giải thích behavior của slicing và append.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Slice header</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Backing array</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">append / reslice</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>nums := []int{10, 20, 30, 40}
+part := nums[1:3]
+part[0] = 999
+
+fmt.Println(nums) // [10 999 30 40]</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Hai slice có thể cùng nhìn vào một backing storage nên thay đổi qua một slice có thể thấy qua slice kia. `append` có thể dùng capacity còn lại hoặc cấp storage mới khi không đủ chỗ; vì vậy đừng dựa vào việc hai slice “chắc chắn” tiếp tục chia sẻ sau append.</p><p>`len` là số element đang nhìn thấy; `cap` là khả năng mở rộng từ start hiện tại đến cuối backing storage. `copy` hữu ích khi bạn thật sự muốn ownership độc lập.</p><pre><span class="code-label">Example</span><code>dst := make([]byte, len(src))
+copy(dst, src)
+// dst now owns a separate copy</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Trong code xử lý payload lớn, slices quyết định cả correctness lẫn allocation. Ví dụ giữ một sub-slice rất nhỏ của buffer lớn có thể vô tình giữ cả backing storage sống lâu hơn dự kiến. Khi cần giữ lâu, đôi khi copy phần nhỏ là lựa chọn tốt hơn.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3 id="sai-l-m-th-ng-g-p">Sai lầm thường gặp</h3><ul class="checklist"><li>Giả định `append` luôn mutate cùng backing array.</li><li>Trả một sub-slice của buffer lớn và vô tình giữ memory.</li><li>Dùng `len(slice)==0` và `slice==nil` như hai khái niệm giống nhau trong mọi contract.</li></ul><h3 id="i-u-c-n-mang-sang-b-i-ti-p-theo">Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Slice không phải array động đơn giản; nó là view lên storage.</li><li>`append` có thể làm thay đổi ownership/storage relationship.</li><li>Khi boundary API quan trọng, hãy quyết định rõ có copy hay share.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/control-flow-functions/?path=golang-backend"><small>Previous</small><strong>Control Flow và Functions</strong></a><a href="/articles/golang/maps/?path=golang-backend"><small>Next</small><strong>Maps và Set-like Data</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

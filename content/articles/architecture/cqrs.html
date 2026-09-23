@@ -1,0 +1,5 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Commands -&gt; Write Model -&gt; DB
+                 |
+               Events
+                 |
+Queries  -&gt; Read Model / Projection</pre></div></section><section id="khi-h-u-ch"><h2>Khi hữu ích</h2><ul><li>read shape rất khác write shape</li><li>event-driven projections</li><li>scale read/write khác nhau</li></ul></section><section id="cost"><h2>Cost</h2><p>CQRS thêm eventual consistency, projection rebuild và operational complexity.</p></section>

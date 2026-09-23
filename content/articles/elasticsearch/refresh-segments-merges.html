@@ -1,0 +1,9 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>index docs
+  |
+in-memory buffers
+  |
+refresh
+  |
+new searchable segment
+  |
+background merge</pre></div></section><section id="refresh"><h2>Refresh</h2><p>Document đã index chưa chắc searchable ngay tức thì cho đến refresh boundary.</p></section><section id="merge-cost"><h2>Merge cost</h2><p>Segment merge dùng CPU/disk I/O và có thể ảnh hưởng indexing latency nếu cluster thiếu headroom.</p></section>

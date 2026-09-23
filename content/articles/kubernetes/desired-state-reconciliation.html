@@ -1,0 +1,34 @@
+<p class="lead">Kubernetes không chạy một lệnh tạo đủ Pods rồi quên chúng. Controllers liên tục watch objects, tính xem trạng thái hiện tại còn lệch spec ở đâu và ghi các object cần thiết qua API. Đây là cách hiểu hữu ích nhất để đọc lỗi và dự đoán phản ứng của cluster.</p>
+<section id="outcomes"><h2>Sau bài này, bạn có thể</h2><ul><li>Diễn giải desired state, observed state và reconciliation loop.</li><li>Nêu controller nào sở hữu từng tầng trong Deployment → ReplicaSet → Pod.</li><li>Dự đoán controller phản ứng thế nào khi xóa một Pod được quản lý.</li><li>Phân biệt Pod object bị thay với container restart bên trong cùng Pod.</li></ul></section>
+<section id="loop"><h2>Controller là control loop</h2><div class="diagram"><pre>spec / desired state
+        |
+        v
+watch and read API objects
+        |
+        v
+compare desired with observed
+        |
+        v
+create / update / delete related objects
+        |
+        +------> observe again</pre></div><p>Controller thường không sửa trực tiếp container trên node. Nó tạo hoặc cập nhật API objects; controllers khác, scheduler, kubelet và runtime tiếp tục các bước riêng. Mỗi vòng có thể chạy nhiều lần và có retry. Trạng thái có thể dao động do load, failure hoặc external changes mà không có một thời điểm mọi thứ ổn định hoàn toàn.</p></section>
+<section id="ownership"><h2>Ownership: Deployment không trực tiếp sở hữu Pod</h2><div class="diagram"><pre>Deployment
+    | owns
+    v
+ReplicaSet
+    | owns
+    +------ Pod A
+    +------ Pod B</pre></div><p>Deployment controller tạo hoặc cập nhật ReplicaSet để thực hiện rollout. ReplicaSet controller quan sát selector và số replica, rồi tạo hoặc xóa Pods. Pod object lưu ownerReference trỏ tới ReplicaSet. Scheduler chỉ gán Pod chưa có node; kubelet thực thi Pod đã gán trên node.</p><p>Vì vậy, khi learner xóa Pod bằng kubectl, họ không “xóa ứng dụng”. Họ xóa một instance object do ReplicaSet quản lý. Nếu Deployment và ReplicaSet còn tồn tại với replicas=2, controller cố tạo Pod thay thế.</p></section>
+<section id="experiment"><h2>Failure experiment: xóa một Pod được quản lý</h2><p>Chạy <code>make -C labs/kubernetes/01-foundations test</code> hoặc thực hiện theo hai terminal:</p><pre><code># Terminal 1: theo dõi Pods
+kubectl get pods -n atlas-foundations -l app.kubernetes.io/name=atlas-demo-api -w
+
+# Terminal 2: kiểm tra hierarchy rồi xóa một Pod
+kubectl get deployment,replicaset,pods -n atlas-foundations
+kubectl delete pod &lt;pod-name&gt; -n atlas-foundations</code></pre><p>Quan sát Pod bị xóa rời danh sách, ReplicaSet tạo Pod mới, Pod mới được scheduler gán node rồi kubelet khởi chạy container. UID mới chứng minh đây là object khác. Deployment availability có thể giảm tạm thời trong lúc replacement khởi động.</p></section>
+<section id="what-does-not-reconcile"><h2>Điều desired state không hứa hẹn</h2><p>Controller chỉ có thể hành động dựa trên các API và quyền truy cập nó có. Nếu không node nào đủ resource, image sai, admission policy từ chối, storage không cấp được hoặc dependency hỏng, loop có thể tiếp tục retry nhưng không hội tụ. “Có Deployment object” không đồng nghĩa có Pod Ready.</p><p>Xóa trực tiếp Pod không bền vì parent controller tạo lại. Xóa Deployment là thay đổi khác: cascade policy và owner references có thể xóa các dependent objects. Trước khi xóa, hãy xác định owner bằng <code>kubectl describe pod</code> hoặc đọc <code>metadata.ownerReferences</code>.</p></section>
+<section id="debugging"><h2>Quan sát thay vì restart</h2><pre><code>kubectl get deployment,replicaset,pods -n atlas-foundations
+kubectl describe deployment atlas-demo-api -n atlas-foundations
+kubectl describe pod &lt;pod-name&gt; -n atlas-foundations
+kubectl get events -n atlas-foundations --sort-by=.metadata.creationTimestamp</code></pre><p>So sánh desired/ready/available replicas, xem owner chain và events. Pod <code>Pending</code> thường hướng điều tra sang scheduler/capacity/constraints; container crash hướng sang logs; image pull lỗi hướng sang registry hoặc image-load workflow.</p></section>
+<section id="production-notes"><h2>Production Notes</h2><p>Reconciliation là eventual, không phải transaction xuyên nhiều controller. Một rollout có thể tạo nhiều object và các status cập nhật lệch nhịp. Thiết kế application chịu được instance replacement; externalize durable state, handle SIGTERM, và chỉ dùng retry khi operation an toàn. Hệ thống operator tự viết cần reconcile idempotent để cùng input chạy nhiều lần không gây tác dụng phụ lặp.</p></section>
+<section id="references"><h2>Nguồn chính thức</h2><ul class="refs"><li><a href="https://kubernetes.io/docs/concepts/architecture/controller/">Controllers</a></li><li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">Deployments</a></li><li><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/owners-dependents/">Owners and Dependents</a></li><li><a href="https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/">ReplicaSets</a></li></ul></section>

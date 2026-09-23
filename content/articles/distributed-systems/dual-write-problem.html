@@ -1,0 +1,3 @@
+<section id="db-tr-c-message-sau"><h2>DB trước, message sau</h2><pre><code>tx.Commit()        // success
+producer.Publish() // crash here</code></pre><p>DB có dữ liệu nhưng event biến mất.</p></section><section id="message-tr-c-db-sau"><h2>Message trước, DB sau</h2><pre><code>producer.Publish() // success
+tx.Commit()        // fails</code></pre><p>Consumer thấy event cho state chưa tồn tại.</p></section><section id="k-t-lu-n"><h2>Kết luận</h2><div class="callout warn">Hai write độc lập không tự nhiên trở thành atomic chỉ vì chúng nằm cạnh nhau trong code.</div></section>

@@ -1,0 +1,30 @@
+{
+  "id": "season-19-kubernetes-for-go-backend-12-kubernetes-debugging",
+  "title": "Debug Go Service trên Kubernetes",
+  "description": "Đi từ symptom đến pod, network, config và resource signals.",
+  "type": "article",
+  "domain": "kubernetes",
+  "category": "orchestration",
+  "tags": [
+    "kubernetes",
+    "orchestration"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kubernetes",
+      "order": 270
+    }
+  ],
+  "path_order": 270,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kubernetes/kubernetes-debugging/",
+  "source": "content/articles/kubernetes/kubernetes-debugging.html",
+  "legacy_url": "/season-19-kubernetes-for-go-backend/12-kubernetes-debugging.html",
+  "authors": [
+    "tiecont"
+  ]
+}

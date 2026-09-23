@@ -1,0 +1,30 @@
+{
+  "id": "season-21-consensus-coordination-12-paxos-overview",
+  "title": "Paxos Overview",
+  "description": "Hiểu ý tưởng proposal number, acceptor và quorum mà không sa vào chứng minh hình thức.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "consensus",
+  "tags": [
+    "distributed-systems",
+    "consensus"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "consensus",
+      "order": 296
+    }
+  ],
+  "path_order": 296,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/paxos-overview/",
+  "source": "content/articles/distributed-systems/paxos-overview.html",
+  "legacy_url": "/season-21-consensus-coordination/12-paxos-overview.html",
+  "authors": [
+    "tiecont"
+  ]
+}

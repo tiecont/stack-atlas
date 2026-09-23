@@ -1,0 +1,6 @@
+<section id="adr"><h2>ADR</h2><pre><code>Title: Use Kafka for domain events
+Context: consumers need replay + independent scaling
+Decision: Kafka with 7-day retention
+Consequences:
+- stronger operational burden
+- schema/versioning required</code></pre></section><section id="value"><h2>Value</h2><p>Sau 12 tháng, team cần biết constraint ban đầu để quyết định còn đúng hay không.</p></section><section id="rule"><h2>Rule</h2><p>ADR ngắn, có context, alternatives và consequences thường hữu ích hơn document 50 trang.</p></section>

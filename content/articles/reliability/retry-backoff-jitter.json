@@ -1,0 +1,29 @@
+{
+  "id": "season-11-reliability-engineering-03-retry-backoff-jitter",
+  "title": "Retry, Exponential Backoff và Jitter",
+  "description": "Retry đúng chỗ cứu hệ thống; retry sai chỗ tạo retry storm.",
+  "type": "article",
+  "domain": "reliability",
+  "category": "reliability",
+  "tags": [
+    "reliability"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "reliability-engineering",
+      "order": 160
+    }
+  ],
+  "path_order": 160,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/reliability/retry-backoff-jitter/",
+  "source": "content/articles/reliability/retry-backoff-jitter.html",
+  "legacy_url": "/season-11-reliability-engineering/03-retry-backoff-jitter.html",
+  "authors": [
+    "tiecont"
+  ]
+}

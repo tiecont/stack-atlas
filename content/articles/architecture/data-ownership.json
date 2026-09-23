@@ -1,0 +1,29 @@
+{
+  "id": "season-13-microservices-architecture-03-data-ownership",
+  "title": "Database per Service và Data Ownership",
+  "description": "Service boundary yếu nếu nhiều service cùng sửa một database schema.",
+  "type": "article",
+  "domain": "architecture",
+  "category": "architecture",
+  "tags": [
+    "architecture"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "microservices-architecture",
+      "order": 182
+    }
+  ],
+  "path_order": 182,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/architecture/data-ownership/",
+  "source": "content/articles/architecture/data-ownership.html",
+  "legacy_url": "/season-13-microservices-architecture/03-data-ownership.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,7 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Client
+  |
+HTTP API -&gt; PostgreSQL
+  |
+Kafka -&gt; Worker
+  |
+External API</pre></div></section><section id="instrumentation"><h2>Instrumentation</h2><ul><li>structured logs</li><li>HTTP RED metrics</li><li>DB pool metrics</li><li>Kafka lag</li><li>trace propagation</li><li>business metric</li><li>SLO dashboard</li></ul></section><section id="incident-drill"><h2>Incident drill</h2><div class="callout ">Giả lập DB chậm hoặc consumer lag và phải chứng minh telemetry đủ để tìm bottleneck trong vài bước.</div></section>

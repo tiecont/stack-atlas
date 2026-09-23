@@ -1,0 +1,29 @@
+{
+  "id": "season-23-architecture-patterns-05-aggregate-invariants",
+  "title": "Aggregate và Invariants",
+  "description": "Đặt những rule phải nhất quán ngay lập tức vào cùng transaction boundary.",
+  "type": "article",
+  "domain": "architecture",
+  "category": "architecture",
+  "tags": [
+    "architecture"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "architecture-patterns",
+      "order": 318
+    }
+  ],
+  "path_order": 318,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/architecture/aggregate-invariants/",
+  "source": "content/articles/architecture/aggregate-invariants.html",
+  "legacy_url": "/season-23-architecture-patterns/05-aggregate-invariants.html",
+  "authors": [
+    "tiecont"
+  ]
+}

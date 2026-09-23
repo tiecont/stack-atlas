@@ -1,0 +1,4 @@
+<section id="scenario"><h2>Scenario</h2><p>Ứng dụng global có profile, payment ledger, feed và search.</p></section><section id="design"><h2>Design</h2><div class="diagram"><pre>Profile -&gt; replicated store
+Ledger  -&gt; strong transactional store
+Feed    -&gt; partitioned/event-driven data
+Search  -&gt; Elasticsearch index</pre></div></section><section id="definition-of-done"><h2>Definition of done</h2><ul><li>source of truth</li><li>partition key</li><li>replication model</li><li>consistency per use case</li><li>failover semantics</li><li>hotspot strategy</li><li>recovery/repair</li></ul></section>

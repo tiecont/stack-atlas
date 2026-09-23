@@ -1,0 +1,3 @@
+<section id="conflict"><h2>Conflict</h2><div class="diagram"><pre>Leader:   1 2 3 4 5
+Follower: 1 2 X Y
+             ^ conflict</pre></div></section><section id="repair"><h2>Repair</h2><p>Leader tìm prefix khớp rồi overwrite suffix chưa committed theo protocol rules.</p></section><section id="safety"><h2>Safety</h2><div class="callout ">Committed history không được tùy tiện overwrite. Đây là boundary cực kỳ quan trọng.</div></section>

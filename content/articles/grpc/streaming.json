@@ -1,0 +1,30 @@
+{
+  "id": "season-14-grpc-with-go-05-streaming",
+  "title": "Server, Client và Bidirectional Streaming",
+  "description": "Streaming cho phép trao đổi nhiều message trên cùng một RPC.",
+  "type": "article",
+  "domain": "grpc",
+  "category": "rpc",
+  "tags": [
+    "grpc",
+    "rpc"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "grpc-with-go",
+      "order": 196
+    }
+  ],
+  "path_order": 196,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/grpc/streaming/",
+  "source": "content/articles/grpc/streaming.html",
+  "legacy_url": "/season-14-grpc-with-go/05-streaming.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,9 @@
+<section id="ports-adapters"><h2>Ports/adapters</h2><div class="diagram"><pre>HTTP Adapter
+      |
+    Port
+      |
+  Domain/Core
+      |
+    Port
+      |
+Postgres Adapter</pre></div></section><section id="gi-tr"><h2>Giá trị</h2><p>Core business logic có thể test mà không cần boot HTTP server hoặc database.</p></section><section id="c-nh-b-o"><h2>Cảnh báo</h2><div class="callout warn">Nếu domain đơn giản, quá nhiều interfaces/abstractions có thể tăng ceremony mà không tạo giá trị.</div></section>

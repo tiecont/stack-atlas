@@ -1,0 +1,8 @@
+<section id="query"><h2>Query</h2><p>Full-text/relevance search thường tính score.</p></section><section id="filter"><h2>Filter</h2><p>Structured conditions như status=active hoặc created_at range thường không cần score.</p></section><section id="design"><h2>Design</h2><pre><code>{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [{&quot;match&quot;: {&quot;title&quot;: &quot;golang concurrency&quot;}}],
+      &quot;filter&quot;: [{&quot;term&quot;: {&quot;status&quot;: &quot;published&quot;}}]
+    }
+  }
+}</code></pre></section>

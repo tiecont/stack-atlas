@@ -1,0 +1,9 @@
+<section id="v-sao-timeout-b-t-bu-c"><h2>Vì sao timeout bắt buộc</h2><p>Mỗi call giữ connection, goroutine, memory và đôi khi lock. Timeout biến wait vô hạn thành failure có giới hạn.</p></section><section id="timeout-budget"><h2>Timeout budget</h2><div class="diagram"><pre>Client budget: 1000ms
+  API: 900ms
+    DB: 250ms
+    Cache: 100ms
+    Payment: 400ms
+    Reserve: 150ms</pre></div><p>Timeout downstream nên nhỏ hơn deadline upstream để còn thời gian cleanup và trả response.</p></section><section id="go-example"><h2>Go example</h2><pre><code>ctx, cancel := context.WithTimeout(r.Context(), 300*time.Millisecond)
+defer cancel()
+
+row := db.QueryRowContext(ctx, `select name from users where id=$1`, id)</code></pre></section>

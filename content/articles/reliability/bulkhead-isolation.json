@@ -1,0 +1,29 @@
+{
+  "id": "season-11-reliability-engineering-05-bulkhead-isolation",
+  "title": "Bulkhead và Failure Isolation",
+  "description": "Không để một dependency ngốn sạch tài nguyên của toàn service.",
+  "type": "article",
+  "domain": "reliability",
+  "category": "reliability",
+  "tags": [
+    "reliability"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "reliability-engineering",
+      "order": 162
+    }
+  ],
+  "path_order": 162,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/reliability/bulkhead-isolation/",
+  "source": "content/articles/reliability/bulkhead-isolation.html",
+  "legacy_url": "/season-11-reliability-engineering/05-bulkhead-isolation.html",
+  "authors": [
+    "tiecont"
+  ]
+}

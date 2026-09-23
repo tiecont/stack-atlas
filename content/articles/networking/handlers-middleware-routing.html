@@ -1,0 +1,25 @@
+<p class="lead">Một HTTP backend Go tốt thường là pipeline của <code>http.Handler</code>. Middleware chỉ là function nhận handler và trả về handler mới.</p>
+<h2 id="handler">1. Handler là interface rất nhỏ</h2>
+<pre><span class="code-label">go</span><code>type Handler interface {
+    ServeHTTP(ResponseWriter, *Request)
+}</code></pre>
+<p>Sự đơn giản này cho phép router, auth, logging, metrics và business handler compose với nhau.</p>
+<h2 id="middleware">2. Middleware chain</h2>
+<pre><span class="code-label">go</span><code>func logging(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        start := time.Now()
+        next.ServeHTTP(w, r)
+        log.Printf("%s %s %s", r.Method, r.URL.Path, time.Since(start))
+    })
+}</code></pre>
+<figure class="figure"><svg viewBox="0 0 900 270" role="img" aria-label="HTTP middleware pipeline"><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><text x="450" y="36" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">HTTP middleware pipeline</text><path d="M185 137.5 C215 137.5,205 137.5,235 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M385 137.5 C415 137.5,405 137.5,435 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M585 137.5 C615 137.5,605 137.5,635 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><rect x="35" y="105" width="150" height="65" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/><text x="110.0" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Request</text><rect x="235" y="105" width="150" height="65" rx="16" fill="#f3e8ff" stroke="#d8b4fe"/><text x="310.0" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Auth</text><rect x="435" y="105" width="150" height="65" rx="16" fill="#fef3c7" stroke="#fcd34d"/><text x="510.0" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Tracing</text><rect x="635" y="105" width="150" height="65" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="710.0" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Handler</text></svg><figcaption>Middleware nên thêm cross-cutting behavior; business logic vẫn nên nằm trong service/domain boundary rõ ràng.</figcaption></figure>
+<h2 id="context">3. Request context là lifecycle signal</h2>
+<p><code>r.Context()</code> bị cancel khi request bị hủy hoặc server-side lifecycle kết thúc phù hợp. Hãy truyền nó xuống DB/HTTP call thay vì tạo <code>context.Background()</code> giữa request path.</p>
+<pre><span class="code-label">go</span><code>func handle(w http.ResponseWriter, r *http.Request) {
+    user, err := repo.FindUser(r.Context(), r.PathValue("id"))
+    // ...
+}</code></pre>
+<div class="callout warn"><strong>Context không phải túi đựng dependency</strong>Dùng context cho cancellation, deadline và request-scoped metadata nhỏ. Đừng nhét database client hay service container vào context.</div>
+<h2 id="boundaries">4. Middleware nào nên có?</h2>
+<ul><li>Request ID / tracing.</li><li>Authentication / authorization boundary phù hợp.</li><li>Access log và metrics.</li><li>Recovery ở process boundary.</li><li>Rate limit nếu thuộc trách nhiệm service.</li></ul>
+<section id="sources" class="sources"><h3>Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net/http#Handler" target="_blank" rel="noreferrer">http.Handler</a></li><li><a href="https://pkg.go.dev/context" target="_blank" rel="noreferrer">context package</a></li></ul></section>

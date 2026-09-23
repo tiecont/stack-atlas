@@ -1,0 +1,30 @@
+{
+  "id": "season-14-grpc-with-go-02-protobuf-basics",
+  "title": "Protocol Buffers",
+  "description": "IDL định nghĩa message và service contract độc lập ngôn ngữ.",
+  "type": "article",
+  "domain": "grpc",
+  "category": "rpc",
+  "tags": [
+    "grpc",
+    "rpc"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "grpc-with-go",
+      "order": 193
+    }
+  ],
+  "path_order": 193,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/grpc/protobuf-basics/",
+  "source": "content/articles/grpc/protobuf-basics.html",
+  "legacy_url": "/season-14-grpc-with-go/02-protobuf-basics.html",
+  "authors": [
+    "tiecont"
+  ]
+}

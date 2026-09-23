@@ -1,0 +1,7 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Ingress
+  |
+Go API Deployment -&gt; PostgreSQL
+  |
+Kafka
+  |
+Go Worker Deployment</pre></div></section><section id="requirements"><h2>Requirements</h2><ul><li>ConfigMap/Secret</li><li>requests/limits</li><li>readiness/liveness</li><li>HPA</li><li>PDB</li><li>graceful shutdown</li><li>metrics</li><li>rolling update</li></ul></section><section id="definition-of-done"><h2>Definition of done</h2><div class="callout ">Phải chứng minh scale down và rollout không làm mất request/job trong điều kiện bình thường.</div></section>

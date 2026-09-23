@@ -1,0 +1,5 @@
+<section id="expand-contract"><h2>Expand/contract</h2><div class="diagram"><pre>Deploy 1: add new nullable column
+Deploy 2: app writes old + new
+Deploy 3: backfill / switch reads
+Deploy 4: remove old usage
+Deploy 5: drop old column</pre></div></section><section id="danger"><h2>Danger</h2><p>Rename/drop trực tiếp có thể làm pod version cũ crash trong lúc rollout.</p></section><section id="migration-ownership"><h2>Migration ownership</h2><p>Migration nên có version, observability và rollback/forward strategy rõ.</p></section>

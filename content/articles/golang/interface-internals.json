@@ -1,0 +1,30 @@
+{
+  "id": "season-02-runtime-08-interface-internals",
+  "title": "Interface Internals và Typed nil",
+  "description": "Dynamic type, dynamic value, boxing và bug `err != nil` khiến nhiều Go dev từng bối rối.",
+  "type": "article",
+  "domain": "golang",
+  "category": "runtime",
+  "tags": [
+    "golang",
+    "runtime"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-runtime",
+      "order": 23
+    }
+  ],
+  "path_order": 23,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/interface-internals/",
+  "source": "content/articles/golang/interface-internals.html",
+  "legacy_url": "/season-02-runtime/08-interface-internals.html",
+  "authors": [
+    "tiecont"
+  ]
+}

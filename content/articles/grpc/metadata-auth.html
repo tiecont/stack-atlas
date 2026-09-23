@@ -1,0 +1,3 @@
+<section id="client-metadata"><h2>Client metadata</h2><pre><code>md := metadata.Pairs(&quot;authorization&quot;, &quot;Bearer &quot;+token)
+ctx := metadata.NewOutgoingContext(ctx, md)
+resp, err := client.GetUser(ctx, req)</code></pre></section><section id="server"><h2>Server</h2><p>Server đọc incoming metadata và auth interceptor có thể reject trước khi handler chạy.</p></section><section id="kh-ng-l-m-d-ng"><h2>Không lạm dụng</h2><p>Business payload nên nằm trong message; metadata dành cho cross-cutting context.</p></section>

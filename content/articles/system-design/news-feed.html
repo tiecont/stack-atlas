@@ -1,0 +1,3 @@
+<section id="write-fanout"><h2>Write fanout</h2><div class="diagram"><pre>Post -&gt; followers&#x27; feed caches
+fast reads, expensive celebrity writes</pre></div></section><section id="read-fanout"><h2>Read fanout</h2><div class="diagram"><pre>Read -&gt; gather recent posts from followed users
+cheap writes, expensive reads</pre></div></section><section id="hybrid"><h2>Hybrid</h2><p>Thường dùng hybrid: normal users fanout-on-write, celebrity accounts handled differently.</p></section>

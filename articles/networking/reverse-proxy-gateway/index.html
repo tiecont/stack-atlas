@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reverse Proxy và API Gateway bằng Go · Stack Atlas</title><meta name="description" content="Hiểu proxying, forwarding headers, upstream selection và vì sao gateway là một network boundary.">
+  <meta property="og:title" content="Reverse Proxy và API Gateway bằng Go · Stack Atlas"><meta property="og:description" content="Hiểu proxying, forwarding headers, upstream selection và vì sao gateway là một network boundary.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-04-networking-with-go-14-reverse-proxy-gateway"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/networking/">Networking</a><span>/</span><a href="/topics/networking/#category-networking">Networking</a><span>/</span>Reverse Proxy và API Gateway bằng Go</div><header class="article-header"><span class="eyebrow">Networking · Networking</span><h1>Reverse Proxy và API Gateway bằng Go</h1><p>Hiểu proxying, forwarding headers, upstream selection và vì sao gateway là một network boundary.</p><div class="article-meta"><span>Networking</span><button class="complete-toggle" type="button" data-progress-toggle="season-04-networking-with-go-14-reverse-proxy-gateway" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#proxy">1. ReverseProxy với Rewrite</a><a class="toc-level-2" href="#headers">2. Forwarding headers là trust boundary</a><a class="toc-level-2" href="#gateway">3. Gateway nên làm gì?</a><a class="toc-level-2" href="#failure">4. Proxy cũng cần resilience</a><a class="toc-level-3" href="#ngu-n-c-th-m">Nguồn &amp; đọc thêm</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Networking with Go · Lesson 14</strong></a></aside><article class="article-body"><p class="lead">Reverse proxy nhận HTTP request từ client, tạo outbound request tới backend rồi chuyển response trở lại. Go có <code>net/http/httputil.ReverseProxy</code> để xây proxy behavior mà không cần tự copy mọi chi tiết HTTP.</p>
+<figure class="figure"><svg viewBox="0 0 900 270" role="img" aria-label="Reverse proxy boundary"><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><text x="450" y="36" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Reverse proxy boundary</text><path d="M210 137.5 C240 137.5,240 137.5,270 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M460 137.5 C490 137.5,505 95.0,535 95.0" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M700 95.0 C730 95.0,505 185.0,535 185.0" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M700 185.0 C730 185.0,730 137.5,760 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><rect x="45" y="105" width="165" height="65" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/><text x="127.5" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Client</text><rect x="270" y="105" width="190" height="65" rx="16" fill="#f3e8ff" stroke="#d8b4fe"/><text x="365.0" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Reverse Proxy</text><rect x="535" y="65" width="165" height="60" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="617.5" y="100.0" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Service A</text><rect x="535" y="155" width="165" height="60" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="617.5" y="190.0" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Service B</text><rect x="760" y="105" width="95" height="65" rx="16" fill="#fef3c7" stroke="#fcd34d"/><text x="807.5" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Data</text></svg><figcaption>Proxy có thể route, add observability, auth/rate-limit và chọn upstream, nhưng cũng trở thành failure boundary quan trọng.</figcaption></figure>
+<h2 id="proxy">1. ReverseProxy với Rewrite</h2>
+<pre><span class="code-label">go</span><code>target, _ := url.Parse("http://127.0.0.1:9000")
+proxy := &amp;httputil.ReverseProxy{
+    Rewrite: func(pr *httputil.ProxyRequest) {
+        pr.SetURL(target)
+        pr.SetXForwarded()
+    },
+}
+
+http.ListenAndServe(":8080", proxy)</code></pre>
+<p>API hiện đại của <code>ReverseProxy</code> cung cấp <code>Rewrite</code> và <code>ProxyRequest</code> để kiểm soát outbound request rõ hơn.</p>
+<h2 id="headers">2. Forwarding headers là trust boundary</h2>
+<p><code>X-Forwarded-For</code>, <code>X-Forwarded-Proto</code> và host information thường được dùng để giữ metadata qua proxy. Nhưng bạn phải biết proxy nào đáng tin, vì client cũng có thể tự gửi header nếu edge không sanitize.</p>
+<h2 id="gateway">3. Gateway nên làm gì?</h2>
+<ul><li>Routing và protocol boundary.</li><li>Authentication ở edge khi phù hợp.</li><li>Rate limit / quota.</li><li>Tracing/request ID.</li><li>Timeout và upstream policy.</li></ul>
+<div class="callout warn"><strong>Đừng nhét business logic vào gateway</strong>Nếu gateway trở thành nơi chứa mọi rule domain, nó nhanh chóng trở thành distributed monolith ở edge.</div>
+<h2 id="failure">4. Proxy cũng cần resilience</h2>
+<p>Upstream timeout, connection pool, retry, body streaming và client cancellation đều ảnh hưởng proxy behavior. Một proxy đơn giản trong lab khác rất xa gateway production chịu hàng chục nghìn RPS.</p>
+<section id="sources" class="sources"><h3 id="ngu-n-c-th-m">Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net/http/httputil#ReverseProxy" target="_blank" rel="noreferrer">httputil.ReverseProxy</a></li><li><a href="https://pkg.go.dev/net/http/httputil#ProxyRequest.SetXForwarded" target="_blank" rel="noreferrer">ProxyRequest.SetXForwarded</a></li></ul></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/networking/streaming-sse-websocket/?path=golang-backend"><small>Previous</small><strong>Streaming, SSE và WebSocket</strong></a><a href="/articles/networking/grpc-debugging-lab/?path=golang-backend"><small>Next</small><strong>gRPC + Network Debugging: Bài tốt nghiệp Season 04</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

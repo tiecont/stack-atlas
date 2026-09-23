@@ -1,0 +1,4 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>client -&gt; service name -&gt; discovery/DNS -&gt; instances
+                                  |-&gt; pod A
+                                  |-&gt; pod B
+                                  |-&gt; pod C</pre></div></section><section id="client-side-vs-proxy-side"><h2>Client-side vs proxy-side</h2><p>Client có thể tự chọn endpoint, hoặc gửi tới proxy/load balancer. Kubernetes thường cho bạn service discovery qua DNS + Service abstraction.</p></section><section id="health"><h2>Health</h2><p>Discovery chỉ hữu ích nếu health/readiness phản ánh đúng khả năng nhận traffic.</p></section>

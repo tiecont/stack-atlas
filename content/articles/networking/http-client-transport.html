@@ -1,0 +1,31 @@
+<p class="lead">Trong Go, <code>http.Client</code> là API cấp cao; <code>http.Transport</code> mới là nơi quản lý connection, proxy, keep-alive và nhiều network policy quan trọng.</p>
+<figure class="figure"><svg viewBox="0 0 900 320"><text x="450" y="34" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">HTTP connection reuse</text>
+        <rect x="65" y="105" width="190" height="72" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><text x="160" y="146" text-anchor="middle" font-weight="800">http.Client</text>
+        <rect x="355" y="82" width="190" height="118" rx="18" fill="#f3e8ff" stroke="#d8b4fe"/><text x="450" y="124" text-anchor="middle" font-weight="800">Transport</text><text x="450" y="151" text-anchor="middle" fill="#64748b">idle connection pool</text>
+        <rect x="645" y="105" width="190" height="72" rx="18" fill="#dcfce7" stroke="#86efac"/><text x="740" y="146" text-anchor="middle" font-weight="800">Backend</text>
+        <path d="M255 140 L355 140" stroke="#38bdf8" stroke-width="5"/><path d="M545 140 L645 140" stroke="#38bdf8" stroke-width="5"/><path d="M645 180 C560 255,340 255,255 180" stroke="#14b8a6" stroke-width="4" fill="none" stroke-dasharray="8 6"/><text x="450" y="270" text-anchor="middle" fill="#475569">Reuse TCP/TLS connection → giảm handshake, latency và sockets.</text></svg><figcaption>Transport nên được reuse. Tạo Transport mới cho từng request phá vỡ connection pooling và làm tăng handshake/socket churn.</figcaption></figure>
+<h2 id="reuse">1. Reuse Client và Transport</h2>
+<pre><span class="code-label">go</span><code>var transport = &amp;http.Transport{
+    MaxIdleConns:        200,
+    MaxIdleConnsPerHost: 50,
+    IdleConnTimeout:     90 * time.Second,
+}
+
+var client = &amp;http.Client{
+    Transport: transport,
+    Timeout:   5 * time.Second,
+}</code></pre>
+<p>Các con số trên chỉ là ví dụ. Pool sizing phải dựa trên concurrency, số host, latency và upstream behavior.</p>
+<div class="callout "><strong>Theo tài liệu net/http</strong>Transport cache connections để reuse và nên được tái sử dụng thay vì tạo theo từng request. Transport cũng an toàn cho concurrent use.</div>
+<h2 id="body">2. Response body và reuse</h2>
+<pre><span class="code-label">go</span><code>resp, err := client.Do(req)
+if err != nil { return err }
+defer resp.Body.Close()
+
+body, err := io.ReadAll(io.LimitReader(resp.Body, 1&lt;&lt;20))</code></pre>
+<p>Đóng body là bắt buộc về resource lifecycle. Với HTTP/1.x, việc đọc body đến EOF trong các trường hợp thích hợp còn giúp connection có cơ hội reuse.</p>
+<h2 id="saturation">3. Pool cũng là một resource limit</h2>
+<p>Nếu service tạo outbound concurrency lớn hơn khả năng downstream, chỉ tăng connection limit có thể chuyển bottleneck sang server kia. Hãy kết hợp pool policy với timeout, bounded concurrency và rate limit.</p>
+<h2 id="default">4. DefaultClient không phải sai, nhưng explicit policy tốt hơn</h2>
+<p>Library code thường nên nhận client từ caller để test và cấu hình. Application code production thường nên khai báo client theo dependency thay vì rải <code>http.Get</code> khắp codebase.</p>
+<section id="sources" class="sources"><h3>Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net/http#Transport" target="_blank" rel="noreferrer">http.Transport</a></li><li><a href="https://pkg.go.dev/net/http#Client" target="_blank" rel="noreferrer">http.Client</a></li></ul></section>

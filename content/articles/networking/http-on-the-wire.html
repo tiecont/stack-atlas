@@ -1,0 +1,21 @@
+<p class="lead">HTTP là application protocol chạy trên transport. Framework làm HTTP trông như function call, nhưng trên wire vẫn là request, headers, body và response đi qua connection.</p>
+<h2 id="request">1. Request có cấu trúc</h2>
+<pre><span class="code-label">http</span><code>GET /users/42?expand=orders HTTP/1.1
+Host: api.example.com
+Accept: application/json
+Authorization: Bearer ...</code></pre>
+<p>Method và path không phải function name. Headers mang metadata. Body có thể không tồn tại. Response cũng có status line, headers và body.</p>
+<h2 id="keepalive">2. Một TCP connection có thể phục vụ nhiều HTTP request</h2>
+<p>Việc reuse connection giúp tránh lặp lại TCP/TLS handshake. Đây là lý do connection pooling ở HTTP client quan trọng đến vậy.</p>
+<figure class="figure"><svg viewBox="0 0 900 270" role="img" aria-label="Một connection, nhiều request tuần tự hoặc multiplexed tùy protocol"><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><text x="450" y="36" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Một connection, nhiều request tuần tự hoặc multiplexed tùy protocol</text><path d="M240 137.5 C270 137.5,285 137.5,315 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M565 137.5 C595 137.5,610 137.5,640 137.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><rect x="65" y="105" width="175" height="65" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/><text x="152.5" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Client</text><rect x="315" y="105" width="250" height="65" rx="16" fill="#f3e8ff" stroke="#d8b4fe"/><text x="440.0" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">TCP/TLS connection</text><rect x="640" y="105" width="195" height="65" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="737.5" y="142.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Server</text></svg><figcaption>HTTP semantics nằm phía trên connection; cách nhiều request chia sẻ connection phụ thuộc HTTP version.</figcaption></figure>
+<h2 id="body">3. Body là stream</h2>
+<p>Trong Go, <code>Request.Body</code> và <code>Response.Body</code> là stream interface. Bạn không bắt buộc load toàn bộ payload vào RAM. Đây là lợi thế lớn khi upload/download dữ liệu lớn.</p>
+<pre><span class="code-label">go</span><code>resp, err := client.Do(req)
+if err != nil { return err }
+defer resp.Body.Close()
+
+_, err = io.Copy(dst, resp.Body)</code></pre>
+<div class="callout "><strong>Một thói quen quan trọng</strong>HTTP response body cần được đóng. Connection reuse còn phụ thuộc vào việc body được xử lý đúng theo semantics của transport.</div>
+<h2 id="status">4. HTTP error không giống network error</h2>
+<p><code>503 Service Unavailable</code> nghĩa là bạn đã nhận được HTTP response. <code>connection refused</code> nghĩa là chưa có HTTP response nào cả. Tách hai loại lỗi này là nền tảng cho retry và observability.</p>
+<section id="sources" class="sources"><h3>Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net/http#Request" target="_blank" rel="noreferrer">net/http Request</a></li><li><a href="https://www.rfc-editor.org/rfc/rfc9110" target="_blank" rel="noreferrer">RFC 9110 HTTP Semantics</a></li></ul></section>

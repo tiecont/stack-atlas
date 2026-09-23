@@ -1,0 +1,7 @@
+<section id="inbox"><h2>Inbox</h2><div class="diagram"><pre>Kafka message(id=abc)
+   |
+Consumer
+   |
+INSERT inbox(abc) UNIQUE
+   |
+process business state</pre></div></section><section id="transaction"><h2>Transaction</h2><p>Inbox marker và update business state thường nằm trong cùng local transaction.</p></section><section id="alternative"><h2>Alternative</h2><p>Một số operation tự nhiên idempotent bằng state/version hoặc unique constraint và không cần bảng inbox riêng.</p></section>

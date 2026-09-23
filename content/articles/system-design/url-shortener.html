@@ -1,0 +1,2 @@
+<section id="core"><h2>Core</h2><div class="diagram"><pre>POST /shorten -&gt; ID generator -&gt; DB
+GET /abc123 -&gt; Cache -&gt; DB -&gt; redirect</pre></div></section><section id="decisions"><h2>Decisions</h2><ul><li>random vs sequential id</li><li>collision handling</li><li>cache TTL</li><li>custom alias</li><li>analytics async</li></ul></section><section id="scale"><h2>Scale</h2><p>Read-heavy workload phù hợp cache/CDN; write path đơn giản hơn.</p></section>

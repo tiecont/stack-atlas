@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-11-n-plus-one-batching",
+  "title": "N+1 Query và Batching",
+  "description": "Phát hiện vòng lặp query và gom dữ liệu bằng JOIN, IN, batch hoặc prefetch hợp lý.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 90
+    }
+  ],
+  "path_order": 90,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/n-plus-one-batching/",
+  "source": "content/articles/postgresql/n-plus-one-batching.html",
+  "legacy_url": "/season-06-postgresql-with-go/11-n-plus-one-batching.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,4 @@
+<section id="retry-budget"><h2>Retry budget</h2><p>Ngoài max-attempt trên từng request, hệ thống lớn nên giới hạn tổng lượng retry so với traffic gốc.</p></section><section id="idempotency-key"><h2>Idempotency key</h2><pre><code>POST /payments
+Idempotency-Key: 9f4b...
+
+// server persists key -&gt; result</code></pre></section><section id="nguy-n-t-c"><h2>Nguyên tắc</h2><div class="callout ">Không retry write mù quáng. Nếu không biết request trước đã commit chưa, duplicate side effect là rủi ro thật.</div></section>

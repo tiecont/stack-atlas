@@ -1,0 +1,7 @@
+<section id="multi-stage"><h2>Multi-stage</h2><div class="diagram"><pre>builder image
+  |
+go build
+  v
+runtime image
+  |
+single Go binary</pre></div></section><section id="trade-off"><h2>Trade-off</h2><p>Distroless/scratch giảm attack surface nhưng debugging shell-based khó hơn. Chọn theo operating model.</p></section><section id="checklist"><h2>Checklist</h2><ul><li>non-root</li><li>read-only filesystem khi phù hợp</li><li>CA certificates</li><li>timezone nếu cần</li><li>no build tools in runtime image</li></ul></section>

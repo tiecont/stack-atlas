@@ -1,0 +1,29 @@
+{
+  "id": "season-15-observability-04-metrics-basics",
+  "title": "Metrics: Counter, Gauge, Histogram",
+  "description": "Chọn metric type đúng để không tự đánh lừa mình.",
+  "type": "article",
+  "domain": "observability",
+  "category": "observability",
+  "tags": [
+    "observability"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "observability",
+      "order": 208
+    }
+  ],
+  "path_order": 208,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/observability/metrics-basics/",
+  "source": "content/articles/observability/metrics-basics.html",
+  "legacy_url": "/season-15-observability/04-metrics-basics.html",
+  "authors": [
+    "tiecont"
+  ]
+}

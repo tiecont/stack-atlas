@@ -1,0 +1,5 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Saga Orchestrator
+  |-&gt; Order: create
+  |-&gt; Inventory: reserve
+  |-&gt; Payment: charge
+  |-&gt; Order: confirm</pre></div></section><section id="u-i-m"><h2>Ưu điểm</h2><ul><li>workflow nhìn thấy tập trung</li><li>dễ quan sát state machine</li><li>dễ implement timeout/retry/compensation</li></ul></section><section id="nh-i"><h2>Đánh đổi</h2><p>Orchestrator trở thành thành phần quan trọng và có coupling tới workflow business.</p></section>

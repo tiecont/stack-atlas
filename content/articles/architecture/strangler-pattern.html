@@ -1,0 +1,6 @@
+<section id="migration"><h2>Migration</h2><div class="diagram"><pre>Client
+  |
+Router
+ |  |  \-&gt; New Service
+ |
+ \----&gt; Legacy Monolith</pre></div></section><section id="steps"><h2>Steps</h2><ul><li>chọn capability</li><li>đặt facade/router</li><li>mirror/redirect traffic</li><li>migrate data ownership</li><li>remove legacy path</li></ul></section><section id="goal"><h2>Goal</h2><p>Giảm migration risk và cho phép rollback nhỏ theo từng capability.</p></section>

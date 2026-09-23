@@ -1,0 +1,29 @@
+{
+  "id": "season-15-observability-08-grafana-dashboards",
+  "title": "Dashboard cho Production",
+  "description": "Dashboard tốt trả lời câu hỏi vận hành, không chỉ đẹp.",
+  "type": "article",
+  "domain": "observability",
+  "category": "observability",
+  "tags": [
+    "observability"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "observability",
+      "order": 212
+    }
+  ],
+  "path_order": 212,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/observability/grafana-dashboards/",
+  "source": "content/articles/observability/grafana-dashboards.html",
+  "legacy_url": "/season-15-observability/08-grafana-dashboards.html",
+  "authors": [
+    "tiecont"
+  ]
+}

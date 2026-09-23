@@ -1,0 +1,4 @@
+<section id="sql"><h2>SQL</h2><pre><code>row := db.QueryRowContext(ctx,
+    &quot;select id from users where email=$1&quot;,
+    email,
+)</code></pre></section><section id="command-injection"><h2>Command injection</h2><p>Không ghép input user vào shell command. Ưu tiên API trực tiếp hoặc argument list an toàn.</p></section><section id="validation"><h2>Validation</h2><ul><li>schema</li><li>length</li><li>range</li><li>format</li><li>allow-list khi phù hợp</li></ul></section>

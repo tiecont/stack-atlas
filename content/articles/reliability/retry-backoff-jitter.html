@@ -1,0 +1,6 @@
+<section id="retry-kh-ng-mi-n-ph"><h2>Retry không miễn phí</h2><p>Nếu 10.000 request cùng fail và mỗi request retry 3 lần, downstream có thể nhận thêm hàng chục nghìn request đúng lúc nó yếu nhất.</p></section><section id="backoff"><h2>Backoff</h2><pre><code>delay := 100 * time.Millisecond
+for attempt := 0; attempt &lt; 5; attempt++ {
+    if err := call(); err == nil { return nil }
+    time.Sleep(delay)
+    delay *= 2
+}</code></pre></section><section id="jitter"><h2>Jitter</h2><p>Jitter làm thời điểm retry lệch nhau, giảm thundering herd.</p><div class="callout warn">Chỉ retry lỗi có khả năng tạm thời và khi operation có semantics an toàn hoặc idempotent.</div></section>

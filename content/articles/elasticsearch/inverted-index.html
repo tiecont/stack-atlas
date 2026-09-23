@@ -1,0 +1,6 @@
+<section id="example"><h2>Example</h2><div class="diagram"><pre>Doc1: &quot;go concurrency&quot;
+Doc2: &quot;go backend&quot;
+
+go          -&gt; Doc1, Doc2
+concurrency -&gt; Doc1
+backend     -&gt; Doc2</pre></div></section><section id="why-fast"><h2>Why fast</h2><p>Search không scan mọi document; engine tra term dictionary và postings lists.</p></section><section id="trade-off"><h2>Trade-off</h2><p>Indexing tạo cấu trúc phụ tốn disk và write work để đổi lấy search speed.</p></section>

@@ -1,0 +1,30 @@
+{
+  "id": "season-02-runtime-05-slice-internals",
+  "title": "Slice Internals sâu hơn",
+  "description": "Header, backing array, growth, retention và aliasing dưới góc nhìn runtime/performance.",
+  "type": "article",
+  "domain": "golang",
+  "category": "runtime",
+  "tags": [
+    "golang",
+    "runtime"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-runtime",
+      "order": 20
+    }
+  ],
+  "path_order": 20,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/slice-internals/",
+  "source": "content/articles/golang/slice-internals.html",
+  "legacy_url": "/season-02-runtime/05-slice-internals.html",
+  "authors": [
+    "tiecont"
+  ]
+}

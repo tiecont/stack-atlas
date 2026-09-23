@@ -1,0 +1,8 @@
+<section id="progression"><h2>Progression</h2><div class="diagram"><pre>1k rps
+ -&gt; stateless scale
+ -&gt; CDN/cache
+ -&gt; sharding
+ -&gt; async work
+ -&gt; multi-region
+ -&gt; load shedding
+ -&gt; capacity planning</pre></div></section><section id="key-insight"><h2>Key insight</h2><p>Mục tiêu không phải làm DB chịu 10M queries/s; mục tiêu là phần lớn request không đi tới DB.</p></section><section id="failure-domains"><h2>Failure domains</h2><ul><li>regional routing</li><li>retry storm</li><li>hot shard</li><li>cache stampede</li><li>dependency saturation</li></ul></section>

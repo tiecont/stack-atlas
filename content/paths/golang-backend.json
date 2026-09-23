@@ -1,0 +1,32 @@
+{
+  "id": "golang-backend",
+  "title": "Golang Backend Engineering",
+  "description": "A structured route from Go fundamentals to reliable, distributed production systems.",
+  "status": "published",
+  "modules": [
+    {"id":"go-fundamentals","title":"Go Fundamentals","season":"season-01-fundamentals","group":"Golang Core","domain":"golang","category":"fundamentals"},
+    {"id":"go-runtime","title":"Inside Go Runtime","season":"season-02-runtime","group":"Golang Core","domain":"golang","category":"runtime"},
+    {"id":"go-concurrency","title":"Go Concurrency","season":"season-03-concurrency","group":"Golang Core","domain":"golang","category":"concurrency"},
+    {"id":"networking-with-go","title":"Networking with Go","season":"season-04-networking-with-go","group":"Golang Core","domain":"networking","category":"networking"},
+    {"id":"production-http","title":"Production HTTP Server","season":"season-05-production-http-server","group":"Golang Core","domain":"golang","category":"http-services"},
+    {"id":"postgresql-with-go","title":"PostgreSQL with Go","season":"season-06-postgresql-with-go","group":"Data & Messaging","domain":"postgresql","category":"databases"},
+    {"id":"redis-caching","title":"Redis & Caching","season":"season-07-redis-caching","group":"Data & Messaging","domain":"redis","category":"caching"},
+    {"id":"messaging-patterns","title":"Messaging","season":"season-08-messaging","group":"Data & Messaging","domain":"messaging","category":"messaging"},
+    {"id":"kafka-deep-dive","title":"Kafka Deep Dive","season":"season-09-kafka-deep-dive","group":"Data & Messaging","domain":"kafka","category":"stream-processing"},
+    {"id":"distributed-systems","title":"Distributed Systems","season":"season-10-distributed-systems","group":"Distributed Systems","domain":"distributed-systems","category":"distributed-systems"},
+    {"id":"reliability-engineering","title":"Reliability Engineering","season":"season-11-reliability-engineering","group":"Distributed Systems","domain":"reliability","category":"reliability"},
+    {"id":"distributed-transactions","title":"Distributed Transactions","season":"season-12-distributed-transactions","group":"Distributed Systems","domain":"distributed-systems","category":"transactions"},
+    {"id":"microservices-architecture","title":"Microservices Architecture","season":"season-13-microservices-architecture","group":"Distributed Systems","domain":"architecture","category":"architecture"},
+    {"id":"grpc-with-go","title":"gRPC","season":"season-14-grpc-with-go","group":"Distributed Systems","domain":"grpc","category":"rpc"},
+    {"id":"observability","title":"Observability","season":"season-15-observability","group":"Production Engineering","domain":"observability","category":"observability"},
+    {"id":"performance-engineering","title":"Performance Engineering","season":"season-16-performance-engineering","group":"Production Engineering","domain":"performance","category":"performance"},
+    {"id":"security-for-backends","title":"Security","season":"season-17-security-for-go-backend","group":"Production Engineering","domain":"security","category":"security"},
+    {"id":"production-go","title":"Production Go","season":"season-18-production-go-engineering","group":"Production Engineering","domain":"golang","category":"fundamentals"},
+    {"id":"kubernetes","title":"Kubernetes","season":"season-19-kubernetes-for-go-backend","group":"Production Engineering","domain":"kubernetes","category":"orchestration"},
+    {"id":"distributed-data","title":"Distributed Data","season":"season-20-distributed-data","group":"Data & Architecture","domain":"distributed-systems","category":"data-systems"},
+    {"id":"consensus","title":"Consensus","season":"season-21-consensus-coordination","group":"Data & Architecture","domain":"distributed-systems","category":"consensus"},
+    {"id":"elasticsearch","title":"Elasticsearch","season":"season-22-elasticsearch-deep-dive","group":"Data & Architecture","domain":"elasticsearch","category":"search"},
+    {"id":"architecture-patterns","title":"Architecture Patterns","season":"season-23-architecture-patterns","group":"Data & Architecture","domain":"architecture","category":"architecture"},
+    {"id":"system-design","title":"System Design","season":"season-24-system-design","group":"Data & Architecture","domain":"system-design","category":"system-design"}
+  ]
+}

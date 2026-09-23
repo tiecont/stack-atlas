@@ -1,0 +1,10 @@
+<section id="ba-m-h-nh"><h2>Ba mô hình</h2><div class="diagram"><pre>Monolith
+  [ one deployable ]
+
+Modular Monolith
+  [ user | order | payment ]
+
+Microservices
+  user svc   order svc   payment svc
+     |          |            |
+   own DB     own DB       own DB</pre></div></section><section id="i-m-c-t-l-i"><h2>Điểm cốt lõi</h2><p>Microservices đổi local function call thành network call và đổi một deployment thành nhiều failure domain.</p></section><section id="khi-ch-a-n-n-t-ch"><h2>Khi chưa nên tách</h2><div class="callout warn">Nếu team nhỏ, domain chưa ổn định và deployment monolith chưa phải bottleneck, modular monolith thường rẻ hơn về độ phức tạp.</div></section>

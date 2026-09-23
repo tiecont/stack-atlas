@@ -1,0 +1,29 @@
+{
+  "id": "season-08-messaging-10-nats-mental-model",
+  "title": "NATS và JetStream Mental Model",
+  "description": "Subject-based messaging, request/reply và khi durable stream khác Core NATS.",
+  "type": "article",
+  "domain": "messaging",
+  "category": "messaging",
+  "tags": [
+    "messaging"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "messaging-patterns",
+      "order": 121
+    }
+  ],
+  "path_order": 121,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/messaging/nats-mental-model/",
+  "source": "content/articles/messaging/nats-mental-model.html",
+  "legacy_url": "/season-08-messaging/10-nats-mental-model.html",
+  "authors": [
+    "tiecont"
+  ]
+}

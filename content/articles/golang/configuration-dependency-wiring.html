@@ -1,0 +1,8 @@
+<p class="lead">Production service dễ debug hơn khi dependency graph được tạo rõ ở startup. Global singleton tiện lúc đầu nhưng làm test, lifecycle và ownership khó kiểm soát.</p><h2 id="1-composition-root">1. Composition root</h2><pre><span class="code-label">go</span><code>func main() {
+    cfg := mustLoadConfig()
+    db := mustOpenDB(cfg.DatabaseURL)
+    repo := NewUserRepo(db)
+    svc := NewUserService(repo)
+    handler := NewHandler(svc)
+    runServer(cfg, handler)
+}</code></pre><h2 id="2-fail-fast-v-i-config">2. Fail fast với config</h2><p>Port sai, DSN thiếu, secret rỗng hay timeout âm nên fail ngay lúc startup thay vì đợi request đầu tiên mới phát hiện.</p><h2 id="3-constructor-explicit">3. Constructor explicit</h2><p>Constructor nhận interface hoặc concrete dependency cần thiết giúp dependency graph nhìn thấy được bằng code và compiler.</p><h2 id="4-lifecycle-ownership">4. Lifecycle ownership</h2><p>Ai tạo resource thì nên rõ ai đóng nó. DB pool, tracer provider và server đều có shutdown lifecycle.</p><div class="callout warn"><strong>Design test</strong>Nếu unit test phải boot cả application chỉ để test một service, dependency boundary có thể đang quá chặt.</div><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Khởi tạo dependency ở startup.</li><li>Validate config một lần, sớm.</li><li>Lifecycle ownership phải rõ.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Refactor một package đang dùng global DB thành constructor injection.</div>

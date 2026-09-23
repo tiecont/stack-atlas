@@ -1,0 +1,15 @@
+<h2 id="s1">1. Deadlock là gì?</h2><p class="lead">Deadlock xảy ra khi các goroutine chờ nhau theo cách không ai còn có thể tiến lên.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Circular wait">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Circular wait</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Goroutine A</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Waits for B</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Goroutine B</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">A giữ resource B cần, B giữ resource A cần.</text></svg><figcaption>A giữ resource B cần, B giữ resource A cần.</figcaption></figure><h2 id="s2">2. Deadlock với channel</h2><pre><span class="code-label">Go</span><code>ch := make(chan int)
+ch &lt;- 1 // không có receiver
+fmt.Println(&lt;-ch)</code></pre><h2 id="s3">3. Deadlock với nhiều mutex</h2><pre><span class="code-label">Go</span><code>// Goroutine A
+mu1.Lock()
+mu2.Lock()
+
+// Goroutine B
+mu2.Lock()
+mu1.Lock()</code></pre><p>Hai goroutine lấy lock khác thứ tự có thể tạo circular wait.</p><h2 id="s4">4. Lock ordering</h2><p>Một cách phòng tránh mạnh là định nghĩa thứ tự global khi cần giữ nhiều lock: luôn lock A trước B, không bao giờ ngược lại.</p><h2 id="s5">5. Deadlock không phải lúc nào runtime cũng phát hiện</h2><div class="warn callout"><strong>Lưu ý</strong>Runtime chỉ có thể báo một số deadlock toàn chương trình. Partial deadlock trong server vẫn có thể tồn tại trong khi goroutine khác tiếp tục chạy.</div>

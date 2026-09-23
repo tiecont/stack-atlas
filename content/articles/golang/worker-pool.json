@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-10-worker-pool",
+  "title": "Worker Pool",
+  "description": "Giới hạn concurrency để bảo vệ database, API và tài nguyên downstream.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 37
+    }
+  ],
+  "path_order": 37,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/worker-pool/",
+  "source": "content/articles/golang/worker-pool.html",
+  "legacy_url": "/season-03-concurrency/10-worker-pool.html",
+  "authors": [
+    "tiecont"
+  ]
+}

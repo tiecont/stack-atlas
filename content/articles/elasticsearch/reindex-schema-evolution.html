@@ -1,0 +1,4 @@
+<section id="alias-pattern"><h2>Alias pattern</h2><div class="diagram"><pre>write alias -&gt; index_v1
+build index_v2
+reindex/backfill
+switch alias -&gt; index_v2</pre></div></section><section id="zero-downtime"><h2>Zero downtime</h2><p>Alias giúp cutover read/write mà client không đổi index name.</p></section><section id="rollback"><h2>Rollback</h2><p>Giữ old index đủ lâu để rollback khi validation chưa ổn.</p></section>

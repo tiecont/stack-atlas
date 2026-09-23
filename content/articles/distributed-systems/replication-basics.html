@@ -1,0 +1,3 @@
+<section id="leader-follower"><h2>Leader-follower</h2><div class="diagram"><pre>Client write -&gt; Leader
+                |-&gt; Follower A
+                |-&gt; Follower B</pre></div></section><section id="async-replication"><h2>Async replication</h2><p>Nhanh hơn nhưng có replication lag và risk mất recent writes khi failover.</p></section><section id="sync-replication"><h2>Sync replication</h2><p>Consistency/durability mạnh hơn nhưng write latency và availability bị ảnh hưởng.</p></section>

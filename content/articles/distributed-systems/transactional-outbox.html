@@ -1,0 +1,11 @@
+<section id="pattern"><h2>Pattern</h2><div class="diagram"><pre>BEGIN
+  INSERT orders
+  INSERT outbox_event
+COMMIT
+      |
+Outbox Publisher -&gt; Kafka</pre></div></section><section id="schema"><h2>Schema</h2><pre><code>create table outbox_events (
+  id uuid primary key,
+  topic text not null,
+  payload jsonb not null,
+  published_at timestamptz
+);</code></pre></section><section id="i-m-m-nh"><h2>Điểm mạnh</h2><p>DB đảm bảo order và outbox row commit cùng nhau. Publisher có thể retry tới khi publish thành công.</p></section>

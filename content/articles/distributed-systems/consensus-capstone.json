@@ -1,0 +1,30 @@
+{
+  "id": "season-21-consensus-coordination-13-consensus-capstone",
+  "title": "Capstone: Thiết kế Metadata Cluster",
+  "description": "Thiết kế một replicated configuration service với leader, quorum, log và snapshot.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "consensus",
+  "tags": [
+    "distributed-systems",
+    "consensus"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "consensus",
+      "order": 297
+    }
+  ],
+  "path_order": 297,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/consensus-capstone/",
+  "source": "content/articles/distributed-systems/consensus-capstone.html",
+  "legacy_url": "/season-21-consensus-coordination/13-consensus-capstone.html",
+  "authors": [
+    "tiecont"
+  ]
+}

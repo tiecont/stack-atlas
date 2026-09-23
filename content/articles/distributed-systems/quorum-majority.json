@@ -1,0 +1,30 @@
+{
+  "id": "season-21-consensus-coordination-03-quorum-majority",
+  "title": "Quorum và Majority",
+  "description": "Majority tạo giao nhau giữa các tập quyết định.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "consensus",
+  "tags": [
+    "distributed-systems",
+    "consensus"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "consensus",
+      "order": 287
+    }
+  ],
+  "path_order": 287,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/quorum-majority/",
+  "source": "content/articles/distributed-systems/quorum-majority.html",
+  "legacy_url": "/season-21-consensus-coordination/03-quorum-majority.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,3 @@
+<section id="kh-ng-c-backpressure"><h2>Không có backpressure</h2><div class="diagram"><pre>Producer 10k/s -&gt; Queue -&gt; Consumer 2k/s
+                     backlog +8k/s -&gt; memory/lag grows</pre></div></section><section id="chi-n-l-c"><h2>Chiến lược</h2><ul><li>block producer</li><li>bounded queue</li><li>drop theo policy</li><li>rate limit producer</li><li>scale consumer</li><li>batch work</li></ul></section><section id="go-channel"><h2>Go channel</h2><pre><code>jobs := make(chan Job, 1000)
+jobs &lt;- job // blocks when full</code></pre></section>

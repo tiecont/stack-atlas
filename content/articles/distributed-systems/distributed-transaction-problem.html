@@ -1,0 +1,3 @@
+<section id="v-d-order"><h2>Ví dụ order</h2><div class="diagram"><pre>Order Service ----&gt; Payment Service
+      |
+      +-----------&gt; Inventory Service</pre></div><p>Nếu order đã ghi DB nhưng payment thất bại, hệ thống ở trạng thái nào?</p></section><section id="local-acid-kh-ng"><h2>Local ACID không đủ</h2><p>Mỗi service có transaction riêng. Không có rollback tự nhiên xuyên database hoặc service boundary.</p></section><section id="m-c-ti-u"><h2>Mục tiêu</h2><div class="callout ">Thường ta thiết kế consistency bằng state machine, message và compensation thay vì giả vờ có một transaction toàn cục.</div></section>

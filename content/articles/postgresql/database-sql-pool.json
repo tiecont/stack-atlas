@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-02-database-sql-pool",
+  "title": "database/sql và Connection Pool",
+  "description": "Hiểu DB handle, connection reuse, pool wait và các knobs MaxOpen/MaxIdle/Lifetime.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 81
+    }
+  ],
+  "path_order": 81,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/database-sql-pool/",
+  "source": "content/articles/postgresql/database-sql-pool.html",
+  "legacy_url": "/season-06-postgresql-with-go/02-database-sql-pool.html",
+  "authors": [
+    "tiecont"
+  ]
+}

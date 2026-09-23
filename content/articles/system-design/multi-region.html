@@ -1,0 +1,6 @@
+<section id="patterns"><h2>Patterns</h2><ul><li>active-passive</li><li>active-active</li><li>home region</li><li>regional reads + global writes</li></ul></section><section id="hard-parts"><h2>Hard parts</h2><div class="diagram"><pre>Region A write
+   |
+replication lag
+   |
+Region B read
+=&gt; stale? route back? accept?</pre></div></section><section id="decision"><h2>Decision</h2><p>Không có multi-region design tốt nếu chưa biết business consistency và RTO/RPO.</p></section>

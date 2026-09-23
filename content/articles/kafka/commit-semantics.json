@@ -1,0 +1,30 @@
+{
+  "id": "season-09-kafka-deep-dive-10-commit-semantics",
+  "title": "Commit semantics và idempotent consumer",
+  "description": "At-least-once là lựa chọn rất phổ biến vì dễ phục hồi.",
+  "type": "article",
+  "domain": "kafka",
+  "category": "stream-processing",
+  "tags": [
+    "kafka",
+    "stream-processing"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kafka-deep-dive",
+      "order": 133
+    }
+  ],
+  "path_order": 133,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kafka/commit-semantics/",
+  "source": "content/articles/kafka/commit-semantics.html",
+  "legacy_url": "/season-09-kafka-deep-dive/10-commit-semantics.html",
+  "authors": [
+    "tiecont"
+  ]
+}

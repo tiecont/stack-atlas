@@ -1,0 +1,30 @@
+{
+  "id": "season-20-distributed-data-01-distributed-data-mental-model",
+  "title": "Distributed Data Mental Model",
+  "description": "Khi dữ liệu nằm trên nhiều node, mọi quyết định đều là trade-off.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "data-systems",
+  "tags": [
+    "distributed-systems",
+    "data-systems"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-data",
+      "order": 272
+    }
+  ],
+  "path_order": 272,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/distributed-data-mental-model/",
+  "source": "content/articles/distributed-systems/distributed-data-mental-model.html",
+  "legacy_url": "/season-20-distributed-data/01-distributed-data-mental-model.html",
+  "authors": [
+    "tiecont"
+  ]
+}

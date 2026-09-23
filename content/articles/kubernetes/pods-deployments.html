@@ -1,0 +1,7 @@
+<section id="pod"><h2>Pod</h2><p>Pod chứa một hoặc nhiều container cùng network namespace và lifecycle gần nhau.</p></section><section id="deployment"><h2>Deployment</h2><div class="diagram"><pre>Deployment
+  |
+ReplicaSet
+  |
++-- Pod A
++-- Pod B
++-- Pod C</pre></div></section><section id="go-concern"><h2>Go concern</h2><p>App phải stateless hoặc externalize state để pod có thể bị thay thế bất kỳ lúc nào.</p></section>

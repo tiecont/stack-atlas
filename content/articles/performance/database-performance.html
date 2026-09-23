@@ -1,0 +1,3 @@
+<section id="pool-wait"><h2>Pool wait</h2><div class="diagram"><pre>goroutines -&gt; DB pool (20 conns) -&gt; PostgreSQL
+1000 concurrent callers
+=&gt; queue/wait before query</pre></div></section><section id="measure"><h2>Measure</h2><ul><li>query latency</li><li>pool wait duration</li><li>active/idle conns</li><li>rows scanned</li><li>EXPLAIN ANALYZE</li></ul></section><section id="principle"><h2>Principle</h2><div class="callout ">Tăng MaxOpenConns không tự động tăng throughput; DB cũng có capacity limit.</div></section>

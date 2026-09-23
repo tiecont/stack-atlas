@@ -1,0 +1,22 @@
+<p class="lead">UDP không cho bạn reliable ordered stream như TCP. Đổi lại nó có message boundary tự nhiên, overhead thấp và không cần thiết lập connection theo cách TCP làm.</p>
+<h2 id="compare">1. TCP và UDP giải quyết bài toán khác nhau</h2>
+<table style="width:100%;border-collapse:collapse;margin:24px 0"><tr><th style="text-align:left;border-bottom:1px solid #e2e8f0;padding:10px">TCP</th><th style="text-align:left;border-bottom:1px solid #e2e8f0;padding:10px">UDP</th></tr><tr><td style="padding:10px">Ordered byte stream</td><td style="padding:10px">Datagrams</td></tr><tr><td style="padding:10px">Reliability/retransmission</td><td style="padding:10px">Application tự quyết nếu cần reliability</td></tr><tr><td style="padding:10px">Connection state</td><td style="padding:10px">Connectionless semantics</td></tr></table>
+<figure class="figure"><svg viewBox="0 0 900 270" role="img" aria-label="Datagram giữ message boundary"><defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><text x="450" y="36" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Datagram giữ message boundary</text><path d="M255 132.5 C285 132.5,330 132.5,360 132.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><path d="M540 132.5 C570 132.5,615 132.5,645 132.5" stroke="#38bdf8" stroke-width="4" fill="none" marker-end="url(#arr)"/><rect x="75" y="100" width="180" height="65" rx="16" fill="#e0f2fe" stroke="#7dd3fc"/><text x="165.0" y="137.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">packet A</text><rect x="360" y="100" width="180" height="65" rx="16" fill="#f1f5f9" stroke="#cbd5e1"/><text x="450.0" y="137.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">Network</text><rect x="645" y="100" width="180" height="65" rx="16" fill="#dcfce7" stroke="#86efac"/><text x="735.0" y="137.5" text-anchor="middle" fill="#0f172a" font-size="15" font-weight="800">packet A</text></svg><figcaption>Một datagram được nhận như một datagram; khác với TCP là byte stream liên tục.</figcaption></figure>
+<h2 id="go">2. UDP server trong Go</h2>
+<pre><span class="code-label">go</span><code>addr, _ := net.ResolveUDPAddr("udp", ":9999")
+conn, err := net.ListenUDP("udp", addr)
+if err != nil { log.Fatal(err) }
+defer conn.Close()
+
+buf := make([]byte, 2048)
+for {
+    n, peer, err := conn.ReadFromUDP(buf)
+    if err != nil { continue }
+    _, _ = conn.WriteToUDP(buf[:n], peer)
+}</code></pre>
+<h2 id="uses">3. UDP thường xuất hiện ở đâu?</h2>
+<p>DNS truyền thống thường dùng UDP cho nhiều query; telemetry, game networking, discovery protocol và transport hiện đại như QUIC cũng xây trên UDP nhưng tự bổ sung semantics cao hơn.</p>
+<div class="callout note"><strong>Không phải “UDP nhanh hơn TCP”</strong>Đó là cách nói quá đơn giản. UDP cung cấp semantics ít hơn. Nếu ứng dụng tự implement retransmission, ordering, congestion control... thì complexity quay trở lại ở tầng ứng dụng.</div>
+<h2 id="backend">4. Backend engineer nên học tới đâu?</h2>
+<p>Bạn không nhất thiết dùng UDP mỗi ngày, nhưng hiểu nó giúp bạn hiểu DNS, QUIC/HTTP/3 và lý do “không có connection” không đồng nghĩa “không có state ở application”.</p>
+<section id="sources" class="sources"><h3>Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/net#PacketConn" target="_blank" rel="noreferrer">net.PacketConn</a></li><li><a href="https://pkg.go.dev/net#UDPConn" target="_blank" rel="noreferrer">net.UDPConn</a></li></ul></section>

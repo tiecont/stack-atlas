@@ -1,0 +1,29 @@
+{
+  "id": "season-17-security-for-go-backend-09-cors-csrf-cookies",
+  "title": "CORS, CSRF và Cookie Security",
+  "description": "Ba khái niệm dễ bị trộn lẫn nhưng giải quyết các vấn đề khác nhau.",
+  "type": "article",
+  "domain": "security",
+  "category": "security",
+  "tags": [
+    "security"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "security-for-backends",
+      "order": 239
+    }
+  ],
+  "path_order": 239,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/security/cors-csrf-cookies/",
+  "source": "content/articles/security/cors-csrf-cookies.html",
+  "legacy_url": "/season-17-security-for-go-backend/09-cors-csrf-cookies.html",
+  "authors": [
+    "tiecont"
+  ]
+}

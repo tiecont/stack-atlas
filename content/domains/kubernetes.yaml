@@ -1,0 +1,7 @@
+id: kubernetes
+title: Kubernetes
+description: >-
+  Learn how Kubernetes schedules, runs, connects, secures, scales and operates
+  containerized workloads without tying the concepts to one application language.
+icon: kubernetes
+status: published

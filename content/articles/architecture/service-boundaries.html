@@ -1,0 +1,5 @@
+<section id="sai-l-m-ph-bi-n"><h2>Sai lầm phổ biến</h2><div class="diagram"><pre>user-table-service
+order-table-service
+email-table-service
+
+=&gt; chatty network + coupling dữ liệu</pre></div></section><section id="boundary-t-t-h-n"><h2>Boundary tốt hơn</h2><p>Một service nên sở hữu capability có ngôn ngữ domain, invariants và lifecycle tương đối độc lập.</p></section><section id="heuristic"><h2>Heuristic</h2><ul><li>data ownership rõ</li><li>có thể deploy độc lập</li><li>business rule gom cùng nơi</li><li>không cần gọi vòng qua nhiều service cho một invariant nhỏ</li></ul></section>

@@ -1,0 +1,30 @@
+{
+  "id": "season-07-redis-caching-09-penetration-avalanche-hotkeys",
+  "title": "Cache Penetration, Avalanche và Hot Keys",
+  "description": "Ba failure pattern phổ biến và cách nhận biết qua metrics thay vì thuộc tên.",
+  "type": "article",
+  "domain": "redis",
+  "category": "caching",
+  "tags": [
+    "redis",
+    "caching"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "redis-caching",
+      "order": 108
+    }
+  ],
+  "path_order": 108,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/redis/penetration-avalanche-hotkeys/",
+  "source": "content/articles/redis/penetration-avalanche-hotkeys.html",
+  "legacy_url": "/season-07-redis-caching/09-penetration-avalanche-hotkeys.html",
+  "authors": [
+    "tiecont"
+  ]
+}

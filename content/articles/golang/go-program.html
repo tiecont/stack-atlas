@@ -1,0 +1,23 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Khi mới học Go, nhiều người bắt đầu bằng cách ghi nhớ cú pháp. Cách dễ hơn là hiểu một chương trình Go đi qua những lớp nào: source code thuộc một package, package thuộc một module, toolchain kiểm tra và biên dịch code, cuối cùng tạo ra executable hoặc library package.</p><p>Go được thiết kế để vòng lặp “viết → format → test → build” rất ngắn. Bạn nên làm quen với các lệnh chuẩn ngay từ ngày đầu thay vì phụ thuộc vào IDE.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Source code</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Go toolchain</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Executable</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    fmt.Println(&quot;Hello, Go&quot;)
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>`package main` nói rằng package này có thể tạo executable. Hàm `main` là entry point của executable đó. `import "fmt"` đưa package chuẩn `fmt` vào phạm vi sử dụng.</p><p>Chạy bằng `go run .` tiện khi học; build bằng `go build` giúp bạn thấy một đặc tính quan trọng của Go: chương trình thường được phát hành như một binary đã biên dịch.</p><pre><span class="code-label">Example</span><code>go mod init example.com/hello
+go fmt ./...
+go test ./...
+go build ./...
+go run .</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Trong backend, mental model này giúp bạn hiểu tại sao container Go thường rất gọn: build stage chứa toolchain, runtime image chỉ cần binary và những file runtime thực sự cần. Nó cũng giải thích vì sao lỗi compile-time được phát hiện sớm hơn nhiều lỗi kiểu động.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Nhầm package với folder theo nghĩa tuyệt đối; package là đơn vị code, folder là cách tổ chức source phổ biến.</li><li>Dùng `go run file.go` cho project nhiều file rồi tưởng các file khác “không được nhận”. Hãy dùng `go run .`.</li><li>Không chạy `gofmt`/`go fmt`; Go cố tình chuẩn hóa format để giảm tranh luận style.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Package là đơn vị biên dịch và namespace quan trọng.</li><li>Module là đơn vị version/dependency ở cấp project.</li><li>Toolchain chuẩn là một phần rất lớn của trải nghiệm Go.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

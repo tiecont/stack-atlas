@@ -1,0 +1,3 @@
+<section id="ba-lo-i"><h2>Ba loại</h2><div class="diagram"><pre>Server streaming: request -&gt; many responses
+Client streaming: many requests -&gt; response
+Bidi streaming: many &lt;-&gt; many</pre></div></section><section id="use-cases"><h2>Use cases</h2><ul><li>event feed</li><li>large upload</li><li>telemetry</li><li>interactive session</li></ul></section><section id="backpressure"><h2>Backpressure</h2><p>Streaming không loại bỏ backpressure; sender vẫn cần tôn trọng khả năng đọc của peer.</p></section>

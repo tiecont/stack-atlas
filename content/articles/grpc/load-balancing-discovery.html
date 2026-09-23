@@ -1,0 +1,7 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Client
+  |
+resolver
+  |
+addresses [A B C]
+  |
+balancer -&gt; SubConns</pre></div></section><section id="kubernetes"><h2>Kubernetes</h2><p>Bạn có thể đi qua Service/load balancer hoặc dùng resolver/balancer phù hợp với hạ tầng.</p></section><section id="connection-reuse"><h2>Connection reuse</h2><p>Không tạo connection mới cho từng RPC; reuse ClientConn.</p></section>

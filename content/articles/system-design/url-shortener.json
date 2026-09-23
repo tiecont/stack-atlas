@@ -1,0 +1,29 @@
+{
+  "id": "season-24-system-design-03-url-shortener",
+  "title": "Design URL Shortener",
+  "description": "Bài nhập môn cho key generation, caching và read-heavy scale.",
+  "type": "article",
+  "domain": "system-design",
+  "category": "system-design",
+  "tags": [
+    "system-design"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "system-design",
+      "order": 328
+    }
+  ],
+  "path_order": 328,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/system-design/url-shortener/",
+  "source": "content/articles/system-design/url-shortener.html",
+  "legacy_url": "/season-24-system-design/03-url-shortener.html",
+  "authors": [
+    "tiecont"
+  ]
+}

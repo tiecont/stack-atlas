@@ -1,0 +1,29 @@
+{
+  "id": "season-24-system-design-13-metrics-platform",
+  "title": "Design Metrics Platform",
+  "description": "Ingest high-cardinality time-series và query theo thời gian.",
+  "type": "article",
+  "domain": "system-design",
+  "category": "system-design",
+  "tags": [
+    "system-design"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "system-design",
+      "order": 338
+    }
+  ],
+  "path_order": 338,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/system-design/metrics-platform/",
+  "source": "content/articles/system-design/metrics-platform.html",
+  "legacy_url": "/season-24-system-design/13-metrics-platform.html",
+  "authors": [
+    "tiecont"
+  ]
+}

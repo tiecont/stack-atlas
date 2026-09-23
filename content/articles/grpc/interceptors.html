@@ -1,0 +1,14 @@
+<section id="chain"><h2>Chain</h2><div class="diagram"><pre>Client -&gt; Interceptor -&gt; Handler
+            | auth
+            | logging
+            | tracing</pre></div></section><section id="unary-interceptor"><h2>Unary interceptor</h2><pre><code>func loggingInterceptor(
+    ctx context.Context,
+    req any,
+    info *grpc.UnaryServerInfo,
+    handler grpc.UnaryHandler,
+) (any, error) {
+    start := time.Now()
+    resp, err := handler(ctx, req)
+    log.Printf(&quot;%s %s&quot;, info.FullMethod, time.Since(start))
+    return resp, err
+}</code></pre></section>

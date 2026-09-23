@@ -1,0 +1,29 @@
+{
+  "id": "season-10-distributed-systems-02-latency-partial-failure",
+  "title": "Latency, Timeout và Partial Failure",
+  "description": "Mạng có tail latency; timeout là policy chứ không phải sự thật.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "distributed-systems",
+  "tags": [
+    "distributed-systems"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-systems",
+      "order": 143
+    }
+  ],
+  "path_order": 143,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/latency-partial-failure/",
+  "source": "content/articles/distributed-systems/latency-partial-failure.html",
+  "legacy_url": "/season-10-distributed-systems/02-latency-partial-failure.html",
+  "authors": [
+    "tiecont"
+  ]
+}

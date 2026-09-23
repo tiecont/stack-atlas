@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pagination ở PostgreSQL: Offset vs Keyset · Stack Atlas</title><meta name="description" content="Biến API cursor thành query có index và stable ordering.">
+  <meta property="og:title" content="Pagination ở PostgreSQL: Offset vs Keyset · Stack Atlas"><meta property="og:description" content="Biến API cursor thành query có index và stable ordering.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-06-postgresql-with-go-12-pagination-keyset"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/postgresql/">Postgresql</a><span>/</span><a href="/topics/postgresql/#category-databases">Databases</a><span>/</span>Pagination ở PostgreSQL: Offset vs Keyset</div><header class="article-header"><span class="eyebrow">Postgresql · Databases</span><h1>Pagination ở PostgreSQL: Offset vs Keyset</h1><p>Biến API cursor thành query có index và stable ordering.</p><div class="article-meta"><span>Postgresql</span><button class="complete-toggle" type="button" data-progress-toggle="season-06-postgresql-with-go-12-pagination-keyset" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#1-offset">1. Offset</a><a class="toc-level-2" href="#2-keyset-query">2. Keyset query</a><a class="toc-level-2" href="#3-index-match">3. Index match</a><a class="toc-level-2" href="#4-cursor-opaque">4. Cursor opaque</a><a class="toc-level-2" href="#takeaways">Điểm cần nhớ</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>PostgreSQL with Go · Lesson 12</strong></a></aside><article class="article-body"><p class="lead">Season 05 đã thiết kế cursor contract. Bây giờ ta nối nó với SQL để tránh OFFSET sâu và giữ ordering ổn định.</p><h2 id="1-offset">1. Offset</h2><p><code>LIMIT 50 OFFSET 500000</code> có thể buộc DB đi qua rất nhiều rows trước khi bỏ chúng.</p><h2 id="2-keyset-query">2. Keyset query</h2><pre><span class="code-label">sql</span><code>SELECT id, title, created_at
+FROM jobs
+WHERE (created_at, id) &lt; ($1, $2)
+ORDER BY created_at DESC, id DESC
+LIMIT 50;</code></pre><h2 id="3-index-match">3. Index match</h2><p>Index trên <code>(created_at DESC, id DESC)</code> giúp planner phục vụ order + seek pattern hiệu quả.</p><h2 id="4-cursor-opaque">4. Cursor opaque</h2><p>API có thể encode tuple thành opaque cursor để client không phụ thuộc internal schema.</p><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Keyset pagination seek theo last key.</li><li>Tie-breaker tạo total order.</li><li>Index phải match order.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Implement encode/decode cursor base64 JSON cho (created_at,id) và query page kế tiếp.</div>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/postgresql/n-plus-one-batching/?path=golang-backend"><small>Previous</small><strong>N+1 Query và Batching</strong></a><a href="/articles/postgresql/constraints-invariants/?path=golang-backend"><small>Next</small><strong>Constraints và Data Invariants</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

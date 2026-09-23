@@ -1,0 +1,6 @@
+<section id="ba-tr"><h2>Ba trụ</h2><ul><li>structured logs</li><li>metrics</li><li>distributed tracing</li></ul></section><section id="trace-context"><h2>Trace context</h2><div class="diagram"><pre>Client
+  |
+trace-id=abc
+  v
+Gateway -&gt; Order -&gt; Payment -&gt; Kafka -&gt; Worker
+          same causal trace/context where applicable</pre></div></section><section id="m-c-ti-u"><h2>Mục tiêu</h2><p>Bạn cần biết request chậm ở hop nào, retry ở đâu và dependency nào tạo lỗi.</p></section>

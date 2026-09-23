@@ -1,0 +1,29 @@
+{
+  "id": "season-16-performance-engineering-03-load-testing",
+  "title": "Load Testing API",
+  "description": "Đo throughput, latency và saturation dưới tải thực tế hơn.",
+  "type": "article",
+  "domain": "performance",
+  "category": "performance",
+  "tags": [
+    "performance"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "performance-engineering",
+      "order": 219
+    }
+  ],
+  "path_order": 219,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/performance/load-testing/",
+  "source": "content/articles/performance/load-testing.html",
+  "legacy_url": "/season-16-performance-engineering/03-load-testing.html",
+  "authors": [
+    "tiecont"
+  ]
+}

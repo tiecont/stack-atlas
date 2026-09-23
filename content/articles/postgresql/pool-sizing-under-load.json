@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-18-pool-sizing-under-load",
+  "title": "Pool Sizing dưới Load",
+  "description": "Kết nối Little’s Law trực giác với DB capacity, queueing và p99 latency.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 97
+    }
+  ],
+  "path_order": 97,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/pool-sizing-under-load/",
+  "source": "content/articles/postgresql/pool-sizing-under-load.html",
+  "legacy_url": "/season-06-postgresql-with-go/18-pool-sizing-under-load.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,4 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>API -&gt; Notification DB -&gt; Queue
+                         |-&gt; Email worker
+                         |-&gt; Push worker
+                         |-&gt; SMS worker</pre></div></section><section id="concerns"><h2>Concerns</h2><ul><li>user preferences</li><li>template versioning</li><li>provider retry</li><li>deduplication</li><li>DLQ</li><li>rate limits</li></ul></section><section id="reliability"><h2>Reliability</h2><p>Notification thường async và at-least-once, nên idempotency và provider result tracking quan trọng.</p></section>

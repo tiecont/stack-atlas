@@ -1,0 +1,24 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Go là ngôn ngữ statically typed, nhưng phần lớn code không cần viết type ở mọi nơi vì compiler có thể suy luận từ biểu thức khởi tạo. Điều đáng học hơn cú pháp khai báo là khái niệm zero value: biến luôn có một giá trị hợp lệ của type ngay cả khi bạn chưa gán thủ công.</p><p>Zero value giảm số trạng thái “chưa khởi tạo” mà developer phải quản lý, nhưng không có nghĩa zero value luôn có semantics đúng với domain của bạn.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Type</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Value</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Zero value</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>var count int       // 0
+var enabled bool   // false
+var name string    // &quot;&quot;
+var items []string // nil
+
+age := 25
+const maxRetries = 3</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Các type cơ bản như integer, floating point, boolean và string có zero value dễ đoán. Với pointer, slice, map, channel, function và interface, zero value thường là `nil`. Một số nil value vẫn dùng được cho một số operation, một số thì không.</p><p>`:=` chỉ dùng trong function body và tạo ít nhất một biến mới. `const` là constant ở compile time; constant trong Go còn có cơ chế “untyped constant” giúp biểu thức số linh hoạt hơn trước khi bị ép vào một concrete type.</p><pre><span class="code-label">Example</span><code>type Config struct {
+    Timeout time.Duration
+    Retries int
+}
+
+// Decide: zero means default, disabled, or invalid?</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Trong config/backend model, zero value rất quan trọng. Ví dụ `Timeout time.Duration` bằng `0` có thể được hiểu là “không timeout”, “dùng default”, hoặc “invalid”. Hãy quyết định semantics rõ ràng thay vì để zero value vô tình mang nhiều nghĩa.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Dùng `int` cho ID hoặc dữ liệu wire mà không cân nhắc kích thước/semantics.</li><li>Nhầm `nil` slice với empty slice khi serialize JSON; tùy encoder và contract chúng có thể khác nhau.</li><li>Dùng zero value để biểu diễn “không được cung cấp” khi domain cũng cho phép chính giá trị zero.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Zero value là một phần của API design trong Go.</li><li>Type rõ ràng giúp compiler bắt lỗi trước runtime.</li><li>Đừng chỉ hỏi “type nào compile được”; hãy hỏi “type nào diễn đạt domain tốt nhất”.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-20-error-propagation",
+  "title": "Error Propagation",
+  "description": "Thu lỗi từ concurrent tasks, cancel phần còn lại và giữ semantics rõ ràng.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 47
+    }
+  ],
+  "path_order": 47,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/error-propagation/",
+  "source": "content/articles/golang/error-propagation.html",
+  "legacy_url": "/season-03-concurrency/20-error-propagation.html",
+  "authors": [
+    "tiecont"
+  ]
+}

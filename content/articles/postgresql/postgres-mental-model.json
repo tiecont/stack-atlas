@@ -1,0 +1,30 @@
+{
+  "id": "season-06-postgresql-with-go-01-postgres-mental-model",
+  "title": "PostgreSQL cho Go Backend: mental model",
+  "description": "Hiểu process, connection, transaction và query path trước khi học ORM.",
+  "type": "article",
+  "domain": "postgresql",
+  "category": "databases",
+  "tags": [
+    "postgresql",
+    "databases"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "postgresql-with-go",
+      "order": 80
+    }
+  ],
+  "path_order": 80,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/postgresql/postgres-mental-model/",
+  "source": "content/articles/postgresql/postgres-mental-model.html",
+  "legacy_url": "/season-06-postgresql-with-go/01-postgres-mental-model.html",
+  "authors": [
+    "tiecont"
+  ]
+}

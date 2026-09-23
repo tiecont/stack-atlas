@@ -1,0 +1,6 @@
+<section id="log"><h2>Log</h2><div class="diagram"><pre>Leader log:
+1 SET x=1
+2 SET y=2
+3 DELETE z
+
+Followers replicate same ordered prefix</pre></div></section><section id="state-machine"><h2>State machine</h2><p>Mỗi node apply cùng log theo cùng thứ tự để tạo cùng state machine state.</p></section><section id="commit"><h2>Commit</h2><p>Entry chỉ được xem là committed khi protocol thỏa điều kiện quorum/safety tương ứng.</p></section>

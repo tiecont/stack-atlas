@@ -1,0 +1,4 @@
+<section id="expand-contract"><h2>Expand/contract</h2><div class="diagram"><pre>1. Add new field
+2. Deploy consumers that understand it
+3. Deploy producers using it
+4. Remove old field later</pre></div></section><section id="proto-json"><h2>Proto/JSON</h2><p>Ưu tiên additive change. Đừng rename/remove field ngay nếu consumer cũ còn tồn tại.</p></section><section id="database-migration"><h2>Database migration</h2><p>Schema migration cũng phải backward-compatible với application version đang rolling update.</p></section>

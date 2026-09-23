@@ -1,0 +1,9 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Browser / Mobile
+      |
+   HTTP JSON
+      |
+    Gateway
+      |
+     gRPC
+      |
+   Services</pre></div></section><section id="khi-h-u-ch"><h2>Khi hữu ích</h2><p>Public clients thường dễ dùng HTTP/JSON; internal service có thể dùng gRPC typed contract.</p></section><section id="trade-off"><h2>Trade-off</h2><p>Gateway thêm một lớp mapping, error translation và compatibility cần quản lý.</p></section>

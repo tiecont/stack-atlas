@@ -1,0 +1,29 @@
+{
+  "id": "season-04-networking-with-go-10-timeouts-deadlines-cancellation",
+  "title": "Timeout, Deadline và Cancellation",
+  "description": "Thiết kế time budget đúng cách thay vì tăng timeout cho tới khi hệ thống “hết lỗi”.",
+  "type": "article",
+  "domain": "networking",
+  "category": "networking",
+  "tags": [
+    "networking"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "networking-with-go",
+      "order": 59
+    }
+  ],
+  "path_order": 59,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/networking/timeouts-deadlines-cancellation/",
+  "source": "content/articles/networking/timeouts-deadlines-cancellation.html",
+  "legacy_url": "/season-04-networking-with-go/10-timeouts-deadlines-cancellation.html",
+  "authors": [
+    "tiecont"
+  ]
+}

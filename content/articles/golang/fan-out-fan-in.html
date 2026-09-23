@@ -1,0 +1,19 @@
+<h2 id="s1">1. Fan-out</h2><p class="lead">Một nguồn công việc được chia cho nhiều worker để xử lý song song.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Fan-out">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Fan-out</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Input stream</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Workers x N</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Partial results</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Nhiều worker cùng consume một nguồn job.</text></svg><figcaption>Nhiều worker cùng consume một nguồn job.</figcaption></figure><h2 id="s2">2. Fan-in</h2><p>Sau khi xử lý, nhiều result stream được merge về một channel chung.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Fan-in">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Fan-in</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Results A/B/C</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Merge</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Output</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Nhiều nguồn kết quả được gom thành một stream.</text></svg><figcaption>Nhiều nguồn kết quả được gom thành một stream.</figcaption></figure><h2 id="s3">3. Một skeleton đơn giản</h2><pre><span class="code-label">Go</span><code>jobs := make(chan Job)
+results := make(chan Result)
+
+for i := 0; i &lt; n; i++ {
+    go worker(jobs, results)
+}
+// collect từ results</code></pre><h2 id="s4">4. Ordering không tự động được giữ</h2><p>Khi nhiều worker chạy song song, kết quả có thể về khác thứ tự input. Nếu business yêu cầu ordering, bạn cần sequence number hoặc reorder stage.</p><h2 id="s5">5. Cancellation phải đi xuyên toàn pipeline</h2><p>Nếu consumer đã bỏ cuộc mà producer vẫn cố gửi result vào channel, goroutine có thể leak. Context giúp fan-out/fan-in dừng đồng bộ.</p>

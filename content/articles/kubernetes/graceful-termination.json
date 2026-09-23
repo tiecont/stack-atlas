@@ -1,0 +1,30 @@
+{
+  "id": "season-19-kubernetes-for-go-backend-08-graceful-termination",
+  "title": "SIGTERM và Graceful Termination",
+  "description": "Điều gì xảy ra với request khi Kubernetes terminate pod?",
+  "type": "article",
+  "domain": "kubernetes",
+  "category": "orchestration",
+  "tags": [
+    "kubernetes",
+    "orchestration"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kubernetes",
+      "order": 266
+    }
+  ],
+  "path_order": 266,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kubernetes/graceful-termination/",
+  "source": "content/articles/kubernetes/graceful-termination.html",
+  "legacy_url": "/season-19-kubernetes-for-go-backend/08-graceful-termination.html",
+  "authors": [
+    "tiecont"
+  ]
+}

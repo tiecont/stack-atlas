@@ -1,0 +1,23 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Generics cho phép viết code hoạt động trên nhiều type trong khi vẫn giữ compile-time type safety. Go dùng type parameters và constraints; mục tiêu là abstraction có kiểm soát, không khuyến khích tạo hierarchy phức tạp.</p><p>Từ Go 1.27, ngôn ngữ hỗ trợ generic methods trong các trường hợp được định nghĩa bởi spec/release hiện hành, nhưng interface methods vẫn có các giới hạn riêng. Với người mới, generic function/type vẫn là nơi tốt nhất để bắt đầu.</p></div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Type set</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Generic function</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Concrete result</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>func Contains[T comparable](items []T, target T) bool {
+    for _, item := range items {
+        if item == target {
+            return true
+        }
+    }
+    return false
+}</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Constraint mô tả tập type/operations hợp lệ. `any` là constraint rộng; `comparable` dùng cho type hỗ trợ `==`/`!=` phù hợp để làm map key.</p><p>Đừng dùng generic khi interface hoặc function concrete rõ hơn. Generics hợp lý cho container/algorithm mà logic thực sự không phụ thuộc concrete domain type.</p><pre><span class="code-label">Example</span><code>type Page[T any] struct {
+    Items []T `json:&quot;items&quot;`
+    Next  string `json:&quot;next&quot;`
+}</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Trong backend, generics thường hữu ích ở infrastructure helpers: typed pagination result, cache wrapper, collection transform. Nhưng một `Repository[T]` quá generic dễ xóa mất semantics khác nhau giữa User, Order, Payment.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Generic hóa domain repository chỉ để giảm vài dòng code.</li><li>Constraint quá rộng khiến implementation phải dùng reflection/type switch.</li><li>Tạo abstraction trước khi có hai use case thực sự.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Generics là công cụ giảm duplication của algorithm/type-safe container.</li><li>Domain semantics quan trọng hơn “DRY tuyệt đối”.</li><li>Bắt đầu concrete, generalize khi pattern đã rõ.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">A Tour of Go và Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Effective Go: <a href="https://go.dev/doc/effective_go" target="_blank" rel="noreferrer">go.dev/doc/effective_go</a></p>

@@ -1,0 +1,30 @@
+{
+  "id": "season-05-production-http-server-03-request-parsing-validation",
+  "title": "Parsing Request và Validation",
+  "description": "Decode JSON có giới hạn, phân biệt syntax error với business validation và tránh payload bất tận.",
+  "type": "article",
+  "domain": "golang",
+  "category": "http-services",
+  "tags": [
+    "golang",
+    "http-services"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "production-http",
+      "order": 67
+    }
+  ],
+  "path_order": 67,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/request-parsing-validation/",
+  "source": "content/articles/golang/request-parsing-validation.html",
+  "legacy_url": "/season-05-production-http-server/03-request-parsing-validation.html",
+  "authors": [
+    "tiecont"
+  ]
+}

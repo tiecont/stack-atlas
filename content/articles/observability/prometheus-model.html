@@ -1,0 +1,5 @@
+<section id="metric"><h2>Metric</h2><pre><code>http_requests_total{
+  method=&quot;GET&quot;,
+  route=&quot;/users/:id&quot;,
+  status=&quot;200&quot;
+}</code></pre></section><section id="cardinality"><h2>Cardinality</h2><p>Label như user_id hoặc request_id có cardinality cực cao và có thể làm metrics backend bùng nổ.</p></section><section id="rule"><h2>Rule</h2><div class="callout ">Metrics dùng label có tập giá trị nhỏ, ổn định. High-cardinality context để logs/traces xử lý.</div></section>

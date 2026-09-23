@@ -1,0 +1,5 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Client -&gt; Upload API -&gt; Object Storage
+                |
+             Metadata DB
+                |
+               CDN</pre></div></section><section id="concerns"><h2>Concerns</h2><ul><li>pre-signed upload</li><li>multipart</li><li>checksum</li><li>virus scan</li><li>retention</li><li>access control</li></ul></section><section id="rule"><h2>Rule</h2><p>Large file bytes không nên proxy qua app server nếu object storage/direct upload giải quyết tốt hơn.</p></section>

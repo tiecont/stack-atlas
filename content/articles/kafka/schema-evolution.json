@@ -1,0 +1,30 @@
+{
+  "id": "season-09-kafka-deep-dive-15-schema-evolution",
+  "title": "Schema Evolution: event sống lâu hơn code",
+  "description": "Event contract cần thay đổi mà không phá consumer cũ.",
+  "type": "article",
+  "domain": "kafka",
+  "category": "stream-processing",
+  "tags": [
+    "kafka",
+    "stream-processing"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kafka-deep-dive",
+      "order": 138
+    }
+  ],
+  "path_order": 138,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kafka/schema-evolution/",
+  "source": "content/articles/kafka/schema-evolution.html",
+  "legacy_url": "/season-09-kafka-deep-dive/15-schema-evolution.html",
+  "authors": [
+    "tiecont"
+  ]
+}

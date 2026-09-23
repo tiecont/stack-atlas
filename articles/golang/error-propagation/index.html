@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Error Propagation · Stack Atlas</title><meta name="description" content="Thu lỗi từ concurrent tasks, cancel phần còn lại và giữ semantics rõ ràng.">
+  <meta property="og:title" content="Error Propagation · Stack Atlas"><meta property="og:description" content="Thu lỗi từ concurrent tasks, cancel phần còn lại và giữ semantics rõ ràng.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-03-concurrency-20-error-propagation"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-concurrency">Concurrency</a><span>/</span>Error Propagation</div><header class="article-header"><span class="eyebrow">Golang · Concurrency</span><h1>Error Propagation</h1><p>Thu lỗi từ concurrent tasks, cancel phần còn lại và giữ semantics rõ ràng.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-03-concurrency-20-error-propagation" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#s1">1. Concurrent code cần error semantics rõ ràng</a><a class="toc-level-2" href="#s2">2. errgroup</a><a class="toc-level-2" href="#s3">3. Cancel sibling tasks</a><a class="toc-level-2" href="#s4">4. Khi cần collect all errors</a><a class="toc-level-2" href="#s5">5. Error propagation là thiết kế API</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Go Concurrency · Lesson 20</strong></a></aside><article class="article-body"><h2 id="s1">1. Concurrent code cần error semantics rõ ràng</h2><p class="lead">Khi 10 goroutine chạy cùng lúc và 1 cái lỗi, bạn cần quyết định: dừng tất cả, tiếp tục phần còn lại, hay gom toàn bộ lỗi?</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Error propagation">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Error propagation</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Task A/B/C</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">errgroup</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Caller</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Lỗi đầu tiên có thể cancel các sibling task.</text></svg><figcaption>Lỗi đầu tiên có thể cancel các sibling task.</figcaption></figure><h2 id="s2">2. errgroup</h2><pre><span class="code-label">Go</span><code>g, ctx := errgroup.WithContext(ctx)
+
+g.Go(func() error { return fetchA(ctx) })
+g.Go(func() error { return fetchB(ctx) })
+
+if err := g.Wait(); err != nil {
+    return err
+}</code></pre><h2 id="s3">3. Cancel sibling tasks</h2><p>Với <code>errgroup.WithContext</code>, khi một task trả lỗi, context được cancel để task khác có cơ hội dừng sớm.</p><h2 id="s4">4. Khi cần collect all errors</h2><p>Không phải lúc nào “first error wins” cũng đúng. Batch validation có thể cần gom lỗi theo item. Khi đó dùng result struct chứa value + error hoặc một aggregator riêng.</p><h2 id="s5">5. Error propagation là thiết kế API</h2><div class="callout note"><strong>Câu hỏi cần trả lời</strong>Lỗi nào retryable? task nào độc lập? có partial success không? cancellation có phải lỗi không? Khi semantics rõ, code concurrent sẽ dễ reasoning hơn nhiều.</div>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/backpressure/?path=golang-backend"><small>Previous</small><strong>Backpressure</strong></a><a href="/articles/golang/go-scheduler/?path=golang-backend"><small>Next</small><strong>Go Scheduler</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

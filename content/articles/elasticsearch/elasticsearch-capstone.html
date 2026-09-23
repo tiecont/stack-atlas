@@ -1,0 +1,4 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>Postgres -&gt; Outbox/Kafka -&gt; Go Indexer -&gt; Elasticsearch
+                                      ^
+                                      |
+Client -&gt; Search API -----------------+</pre></div></section><section id="features"><h2>Features</h2><ul><li>full-text title search</li><li>keyword filters</li><li>faceted aggregations</li><li>search_after pagination</li><li>bulk indexing</li><li>alias-based reindex</li></ul></section><section id="definition-of-done"><h2>Definition of done</h2><div class="callout ">Phải chỉ ra source of truth, consistency lag, mapping, shard strategy, failure recovery và observability.</div></section>

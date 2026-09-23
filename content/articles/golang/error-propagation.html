@@ -1,0 +1,14 @@
+<h2 id="s1">1. Concurrent code cần error semantics rõ ràng</h2><p class="lead">Khi 10 goroutine chạy cùng lúc và 1 cái lỗi, bạn cần quyết định: dừng tất cả, tiếp tục phần còn lại, hay gom toàn bộ lỗi?</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Error propagation">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Error propagation</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Task A/B/C</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">errgroup</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Caller</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Lỗi đầu tiên có thể cancel các sibling task.</text></svg><figcaption>Lỗi đầu tiên có thể cancel các sibling task.</figcaption></figure><h2 id="s2">2. errgroup</h2><pre><span class="code-label">Go</span><code>g, ctx := errgroup.WithContext(ctx)
+
+g.Go(func() error { return fetchA(ctx) })
+g.Go(func() error { return fetchB(ctx) })
+
+if err := g.Wait(); err != nil {
+    return err
+}</code></pre><h2 id="s3">3. Cancel sibling tasks</h2><p>Với <code>errgroup.WithContext</code>, khi một task trả lỗi, context được cancel để task khác có cơ hội dừng sớm.</p><h2 id="s4">4. Khi cần collect all errors</h2><p>Không phải lúc nào “first error wins” cũng đúng. Batch validation có thể cần gom lỗi theo item. Khi đó dùng result struct chứa value + error hoặc một aggregator riêng.</p><h2 id="s5">5. Error propagation là thiết kế API</h2><div class="callout note"><strong>Câu hỏi cần trả lời</strong>Lỗi nào retryable? task nào độc lập? có partial success không? cancellation có phải lỗi không? Khi semantics rõ, code concurrent sẽ dễ reasoning hơn nhiều.</div>

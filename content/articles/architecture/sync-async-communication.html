@@ -1,0 +1,2 @@
+<section id="synchronous"><h2>Synchronous</h2><div class="diagram"><pre>A --request--&gt; B --response--&gt; A</pre></div><p>Đơn giản để reasoning, nhưng A phụ thuộc availability và latency của B.</p></section><section id="asynchronous"><h2>Asynchronous</h2><div class="diagram"><pre>A -&gt; Broker -&gt; B
+A không cần B online ngay lúc publish</pre></div></section><section id="rule-of-thumb"><h2>Rule of thumb</h2><div class="callout ">Dùng sync khi caller cần kết quả ngay; dùng async khi workflow chấp nhận eventual processing và muốn tách availability.</div></section>

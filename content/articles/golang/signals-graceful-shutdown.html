@@ -1,0 +1,15 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>SIGTERM
+  |
+stop accepting traffic
+  |
+finish in-flight work
+  |
+close resources
+  |
+exit</pre></div></section><section id="go"><h2>Go</h2><pre><code>ctx, stop := signal.NotifyContext(
+    context.Background(),
+    syscall.SIGTERM,
+    syscall.SIGINT,
+)
+defer stop()
+&lt;-ctx.Done()</code></pre></section><section id="budget"><h2>Budget</h2><p>Shutdown phải nằm trong termination grace period của platform.</p></section>

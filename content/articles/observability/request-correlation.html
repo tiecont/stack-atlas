@@ -1,0 +1,9 @@
+<section id="flow"><h2>Flow</h2><div class="diagram"><pre>Client
+  |
+request-id=abc
+  v
+API -&gt; DB
+ |
+ +-&gt; gRPC -&gt; Payment
+ |
+ +-&gt; Kafka -&gt; Worker</pre></div></section><section id="propagation"><h2>Propagation</h2><p>Correlation id nên được đưa qua HTTP header, gRPC metadata hoặc message metadata khi phù hợp.</p></section><section id="kh-ng-thay-trace"><h2>Không thay trace</h2><p>Request ID hữu ích nhưng distributed tracing cung cấp parent/child relationship và timing chi tiết hơn.</p></section>

@@ -1,0 +1,8 @@
+<section id="server"><h2>Server</h2><pre><code>func (s *Server) GetUser(
+    ctx context.Context,
+    req *pb.GetUserRequest,
+) (*pb.User, error) {
+    return s.users.Get(ctx, req.Id)
+}</code></pre></section><section id="client"><h2>Client</h2><pre><code>ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+defer cancel()
+res, err := client.GetUser(ctx, &amp;pb.GetUserRequest{Id: &quot;42&quot;})</code></pre></section><section id="deadline"><h2>Deadline</h2><p>Client nên truyền deadline thực tế thay vì để RPC chờ vô hạn.</p></section>

@@ -1,0 +1,6 @@
+<p class="lead">Tuning SQL tốt bắt đầu bằng execution plan. Query text giống nhau có thể chạy rất khác tùy data distribution và statistics.</p><h2 id="1-explain">1. EXPLAIN</h2><p>Cho estimated plan mà không chạy query. Hữu ích khi query có side effect hoặc rất đắt.</p><h2 id="2-explain-analyze">2. EXPLAIN ANALYZE</h2><pre><span class="code-label">sql</span><code>EXPLAIN (ANALYZE, BUFFERS)
+SELECT id, title
+FROM jobs
+WHERE company_id = 42
+ORDER BY created_at DESC
+LIMIT 50;</code></pre><h2 id="3-estimated-vs-actual-rows">3. Estimated vs actual rows</h2><p>Chênh lệch lớn có thể chỉ ra statistics không phù hợp hoặc correlation/data distribution đặc biệt.</p><h2 id="4-ng-ch-nh-n-total-time">4. Đừng chỉ nhìn total time</h2><p>Loops, buffers, sort method, rows removed và scan type cho biết vì sao query tốn.</p><div class="callout warn"><strong>Safety</strong>EXPLAIN ANALYZE thực sự chạy statement. Cẩn thận với UPDATE/DELETE/INSERT.</div><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Đo plan trước khi đoán index.</li><li>Estimated-vs-actual rows là signal quan trọng.</li><li>ANALYZE thực thi query.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Lấy một query thật, chạy EXPLAIN (ANALYZE, BUFFERS) và giải thích node đắt nhất.</div>

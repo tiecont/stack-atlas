@@ -1,0 +1,7 @@
+<section id="aggregate"><h2>Aggregate</h2><div class="diagram"><pre>Order
+├─ Items
+├─ Total
+└─ Status
+
+Invariant:
+confirmed order must have &gt;= 1 item</pre></div></section><section id="boundary"><h2>Boundary</h2><p>Nếu invariant cần atomicity, dữ liệu liên quan nên nằm trong boundary có thể enforce transactionally.</p></section><section id="distributed-warning"><h2>Distributed warning</h2><p>Tách aggregate invariant qua nhiều microservice thường biến invariant đơn giản thành distributed transaction problem.</p></section>

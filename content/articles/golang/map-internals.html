@@ -1,0 +1,20 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Map cần hash key và tìm vị trí lưu value trong hash table implementation. Exact bucket/layout có thể thay đổi giữa các Go release, nên hãy học invariants: key phải comparable, lookup expected-fast, iteration order không phải contract, mutation concurrent cần synchronization.</p><p>Performance của map phụ thuộc cả key type, size, hashing cost và memory locality.</p></div><div class="note callout"><strong>Runtime note</strong>Nội dung runtime được viết theo Go 1.27 hiện hành. Các chi tiết implementation có thể thay đổi; language/spec behavior mới là contract ổn định.</div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Hash key</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Bucket/table</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Lookup</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>type Key struct {
+    TenantID uint64
+    UserID   uint64
+}
+
+cache := make(map[Key]User)
+cache[Key{1, 42}] = user</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Composite comparable struct thường là key tốt hơn việc nối string nếu domain phù hợp, vì tránh format/parse và giữ type safety. Nhưng đừng micro-optimize nếu profile không cho thấy map/key hashing nóng.</p><p>Deleting entry làm key/value không còn reachable qua map, nhưng runtime memory management và table capacity không nhất thiết lập tức trả memory về OS.</p><pre><span class="code-label">Example</span><code>delete(cache, key)
+// removes logical entry; do not assume immediate RSS drop</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>In-memory caches, dedupe tables và routing metadata thường dùng map. Nếu cardinality không bounded, vấn đề lớn nhất không phải lookup speed mà là memory growth và eviction policy.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Tin vào một bài blog mô tả bucket internals cũ như contract vĩnh viễn.</li><li>Map key là string format phức tạp chỉ vì tiện.</li><li>Cache map không giới hạn trong service lâu sống.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Học semantics ổn định trước implementation detail.</li><li>Key design ảnh hưởng correctness và cost.</li><li>Map production cần ownership + lifecycle + cardinality control.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">Go Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Diagnostics: <a href="https://go.dev/doc/diagnostics" target="_blank" rel="noreferrer">go.dev/doc/diagnostics</a> · GC Guide: <a href="https://go.dev/doc/gc-guide" target="_blank" rel="noreferrer">go.dev/doc/gc-guide</a></p>

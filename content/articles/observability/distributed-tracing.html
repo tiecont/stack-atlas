@@ -1,0 +1,5 @@
+<section id="trace"><h2>Trace</h2><div class="diagram"><pre>HTTP request [120ms]
+├─ DB query [20ms]
+├─ gRPC payment [80ms]
+│  └─ payment DB [50ms]
+└─ serialize [5ms]</pre></div></section><section id="span-attributes"><h2>Span attributes</h2><ul><li>service</li><li>operation</li><li>status</li><li>peer</li><li>db.system</li><li>messaging destination</li></ul></section><section id="sampling"><h2>Sampling</h2><p>Trace mọi request có thể quá đắt. Sampling phải giữ được enough signal cho incident và tail latency.</p></section>

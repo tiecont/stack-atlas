@@ -1,0 +1,4 @@
+<section id="propagation"><h2>Propagation</h2><div class="diagram"><pre>HTTP request deadline
+   -&gt; gRPC A
+      -&gt; gRPC B
+         -&gt; DB query</pre></div></section><section id="go-context"><h2>Go context</h2><p>gRPC Go tích hợp context nên server handler có thể truyền ctx xuống DB hoặc RPC tiếp theo.</p></section><section id="budget"><h2>Budget</h2><div class="callout ">Downstream deadline phải nằm trong budget của upstream, không dài hơn một cách mù quáng.</div></section>

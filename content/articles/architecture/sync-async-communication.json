@@ -1,0 +1,29 @@
+{
+  "id": "season-13-microservices-architecture-04-sync-async-communication",
+  "title": "Sync vs Async Communication",
+  "description": "Chọn HTTP/gRPC hay messaging dựa vào coupling thời gian và business flow.",
+  "type": "article",
+  "domain": "architecture",
+  "category": "architecture",
+  "tags": [
+    "architecture"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "microservices-architecture",
+      "order": 183
+    }
+  ],
+  "path_order": 183,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/architecture/sync-async-communication/",
+  "source": "content/articles/architecture/sync-async-communication.html",
+  "legacy_url": "/season-13-microservices-architecture/04-sync-async-communication.html",
+  "authors": [
+    "tiecont"
+  ]
+}

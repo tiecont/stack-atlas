@@ -1,0 +1,31 @@
+<p class="lead">Kubernetes object là một bản ghi bền vững trong API biểu diễn một phần trạng thái cluster. Manifest không phải shell script: nó mô tả object và intent; API server cùng controllers diễn giải rồi cập nhật trạng thái theo thời gian.</p>
+<section id="outcomes"><h2>Sau bài này, bạn có thể</h2><ul><li>Đọc bốn trường gốc apiVersion, kind, metadata và spec.</li><li>Phân biệt spec do client khai báo với status do hệ thống quan sát/cập nhật.</li><li>Giải thích UID, resourceVersion và generation ở mức dùng an toàn.</li><li>Dùng kubectl explain và API output để kiểm tra schema thực tế.</li></ul></section>
+<section id="shape"><h2>Hình dạng của một object</h2><pre><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlas-demo-api
+  namespace: atlas-foundations
+  labels:
+    app.kubernetes.io/name: atlas-demo-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: atlas-demo-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: atlas-demo-api
+    spec:
+      containers:
+        - name: api
+          image: atlas-demo-api:dev</code></pre><ul><li><code>apiVersion</code> chọn API group/version diễn giải object; <code>kind</code> chọn loại resource.</li><li><code>metadata</code> chứa name, namespace, labels, annotations và server-generated identity fields.</li><li><code>spec</code> diễn tả trạng thái mong muốn theo schema riêng của từng kind.</li><li><code>status</code> là trạng thái quan sát được, thường do controller hoặc component hệ thống cập nhật.</li></ul><p>Mọi object không có cùng shape chi tiết. Dùng API reference hoặc <code>kubectl explain deployment.spec</code> thay vì đoán field.</p></section>
+<section id="identity"><h2>Identity và version fields</h2><p><code>metadata.uid</code> nhận diện một object cụ thể xuyên suốt vòng đời của nó; xóa rồi tạo lại cùng namespace/name sẽ tạo UID khác. <code>metadata.resourceVersion</code> là token opaque để API hỗ trợ watch và phát hiện cập nhật cũ; không parse nó như timestamp hay số thứ tự toàn cục.</p><p><code>metadata.generation</code> biểu diễn phiên bản mong muốn của object theo semantics của resource. Controller thường báo generation đã quan sát trong status khi reconcile. Không phải mọi status update đều thay đổi generation. Hãy xem nó như tín hiệu API, không tự tăng hoặc dùng làm sequence number nghiệp vụ.</p><div class="callout warn"><strong>Không copy server fields vào source manifest</strong>Không khai báo UID hoặc resourceVersion cố định trong file Git. Server tạo hoặc quản lý chúng; giá trị từ một cluster không phải cấu hình portable.</div></section>
+<section id="lab"><h2>Lab: nhìn object qua API</h2><p>Chạy lab foundations trước để tạo Deployment. Sau đó so sánh object mong muốn và Pod được controller tạo:</p><pre><code>kubectl get deployment atlas-demo-api -n atlas-foundations -o yaml
+kubectl get pods -n atlas-foundations -l app.kubernetes.io/name=atlas-demo-api -o yaml
+kubectl explain deployment.spec
+kubectl explain pod.spec.containers.resources
+kubectl api-resources --api-group=apps</code></pre><p>Trong output, tìm <code>spec.replicas</code>, <code>status.availableReplicas</code>, UID, resourceVersion, generation và ownerReferences. API server có thể thêm defaults nên object trả về thường nhiều field hơn manifest nguồn.</p></section>
+<section id="failure"><h2>Failure và cách đọc</h2><p>Nếu <code>kubectl apply</code> báo unknown field hoặc sai apiVersion, request chưa tạo object thành công. Nếu API server chấp nhận object nhưng status không đạt mong muốn, đó là giai đoạn reconcile/schedule/runtime tiếp theo; xem <code>kubectl get</code>, <code>describe</code> và events để tìm component đang chờ hoặc từ chối.</p><p>Server-side dry-run kiểm tra request qua API server mà không lưu thay đổi:</p><pre><code>kubectl apply --server-side --dry-run=server -f manifests/10-deployment.yaml</code></pre><p>Dry-run vẫn cần quyền authorization tương ứng và không kiểm chứng rằng image chạy được hoặc ứng dụng khỏe.</p></section>
+<section id="production-notes"><h2>Production Notes</h2><p>Schema có thể khác theo API version và CRD được cài trong cluster. Hãy pin API versions trong source, kiểm tra deprecation trước khi nâng cluster, và dùng server-side validation trong CI. Tránh để hai field managers cùng ghi một field mà không có ownership rõ ràng.</p></section>
+<section id="references"><h2>Nguồn chính thức</h2><ul class="refs"><li><a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/">Objects in Kubernetes</a></li><li><a href="https://kubernetes.io/docs/reference/using-api/api-concepts/">Kubernetes API Concepts: identity, resource versions and watches</a></li><li><a href="https://kubernetes.io/docs/reference/kubectl/overview/">kubectl overview</a></li><li><a href="https://kubernetes.io/docs/reference/kubectl/generated/kubectl_explain/">kubectl explain reference</a></li></ul></section>

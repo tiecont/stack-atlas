@@ -1,0 +1,8 @@
+<section id="architecture"><h2>Architecture</h2><div class="diagram"><pre>HTTP Gateway
+   |
+   v
+Order gRPC ----&gt; User gRPC
+   |
+   +-----------&gt; Payment gRPC
+   |
+   +-----------&gt; Event Stream</pre></div></section><section id="y-u-c-u"><h2>Yêu cầu</h2><ul><li>protobuf versioning</li><li>unary + streaming RPC</li><li>auth interceptor</li><li>deadline propagation</li><li>status mapping</li><li>connection reuse</li><li>metrics/tracing</li><li>graceful shutdown</li></ul></section><section id="definition-of-done"><h2>Definition of done</h2><div class="callout ">Client phải xử lý deadline, unavailable và compatibility như network concerns thật, không xem RPC như function call local.</div></section>

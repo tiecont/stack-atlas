@@ -1,0 +1,3 @@
+<section id="health-semantics"><h2>Health semantics</h2><ul><li>Liveness: process còn hoạt động?</li><li>Readiness: có nên nhận traffic mới?</li><li>Dependency health: capability nào đang degraded?</li></ul></section><section id="degraded-mode"><h2>Degraded mode</h2><div class="diagram"><pre>Search down -&gt; API returns basic DB results
+Recommendation down -&gt; page still loads
+Analytics down -&gt; request still succeeds</pre></div></section><section id="tr-nh-cascade"><h2>Tránh cascade</h2><p>Không nên làm readiness phụ thuộc mù quáng vào mọi downstream nếu điều đó khiến hàng loạt pod bị rút khỏi traffic chỉ vì một dependency phụ trợ lỗi.</p></section>

@@ -1,0 +1,5 @@
+<p class="lead">Season 05 đã thiết kế cursor contract. Bây giờ ta nối nó với SQL để tránh OFFSET sâu và giữ ordering ổn định.</p><h2 id="1-offset">1. Offset</h2><p><code>LIMIT 50 OFFSET 500000</code> có thể buộc DB đi qua rất nhiều rows trước khi bỏ chúng.</p><h2 id="2-keyset-query">2. Keyset query</h2><pre><span class="code-label">sql</span><code>SELECT id, title, created_at
+FROM jobs
+WHERE (created_at, id) &lt; ($1, $2)
+ORDER BY created_at DESC, id DESC
+LIMIT 50;</code></pre><h2 id="3-index-match">3. Index match</h2><p>Index trên <code>(created_at DESC, id DESC)</code> giúp planner phục vụ order + seek pattern hiệu quả.</p><h2 id="4-cursor-opaque">4. Cursor opaque</h2><p>API có thể encode tuple thành opaque cursor để client không phụ thuộc internal schema.</p><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Keyset pagination seek theo last key.</li><li>Tie-breaker tạo total order.</li><li>Index phải match order.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Implement encode/decode cursor base64 JSON cho (created_at,id) và query page kế tiếp.</div>

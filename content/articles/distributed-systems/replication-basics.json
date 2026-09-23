@@ -1,0 +1,30 @@
+{
+  "id": "season-20-distributed-data-02-replication-basics",
+  "title": "Replication Basics",
+  "description": "Tạo nhiều bản sao để tăng availability, read scale hoặc durability.",
+  "type": "article",
+  "domain": "distributed-systems",
+  "category": "data-systems",
+  "tags": [
+    "distributed-systems",
+    "data-systems"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "distributed-data",
+      "order": 273
+    }
+  ],
+  "path_order": 273,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/distributed-systems/replication-basics/",
+  "source": "content/articles/distributed-systems/replication-basics.html",
+  "legacy_url": "/season-20-distributed-data/02-replication-basics.html",
+  "authors": [
+    "tiecont"
+  ]
+}

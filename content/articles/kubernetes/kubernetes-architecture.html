@@ -1,0 +1,29 @@
+<p class="lead">Một Kubernetes cluster không phải một daemon duy nhất. Nó là một tập component cùng trao đổi qua Kubernetes API: control plane quản lý trạng thái và quyết định placement; node components thực thi Pod trên máy được chọn.</p>
+<section id="outcomes"><h2>Sau bài này, bạn có thể</h2><ul><li>Vẽ luồng cơ bản giữa kubectl, API server, etcd, controllers, scheduler, kubelet và runtime.</li><li>Giải thích thành phần nào quan sát object và thành phần nào chạy container.</li><li>Phân biệt Kubernetes API contract với cluster-specific implementation.</li></ul></section>
+<section id="map"><h2>Bản đồ thành phần</h2><div class="diagram"><pre>                         CONTROL PLANE
+kubectl / API client
+        |
+        v
+  kube-apiserver &lt;------&gt; etcd (persisted cluster state)
+     ^       ^
+     |       |
+controllers  kube-scheduler
+     |       |
+     +--- create/update objects; bind unscheduled Pods
+             |
+             v
+          NODE
+       kubelet watches assigned Pods
+             |
+       Container Runtime (CRI)
+             |
+       containers in a Pod</pre></div><p>Đây là sơ đồ trách nhiệm logic, không phải topology bắt buộc. Development cluster có thể đặt control plane trên một node/container; production control plane thường phân tán để tăng khả năng chịu lỗi. Kubernetes cho phép component placement và network implementation khác nhau.</p></section>
+<section id="control-plane"><h2>Control plane: lưu, quan sát và quyết định</h2><h3>API server</h3><p><code>kube-apiserver</code> cung cấp HTTP API và là điểm vào chính cho kubectl, controllers và clients. Request đi qua authentication, authorization và admission trước khi được chấp nhận. API server xác thực object, lưu trạng thái và phát thay đổi cho các client đang watch.</p><h3>etcd</h3><p>etcd là backing store key-value nhất quán cho dữ liệu API của cluster. Người dùng workload thường thao tác qua API server thay vì truy cập etcd trực tiếp. Với cluster tự quản lý, backup và restore etcd là trách nhiệm vận hành trọng yếu.</p><h3>Controllers và scheduler</h3><p><code>kube-controller-manager</code> chạy nhiều controller control loop. Một controller có thể tạo hoặc cập nhật object khác qua API; nó không nhất thiết thực thi container. Scheduler theo dõi Pod chưa được gán node, đánh giá resource requests và các constraint rồi ghi quyết định binding. Scheduler không kéo image hay khởi chạy process.</p></section>
+<section id="nodes"><h2>Node: thực thi Pod</h2><p>Kubelet trên node nhận PodSpec đã được gán và làm việc với container runtime qua CRI để bảo đảm container theo mô tả được chạy. Runtime như containerd hoặc CRI-O chịu trách nhiệm lifecycle container ở tầng node. Kubelet không quản lý các container được khởi chạy ngoài Kubernetes.</p><p>Network plugin cung cấp Pod networking; plugin hoặc proxy implementation có thể hiện thực một phần Service behavior. Storage plugin nối volume APIs với hệ thống lưu trữ. Đây là điểm tích hợp, không phải cùng một binary bắt buộc trong mọi cluster.</p></section>
+<section id="trace"><h2>Trace một Deployment</h2><ol><li>Client gửi Deployment qua API server; API server kiểm tra request và lưu object.</li><li>Deployment controller nhận thay đổi và tạo ReplicaSet object.</li><li>ReplicaSet controller tạo Pod objects theo template.</li><li>Scheduler chọn node cho mỗi Pod chưa được gán.</li><li>Kubelet trên node làm việc với runtime để tạo container.</li><li>Status và events được cập nhật; client đọc lại qua API server.</li></ol><p>Các bước diễn ra bất đồng bộ. kubectl apply trả về trước khi mọi Pod đã Ready.</p></section>
+<section id="observe"><h2>Quan sát local cluster</h2><pre><code>kubectl get nodes -o wide
+kubectl get --raw=/readyz?verbose
+kubectl get pods -A -o wide
+kubectl get events -A --sort-by=.metadata.creationTimestamp</code></pre><p>Trong kind, control plane components thường chạy dưới dạng static Pods ở namespace kube-system. Managed cluster có thể không cho bạn xem hoặc quản lý trực tiếp các Pod đó.</p></section>
+<section id="production-notes"><h2>Production Notes</h2><p>Đừng suy ra topology, high availability hay Service dataplane chỉ từ API. Hãy xác minh cách provider triển khai API server/etcd, CNI, CSI, proxying, DNS và cloud controllers. Khi điều tra outage, xác định lỗi ở API/control plane, scheduler, node runtime, network/storage integration hay chính application trước khi thử restart.</p></section>
+<section id="references"><h2>Nguồn chính thức</h2><ul class="refs"><li><a href="https://kubernetes.io/docs/concepts/architecture/">Cluster Architecture</a></li><li><a href="https://kubernetes.io/docs/concepts/overview/components/">Kubernetes Components</a></li><li><a href="https://kubernetes.io/docs/concepts/architecture/nodes/">Nodes</a></li><li><a href="https://kubernetes.io/docs/concepts/architecture/controller/">Controllers</a></li></ul></section>

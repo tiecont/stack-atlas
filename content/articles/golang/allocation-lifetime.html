@@ -1,0 +1,20 @@
+<h2 id="s1">1. Mental model</h2><div class="lead"><p>Memory pressure không chỉ là số lần allocation. Hai workload cùng alloc 1 GB/s nhưng khác live heap/retention có thể tạo GC behavior rất khác. Bạn cần phân biệt allocation rate — tốc độ tạo object — và live heap — object vẫn reachable.</p><p>Object trở nên reclaimable khi không còn reachable theo GC, không phải ngay lúc variable ra khỏi một block source code theo nghĩa trực giác.</p></div><div class="note callout"><strong>Runtime note</strong>Nội dung runtime được viết theo Go 1.27 hiện hành. Các chi tiết implementation có thể thay đổi; language/spec behavior mới là contract ổn định.</div>
+<figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Mental model">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Mental model</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Allocate</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Live object graph</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">GC / reclaim</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Học flow và ownership trước khi nhớ API chi tiết.</text></svg><figcaption>Học flow và ownership trước khi nhớ API chi tiết.</figcaption></figure>
+<h2 id="s2">2. Code đầu tiên</h2><pre><span class="code-label">Go</span><code>type Cache struct {
+    items map[string][]byte
+}
+
+// If entries are never evicted, values stay reachable
+// regardless of how little code references them directly.</code></pre>
+<h2 id="s3">3. Hiểu sâu hơn</h2><p>Một object nhỏ trỏ tới object graph lớn có thể giữ nhiều memory sống. Slice/map/string có reference đến backing data nên retention bug thường đến từ ownership/lifetime, không chỉ “quên free”.</p><p>Go tự quản lý memory, nhưng resource bên ngoài như file descriptors, sockets hay DB rows vẫn cần lifecycle explicit.</p><pre><span class="code-label">Example</span><code>var ms runtime.MemStats
+runtime.ReadMemStats(&amp;ms)
+fmt.Println(ms.HeapAlloc, ms.HeapObjects)</code></pre>
+<h2 id="s4">4. Khi đặt vào backend thật</h2><p>Cache không giới hạn, queue backlog và per-request buffers được giữ trong pool là ba nguồn memory growth phổ biến. Hãy đo heap in-use, allocation rate và application-level queue/cache size cùng nhau.</p><div class="callout"><strong>Câu hỏi nên tự hỏi</strong>Khi concept này đi qua HTTP, database, cache hoặc worker, ownership nằm ở đâu, lifecycle kết thúc khi nào, và failure được biểu diễn ra sao?</div>
+<h2 id="s5">5. Sai lầm thường gặp & điều cần nhớ</h2><h3>Sai lầm thường gặp</h3><ul class="checklist"><li>Chỉ nhìn RSS và kết luận “GC leak”.</li><li>Dùng `sync.Pool` như cache lâu dài.</li><li>Giữ pointer/reference trong global registry mà không eviction.</li></ul><h3>Điều cần mang sang bài tiếp theo</h3><ul class="checklist"><li>Allocation và retention là hai vấn đề khác nhau.</li><li>Reachability quyết định GC có thể reclaim object hay chưa.</li><li>Đo memory cùng domain metrics như cache size/queue depth.</li></ul>
+<h2 id="refs">6. Tài liệu chính thức nên đọc</h2><p class="refs">Go Documentation: <a href="https://go.dev/doc/" target="_blank" rel="noreferrer">go.dev/doc</a> · Diagnostics: <a href="https://go.dev/doc/diagnostics" target="_blank" rel="noreferrer">go.dev/doc/diagnostics</a> · GC Guide: <a href="https://go.dev/doc/gc-guide" target="_blank" rel="noreferrer">go.dev/doc/gc-guide</a></p>

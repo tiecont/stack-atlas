@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Microservices Anti-patterns · Stack Atlas</title><meta name="description" content="Distributed monolith là trạng thái tệ nhất: phức tạp như microservices nhưng coupling như monolith.">
+  <meta property="og:title" content="Microservices Anti-patterns · Stack Atlas"><meta property="og:description" content="Distributed monolith là trạng thái tệ nhất: phức tạp như microservices nhưng coupling như monolith.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-13-microservices-architecture-11-anti-patterns"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/architecture/">Architecture</a><span>/</span><a href="/topics/architecture/#category-architecture">Architecture</a><span>/</span>Microservices Anti-patterns</div><header class="article-header"><span class="eyebrow">Architecture · Architecture</span><h1>Microservices Anti-patterns</h1><p>Distributed monolith là trạng thái tệ nhất: phức tạp như microservices nhưng coupling như monolith.</p><div class="article-meta"><span>Architecture</span><button class="complete-toggle" type="button" data-progress-toggle="season-13-microservices-architecture-11-anti-patterns" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#d-u-hi-u">Dấu hiệu</a><a class="toc-level-2" href="#chatty-architecture">Chatty architecture</a><a class="toc-level-2" href="#s-a">Sửa</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Microservices Architecture · Lesson 11</strong></a></aside><article class="article-body"><section id="d-u-hi-u"><h2 id="d-u-hi-u">Dấu hiệu</h2><ul><li>deploy service A phải deploy B</li><li>request fan-out quá nhiều</li><li>shared database</li><li>transaction xuyên nhiều service cho mọi flow</li><li>service quá nhỏ chỉ wrap một table</li></ul></section><section id="chatty-architecture"><h2 id="chatty-architecture">Chatty architecture</h2><div class="diagram"><pre>API -&gt; A -&gt; B -&gt; C -&gt; D -&gt; E
+mỗi hop thêm latency + failure probability</pre></div></section><section id="s-a"><h2 id="s-a">Sửa</h2><p>Gộp boundary quá nhỏ, đưa invariant về đúng owner và dùng async projection cho read model khi phù hợp.</p></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/architecture/deployment-ownership/?path=golang-backend"><small>Previous</small><strong>Independent Deployment và Team Ownership</strong></a><a href="/articles/architecture/microservices-capstone/?path=golang-backend"><small>Next</small><strong>Capstone: Tách Marketplace thành Services</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

@@ -1,0 +1,29 @@
+{
+  "id": "season-15-observability-06-latency-percentiles",
+  "title": "p50, p95, p99 và Tail Latency",
+  "description": "Average đẹp không có nghĩa user experience đẹp.",
+  "type": "article",
+  "domain": "observability",
+  "category": "observability",
+  "tags": [
+    "observability"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "observability",
+      "order": 210
+    }
+  ],
+  "path_order": 210,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/observability/latency-percentiles/",
+  "source": "content/articles/observability/latency-percentiles.html",
+  "legacy_url": "/season-15-observability/06-latency-percentiles.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,23 @@
+<p class="lead">Distributed system không có timeout thì một dependency chậm có thể giữ goroutine, connection và request vô thời hạn. Nhưng timeout quá ngắn hoặc retry thiếu kiểm soát cũng tạo lỗi giả và retry storm.</p>
+<figure class="figure"><svg viewBox="0 0 900 300"><text x="450" y="34" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Deadline budget đi xuyên call graph</text>
+        <rect x="55" y="105" width="175" height="70" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><text x="142" y="145" text-anchor="middle" font-weight="800">Client 800ms</text>
+        <rect x="290" y="105" width="175" height="70" rx="18" fill="#f3e8ff" stroke="#d8b4fe"/><text x="377" y="145" text-anchor="middle" font-weight="800">API</text>
+        <rect x="525" y="105" width="140" height="70" rx="18" fill="#dcfce7" stroke="#86efac"/><text x="595" y="145" text-anchor="middle" font-weight="800">DB</text>
+        <rect x="705" y="105" width="140" height="70" rx="18" fill="#fef3c7" stroke="#fcd34d"/><text x="775" y="145" text-anchor="middle" font-weight="800">Remote</text>
+        <path d="M230 140 L290 140" stroke="#38bdf8" stroke-width="5"/><path d="M465 140 L525 140" stroke="#38bdf8" stroke-width="5"/><path d="M665 140 L705 140" stroke="#38bdf8" stroke-width="5"/><text x="450" y="235" text-anchor="middle" fill="#475569">Mỗi dependency phải tôn trọng thời gian còn lại, không tự tạo timeout dài hơn request cha.</text></svg><figcaption>Timeout nên là budget có quan hệ cha–con, không phải mỗi tầng tự chọn một con số tùy ý.</figcaption></figure>
+<h2 id="layers">1. Có nhiều loại timeout</h2>
+<ul><li>Dial/connect timeout.</li><li>TLS handshake timeout.</li><li>Response header timeout.</li><li>Whole-request timeout.</li><li>Server read/write/idle timeout.</li><li>Business deadline từ request context.</li></ul>
+<h2 id="context">2. Request deadline bằng context</h2>
+<pre><span class="code-label">go</span><code>ctx, cancel := context.WithTimeout(r.Context(), 800*time.Millisecond)
+defer cancel()
+
+req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+if err != nil { return err }
+resp, err := client.Do(req)</code></pre>
+<p>Nếu client hủy request, context cha có thể cancel các dependency phía dưới thay vì để chúng tiếp tục làm việc vô ích.</p>
+<h2 id="conn">3. net.Conn deadline khác context</h2>
+<p>Deadline trên connection tác động trực tiếp tới I/O của connection. Context là lifecycle abstraction được các API cấp cao tôn trọng. Hai cơ chế liên quan nhưng không đồng nhất.</p>
+<div class="callout warn"><strong>Anti-pattern</strong>Không đặt timeout 30s ở API, rồi dependency A 30s, dependency B 30s. Request cha chỉ có một budget. Child work nên biết thời gian còn lại.</div>
+<h2 id="retry">4. Timeout và retry phải thiết kế cùng nhau</h2>
+<p>Nếu timeout 1 giây rồi retry 3 lần, worst-case có thể vượt latency SLO đáng kể. Retry cũng cần xét idempotency và error class, không phải lỗi nào cũng retry.</p>
+<section id="sources" class="sources"><h3>Nguồn & đọc thêm</h3><ul><li><a href="https://pkg.go.dev/context" target="_blank" rel="noreferrer">context package</a></li><li><a href="https://pkg.go.dev/net#Dialer" target="_blank" rel="noreferrer">net.Dialer</a></li><li><a href="https://pkg.go.dev/net/http#Transport" target="_blank" rel="noreferrer">http.Transport</a></li></ul></section>

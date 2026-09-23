@@ -1,0 +1,16 @@
+<h2 id="s1">1. Pipeline là gì?</h2><p class="lead">Pipeline chia xử lý thành các stage; output của stage trước trở thành input của stage sau.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Concurrent Pipeline">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Concurrent Pipeline</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Read</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Transform</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Persist</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Mỗi stage có thể có goroutine riêng và giao tiếp bằng channel.</text></svg><figcaption>Mỗi stage có thể có goroutine riêng và giao tiếp bằng channel.</figcaption></figure><h2 id="s2">2. Mỗi stage có contract rõ ràng</h2><pre><span class="code-label">Go</span><code>func transform(in &lt;-chan Item) &lt;-chan Item {
+    out := make(chan Item)
+    go func() {
+        defer close(out)
+        for item := range in {
+            out &lt;- mutate(item)
+        }
+    }()
+    return out
+}</code></pre><h2 id="s3">3. Backpressure chạy ngược pipeline</h2><p>Nếu Persist chậm, output channel của Transform đầy, Transform block; rồi input của nó đầy và Read cũng chậm lại. Đây là backpressure tự nhiên.</p><h2 id="s4">4. Close đúng phía</h2><p>Stage tạo ra output channel thường chịu trách nhiệm đóng nó khi không còn gửi thêm dữ liệu.</p><h2 id="s5">5. Pipeline production cần cancellation</h2><p>Mỗi send/receive dài hạn nên cân nhắc <code>select</code> với <code>ctx.Done()</code> để pipeline không bị treo khi request bị hủy.</p>

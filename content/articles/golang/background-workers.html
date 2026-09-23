@@ -1,0 +1,3 @@
+<section id="worker"><h2>Worker</h2><div class="diagram"><pre>Broker -&gt; Consumer -&gt; Handler -&gt; DB/API
+           |
+         retry / DLQ</pre></div></section><section id="shutdown"><h2>Shutdown</h2><p>Stop polling, finish hoặc safely abandon in-flight work theo delivery semantics, commit offset đúng thời điểm.</p></section><section id="metrics"><h2>Metrics</h2><ul><li>lag</li><li>processing latency</li><li>success/error rate</li><li>retry count</li><li>DLQ depth</li></ul></section>

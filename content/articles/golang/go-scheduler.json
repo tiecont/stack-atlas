@@ -1,0 +1,30 @@
+{
+  "id": "season-03-concurrency-21-go-scheduler",
+  "title": "Go Scheduler",
+  "description": "Go runtime quyết định goroutine nào chạy, block và được reschedule ra sao.",
+  "type": "article",
+  "domain": "golang",
+  "category": "concurrency",
+  "tags": [
+    "golang",
+    "concurrency"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "go-concurrency",
+      "order": 48
+    }
+  ],
+  "path_order": 48,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/go-scheduler/",
+  "source": "content/articles/golang/go-scheduler.html",
+  "legacy_url": "/season-03-concurrency/21-go-scheduler.html",
+  "authors": [
+    "tiecont"
+  ]
+}

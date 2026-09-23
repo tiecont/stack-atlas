@@ -1,0 +1,13 @@
+<h2 id="s1">1. RWMutex là gì?</h2><p class="lead"><code>sync.RWMutex</code> có hai chế độ: nhiều reader có thể cùng giữ read lock, nhưng writer cần quyền độc quyền.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Nhiều reader, một writer">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Nhiều reader, một writer</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Readers</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">RWMutex</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Shared config</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Reader có thể đi cùng nhau; writer chặn mọi reader/writer khác.</text></svg><figcaption>Reader có thể đi cùng nhau; writer chặn mọi reader/writer khác.</figcaption></figure><pre><span class="code-label">Go</span><code>mu.RLock()
+v := data[key]
+mu.RUnlock()
+
+mu.Lock()
+data[key] = value
+mu.Unlock()</code></pre><h2 id="s2">2. Nhiều reader</h2><p>RWMutex có ích khi workload thật sự read-heavy và critical section đủ đáng kể để contention của Mutex trở thành vấn đề.</p><h2 id="s3">3. Write lock vẫn độc quyền</h2><p>Khi writer giữ <code>Lock()</code>, reader mới phải chờ. Vì vậy write dài vẫn có thể làm latency tăng mạnh.</p><h2 id="s4">4. Khi không nên dùng</h2><p>RWMutex phức tạp hơn Mutex và không tự động nhanh hơn. Với critical section cực ngắn hoặc write khá thường xuyên, Mutex đơn giản có thể ngang hoặc tốt hơn.</p><h2 id="s5">5. Benchmark trước khi tối ưu</h2><div class="callout"><strong>Quy tắc thực dụng</strong>Bắt đầu bằng <code>sync.Mutex</code>. Chuyển sang <code>RWMutex</code> khi profiling/benchmark cho thấy contention đọc là vấn đề thật.</div>

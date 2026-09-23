@@ -1,0 +1,22 @@
+<h2 id="s1">1. Select là gì?</h2><p class="lead"><code>select</code> giống một switch dành cho channel operations: case nào sẵn sàng thì case đó chạy.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Một goroutine chờ nhiều signal">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Một goroutine chờ nhiều signal</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">jobs</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">select</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">done / timeout</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Select giúp coordination mà không cần polling.</text></svg><figcaption>Select giúp coordination mà không cần polling.</figcaption></figure><pre><span class="code-label">Go</span><code>select {
+case job := &lt;-jobs:
+    process(job)
+case &lt;-done:
+    return
+}</code></pre><h2 id="s2">2. Chờ nhiều channel</h2><p>Nếu nhiều case cùng sẵn sàng, runtime chọn một case pseudo-random để tránh luôn ưu tiên một phía.</p><h2 id="s3">3. Timeout</h2><pre><span class="code-label">Go</span><code>select {
+case result := &lt;-resultCh:
+    use(result)
+case &lt;-time.After(2 * time.Second):
+    return errors.New(&quot;timeout&quot;)
+}</code></pre><h2 id="s4">4. default tạo non-blocking select</h2><pre><span class="code-label">Go</span><code>select {
+case ch &lt;- value:
+    // sent
+default:
+    // channel chưa sẵn sàng, không chờ
+}</code></pre><p>Dùng cẩn thận: default trong loop có thể biến code thành busy-spin.</p><h2 id="s5">5. Nil channel</h2><p>Send/receive trên nil channel sẽ block mãi. Trong select, nil channel có thể được dùng để tạm “disable” một case, nhưng cần hiểu rõ để tránh leak/deadlock.</p>

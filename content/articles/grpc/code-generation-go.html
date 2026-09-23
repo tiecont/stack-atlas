@@ -1,0 +1,5 @@
+<section id="tooling"><h2>Tooling</h2><pre><code>protoc   --go_out=.   --go-grpc_out=.   api/user/v1/user.proto</code></pre></section><section id="generated-code"><h2>Generated code</h2><p>Application implement interface server và client gọi qua generated stub, giảm handwritten serialization code.</p></section><section id="structure"><h2>Structure</h2><div class="diagram"><pre>api/
+  user/v1/user.proto
+gen/
+  user/v1/*.pb.go
+  user/v1/*_grpc.pb.go</pre></div></section>

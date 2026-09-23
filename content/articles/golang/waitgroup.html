@@ -1,0 +1,23 @@
+<h2 id="s1">1. Tại sao không dùng Sleep để chờ?</h2><p class="lead">Sleep đoán thời gian. WaitGroup diễn đạt đúng ý định: chờ một nhóm công việc hoàn thành.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Chờ một nhóm goroutine">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Chờ một nhóm goroutine</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">main</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">WaitGroup</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">workers</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">main tiếp tục khi counter của WaitGroup về 0.</text></svg><figcaption>main tiếp tục khi counter của WaitGroup về 0.</figcaption></figure><h2 id="s2">2. Ba thao tác: Add, Done, Wait</h2><pre><span class="code-label">Go</span><code>var wg sync.WaitGroup
+
+wg.Add(1)
+go func() {
+    defer wg.Done()
+    work()
+}()
+
+wg.Wait()</code></pre><h2 id="s3">3. Chờ nhiều goroutine</h2><pre><span class="code-label">Go</span><code>for _, item := range items {
+    item := item
+    wg.Add(1)
+    go func() {
+        defer wg.Done()
+        process(item)
+    }()
+}
+wg.Wait()</code></pre><h2 id="s4">4. Sai lầm phổ biến</h2><p>Hãy gọi <code>Add</code> trước khi goroutine bắt đầu để tránh race giữa <code>Add</code> và <code>Wait</code>. Và luôn đảm bảo mỗi <code>Add(1)</code> có đúng một <code>Done()</code>.</p><h2 id="s5">5. WaitGroup không truyền lỗi</h2><div class="callout"><strong>Quan trọng</strong>WaitGroup chỉ chờ. Nếu concurrent tasks có thể lỗi và bạn muốn cancel các task còn lại, hãy xem <code>errgroup</code> ở bài Error Propagation.</div>

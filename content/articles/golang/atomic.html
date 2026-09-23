@@ -1,0 +1,16 @@
+<h2 id="s1">1. Atomic là gì?</h2><p class="lead">Atomic cho phép một số thao tác đọc/ghi/cập nhật nhỏ diễn ra như một đơn vị không bị xen ngang bởi goroutine khác.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Atomic update">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Atomic update</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Goroutine</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Atomic op</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Counter</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Không cần khóa cả critical section cho một cập nhật đơn giản.</text></svg><figcaption>Không cần khóa cả critical section cho một cập nhật đơn giản.</figcaption></figure><pre><span class="code-label">Go</span><code>var count atomic.Int64
+
+count.Add(1)
+current := count.Load()</code></pre><h2 id="s2">2. Counter là use case dễ hiểu nhất</h2><p>Metrics nội bộ, sequence nhỏ, flags và counters thường là nơi atomic phù hợp.</p><pre><span class="code-label">Go</span><code>type Stats struct {
+    requests atomic.Uint64
+}
+
+func (s *Stats) Inc() { s.requests.Add(1) }</code></pre><h2 id="s3">3. Compare-And-Swap</h2><p>CAS chỉ cập nhật khi giá trị hiện tại đúng với expected value. Đây là building block của nhiều lock-free algorithm, nhưng đừng vội dùng để thay mutex.</p><pre><span class="code-label">Go</span><code>if state.CompareAndSwap(old, new) {
+    // update thành công
+}</code></pre><h2 id="s4">4. Giới hạn của Atomic</h2><p>Atomic rất tốt cho một biến độc lập. Nhưng nếu invariant liên quan nhiều field — ví dụ balance và version phải đổi cùng nhau — mutex thường dễ đúng hơn.</p><h2 id="s5">5. Atomic hay Mutex?</h2><div class="callout note"><strong>Mental model</strong>Atomic tối ưu thao tác nhỏ. Mutex bảo vệ invariant. Nếu bạn phải suy nghĩ quá lâu để chứng minh atomic code đúng, mutex có thể là lựa chọn tốt hơn.</div>

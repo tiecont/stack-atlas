@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Generate Go Code từ .proto · Stack Atlas</title><meta name="description" content="Biến IDL thành client/server types an toàn kiểu.">
+  <meta property="og:title" content="Generate Go Code từ .proto · Stack Atlas"><meta property="og:description" content="Biến IDL thành client/server types an toàn kiểu.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-14-grpc-with-go-03-code-generation-go"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/grpc/">Grpc</a><span>/</span><a href="/topics/grpc/#category-rpc">Rpc</a><span>/</span>Generate Go Code từ .proto</div><header class="article-header"><span class="eyebrow">Grpc · Rpc</span><h1>Generate Go Code từ .proto</h1><p>Biến IDL thành client/server types an toàn kiểu.</p><div class="article-meta"><span>Grpc</span><button class="complete-toggle" type="button" data-progress-toggle="season-14-grpc-with-go-03-code-generation-go" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#tooling">Tooling</a><a class="toc-level-2" href="#generated-code">Generated code</a><a class="toc-level-2" href="#structure">Structure</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>gRPC · Lesson 03</strong></a></aside><article class="article-body"><section id="tooling"><h2 id="tooling">Tooling</h2><pre><code>protoc   --go_out=.   --go-grpc_out=.   api/user/v1/user.proto</code></pre></section><section id="generated-code"><h2 id="generated-code">Generated code</h2><p>Application implement interface server và client gọi qua generated stub, giảm handwritten serialization code.</p></section><section id="structure"><h2 id="structure">Structure</h2><div class="diagram"><pre>api/
+  user/v1/user.proto
+gen/
+  user/v1/*.pb.go
+  user/v1/*_grpc.pb.go</pre></div></section>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/grpc/protobuf-basics/?path=golang-backend"><small>Previous</small><strong>Protocol Buffers</strong></a><a href="/articles/grpc/unary-rpc/?path=golang-backend"><small>Next</small><strong>Unary RPC</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

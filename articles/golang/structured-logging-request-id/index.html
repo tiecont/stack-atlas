@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Structured Logging và Request Correlation · Stack Atlas</title><meta name="description" content="Log để điều tra production: fields, request ID, latency và error context thay vì printf tự do.">
+  <meta property="og:title" content="Structured Logging và Request Correlation · Stack Atlas"><meta property="og:description" content="Log để điều tra production: fields, request ID, latency và error context thay vì printf tự do.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-05-production-http-server-13-structured-logging-request-id"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-http-services">Http Services</a><span>/</span>Structured Logging và Request Correlation</div><header class="article-header"><span class="eyebrow">Golang · Http Services</span><h1>Structured Logging và Request Correlation</h1><p>Log để điều tra production: fields, request ID, latency và error context thay vì printf tự do.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-05-production-http-server-13-structured-logging-request-id" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#1-structured-fields">1. Structured fields</a><a class="toc-level-2" href="#2-correlation-id">2. Correlation ID</a><a class="toc-level-2" href="#3-kh-ng-log-secrets">3. Không log secrets</a><a class="toc-level-2" href="#4-log-volume-l-cost">4. Log volume là cost</a><a class="toc-level-2" href="#takeaways">Điểm cần nhớ</a><a class="toc-level-3" href="#c-th-m">Đọc thêm</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Production HTTP Server · Lesson 13</strong></a></aside><article class="article-body"><p class="lead">Ở một request đơn lẻ, print log có vẻ đủ. Khi có hàng trăm instance và hàng triệu request, structured fields mới cho phép query và correlate.</p><h2 id="1-structured-fields">1. Structured fields</h2><pre><span class="code-label">go</span><code>logger.Info("request completed",
+    "request_id", requestID,
+    "method", r.Method,
+    "path", r.URL.Path,
+    "status", status,
+    "duration_ms", time.Since(start).Milliseconds(),
+)</code></pre><h2 id="2-correlation-id">2. Correlation ID</h2><p>Request ID giúp nối log trong một service. Distributed tracing dùng trace/span IDs để nối qua nhiều service.</p><h2 id="3-kh-ng-log-secrets">3. Không log secrets</h2><p>Authorization header, password, token, session cookie và sensitive PII không nên xuất hiện trong log mặc định.</p><h2 id="4-log-volume-l-cost">4. Log volume là cost</h2><p>Access log cho mọi request có thể rất lớn. Thiết kế fields, sampling và retention theo mục tiêu điều tra.</p><div class="callout "><strong>Signal > noise</strong>Một log tốt trả lời: request nào, chuyện gì xảy ra, mất bao lâu, lỗi ở boundary nào.</div><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Log fields thay vì ghép string tùy ý.</li><li>Correlation IDs giúp điều tra.</li><li>Không log secret/PII vô tội vạ.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Định nghĩa schema access log cho API và viết 3 query bạn muốn chạy khi p99 tăng.</div><div class="sources"><h3 id="c-th-m">Đọc thêm</h3><ul><li><a href="https://pkg.go.dev/log/slog" target="_blank" rel="noopener">log/slog</a></li></ul></div>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/health-readiness-liveness/?path=golang-backend"><small>Previous</small><strong>Health, Readiness và Liveness</strong></a><a href="/articles/golang/testing-http-services/?path=golang-backend"><small>Next</small><strong>Testing HTTP Services</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>

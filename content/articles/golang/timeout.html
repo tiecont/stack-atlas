@@ -1,0 +1,12 @@
+<h2 id="s1">1. Timeout là một phần của reliability</h2><p class="lead">Không có timeout nghĩa là bạn chấp nhận chờ vô hạn. Trong distributed systems, đó gần như luôn là một assumption nguy hiểm.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Latency budget">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Latency budget</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Request 2s</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Service call 800ms</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">DB 300ms</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Mỗi tầng cần ngân sách để còn thời gian trả lỗi hợp lý.</text></svg><figcaption>Mỗi tầng cần ngân sách để còn thời gian trả lỗi hợp lý.</figcaption></figure><h2 id="s2">2. HTTP client phải có timeout</h2><pre><span class="code-label">Go</span><code>client := &amp;http.Client{
+    Timeout: 2 * time.Second,
+}
+resp, err := client.Do(req)</code></pre><h2 id="s3">3. Database cũng nhận context</h2><pre><span class="code-label">Go</span><code>ctx, cancel := context.WithTimeout(ctx, 500*time.Millisecond)
+defer cancel()
+rows, err := db.QueryContext(ctx, query)</code></pre><h2 id="s4">4. Layered timeout</h2><p>Timeout con nên nhỏ hơn deadline cha. Nếu request có budget 2s, đừng cấp 3s cho database rồi 3s cho API khác.</p><h2 id="s5">5. Timer trong loop</h2><p>Trong hot loop, tạo <code>time.After</code> liên tục có thể tạo nhiều timer allocation. Với code performance-sensitive, cân nhắc <code>time.NewTimer</code> và reset đúng cách.</p>

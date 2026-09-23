@@ -1,0 +1,30 @@
+{
+  "id": "season-09-kafka-deep-dive-11-ordering-guarantees",
+  "title": "Ordering: Kafka đảm bảo cái gì và không đảm bảo cái gì",
+  "description": "“Kafka giữ order” chỉ đúng khi nói rõ phạm vi.",
+  "type": "article",
+  "domain": "kafka",
+  "category": "stream-processing",
+  "tags": [
+    "kafka",
+    "stream-processing"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kafka-deep-dive",
+      "order": 134
+    }
+  ],
+  "path_order": 134,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kafka/ordering-guarantees/",
+  "source": "content/articles/kafka/ordering-guarantees.html",
+  "legacy_url": "/season-09-kafka-deep-dive/11-ordering-guarantees.html",
+  "authors": [
+    "tiecont"
+  ]
+}

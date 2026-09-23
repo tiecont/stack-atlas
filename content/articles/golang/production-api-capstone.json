@@ -1,0 +1,30 @@
+{
+  "id": "season-05-production-http-server-15-production-api-capstone",
+  "title": "Capstone: Ghép một Production API",
+  "description": "Ghép routing, validation, auth, DB, timeout, observability, shutdown và testing thành một service nhỏ hoàn chỉnh.",
+  "type": "article",
+  "domain": "golang",
+  "category": "http-services",
+  "tags": [
+    "golang",
+    "http-services"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "production-http",
+      "order": 79
+    }
+  ],
+  "path_order": 79,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/production-api-capstone/",
+  "source": "content/articles/golang/production-api-capstone.html",
+  "legacy_url": "/season-05-production-http-server/15-production-api-capstone.html",
+  "authors": [
+    "tiecont"
+  ]
+}

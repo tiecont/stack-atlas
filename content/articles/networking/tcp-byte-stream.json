@@ -1,0 +1,29 @@
+{
+  "id": "season-04-networking-with-go-02-tcp-byte-stream",
+  "title": "TCP: Connection, Byte Stream và Framing",
+  "description": "Hiểu TCP thật sự đảm bảo điều gì, không đảm bảo điều gì, và vì sao protocol phải tự định nghĩa message boundary.",
+  "type": "article",
+  "domain": "networking",
+  "category": "networking",
+  "tags": [
+    "networking"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "networking-with-go",
+      "order": 51
+    }
+  ],
+  "path_order": 51,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/networking/tcp-byte-stream/",
+  "source": "content/articles/networking/tcp-byte-stream.html",
+  "legacy_url": "/season-04-networking-with-go/02-tcp-byte-stream.html",
+  "authors": [
+    "tiecont"
+  ]
+}

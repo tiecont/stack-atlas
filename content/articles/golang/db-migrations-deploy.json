@@ -1,0 +1,30 @@
+{
+  "id": "season-18-production-go-engineering-08-db-migrations-deploy",
+  "title": "Database Migration khi Deploy",
+  "description": "Schema và app version phải coexist trong rolling deployment.",
+  "type": "article",
+  "domain": "golang",
+  "category": "fundamentals",
+  "tags": [
+    "golang",
+    "fundamentals"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "production-go",
+      "order": 252
+    }
+  ],
+  "path_order": 252,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/golang/db-migrations-deploy/",
+  "source": "content/articles/golang/db-migrations-deploy.html",
+  "legacy_url": "/season-18-production-go-engineering/08-db-migrations-deploy.html",
+  "authors": [
+    "tiecont"
+  ]
+}

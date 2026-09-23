@@ -1,0 +1,30 @@
+{
+  "id": "season-22-elasticsearch-deep-dive-11-bulk-indexing",
+  "title": "Bulk Indexing và Throughput",
+  "description": "Batch writes để giảm protocol overhead và tăng indexing throughput.",
+  "type": "article",
+  "domain": "elasticsearch",
+  "category": "search",
+  "tags": [
+    "elasticsearch",
+    "search"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "elasticsearch",
+      "order": 308
+    }
+  ],
+  "path_order": 308,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/elasticsearch/bulk-indexing/",
+  "source": "content/articles/elasticsearch/bulk-indexing.html",
+  "legacy_url": "/season-22-elasticsearch-deep-dive/11-bulk-indexing.html",
+  "authors": [
+    "tiecont"
+  ]
+}

@@ -1,0 +1,7 @@
+<p class="lead">Transaction biến nhiều statements thành một unit theo isolation semantics. Nhưng transaction dài giữ connection và có thể giữ locks/version state lâu hơn cần thiết.</p><h2 id="1-pattern-c-b-n">1. Pattern cơ bản</h2><pre><span class="code-label">go</span><code>tx, err := db.BeginTx(ctx, nil)
+if err != nil { return err }
+defer tx.Rollback()
+
+// queries through tx
+
+return tx.Commit()</code></pre><h2 id="2-ch-query-qua-tx">2. Chỉ query qua tx</h2><p>Sau BeginTx, statements thuộc transaction phải đi qua <code>tx</code>, không gọi nhầm <code>db</code> giữa workflow.</p><h2 id="3-kh-ng-g-i-network-l-u-trong-transaction">3. Không gọi network lâu trong transaction</h2><p>Gọi HTTP/Kafka trong lúc giữ transaction mở có thể kéo dài lock và làm pool cạn. Outbox pattern thường giải bài toán publish sau commit.</p><h2 id="4-business-invariant">4. Business invariant</h2><p>Transaction boundary nên bao quanh invariant cần atomicity, không phải bao quanh toàn bộ handler.</p><div class="callout warn"><strong>Rule</strong>Transaction càng dài, contention càng dễ tăng.</div><h2 id="takeaways">Điểm cần nhớ</h2><ul class="checklist"><li>Rollback defer là safety net.</li><li>Transaction scope theo invariant.</li><li>Tránh external network call trong transaction.</li></ul><div class="callout good"><strong>Bài tập thực hành</strong>Viết transaction transfer credit giữa hai accounts và đảm bảo tổng balance không đổi.</div>

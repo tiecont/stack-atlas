@@ -1,0 +1,7 @@
+<section id="mental-model"><h2>Mental model</h2><div class="diagram"><pre>PostgreSQL WAL
+    |
+CDC connector
+    |
+Kafka topic
+    |
+Consumers</pre></div></section><section id="outbox-cdc"><h2>Outbox + CDC</h2><p>Application ghi outbox row; CDC đọc thay đổi bảng outbox và đưa sang broker.</p></section><section id="trade-off"><h2>Trade-off</h2><p>CDC giảm custom polling nhưng thêm infrastructure, operational complexity và yêu cầu hiểu ordering/schema evolution.</p></section>

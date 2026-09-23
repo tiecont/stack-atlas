@@ -1,0 +1,5 @@
+<section id="quorum"><h2>Quorum</h2><div class="diagram"><pre>N = 3 replicas
+W = 2 writes acknowledged
+R = 2 reads consulted
+
+R + W &gt; N can help overlap read/write quorums</pre></div></section><section id="caveat"><h2>Caveat</h2><p>Quorum formula một mình không đảm bảo linearizability; sloppy quorum, clocks và repair semantics vẫn quan trọng.</p></section><section id="systems"><h2>Systems</h2><p>Dynamo-style databases dùng nhiều biến thể của approach này.</p></section>

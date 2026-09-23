@@ -1,0 +1,30 @@
+{
+  "id": "season-09-kafka-deep-dive-17-observability-capacity-share-groups",
+  "title": "Lag, Capacity và Share Groups trong Kafka 4.x",
+  "description": "Vận hành Kafka là quan sát bottleneck theo partition, broker và consumer.",
+  "type": "article",
+  "domain": "kafka",
+  "category": "stream-processing",
+  "tags": [
+    "kafka",
+    "stream-processing"
+  ],
+  "difficulty": "unspecified",
+  "learning_paths": [
+    {
+      "path_id": "golang-backend",
+      "module_id": "kafka-deep-dive",
+      "order": 140
+    }
+  ],
+  "path_order": 140,
+  "prerequisites": [],
+  "related": [],
+  "status": "published",
+  "url": "/articles/kafka/observability-capacity-share-groups/",
+  "source": "content/articles/kafka/observability-capacity-share-groups.html",
+  "legacy_url": "/season-09-kafka-deep-dive/17-observability-capacity-share-groups.html",
+  "authors": [
+    "tiecont"
+  ]
+}

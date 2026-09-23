@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Goroutine Leak · Stack Atlas</title><meta name="description" content="Những goroutine không bao giờ kết thúc và cách phát hiện, phòng tránh.">
+  <meta property="og:title" content="Goroutine Leak · Stack Atlas"><meta property="og:description" content="Những goroutine không bao giờ kết thúc và cách phát hiện, phòng tránh.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script defer src="/assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="brand" href="/" aria-label="Stack Atlas home"><span class="brand-icon">S</span><span>Stack Atlas</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="/#topics">Explore</a><a href="/paths/">Learning Paths</a><a href="/topics/">Topics</a><a href="/articles/">Blog</a>
+      <button class="search-open" type="button" data-open-search>Search</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">Dark mode</button>
+    </nav>
+  </div></header>
+  <main id="main" class="page-shell article-page" data-article-id="season-03-concurrency-17-goroutine-leak"><div class="breadcrumbs"><a href="/">Stack Atlas</a><span>/</span><a href="/topics/golang/">Golang</a><span>/</span><a href="/topics/golang/#category-concurrency">Concurrency</a><span>/</span>Goroutine Leak</div><header class="article-header"><span class="eyebrow">Golang · Concurrency</span><h1>Goroutine Leak</h1><p>Những goroutine không bao giờ kết thúc và cách phát hiện, phòng tránh.</p><div class="article-meta"><span>Golang</span><button class="complete-toggle" type="button" data-progress-toggle="season-03-concurrency-17-goroutine-leak" aria-pressed="false">Mark complete</button></div></header><div class="article-layout"><aside class="article-sidebar"><nav class="article-toc"><strong>On this page</strong><a class="toc-level-2" href="#s1">1. Goroutine leak là gì?</a><a class="toc-level-2" href="#s2">2. Blocked send</a><a class="toc-level-2" href="#s3">3. Blocked receive</a><a class="toc-level-2" href="#s4">4. Cách phát hiện</a><a class="toc-level-2" href="#s5">5. Phòng tránh</a></nav><a class="path-context" data-path-context="golang-backend" href="/paths/golang-backend/"><span>Part of Golang Backend Engineering</span><strong>Go Concurrency · Lesson 17</strong></a></aside><article class="article-body"><h2 id="s1">1. Goroutine leak là gì?</h2><p class="lead">Một goroutine leak không nhất thiết tiêu CPU; nó chỉ cần tồn tại mãi dù công việc logic của nó đã không còn cần thiết.</p><figure class="figure"><svg viewBox="0 0 900 300" role="img" aria-label="Goroutine bị mắc kẹt">
+    <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#2dd4bf"/></linearGradient></defs>
+    <text x="450" y="38" text-anchor="middle" fill="#334155" font-size="20" font-weight="800">Goroutine bị mắc kẹt</text>
+    <rect x="70" y="110" width="210" height="76" rx="18" fill="#e0f2fe" stroke="#7dd3fc"/><rect x="345" y="110" width="210" height="76" rx="18" fill="#f5f3ff" stroke="#c4b5fd"/><rect x="620" y="110" width="210" height="76" rx="18" fill="#ccfbf1" stroke="#5eead4"/>
+    <text x="175" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Request gone</text><text x="450" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Blocked goroutine</text><text x="725" y="154" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">Memory/resources</text>
+    <path d="M280 148 L345 148" stroke="url(#g)" stroke-width="5"/><path d="M555 148 L620 148" stroke="url(#g)" stroke-width="5"/>
+    <text x="450" y="238" text-anchor="middle" fill="#64748b" font-size="15">Leak tích lũy theo thời gian trong service chạy lâu.</text></svg><figcaption>Leak tích lũy theo thời gian trong service chạy lâu.</figcaption></figure><h2 id="s2">2. Blocked send</h2><pre><span class="code-label">Go</span><code>go func() {
+    resultCh &lt;- expensiveWork() // không còn receiver
+}()</code></pre><p>Nếu caller timeout và bỏ đi nhưng channel không có buffer/receiver, goroutine có thể kẹt ở send mãi.</p><h2 id="s3">3. Blocked receive</h2><pre><span class="code-label">Go</span><code>for {
+    job := &lt;-jobs // jobs không bao giờ close và không còn producer
+    process(job)
+}</code></pre><h2 id="s4">4. Cách phát hiện</h2><p>Dùng goroutine profile qua <code>pprof</code>, theo dõi số goroutine theo thời gian, và xem stack traces của các goroutine có pattern lặp bất thường.</p><pre><span class="code-label">Tools</span><code>runtime.NumGoroutine()
+
+go tool pprof http://localhost:6060/debug/pprof/goroutine</code></pre><h2 id="s5">5. Phòng tránh</h2><p>Thiết kế ownership của channel, dùng context cancellation, đảm bảo mọi blocking point đều có đường thoát, và test shutdown path chứ không chỉ happy path.</p>
+<nav class="article-previous-next" data-path-navigation="golang-backend" aria-label="Learning path navigation"><a href="/articles/golang/cancellation/?path=golang-backend"><small>Previous</small><strong>Cancellation</strong></a><a href="/articles/golang/deadlock/?path=golang-backend"><small>Next</small><strong>Deadlock</strong></a></nav></article></div></main>
+  <footer class="site-footer"><div><a class="footer-brand" href="/">Stack Atlas</a><span>Engineering knowledge, from code to infrastructure.</span></div><nav aria-label="Footer navigation"><a href="/topics/">Topics</a><a href="/paths/">Learning Paths</a><a href="/articles/">Articles</a><a href="/about/">About</a></nav><small>Static, open and built for curious engineers.</small></footer>
+  <dialog class="search-dialog" aria-labelledby="search-title" id="search-dialog">
+    <form method="dialog" class="dialog-top"><div><span class="eyebrow">Stack Atlas</span><h2 id="search-title">Search the Atlas</h2></div><button class="icon-button" aria-label="Close search">×</button></form>
+    <label class="search-label" for="site-search">Search topics, articles and learning paths</label>
+    <input id="site-search" type="search" placeholder="Try “goroutine” or “PostgreSQL”" autocomplete="off">
+    <div class="search-filters" role="group" aria-label="Filter search results"><button class="filter-button is-active" data-search-filter="all">All</button><button class="filter-button" data-search-filter="article">Articles</button><button class="filter-button" data-search-filter="topic">Topics</button><button class="filter-button" data-search-filter="path">Learning Paths</button></div>
+    <div class="search-results" id="search-results" aria-live="polite"><p class="empty-state">Start typing to search articles and topics.</p></div>
+  </dialog>
+</body></html>
