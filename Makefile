@@ -5,7 +5,7 @@ export PYTHONPATH := $(CURDIR)/platform$(if $(PYTHONPATH),:$(PYTHONPATH))
 
 BUILD_ARGS := $(if $(strip $(BASE_PATH)),--base-path "$(BASE_PATH)") $(if $(strip $(SITE_URL)),--site-url "$(SITE_URL)")
 
-.PHONY: install validate build serve test test-site test-kubernetes test-databases audit-content clean
+.PHONY: install validate build serve test test-site test-api-integration test-kubernetes test-databases audit-content clean
 
 install:
 	$(PYTHON) -m pip install -e .
@@ -23,8 +23,12 @@ test: test-site test-kubernetes test-databases
 
 test-site:
 	$(PYTHON) -m unittest discover -s tests/platform -p 'test_*.py'
+	node tests/platform/test_api_client.js
 	node tests/platform/test_progress_migration.js
 	node tests/platform/test_path_context.js
+
+test-api-integration:
+	node tests/integration/api_client_http.js
 
 test-kubernetes:
 	bash tests/kubernetes/context_safety.sh

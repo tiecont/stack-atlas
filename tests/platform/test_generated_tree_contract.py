@@ -15,6 +15,42 @@ from stack_atlas.render import render_site  # noqa: E402
 
 
 class GeneratedTreeContractTests(unittest.TestCase):
+    def test_public_knowledge_experiences_render_their_expected_entry_points(self):
+        domains, categories, paths, articles, errors = make_catalog()
+        self.assertEqual(errors, [])
+        populated_topic = next(
+            domain for domain in domains
+            if any(article.get("domain") == domain["id"] for article in articles)
+        )
+        representative_article = next(
+            article for article in articles
+            if article.get("domain") == populated_topic["id"]
+        )
+        learning_path = paths[0]
+
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            render_site(domains, categories, paths, articles, output, read_yaml(ROOT / "content/site.yaml"))
+            home = (output / "index.html").read_text(encoding="utf-8")
+            topic_index = (output / "topics/index.html").read_text(encoding="utf-8")
+            topic = (output / f"topics/{populated_topic['id']}/index.html").read_text(encoding="utf-8")
+            article = (output / f"{representative_article['url'].strip('/')}/index.html").read_text(encoding="utf-8")
+            path_index = (output / "paths/index.html").read_text(encoding="utf-8")
+            path = (output / f"paths/{learning_path['id']}/index.html").read_text(encoding="utf-8")
+
+        self.assertIn('id="topics"', home)
+        self.assertIn("Learning paths", home)
+        self.assertIn("Recently Updated", home)
+        self.assertIn("data-continue-learning", home)
+        self.assertIn("<h1>Topics</h1>", topic_index)
+        self.assertIn(populated_topic["title"], topic)
+        self.assertIn(representative_article["title"], topic)
+        self.assertIn(f'data-article-id="{representative_article["id"]}"', article)
+        self.assertIn(f'data-progress-toggle="{representative_article["id"]}"', article)
+        self.assertIn("<h1>Learning Paths</h1>", path_index)
+        self.assertIn(f'data-progress-path="{learning_path["id"]}"', path)
+        self.assertIn("data-article-id=", path)
+
     def test_build_contains_static_routes_and_compatibility_redirects(self):
         domains, categories, paths, articles, errors = make_catalog()
         self.assertEqual(errors, [])
@@ -22,8 +58,8 @@ class GeneratedTreeContractTests(unittest.TestCase):
             output = Path(directory)
             render_site(domains, categories, paths, articles, output, read_yaml(ROOT / "content/site.yaml"))
             for route in (
-                "index.html", "articles", "topics", "paths", "assets/site.css",
-                "assets/site.js", "assets/progress-store.js", "assets/path-context.js",
+                "index.html", "articles", "topics", "paths", "assets/site.css", "assets/tokens.css",
+                "assets/site.js", "assets/api-client.js", "assets/progress-store.js", "assets/path-context.js",
                 "assets/favicon.svg", "search-index.json", "sitemap.xml", "robots.txt",
             ):
                 self.assertTrue((output / route).exists(), route)
