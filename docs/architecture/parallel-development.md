@@ -44,8 +44,8 @@ must build from its own checkout and must not import source code from a sibling.
 
 1. In `api`, copy `.env.example` to `.env`, run `docker compose up -d --wait postgres`,
    apply migrations, and start `npm run start:dev` on port `3000`.
-2. In `web`, copy `.env.local.example` to `.env.local` and run `npm run dev` on
-   port `3001`. Public content works without API; account routes need API and
+2. In `web`, copy `.env.example` to `.env` and run `npm run dev` on port
+   `3001`. Public content works without API; account routes need API and
    PostgreSQL.
 3. In `engine`, run `make run` when working on the worker. It does not need the
    other repositories.

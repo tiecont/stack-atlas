@@ -1,17 +1,19 @@
-# GitHub Pages deployment
+# Hosting Stack Atlas Web
 
-## One-time repository setting
+The app uses Next.js route handlers, server rendered pages and native redirects.
+GitHub Pages only serves static files, so it cannot host the application. The
+old Pages deployment workflow has been removed as part of the native Next.js
+migration.
 
-For deployment, configure **Settings → Pages → Build and deployment → Source** as **GitHub Actions**. A successful artifact build alone does not enable the repository setting.
+Deploy the standalone image to a Node-capable container host. For local
+production-style use, set values in `.env` and run `docker compose up --build`.
+Set `SITE_URL` to the public origin and `NEXT_PUBLIC_BASE_PATH` if the app is
+served below the origin root. `NEXT_PUBLIC_API_BASE_URL` is required for the
+published image to call the deployment's API.
 
-## Workflows
-
-- `.github/workflows/site-ci.yml` runs repository validation, platform regressions and a base-path-aware site build.
-- `.github/workflows/kubernetes-labs.yml` validates manifests and runs the isolated kind smoke test when platform, content or Kubernetes lab sources change.
-- `.github/workflows/pages.yml` builds `dist/`, uploads only that directory, and deploys it from `main`.
-
-The GitHub Project Pages base path and canonical site URL are passed to the builder through `make build BASE_PATH=... SITE_URL=...`.
-
-## Contributor workflow
-
-Use the repository's normal review process. Site and applicable lab checks must pass before a change is ready to merge. Pages deployment is separate and runs from `main`.
+`.github/workflows/ci.yml` runs content validation, format, lint, typecheck,
+unit/browser regressions, production build, and Docker validation. It publishes
+to GHCR on `main`, `develop`, and version tags after
+`NEXT_PUBLIC_API_BASE_URL` and `SITE_URL` are configured. The separate
+Kubernetes lab workflow retains Python with PyYAML only for lab manifest
+validation.
