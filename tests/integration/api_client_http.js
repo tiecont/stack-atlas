@@ -7,8 +7,8 @@ const root = path.resolve(__dirname, '../..');
 const baseUrl = process.env.API_BASE_URL;
 
 if (!baseUrl) {
-  console.log('Skipped API HTTP integration; set API_BASE_URL to the API /api/v1/ base.');
-  process.exit(0);
+  console.error('API_BASE_URL is required; set it to the API /api/v1/ base.');
+  process.exit(2);
 }
 
 const window = {};

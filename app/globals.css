@@ -1,0 +1,141 @@
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  background: var(--surface-soft, #f4f7f6);
+}
+
+.auth-card {
+  width: min(100%, 440px);
+  padding: 32px;
+  border: 1px solid var(--line, #dce5e2);
+  border-radius: 18px;
+  background: var(--surface, #fff);
+  box-shadow: 0 18px 55px rgb(17 39 34 / 8%);
+}
+
+.auth-brand,
+.auth-back {
+  color: var(--brand, #16745e);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.auth-card h1 {
+  margin: 24px 0 8px;
+  color: var(--ink, #12201c);
+  font-size: clamp(28px, 5vw, 36px);
+  letter-spacing: -0.04em;
+}
+
+.auth-intro,
+.auth-footnote {
+  color: var(--muted, #62736d);
+  line-height: 1.6;
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink, #12201c);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid var(--line, #dce5e2);
+  border-radius: 9px;
+  background: var(--surface, #fff);
+  color: var(--ink, #12201c);
+  font: inherit;
+}
+
+.auth-form input:focus-visible,
+.auth-button:focus-visible,
+.auth-back:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 3px rgb(22 116 94 / 28%));
+}
+
+.auth-button {
+  min-height: 46px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--brand, #16745e);
+  color: white;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.auth-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.auth-error,
+.auth-notice {
+  padding: 11px 13px;
+  border-radius: 9px;
+  line-height: 1.5;
+}
+
+.auth-error {
+  border: 1px solid #e6b8b8;
+  background: #fff3f3;
+  color: #852b2b;
+}
+
+.auth-notice {
+  border: 1px solid #b5d8ca;
+  background: #effaf5;
+  color: #235c45;
+}
+
+.auth-footnote {
+  margin: 20px 0 0;
+  font-size: 14px;
+}
+
+.account-page {
+  min-height: 100vh;
+  padding: 28px max(20px, calc((100vw - 900px) / 2));
+  background: var(--surface-soft, #f4f7f6);
+}
+
+.account-topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+
+.account-card {
+  margin-top: 48px;
+  padding: clamp(24px, 5vw, 40px);
+  border: 1px solid var(--line, #dce5e2);
+  border-radius: 18px;
+  background: var(--surface, #fff);
+}
+
+.account-email {
+  overflow-wrap: anywhere;
+  color: var(--brand, #16745e);
+  font-size: 18px;
+}
+
+.account-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}

@@ -42,5 +42,5 @@ audit-content: validate
 	$(PYTHON) scripts/maintenance/audit_duplicate_articles.py
 
 clean:
-	rm -rf dist _site build .cache .tmp platform/*.egg-info
+	rm -rf dist _site build .cache .tmp .next public/assets public/generated-site public/search-index.json public/robots.txt public/sitemap.xml platform/*.egg-info
 	find . -type d -name __pycache__ -prune -exec rm -rf {} +

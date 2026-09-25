@@ -48,6 +48,7 @@
         headers,
         body,
         signal: options.signal,
+        credentials: options.credentials || 'include',
       });
 
       if (!response.ok) {

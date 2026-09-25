@@ -2,7 +2,17 @@ __pycache__/
 *.py[cod]
 build/
 *.egg-info/
+*.tsbuildinfo
 dist/
 _site/
 .cache/
 .tmp/
+node_modules/
+.next/
+.env.local
+.env.*.local
+public/assets/
+public/generated-site/
+public/search-index.json
+public/robots.txt
+public/sitemap.xml
