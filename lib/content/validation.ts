@@ -3,12 +3,15 @@ import path from 'node:path';
 import { analyzeArticleHtml } from './html.ts';
 import { buildLegacyRedirects, validateLegacyRedirects } from './redirects.ts';
 import { ROOT, orderedModules, pathSequence } from './loader.ts';
+import { examples, isExamplePublicRoute } from '../examples/registry.ts';
+import { isLabPublicRoute, labs } from '../labs/registry.ts';
+import { buildPublicContentRedirects } from '../public-content-redirects.ts';
 import type { Article, Catalog } from './types.ts';
 
 const difficultyValues = new Set(['beginner', 'intermediate', 'advanced', 'all', 'unspecified']);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-function duplicateIds(label: string, records: Array<{ id: string }>, errors: string[]): void {
+function duplicateIds(label: string, records: ReadonlyArray<{ id: string }>, errors: string[]): void {
   const seen = new Set<string>();
   const duplicates = new Set<string>();
   for (const record of records) {
@@ -24,7 +27,61 @@ function isIsoDate(value: unknown): value is string {
   return !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === value;
 }
 
-function validateArticleLinks(article: Article, catalog: Catalog, errors: string[]): void {
+function isSafeRelativePath(value: string): boolean {
+  return (
+    value.length > 0 &&
+    !path.isAbsolute(value) &&
+    !value.includes('\\') &&
+    value.split('/').every((segment) => segment.length > 0 && segment !== '.' && segment !== '..')
+  );
+}
+
+function validatePublicAssets(
+  kind: 'lab' | 'example',
+  root: 'labs' | 'examples',
+  definitions: ReadonlyArray<{
+    id: string;
+    title: string;
+    directory: string;
+    guide: string;
+    publicFiles: readonly string[];
+  }>,
+  errors: string[],
+): void {
+  duplicateIds(kind, definitions, errors);
+  for (const definition of definitions) {
+    if (!slugPattern.test(definition.id)) errors.push(`${kind} has invalid ID ${definition.id}`);
+    if (!definition.title) errors.push(`${kind} ${definition.id}: missing title`);
+    if (!isSafeRelativePath(definition.directory) || !isSafeRelativePath(definition.guide)) {
+      errors.push(`${kind} ${definition.id}: directory and guide must be safe relative paths`);
+      continue;
+    }
+    const guidePath = path.join(ROOT, root, definition.directory, definition.guide);
+    if (!existsSync(guidePath)) errors.push(`${kind} ${definition.id}: missing guide ${guidePath}`);
+
+    const seenFiles = new Set<string>();
+    for (const file of definition.publicFiles) {
+      if (!isSafeRelativePath(file)) {
+        errors.push(`${kind} ${definition.id}: invalid public file path ${JSON.stringify(file)}`);
+        continue;
+      }
+      if (file === definition.guide || seenFiles.has(file)) {
+        errors.push(`${kind} ${definition.id}: duplicate or guide file in publicFiles ${file}`);
+        continue;
+      }
+      seenFiles.add(file);
+      const source = path.join(ROOT, root, definition.directory, file);
+      if (!existsSync(source)) errors.push(`${kind} ${definition.id}: missing public file ${source}`);
+    }
+  }
+}
+
+function validateArticleLinks(
+  article: Article,
+  catalog: Catalog,
+  registeredRedirects: Set<string>,
+  errors: string[],
+): void {
   const links = analyzeArticleHtml(article.bodyHtml).links;
   for (const { href } of links) {
     let url: URL;
@@ -41,27 +98,37 @@ function validateArticleLinks(article: Article, catalog: Catalog, errors: string
       }
     }
     if (!url.pathname || url.pathname === '/') continue;
-    if (catalog.articleByUrl.has(url.pathname) || catalog.topicById.has(url.pathname.split('/')[2]) && url.pathname.startsWith('/topics/')) continue;
-    if (catalog.pathById.has(url.pathname.split('/')[2]) && url.pathname.startsWith('/paths/')) continue;
-    if (url.pathname === '/articles/' || url.pathname === '/topics/' || url.pathname === '/paths/' || url.pathname === '/about/') continue;
-    const redirectRoutes = new Set<string>();
+    let routePath: string;
     try {
-      buildLegacyRedirects(catalog).forEach(item => redirectRoutes.add(item.source));
+      routePath = decodeURIComponent(url.pathname);
     } catch {
-      // Redirect validation reports malformed metadata separately.
+      errors.push(`${article.metadata_file}: invalid local link path ${JSON.stringify(href)}`);
+      continue;
     }
-    if (redirectRoutes.has(url.pathname)) continue;
-    const localFile = path.resolve(ROOT, `.${decodeURIComponent(url.pathname)}`);
-    if (localFile.startsWith(path.join(ROOT, 'labs') + path.sep) || localFile.startsWith(path.join(ROOT, 'examples') + path.sep)) {
-      if (existsSync(localFile) && !localFile.endsWith(path.sep)) continue;
-    }
-    if (url.pathname === '/tests/kubernetes/version-matrix.yaml' && existsSync(path.join(ROOT, 'tests/kubernetes/version-matrix.yaml'))) continue;
+    if (catalog.articleByUrl.has(routePath)) continue;
+    if (routePath.startsWith('/topics/') && catalog.topicById.has(routePath.split('/')[2])) continue;
+    if (routePath.startsWith('/paths/') && catalog.pathById.has(routePath.split('/')[2])) continue;
+    if (['/articles/', '/topics/', '/paths/', '/about/'].includes(routePath)) continue;
+    if (
+      registeredRedirects.has(routePath) ||
+      registeredRedirects.has(routePath.replace(/\/$/, '')) ||
+      isLabPublicRoute(routePath) ||
+      isExamplePublicRoute(routePath)
+    ) continue;
     errors.push(`${article.metadata_file}: broken local link ${JSON.stringify(href)}`);
   }
 }
 
 export function validateCatalog(catalog: Catalog): string[] {
   const errors: string[] = [];
+  validatePublicAssets('lab', 'labs', labs, errors);
+  validatePublicAssets('example', 'examples', examples, errors);
+  const registeredRedirects = new Set(buildPublicContentRedirects().map(({ source }) => source));
+  try {
+    buildLegacyRedirects(catalog).forEach(({ source }) => registeredRedirects.add(source));
+  } catch {
+    // Redirect validation reports malformed article aliases below.
+  }
   duplicateIds('topic', catalog.topics, errors);
   duplicateIds('category', catalog.categories, errors);
   duplicateIds('learning path', catalog.paths, errors);
@@ -137,8 +204,7 @@ export function validateCatalog(catalog: Catalog): string[] {
       else if (article.review.last_reviewed !== undefined && !isIsoDate(article.review.last_reviewed)) errors.push(`${article.metadata_file}: review.last_reviewed must use YYYY-MM-DD`);
     }
     for (const lab of article.labs) {
-      const labPath = path.resolve(ROOT, 'labs', lab);
-      if (!labPath.startsWith(path.join(ROOT, 'labs') + path.sep) || !existsSync(path.join(labPath, 'README.md'))) {
+      if (!isLabPublicRoute(`/labs/${lab}`)) {
         errors.push(`${article.metadata_file}: unknown lab ${JSON.stringify(lab)}`);
       }
     }
@@ -168,7 +234,7 @@ export function validateCatalog(catalog: Catalog): string[] {
       else if (!membership.module_id || !pathModule) errors.push(`${article.id}: unknown module ${JSON.stringify(membership.module_id)} in ${membership.path_id}`);
       else if (!pathModule.article_ids.includes(article.id)) errors.push(`${article.id}: module ${pathModule.id} in ${learningPath.id} does not reference this article`);
     }
-    validateArticleLinks(article, catalog, errors);
+    validateArticleLinks(article, catalog, registeredRedirects, errors);
   }
 
   for (const [key, moduleIds] of placements) {

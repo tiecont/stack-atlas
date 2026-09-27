@@ -45,9 +45,16 @@ if [[ "$*" == *cluster-up* ]]; then
 fi
 STUB
 
-for command in python3 go; do
+for command in node go; do
   cat >"$bin/$command" <<'STUB'
 #!/usr/bin/env bash
+if [[ "$*" == *"validate-kubernetes-manifests.ts"* ]]; then
+  exit 0
+fi
+if [[ "$(basename "$0")" == "node" ]]; then
+  echo "unexpected node stub call: $*" >&2
+  exit 2
+fi
 exit 0
 STUB
 done

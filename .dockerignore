@@ -14,7 +14,6 @@ AGENTS.md
 CLAUDE.md
 *.tsbuildinfo
 npm-debug.log*
-scripts/ci/validate_kubernetes_manifests.py
 .env
 .env.*
 !.env.example

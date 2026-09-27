@@ -35,6 +35,47 @@ test('legacy article and historical module URLs redirect to canonical targets', 
   await expect(page).toHaveURL(/\/paths\/golang-backend\/#module-go-fundamentals$/);
 });
 
+test('lab guides and example downloads expose only registered public files', async ({
+  request,
+}) => {
+  const labGuide = await request.get('/labs/kubernetes-foundations/');
+  expect(labGuide.status()).toBe(200);
+  expect(await labGuide.text()).toContain('Explore the API objects');
+
+  const publicLabFile = await request.get(
+    '/labs/kubernetes-foundations/files/manifests/10-deployment.yaml',
+  );
+  expect(publicLabFile.status()).toBe(200);
+  expect(await publicLabFile.text()).toContain('kind: Deployment');
+
+  const privateLabFile = await request.get('/labs/kubernetes-foundations/files/Makefile');
+  expect(privateLabFile.status()).toBe(404);
+
+  const privateExampleFile = await request.get(
+    '/examples/atlas-demo-api/files/cmd/server/main_test.go',
+  );
+  expect(privateExampleFile.status()).toBe(404);
+
+  const legacyLabGuide = await request.get('/labs/kubernetes/01-foundations/README.md');
+  expect(legacyLabGuide.status()).toBe(200);
+  expect(legacyLabGuide.url()).toMatch(/\/labs\/kubernetes-foundations\/$/);
+
+  const legacyLabManifest = await request.get(
+    '/labs/kubernetes/01-foundations/manifests/10-deployment.yaml',
+  );
+  expect(legacyLabManifest.status()).toBe(200);
+  expect(legacyLabManifest.url()).toMatch(
+    /\/labs\/kubernetes-foundations\/files\/manifests\/10-deployment\.yaml$/,
+  );
+
+  const exampleGuide = await request.get('/examples/atlas-demo-api/');
+  expect(exampleGuide.status()).toBe(200);
+  expect(await exampleGuide.text()).toContain('GET /health/live');
+
+  const removedTestsRoute = await request.get('/tests/kubernetes/version-matrix.yaml');
+  expect(removedTestsRoute.status()).toBe(404);
+});
+
 test('auth screens, metadata endpoints, health, and not-found route respond', async ({
   page,
   request,

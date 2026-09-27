@@ -18,7 +18,8 @@ React pages.
   Modules own order through integer `order` and ordered `article_ids` lists.
 - **Legacy URL** — a historical route listed in article or module metadata;
   Next.js serves a permanent redirect.
-- **Lab** — an executable companion referenced by an article's `labs` list.
+- **Lab** — a registered guide and allowlisted file set referenced by an
+  article's `labs` list. Its stable ID is defined in `lib/labs/registry.ts`.
 
 Article is the canonical knowledge node; a learning path is an ordered set of
 article references. A season is not a source content type.
@@ -39,6 +40,11 @@ Prerequisite relationships must resolve and remain acyclic.
 
 All human-authored metadata uses YAML. Article content remains in the
 repository; it is not copied to a CMS or database.
+
+The current article renderer treats Git-authored HTML as trusted source and
+converts it to React elements through a strict allowlist. It does not support
+admin-authored raw HTML. Future dynamic content should use typed structured
+blocks with dedicated React renderers.
 
 ## Progress model
 

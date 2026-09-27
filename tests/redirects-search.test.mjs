@@ -3,6 +3,7 @@ import { test } from 'node:test';
 import nextConfig from '../next.config.ts';
 import { loadCatalog } from '../lib/content/loader.ts';
 import { buildLegacyRedirects, validateLegacyRedirects } from '../lib/content/redirects.ts';
+import { buildPublicContentRedirects } from '../lib/public-content-redirects.ts';
 import { searchCatalog } from '../lib/content/search.ts';
 
 const catalog = loadCatalog();
@@ -18,7 +19,7 @@ test('derives all 341 article and 24 historical module redirects from metadata',
   assert.equal(new Set(redirects.map((item) => item.source)).size, redirects.length);
   assert.deepEqual(validateLegacyRedirects(catalog), []);
   const configured = await unwrap(nextConfig).redirects();
-  assert.equal(configured.length, redirects.length);
+  assert.equal(configured.length, redirects.length + buildPublicContentRedirects().length);
   assert.ok(configured.every((item) => item.permanent));
   for (const article of catalog.articles) {
     for (const source of article.legacy_urls) {

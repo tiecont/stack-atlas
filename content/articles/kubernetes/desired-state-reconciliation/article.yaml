@@ -19,7 +19,7 @@ related:
 - k8s-kubernetes-architecture
 - k8s-kubectl-mental-model
 labs:
-- kubernetes/01-foundations
+- kubernetes-foundations
 review:
   kubernetes_baseline: '1.37'
   last_reviewed: '2026-09-23'

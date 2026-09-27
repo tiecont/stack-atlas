@@ -14,6 +14,7 @@ import { ArticlePathTracker } from '@/features/progress/components/learning-prog
 import { SiteShell } from '@/components/site-shell';
 import { loadCatalog, pathSequence } from '@/lib/content/loader';
 import { canonicalUrl } from '@/lib/content/urls';
+import { getLab } from '@/lib/labs/registry';
 import { sitePath } from '@/lib/site-path';
 
 type Props = {
@@ -155,8 +156,8 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                 <h2>Hands-on Labs</h2>
                 <div>
                   {article.labs.map((lab) => (
-                    <a className="related-link" href={sitePath(`/labs/${lab}/README.md`)} key={lab}>
-                      Open {lab.split('/').at(-1)?.replaceAll('-', ' ')} lab guide
+                    <a className="related-link" href={sitePath(`/labs/${lab}/`)} key={lab}>
+                      Open {getLab(lab)?.title ?? lab} lab guide
                     </a>
                   ))}
                 </div>

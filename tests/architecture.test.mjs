@@ -47,3 +47,19 @@ test('the delivery baseline includes Node 24, standalone Docker, CI, and pre-com
   assert.match(preCommit, /lint-staged/);
   assert.match(preCommit, /test:precommit/);
 });
+
+test('Kubernetes validation uses TypeScript without Python or PyYAML tooling', () => {
+  const packageJson = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+  const workflow = readFileSync(
+    new URL('../.github/workflows/kubernetes-labs.yml', import.meta.url),
+    'utf8',
+  );
+
+  assert.match(packageJson.scripts['kubernetes:validate'], /node --import tsx/);
+  assert.doesNotMatch(workflow, /setup-python|PyYAML|python3/);
+  assert.ok(existsSync(new URL('../scripts/ci/validate-kubernetes-manifests.ts', import.meta.url)));
+  assert.equal(
+    existsSync(new URL('../scripts/ci/validate_kubernetes_manifests.py', import.meta.url)),
+    false,
+  );
+});

@@ -70,5 +70,5 @@ Use `docker compose up --build` for the production-style local container. Set
 `NEXT_PUBLIC_API_BASE_URL`, `NEXT_PUBLIC_BASE_PATH`, `SITE_URL`, and `WEB_PORT`
 in `.env` as needed; see `.env.example`.
 
-The separate Kubernetes labs workflow keeps Python only for manifest
-validation. Do not add that dependency to the Web image or main Web CI job.
+The separate Kubernetes labs workflow uses the Node/TypeScript manifest
+validator. Keep Kubernetes cluster execution and lab QA out of the Web runtime.

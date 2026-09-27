@@ -14,8 +14,8 @@ lessons and reuses a shared Kubernetes article.
 ## Local development
 
 Requirements: Node.js 24 and npm. Docker is optional for local Web containers.
-Kubernetes lab checks additionally require Python with PyYAML, Go, Docker, kind,
-and kubectl.
+Kubernetes lab checks additionally require Go, Docker, kind, and kubectl; their
+manifest validator uses the same Node toolchain.
 
 ```sh
 npm ci
@@ -27,6 +27,11 @@ The app starts at `http://localhost:3001`. Next.js reads content directly from
 `content/`; no Python bootstrap or content build is required. Account routes
 also need the API and PostgreSQL described in `../api/README.md`. Public
 knowledge pages work without the API or Engine.
+
+Web presents learning content and lab guides. Engine executes future remote
+labs. Web does not create namespaces, run `kubectl` for learners, own sandbox
+lifecycle, or store lab session state; see the [lab runtime ownership
+note](docs/architecture/lab-runtime-ownership.md).
 
 ## Validate and build
 
@@ -80,9 +85,10 @@ make test-databases
 `.env` before building when needed. The Dockerfile also has a `development`
 target for container-based Next.js development.
 
-The Kubernetes lab uses a disposable kind cluster. Its separate workflow retains
-Python only for validating lab manifests. `make test-databases` is reserved for
-the Database Engineering phase after the Repository V2 gate.
+The Kubernetes lab uses a disposable kind cluster. Its separate workflow runs
+the TypeScript manifest validator, Go demo tests, context safety checks, and a
+kind smoke test. `make test-databases` is reserved for the Database Engineering
+phase after the Repository V2 gate.
 
 ## Repository map
 

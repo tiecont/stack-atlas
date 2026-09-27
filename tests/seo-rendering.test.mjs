@@ -12,6 +12,8 @@ import PathPage, { generateMetadata as pathMetadata } from '../app/paths/[path]/
 import sitemap from '../app/sitemap.ts';
 import robots from '../app/robots.ts';
 import { loadCatalog } from '../lib/content/loader.ts';
+import { examples } from '../lib/examples/registry.ts';
+import { labs } from '../lib/labs/registry.ts';
 
 const unwrap = (value) => {
   while (value && typeof value === 'object' && 'default' in value) value = value.default;
@@ -80,7 +82,12 @@ test('sitemap and robots derive public URLs from the typed catalog', () => {
   const entries = unwrap(sitemap)();
   assert.equal(
     entries.length,
-    5 + catalog.topics.length + catalog.paths.length + catalog.articles.length,
+    5 +
+      catalog.topics.length +
+      catalog.paths.length +
+      catalog.articles.length +
+      labs.length +
+      examples.length,
   );
   assert.ok(entries.every((item) => /^https:\/\//.test(item.url)));
   assert.ok(entries.some((item) => item.url.endsWith('/articles/golang/types-zero-values/')));

@@ -10,8 +10,11 @@ on:
       - 'examples/atlas-demo-api/**'
       - 'scripts/ci/kubernetes/**'
       - 'scripts/ci/test_kubernetes_labs.sh'
-      - 'scripts/ci/validate_kubernetes_manifests.py'
+      - 'scripts/ci/validate-kubernetes-manifests.ts'
+      - 'lib/labs/registry.ts'
       - 'tests/kubernetes/**'
+      - 'package.json'
+      - 'package-lock.json'
       - 'Makefile'
       - '.github/workflows/kubernetes-labs.yml'
   push:
@@ -24,8 +27,11 @@ on:
       - 'examples/atlas-demo-api/**'
       - 'scripts/ci/kubernetes/**'
       - 'scripts/ci/test_kubernetes_labs.sh'
-      - 'scripts/ci/validate_kubernetes_manifests.py'
+      - 'scripts/ci/validate-kubernetes-manifests.ts'
+      - 'lib/labs/registry.ts'
       - 'tests/kubernetes/**'
+      - 'package.json'
+      - 'package-lock.json'
       - 'Makefile'
       - '.github/workflows/kubernetes-labs.yml'
   workflow_dispatch:
@@ -39,9 +45,6 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -49,9 +52,9 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install PyYAML
       - run: npm ci
       - run: npm run content:validate
+      - run: npm run kubernetes:validate
       - run: bash tests/kubernetes/context_safety.sh
       - run: go test -race ./...
         working-directory: examples/atlas-demo-api
@@ -62,10 +65,11 @@ jobs:
     needs: fast
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: '3.12'
-      - run: python3 -m pip install PyYAML
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod

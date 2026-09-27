@@ -18,17 +18,16 @@ replacement.
 | Duplicated browser API client                                          | Single `lib/api/client.ts` and shared Problem Details handling                                                                    |
 | Python platform regressions                                            | Node test-runner checks under `tests/*.test.mjs`                                                                                  |
 | Python duplicate-content audit                                         | `scripts/audit-duplicates.ts` and `npm run audit:content`                                                                         |
-| Copied lab/example files                                               | Secure Next route handlers under `app/labs/`, `app/examples/`, and `app/tests/`                                                   |
+| Lab/example guides and downloadable files                              | Registry-backed guide pages and explicit file allowlists under `app/labs/` and `app/examples/`                                    |
 
 The inventory covered 346 article records and HTML fragments, 19 topics, 23
 categories, two learning paths with 25 modules (24 in Golang Backend), 341
 lesson aliases and 24 season-index aliases. Article IDs, canonical URLs,
 relationships, ordering and authored bodies remain in Git.
 
-The remaining Python utility is `scripts/ci/validate_kubernetes_manifests.py`.
-It validates standalone Kubernetes lab manifests and runs only in the separate
-Kubernetes lab workflow with PyYAML. It is not used by Web development,
-validation, tests or builds.
+Web development, validation, builds, tests and runtime use Node.js and
+TypeScript. The separate Kubernetes lab workflow also uses the TypeScript
+manifest validator, then runs its Go and kind checks.
 
 GitHub Pages cannot run Next.js route handlers or HTTP redirects. Its deploy
 workflow was removed; the app now requires a Node-capable host.

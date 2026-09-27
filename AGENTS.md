@@ -18,8 +18,9 @@ content loading, validation, deployment, or repository automation.
 - This app uses Node.js 24, TypeScript, React, and the Next.js App Router.
 - Git-authored YAML and article HTML remain the canonical content source.
 - The Web app may call the configured API. It must not call Engine or Kafka.
-- Python is excluded from Web development, build, validation, and test paths.
-  The separate Kubernetes lab manifest check is intentionally Python-based.
+- Python is excluded from Web development, build, validation, test, and runtime
+  paths. Kubernetes manifest validation uses Node and TypeScript in its separate
+  lab workflow.
 
 ## Folder ownership
 

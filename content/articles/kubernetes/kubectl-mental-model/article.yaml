@@ -19,8 +19,8 @@ related:
 - k8s-kubernetes-architecture
 - k8s-local-kind-cluster
 labs:
-- kubernetes/00-cluster
-- kubernetes/01-foundations
+- kubernetes-cluster
+- kubernetes-foundations
 review:
   kubernetes_baseline: '1.37'
   last_reviewed: '2026-09-23'

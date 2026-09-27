@@ -15,5 +15,5 @@ published image to call the deployment's API.
 unit/browser regressions, production build, and Docker validation. It publishes
 to GHCR on `main`, `develop`, and version tags after
 `NEXT_PUBLIC_API_BASE_URL` and `SITE_URL` are configured. The separate
-Kubernetes lab workflow retains Python with PyYAML only for lab manifest
-validation.
+Kubernetes lab workflow uses the TypeScript manifest validator and keeps cluster
+QA outside the Web runtime.

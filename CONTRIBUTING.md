@@ -71,9 +71,9 @@ Kubernetes lab checks use a separate toolchain:
 make test-kubernetes
 ```
 
-The full target requires Python with PyYAML, Go, Docker, kind v0.33.0 and
-kubectl v1.37.0. Python is used only for the lab manifest validator. The lab
-runner creates and removes a kind cluster only when it created the cluster.
+The full target requires Node.js 24, Go, Docker, kind v0.33.0 and kubectl
+v1.37.0. The lab manifest validator is TypeScript. The lab runner creates and
+removes a kind cluster only when it created the cluster.
 
 The pre-commit hook formats and lints staged files, then runs
 `npm run test:precommit`. For the production-style container, run
