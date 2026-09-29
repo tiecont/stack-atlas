@@ -3,35 +3,37 @@ name: Kubernetes labs
 on:
   pull_request:
     paths:
-      - "content/articles/kubernetes/**"
-      - "content/domains/kubernetes.yaml"
-      - "content/paths/kubernetes-engineer.yaml"
-      - "labs/kubernetes/**"
-      - "examples/atlas-demo-api/**"
-      - "platform/**"
-      - "scripts/ci/kubernetes/**"
-      - "scripts/ci/test_kubernetes_labs.sh"
-      - "scripts/ci/validate_kubernetes_manifests.py"
-      - "tests/kubernetes/**"
-      - "pyproject.toml"
-      - "Makefile"
-      - ".github/workflows/kubernetes-labs.yml"
+      - 'content/articles/kubernetes/**'
+      - 'content/domains/kubernetes.yaml'
+      - 'content/paths/kubernetes-engineer.yaml'
+      - 'labs/kubernetes/**'
+      - 'examples/atlas-demo-api/**'
+      - 'scripts/ci/kubernetes/**'
+      - 'scripts/ci/test_kubernetes_labs.sh'
+      - 'scripts/ci/validate-kubernetes-manifests.ts'
+      - 'lib/labs/registry.ts'
+      - 'tests/kubernetes/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'Makefile'
+      - '.github/workflows/kubernetes-labs.yml'
   push:
     branches: [main]
     paths:
-      - "content/articles/kubernetes/**"
-      - "content/domains/kubernetes.yaml"
-      - "content/paths/kubernetes-engineer.yaml"
-      - "labs/kubernetes/**"
-      - "examples/atlas-demo-api/**"
-      - "platform/**"
-      - "scripts/ci/kubernetes/**"
-      - "scripts/ci/test_kubernetes_labs.sh"
-      - "scripts/ci/validate_kubernetes_manifests.py"
-      - "tests/kubernetes/**"
-      - "pyproject.toml"
-      - "Makefile"
-      - ".github/workflows/kubernetes-labs.yml"
+      - 'content/articles/kubernetes/**'
+      - 'content/domains/kubernetes.yaml'
+      - 'content/paths/kubernetes-engineer.yaml'
+      - 'labs/kubernetes/**'
+      - 'examples/atlas-demo-api/**'
+      - 'scripts/ci/kubernetes/**'
+      - 'scripts/ci/test_kubernetes_labs.sh'
+      - 'scripts/ci/validate-kubernetes-manifests.ts'
+      - 'lib/labs/registry.ts'
+      - 'tests/kubernetes/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'Makefile'
+      - '.github/workflows/kubernetes-labs.yml'
   workflow_dispatch:
 
 permissions:
@@ -43,18 +45,19 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
+          node-version-file: .nvmrc
+          cache: npm
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install -e .
-      - run: make validate
+      - run: npm ci
+      - run: npm run content:validate
+      - run: npm run kubernetes:validate
       - run: bash tests/kubernetes/context_safety.sh
       - run: go test -race ./...
         working-directory: examples/atlas-demo-api
-      - run: make build
 
   kind-smoke:
     runs-on: ubuntu-latest
@@ -62,13 +65,14 @@ jobs:
     needs: fast
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
       - uses: actions/setup-go@v5
         with:
           go-version-file: examples/atlas-demo-api/go.mod
-      - run: python3 -m pip install -e .
       - name: Install pinned kind and kubectl
         run: |
           curl --fail --location --silent --show-error https://kind.sigs.k8s.io/dl/v0.33.0/kind-linux-amd64 --output /tmp/kind

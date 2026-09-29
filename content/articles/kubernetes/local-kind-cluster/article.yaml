@@ -19,7 +19,7 @@ related:
 - k8s-kubernetes-architecture
 - k8s-kubernetes-api-objects
 labs:
-- kubernetes/00-cluster
+- kubernetes-cluster
 review:
   kubernetes_baseline: '1.37'
   last_reviewed: '2026-09-23'

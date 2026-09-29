@@ -1,57 +1,75 @@
-# Static build pipeline
+# Native Next.js content pipeline
 
-The repository stores source. The public site is generated from the catalog into ignored `dist/`.
+Git remains the canonical source for content. TypeScript loads and validates
+YAML metadata and article HTML fragments; Next.js renders native App Router
+pages with React Server Components.
 
 ```text
-content/ + platform/ + labs/
-          |
-          v
-      validation
-          |
-          v
-      rendering
-       /   |   \
- articles topics paths + assets + search/SEO
-          |
-          +--> lesson redirects from legacy_urls
-          +--> season-index redirects from module legacy_index_urls
-          |
-          v
-        dist/
-          |
-          v
-   link and redirect validation
+content/ (YAML + HTML fragments)
+           ↓
+TypeScript loader and schema checks
+           ↓
+typed catalog + relationship graph
+           ↓
+Next.js App Router and React components
+           ↓
+metadata, sitemap, robots, search and native redirects
 ```
 
-## Source and build output
+## Source ownership
 
-- `content/` contains YAML metadata and article folders with `article.yaml` and `article.html`.
-- `platform/stack_atlas/` contains catalog, models, validation, rendering, links, search, redirects and CLI code.
-- `platform/templates/` and `platform/assets/` contain maintained templates, styles, scripts and icons.
-- `labs/`, `examples/`, `tests/`, `scripts/` and `docs/` hold executable labs and project support material.
-- `dist/` contains generated public pages, assets, search data, sitemap, robots file and historical redirects. It is ignored by Git and must not be hand-edited.
+- `content/` stores canonical site, topic, category, path and article records.
+- `lib/content/` loads YAML and bodies, validates references and links, derives
+  search results, and builds historical redirect mappings.
+- `app/` owns public routes, metadata, sitemap, robots, search and static lab
+  file handlers.
+- `features/` owns auth, content, progress and search UI and state;
+  `components/` owns shared site chrome.
+- `app/globals.css` and `public/` are the Next.js asset pipeline.
 
-The renderer sorts modules by their declared integer order and preserves each module's `article_ids` order. The same flattened sequence supplies path lesson numbering and Previous/Next navigation.
+The loader preserves article IDs, canonical URLs, path module order and article
+placement order. Article HTML is parsed into React elements after an explicit
+element and attribute allowlist; complete legacy pages are never read or
+embedded.
 
-## Validation
+## Validation and checks
 
-Catalog validation checks IDs, references, path placement, article schema and legacy URL ownership. Repository validation rejects root season directories, checked-in generated site trees and flat article metadata. Output validation checks local links, fragments, exact legacy redirect coverage and every redirect target.
+`npm run content:validate` checks duplicate IDs and URLs, required metadata,
+references, path membership and ordering, prerequisites and cycles, local links
+and fragments, asset targets, legacy URL ownership, redirect targets and
+redirect chains. It exits non-zero on an error.
 
-Useful commands:
+CI follows the Node 24 baseline and runs:
 
 ```sh
-make install
-make validate
-make build
-make serve
-make test-site
-make test-kubernetes
+npm ci
+npm run format:check
+npm run content:validate
+npm run lint
+npm run typecheck
+npm test
+npm run build
+npm run test:e2e
+docker compose config
+docker build --target runner .
 ```
 
-Set `BASE_PATH` and `SITE_URL` when building a project site:
+The build reruns content validation before `next build`. Development starts
+Next.js directly and does not require a generated content step.
 
-```sh
-make build BASE_PATH=/stack-atlas SITE_URL=https://tiecont.github.io
-```
+The multi-stage Dockerfile builds Next.js standalone output and runs it as an
+unprivileged user. `docker-compose.yml` builds the runner image, exposes port
+3001, and checks the native health route. The `development` Docker target is
+available for container-based development.
 
-Builds contain no timestamp. The regression suite compares hashes from repeated builds.
+## Hosting
+
+The app requires a Node-capable Next.js host. GitHub Pages only serves static
+files, so it cannot run App Router route handlers or `next.config.ts` redirects.
+The old Pages deployment workflow was removed. Configure `SITE_URL` and
+`NEXT_PUBLIC_BASE_PATH` during build when the host uses a path prefix.
+
+GitHub Actions builds and validates the runner image. The GHCR publish job is
+enabled on `main`, `develop`, and version tags after the repository variable
+`NEXT_PUBLIC_API_BASE_URL` and `SITE_URL` are configured; public client and
+canonical URL settings are baked into the Next.js build.

@@ -21,7 +21,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-python3 "$root/scripts/ci/validate_kubernetes_manifests.py"
+node --import tsx "$root/scripts/ci/validate-kubernetes-manifests.ts"
 GOCACHE="${GOCACHE:-/tmp/stack-atlas-go-cache}" go -C "$root/examples/atlas-demo-api" test -race ./...
 if cluster_exists; then
   echo "Using pre-existing kind cluster $CLUSTER_NAME; the test runner will not own cleanup."
@@ -31,5 +31,5 @@ else
 fi
 "$root/scripts/ci/kubernetes/assert_lab_context.sh"
 make -C "$root/labs/kubernetes/01-foundations" apply CLUSTER_NAME="$CLUSTER_NAME" CONTEXT="$CONTEXT" KIND="$KIND" KUBECTL="$KUBECTL"
-python3 "$root/scripts/ci/validate_kubernetes_manifests.py" --server-side --context "$CONTEXT" --kubectl "$KUBECTL"
+node --import tsx "$root/scripts/ci/validate-kubernetes-manifests.ts" --server-side --context "$CONTEXT" --kubectl "$KUBECTL"
 make -C "$root/labs/kubernetes/01-foundations" test CLUSTER_NAME="$CLUSTER_NAME" CONTEXT="$CONTEXT" KUBECTL="$KUBECTL"
