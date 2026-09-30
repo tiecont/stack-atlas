@@ -7,7 +7,7 @@ for learner public content and admin preview. A document contains
 the persisted API contract and imports no contract source from the API repo.
 
 The canonical JSON fixture is
-`tests/fixtures/content-document.v1.json`. Renderer tests load this fixture
+`tests/fixtures/content/content-document-v1.json`. Renderer tests load this fixture
 directly so the public and preview surfaces exercise the persisted V1 shape.
 API owns the persisted contract. Web mirrors it independently, maintains its
 own copied fixture, and imports no contract source from a sibling repository.
@@ -38,6 +38,10 @@ The runtime validates the document envelope and every block before dispatch.
 `mode="preview"` shows the unsupported block type for development/admin
 diagnostics. Public mode shows a safe generic unsupported-content message.
 Unsupported data is never silently dropped or interpreted as a component path.
+`parseContentDocumentV1` validates the untrusted document envelope before the
+registry validates each block's version and props. The fixture test asserts
+that the supported type list, renderer registry keys, and fixture block types
+stay in parity.
 
 ## Safety rules
 

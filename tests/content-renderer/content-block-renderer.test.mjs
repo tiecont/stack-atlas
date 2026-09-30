@@ -2,8 +2,30 @@ import assert from 'node:assert/strict';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { test } from 'node:test';
+import { CONTENT_BLOCK_RENDERER_REGISTRY } from '../../features/content-renderer/components/block-renderer.tsx';
 import { BlockRenderer } from '../../features/content-renderer/index.ts';
+import {
+  CONTENT_BLOCK_TYPES_V1,
+  parseContentDocumentV1,
+} from '../../features/content-renderer/types.ts';
 import { structuredBlockDocument } from '../fixtures/structured-block-document.ts';
+
+test('the renderer registry and canonical fixture cover every supported V1 block type', () => {
+  const supportedTypes = [...CONTENT_BLOCK_TYPES_V1].sort();
+  const registryTypes = Object.keys(CONTENT_BLOCK_RENDERER_REGISTRY).sort();
+  const fixtureTypes = [
+    ...new Set(structuredBlockDocument.blocks.map((block) => block.type)),
+  ].sort();
+
+  assert.deepEqual(registryTypes, supportedTypes);
+  assert.deepEqual(fixtureTypes, supportedTypes);
+});
+
+test('the runtime parser accepts canonical external data and rejects invalid document envelopes', () => {
+  assert.ok(parseContentDocumentV1(structuredBlockDocument));
+  assert.equal(parseContentDocumentV1({ ...structuredBlockDocument, schema_version: 2 }), null);
+  assert.equal(parseContentDocumentV1({ ...structuredBlockDocument, unsupported: true }), null);
+});
 
 test('the explicit registry renders structured blocks as semantic React elements', () => {
   const html = renderToStaticMarkup(
@@ -171,6 +193,19 @@ test('the heading block id stays separate from its optional rendered anchor', ()
 
   assert.match(html, /<h2 id="overview">Overview<\/h2>/);
   assert.doesNotMatch(html, /<h2 id="heading-overview">/);
+});
+
+test('table row shape is validated before dispatch to the renderer', () => {
+  const document = structuredClone(structuredBlockDocument);
+  const table = document.blocks.find((block) => block.type === 'table');
+  assert.ok(table);
+  table.props['rows'] = [['one cell']];
+
+  const html = renderToStaticMarkup(
+    React.createElement(BlockRenderer, { document, mode: 'preview' }),
+  );
+  assert.match(html, /Unsupported content block: <code>table<\/code>/);
+  assert.doesNotMatch(html, /<table/);
 });
 
 test('document and code byte limits are enforced before rendering content', () => {

@@ -181,7 +181,9 @@ Keep the independent mirror limits aligned with the API: compact JSON <=
 matching row widths and cells <=2,000 characters; <=20 related items; URLs
 <=2,048 characters. Image sources allow local paths or HTTPS; links allow local
 paths, fragments, HTTP, or HTTPS. The copied fixture lives at
-`tests/fixtures/content-document.v1.json`; do not read it from a sibling repo.
+`tests/fixtures/content/content-document-v1.json`; do not read it from a sibling
+repo. Keep the runtime parser, V1 type list, renderer registry, and fixture in
+parity; a test MUST assert both registry coverage and fixture coverage.
 
 Derive search, redirects, sitemap, robots, topic/path links, and content URLs
 from the typed catalog and its URL helpers. Do not recreate slug or basePath

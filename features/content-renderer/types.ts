@@ -49,18 +49,36 @@ export type ContentBlockEnvelope<TType extends string, TProps> = {
   props: TProps;
 };
 
-export type ContentBlock =
-  | ContentBlockEnvelope<'rich_text', RichTextContentBlock>
-  | ContentBlockEnvelope<'heading', HeadingContentBlock>
-  | ContentBlockEnvelope<'code', CodeContentBlock>
-  | ContentBlockEnvelope<'callout', CalloutContentBlock>
-  | ContentBlockEnvelope<'image', ImageContentBlock>
-  | ContentBlockEnvelope<'table', TableContentBlock>
-  | ContentBlockEnvelope<'divider', DividerContentBlock>
-  | ContentBlockEnvelope<'related_content', RelatedContentBlock>;
+export const CONTENT_BLOCK_TYPES_V1 = Object.freeze([
+  'rich_text',
+  'heading',
+  'code',
+  'callout',
+  'image',
+  'table',
+  'divider',
+  'related_content',
+] as const);
 
-/** The persisted V1 document shape; blocks remain unknown for safe fallback rendering. */
-export interface BlockDocument {
+export type ContentBlockTypeV1 = (typeof CONTENT_BLOCK_TYPES_V1)[number];
+
+type ContentBlockPropsV1 = {
+  rich_text: RichTextContentBlock;
+  heading: HeadingContentBlock;
+  code: CodeContentBlock;
+  callout: CalloutContentBlock;
+  image: ImageContentBlock;
+  table: TableContentBlock;
+  divider: DividerContentBlock;
+  related_content: RelatedContentBlock;
+};
+
+export type ContentBlock = {
+  [TType in ContentBlockTypeV1]: ContentBlockEnvelope<TType, ContentBlockPropsV1[TType]>;
+}[ContentBlockTypeV1];
+
+/** Persisted V1 envelope for untrusted runtime data; block payloads are checked individually. */
+export interface ContentDocumentV1 {
   schema_version: 1;
   title: string;
   description: string;
@@ -85,7 +103,7 @@ export const CONTENT_DOCUMENT_LIMITS_V1 = Object.freeze({
 const BLOCK_ID_PATTERN = /^[a-z0-9][a-z0-9._:-]{0,127}$/;
 const HEADING_ANCHOR_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-export function isContentDocumentV1(value: unknown): value is BlockDocument {
+export function isContentDocumentV1(value: unknown): value is ContentDocumentV1 {
   if (
     !isRecord(value) ||
     !hasKeys(value, ['schema_version', 'title', 'description', 'blocks']) ||
@@ -112,6 +130,11 @@ export function isContentDocumentV1(value: unknown): value is BlockDocument {
     blockIds.add(block['id']);
     return true;
   });
+}
+
+/** Parse an external value into the V1 document envelope or reject it. */
+export function parseContentDocumentV1(value: unknown): ContentDocumentV1 | null {
+  return isContentDocumentV1(value) ? value : null;
 }
 
 function isWithinDocumentSize(value: Record<string, unknown>): boolean {

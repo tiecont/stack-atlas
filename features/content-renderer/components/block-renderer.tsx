@@ -7,10 +7,13 @@ import { ImageBlock } from './blocks/image-block';
 import { RelatedContentBlock } from './blocks/related-content-block';
 import { RichTextBlock } from './blocks/rich-text-block';
 import { TableBlock } from './blocks/table-block';
-import type { BlockDocument, ContentBlock, RendererMode } from '../types';
-import { isContentBlock, isContentDocumentV1 } from '../types';
+import type { ContentBlock, RendererMode } from '../types';
+import { isContentBlock, parseContentDocumentV1 } from '../types';
 
-const BLOCK_REGISTRY: Record<ContentBlock['type'], (block: ContentBlock) => ReactNode> = {
+export const CONTENT_BLOCK_RENDERER_REGISTRY: Record<
+  ContentBlock['type'],
+  (block: ContentBlock) => ReactNode
+> = {
   rich_text: (block) => (block.type === 'rich_text' ? <RichTextBlock block={block.props} /> : null),
   heading: (block) => (block.type === 'heading' ? <HeadingBlock block={block.props} /> : null),
   code: (block) => (block.type === 'code' ? <CodeBlock block={block.props} /> : null),
@@ -26,10 +29,11 @@ export function BlockRenderer({
   document,
   mode = 'public',
 }: {
-  document: BlockDocument;
+  document: unknown;
   mode?: RendererMode;
 }) {
-  if (!isContentDocumentV1(document)) {
+  const parsedDocument = parseContentDocumentV1(document);
+  if (!parsedDocument) {
     return (
       <div className="content-blocks">
         <aside className="content-unsupported" role="status">
@@ -40,7 +44,7 @@ export function BlockRenderer({
   }
   return (
     <div className="content-blocks">
-      {document.blocks.map((block, index) => {
+      {parsedDocument.blocks.map((block, index) => {
         if (!isContentBlock(block)) {
           const type =
             typeof block === 'object' &&
@@ -58,7 +62,7 @@ export function BlockRenderer({
 }
 
 function Block({ block }: { block: ContentBlock }) {
-  return <>{BLOCK_REGISTRY[block.type](block)}</>;
+  return <>{CONTENT_BLOCK_RENDERER_REGISTRY[block.type](block)}</>;
 }
 
 function UnsupportedBlock({ mode, type }: { mode: RendererMode; type: string }) {
