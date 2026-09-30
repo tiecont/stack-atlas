@@ -1,3 +1,5 @@
+import { isSafeHref, isSafeImageSrc } from './safe-url';
+
 export type InlineContentNode =
   | { type: 'text'; text: string }
   | { type: 'bold'; children: InlineContentNode[] }
@@ -14,7 +16,7 @@ export type RichTextContentBlock = { nodes: RichTextNode[] };
 export type HeadingContentBlock = {
   level: 2 | 3 | 4;
   text: string;
-  id?: string;
+  anchor?: string;
 };
 export type CodeContentBlock = { language: string; code: string };
 export type CalloutContentBlock = {
@@ -57,7 +59,7 @@ export type ContentBlock =
   | ContentBlockEnvelope<'divider', DividerContentBlock>
   | ContentBlockEnvelope<'related_content', RelatedContentBlock>;
 
-/** The persisted V1 document shape; block values stay unknown for safe fallback rendering. */
+/** The persisted V1 document shape; blocks remain unknown for safe fallback rendering. */
 export interface BlockDocument {
   schema_version: 1;
   title: string;
@@ -67,34 +69,61 @@ export interface BlockDocument {
 
 export type RendererMode = 'public' | 'preview';
 
+/** Independently maintained Web mirror of the API-owned persisted V1 limits. */
+export const CONTENT_DOCUMENT_LIMITS_V1 = Object.freeze({
+  maxDocumentBytes: 1_048_576,
+  maxBlocks: 500,
+  maxBlockIdLength: 128,
+  maxRichTextDepth: 16,
+  maxCodeBytes: 100_000,
+  maxTableColumns: 20,
+  maxTableRows: 100,
+  maxRelatedItems: 20,
+  maxUrlLength: 2048,
+});
+
 const BLOCK_ID_PATTERN = /^[a-z0-9][a-z0-9._:-]{0,127}$/;
-const HEADING_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const HEADING_ANCHOR_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export function isContentDocumentV1(value: unknown): value is BlockDocument {
   if (
-    isRecord(value) &&
-    hasKeys(value, ['schema_version', 'title', 'description', 'blocks']) &&
-    value['schema_version'] === 1 &&
-    isBoundedText(value['title'], 160) &&
-    isBoundedText(value['description'], 500) &&
-    Array.isArray(value['blocks']) &&
-    value['blocks'].length <= 500
+    !isRecord(value) ||
+    !hasKeys(value, ['schema_version', 'title', 'description', 'blocks']) ||
+    value['schema_version'] !== 1 ||
+    !isBoundedText(value['title'], 160) ||
+    !isBoundedText(value['description'], 500) ||
+    !Array.isArray(value['blocks']) ||
+    value['blocks'].length > CONTENT_DOCUMENT_LIMITS_V1.maxBlocks ||
+    !isWithinDocumentSize(value)
   ) {
-    const blockIds = new Set<string>();
-    return value['blocks'].every((block) => {
-      if (
-        !isRecord(block) ||
-        !isBoundedText(block['id'], 128) ||
-        !BLOCK_ID_PATTERN.test(block['id']) ||
-        blockIds.has(block['id'])
-      ) {
-        return false;
-      }
-      blockIds.add(block['id']);
-      return true;
-    });
+    return false;
   }
-  return false;
+
+  const blockIds = new Set<string>();
+  return value['blocks'].every((block) => {
+    if (
+      !isRecord(block) ||
+      !isBoundedText(block['id'], CONTENT_DOCUMENT_LIMITS_V1.maxBlockIdLength) ||
+      !BLOCK_ID_PATTERN.test(block['id']) ||
+      blockIds.has(block['id'])
+    ) {
+      return false;
+    }
+    blockIds.add(block['id']);
+    return true;
+  });
+}
+
+function isWithinDocumentSize(value: Record<string, unknown>): boolean {
+  try {
+    const serialized = JSON.stringify(value);
+    return (
+      serialized !== undefined &&
+      new TextEncoder().encode(serialized).byteLength <= CONTENT_DOCUMENT_LIMITS_V1.maxDocumentBytes
+    );
+  } catch {
+    return false;
+  }
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -125,14 +154,17 @@ function hasKeys(
 }
 
 function isInlineNode(value: unknown, depth = 0): value is InlineContentNode {
-  if (!isRecord(value) || depth > 16) return false;
+  if (!isRecord(value) || depth > CONTENT_DOCUMENT_LIMITS_V1.maxRichTextDepth) {
+    return false;
+  }
   if (value['type'] === 'text') {
     return hasKeys(value, ['type', 'text']) && isBoundedText(value['text'], 10_000, true);
   }
   if (value['type'] === 'link') {
     return (
       hasKeys(value, ['type', 'href', 'children']) &&
-      isBoundedText(value['href'], 2048) &&
+      isBoundedText(value['href'], CONTENT_DOCUMENT_LIMITS_V1.maxUrlLength) &&
+      isSafeHref(value['href']) &&
       isInlineNodes(value['children'], depth + 1)
     );
   }
@@ -181,7 +213,7 @@ export function isContentBlock(value: unknown): value is ContentBlock {
   if (
     !isRecord(value) ||
     !hasKeys(value, ['id', 'type', 'version', 'props']) ||
-    !isBoundedText(value['id'], 128) ||
+    !isBoundedText(value['id'], CONTENT_DOCUMENT_LIMITS_V1.maxBlockIdLength) ||
     !BLOCK_ID_PATTERN.test(value['id']) ||
     value['version'] !== 1 ||
     !isRecord(value['props'])
@@ -201,17 +233,19 @@ export function isContentBlock(value: unknown): value is ContentBlock {
       );
     case 'heading':
       return (
-        hasKeys(props, ['level', 'text'], ['id']) &&
+        hasKeys(props, ['level', 'text'], ['anchor']) &&
         (props['level'] === 2 || props['level'] === 3 || props['level'] === 4) &&
         isBoundedText(props['text'], 160) &&
-        (props['id'] === undefined ||
-          (isBoundedText(props['id'], 120) && HEADING_ID_PATTERN.test(props['id'])))
+        (props['anchor'] === undefined ||
+          (isBoundedText(props['anchor'], 120) && HEADING_ANCHOR_PATTERN.test(props['anchor'])))
       );
     case 'code':
       return (
         hasKeys(props, ['language', 'code']) &&
         isBoundedText(props['language'], 40) &&
-        isBoundedText(props['code'], 100_000, true)
+        isBoundedText(props['code'], CONTENT_DOCUMENT_LIMITS_V1.maxCodeBytes, true) &&
+        new TextEncoder().encode(props['code']).byteLength <=
+          CONTENT_DOCUMENT_LIMITS_V1.maxCodeBytes
       );
     case 'callout':
       return (
@@ -223,7 +257,8 @@ export function isContentBlock(value: unknown): value is ContentBlock {
     case 'image':
       return (
         hasKeys(props, ['src', 'alt'], ['caption']) &&
-        isBoundedText(props['src'], 2048) &&
+        isBoundedText(props['src'], CONTENT_DOCUMENT_LIMITS_V1.maxUrlLength) &&
+        isSafeImageSrc(props['src']) &&
         isBoundedText(props['alt'], 1000, true) &&
         (props['caption'] === undefined || isBoundedText(props['caption'], 500))
       );
@@ -232,10 +267,10 @@ export function isContentBlock(value: unknown): value is ContentBlock {
       const rows = props['rows'];
       return (
         hasKeys(props, ['headers', 'rows'], ['caption']) &&
-        isStringArray(headers, 20, 500) &&
+        isStringArray(headers, CONTENT_DOCUMENT_LIMITS_V1.maxTableColumns, 500) &&
         Array.isArray(rows) &&
         rows.length > 0 &&
-        rows.length <= 100 &&
+        rows.length <= CONTENT_DOCUMENT_LIMITS_V1.maxTableRows &&
         rows.every(
           (row) =>
             Array.isArray(row) &&
@@ -252,13 +287,14 @@ export function isContentBlock(value: unknown): value is ContentBlock {
         hasKeys(props, ['items']) &&
         Array.isArray(props['items']) &&
         props['items'].length > 0 &&
-        props['items'].length <= 20 &&
+        props['items'].length <= CONTENT_DOCUMENT_LIMITS_V1.maxRelatedItems &&
         props['items'].every(
           (item) =>
             isRecord(item) &&
             hasKeys(item, ['title', 'href'], ['description']) &&
             isBoundedText(item['title'], 160) &&
-            isBoundedText(item['href'], 2048) &&
+            isBoundedText(item['href'], CONTENT_DOCUMENT_LIMITS_V1.maxUrlLength) &&
+            isSafeHref(item['href']) &&
             (item['description'] === undefined || isBoundedText(item['description'], 500)),
         )
       );

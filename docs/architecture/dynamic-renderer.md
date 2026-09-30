@@ -9,6 +9,8 @@ the persisted API contract and imports no contract source from the API repo.
 The canonical JSON fixture is
 `tests/fixtures/content-document.v1.json`. Renderer tests load this fixture
 directly so the public and preview surfaces exercise the persisted V1 shape.
+API owns the persisted contract. Web mirrors it independently, maintains its
+own copied fixture, and imports no contract source from a sibling repository.
 The renderer foundation is not connected to the current learner Git catalog.
 
 ## Supported block components
@@ -43,8 +45,16 @@ Unsupported data is never silently dropped or interpreted as a component path.
 - Content cannot select a React import, style object, CSS class, event handler,
   script, or executable expression.
 - Links accept local paths, fragments, and HTTP(S). External links open in a
-  new tab with `noopener noreferrer`; unsafe schemes render as text.
-- Images accept local paths or HTTPS sources and send no referrer.
+  new tab with `noopener noreferrer`; unsafe schemes and URLs with credentials
+  are rejected as unsupported content.
+- Images accept local paths or HTTPS sources without credentials and send no
+  referrer.
+- Heading anchors come from optional `props.anchor`; block `id` is only block
+  identity and is never reused as a heading anchor.
+- The Web mirror enforces the V1 limits: 1 MiB compact JSON, 500 blocks, 128
+  character block IDs, 16 inline nesting levels, 100,000 UTF-8 code bytes, 20
+  table columns, 100 table rows, 2,000 character table cells, 20 related items,
+  and 2,048 character URLs.
 - There is no `eval`, `Function`, script execution, or
   `dangerouslySetInnerHTML` in this feature.
 
