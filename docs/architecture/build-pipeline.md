@@ -59,8 +59,10 @@ Next.js directly and does not require a generated content step.
 
 The multi-stage Dockerfile builds Next.js standalone output and runs it as an
 unprivileged user. `docker-compose.yml` builds the runner image, exposes port
-3001, and checks the native health route. The `development` Docker target is
-available for container-based development.
+3001, and checks the native health route. One image can run as learner or admin
+with the runtime `STACK_ATLAS_WEB_PLATFORM` setting. CI builds that image once
+and smoke-tests both modes plus missing production configuration. The
+`development` Docker target is available for container-based development.
 
 ## Hosting
 

@@ -7,6 +7,20 @@ import { ApiError, api } from '@/lib/api/client';
 
 type Account = { id: string; email: string; createdAt: string };
 
+function isAccount(value: unknown): value is Account {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    !Array.isArray(value) &&
+    'id' in value &&
+    typeof value.id === 'string' &&
+    'email' in value &&
+    typeof value.email === 'string' &&
+    'createdAt' in value &&
+    typeof value.createdAt === 'string'
+  );
+}
+
 export function AccountPanel() {
   const router = useRouter();
   const [account, setAccount] = useState<Account | null>(null);
@@ -16,8 +30,9 @@ export function AccountPanel() {
   useEffect(() => {
     let active = true;
     api
-      .get<Account>('account/me')
+      .get('account/me')
       .then((value) => {
+        if (!isAccount(value)) throw new TypeError('The account response is invalid.');
         if (active) setAccount(value);
       })
       .catch((cause) => {
@@ -37,7 +52,7 @@ export function AccountPanel() {
     setBusy(true);
     setError('');
     try {
-      await api.post<null>('auth/logout');
+      await api.post('auth/logout');
       router.replace('/login');
       router.refresh();
     } catch (cause) {

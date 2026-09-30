@@ -57,9 +57,10 @@ export default async function ArticlePage({ params, searchParams }: Props) {
     .map((id) => catalog.articleById.get(id))
     .filter((item) => !!item);
   const related = article.related.map((id) => catalog.articleById.get(id)).filter((item) => !!item);
-  const membershipPaths = article.learning_paths
-    .map((item) => ({ membership: item, path: catalog.pathById.get(item.path_id) }))
-    .filter((item) => !!item.path);
+  const membershipPaths = article.learning_paths.flatMap((membership) => {
+    const path = catalog.pathById.get(membership.path_id);
+    return path ? [{ membership, path }] : [];
+  });
   const selected = query.path
     ? membershipPaths.find((item) => item.membership.path_id === query.path)
     : undefined;
@@ -138,9 +139,9 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                         )}
                         key={`${membership.path_id}:${membership.module_id}`}
                       >
-                        {path!.title}
+                        {path.title}
                         {membershipPaths.length > 1
-                          ? ` · ${path!.modules.find((module) => module.id === membership.module_id)?.title ?? ''}`
+                          ? ` · ${path.modules.find((module) => module.id === membership.module_id)?.title ?? ''}`
                           : ''}
                       </Link>
                     ))}

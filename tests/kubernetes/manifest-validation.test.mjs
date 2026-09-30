@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import {
   checkManifest,
   validateKubernetesManifests,
-} from '../scripts/ci/validate-kubernetes-manifests.ts';
+} from '../../scripts/ci/validate-kubernetes-manifests.ts';
 
 test('validates the Kubernetes lab manifest inventory with the TypeScript validator', () => {
   const result = validateKubernetesManifests();

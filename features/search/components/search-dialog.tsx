@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { SearchKind, SearchResult } from '@/lib/content/search';
+import { parseSearchResponse } from '../search-response';
 import { sitePath } from '@/lib/site-path';
 
 const filters: Array<{ id: SearchKind | 'all'; label: string }> = [
@@ -41,8 +42,9 @@ export function SearchDialog() {
       window.setTimeout(() => input.current?.focus(), 20);
     };
     const keydown = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName ?? '')) {
+      const target = event.target;
+      const targetTag = target instanceof HTMLElement ? target.tagName : '';
+      if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(targetTag)) {
         event.preventDefault();
         open();
       }
@@ -69,8 +71,8 @@ export function SearchDialog() {
           signal: controller.signal,
         });
         if (!response.ok) throw new Error(`Search returned ${response.status}`);
-        const payload = (await response.json()) as { results: SearchResult[] };
-        setResults(payload.results);
+        const payload: unknown = await response.json();
+        setResults(parseSearchResponse(payload));
       } catch {
         if (!controller.signal.aborted) setFailed(true);
       } finally {

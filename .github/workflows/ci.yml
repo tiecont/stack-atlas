@@ -111,12 +111,97 @@ jobs:
           context: .
           target: runner
           push: false
+          load: true
+          tags: stack-atlas-web:ci
           build-args: |
             NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api/v1/
             NEXT_PUBLIC_BASE_PATH=
             SITE_URL=http://localhost:3001
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Verify learner and admin runtime modes on the same image
+        run: |
+          set -eu
+          expect_platform_startup_failure() {
+            name="$1"
+            value="$2"
+            if [ -n "$value" ]; then
+              docker run --detach --name "$name" --env "STACK_ATLAS_WEB_PLATFORM=$value" stack-atlas-web:ci
+            else
+              docker run --detach --name "$name" stack-atlas-web:ci
+            fi
+            state=running
+            attempt=0
+            while [ "$state" != exited ] && [ "$attempt" -lt 15 ]; do
+              state=$(docker inspect --format '{{.State.Status}}' "$name")
+              if [ "$state" != exited ]; then sleep 1; fi
+              attempt=$((attempt + 1))
+            done
+            if [ "$state" != exited ]; then
+              docker logs "$name"
+              docker rm -f "$name"
+              echo "The image did not exit after rejecting STACK_ATLAS_WEB_PLATFORM=$value."
+              exit 1
+            fi
+            exit_code=$(docker inspect --format '{{.State.ExitCode}}' "$name")
+            docker logs "$name" >"/tmp/$name.log" 2>&1
+            docker rm "$name"
+            if [ "$exit_code" = 0 ] || ! grep -q 'STACK_ATLAS_WEB_PLATFORM' "/tmp/$name.log"; then
+              cat "/tmp/$name.log"
+              echo "The image did not reject STACK_ATLAS_WEB_PLATFORM=$value as expected."
+              exit 1
+            fi
+          }
+          expect_platform_startup_failure stack-atlas-web-missing-platform ""
+          expect_platform_startup_failure stack-atlas-web-invalid-platform invalid
+          for mode in learner admin; do
+            if [ "$mode" = learner ]; then
+              port=3011
+              expected='Explore topics'
+            else
+              port=3012
+              expected='Content workspace'
+            fi
+            docker run --detach --rm --name "stack-atlas-web-$mode" \
+              --publish "127.0.0.1:$port:3001" \
+              --env "STACK_ATLAS_WEB_PLATFORM=$mode" stack-atlas-web:ci
+            curl --fail --silent --show-error \
+              --retry 20 --retry-delay 1 --retry-connrefused \
+              "http://127.0.0.1:$port/api/healthz/" \
+              --output "/tmp/stack-atlas-web-$mode-health.json"
+            grep -q '"status":"ok"' "/tmp/stack-atlas-web-$mode-health.json"
+            if [ "$mode" = learner ]; then
+              curl --fail --silent --show-error \
+                --retry 20 --retry-delay 1 --retry-connrefused \
+                "http://127.0.0.1:$port/" --output "/tmp/stack-atlas-web-$mode.html"
+              grep -q "$expected" "/tmp/stack-atlas-web-$mode.html"
+              status=$(curl --silent --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port/admin/")
+              test "$status" = 404
+            else
+              root_status=$(curl --silent --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port/")
+              root_location=$(curl --silent --output /dev/null --write-out '%{redirect_url}' "http://127.0.0.1:$port/")
+              test "$root_status" = 307
+              case "$root_location" in
+                */admin/) ;;
+                *) echo "Admin root did not redirect to /admin/: $root_location"; exit 1 ;;
+              esac
+              curl --fail --silent --show-error --location \
+                --retry 20 --retry-delay 1 --retry-connrefused \
+                "http://127.0.0.1:$port/" --output "/tmp/stack-atlas-web-$mode.html"
+              grep -q "$expected" "/tmp/stack-atlas-web-$mode.html"
+              grep -q 'Administration' "/tmp/stack-atlas-web-$mode.html"
+              curl --fail --silent --show-error \
+                "http://127.0.0.1:$port/admin/content/" \
+                --output "/tmp/stack-atlas-web-$mode-content.html"
+              grep -q 'No API content is available' "/tmp/stack-atlas-web-$mode-content.html"
+              status=$(curl --silent --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port/articles/")
+              test "$status" = 404
+              status=$(curl --silent --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port/paths/")
+              test "$status" = 404
+            fi
+            docker stop "stack-atlas-web-$mode"
+          done
 
   build-and-push:
     name: Build and publish image

@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { ApiError, createApiClient } from '../lib/api/client.ts';
-import { readProgress } from '../features/progress/progress-store.ts';
-import fixture from './fixtures/problem-details.v1.json' with { type: 'json' };
+import { ApiError, createApiClient } from '../../lib/api/client.ts';
+import { normalizeProgress, readProgress } from '../../features/progress/progress-store.ts';
+import fixture from '../fixtures/problem-details.v1.json' with { type: 'json' };
 
 test('migrates v1 local progress and keeps path-specific resume state', () => {
   const values = new Map([
@@ -17,6 +17,21 @@ test('migrates v1 local progress and keeps path-specific resume state', () => {
   assert.deepEqual(migrated.completed, ['shared', 'go']);
   assert.equal(migrated.activePath, null);
   assert.deepEqual(JSON.parse(values.get('stack-atlas-progress-v2')), migrated);
+});
+
+test('normalizes malformed local progress without trusting its object shape', () => {
+  assert.deepEqual(normalizeProgress(['not', 'a', 'progress', 'record']), {
+    version: 2,
+    completed: [],
+    activePath: null,
+    lastVisited: {},
+  });
+  assert.deepEqual(normalizeProgress({ completed: ['valid', 3], lastVisited: ['unexpected'] }), {
+    version: 2,
+    completed: ['valid'],
+    activePath: null,
+    lastVisited: {},
+  });
 });
 
 test('uses configured API base, JSON headers, credentials and Problem Details', async () => {

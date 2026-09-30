@@ -2,18 +2,18 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import { renderToStaticMarkup } from 'react-dom/server';
-import ExamplePage from '../app/examples/[example]/page.tsx';
-import { GET as getExampleFile } from '../app/examples/[example]/files/[...path]/route.ts';
-import ArticlePage from '../app/articles/[domain]/[slug]/page.tsx';
-import LabPage from '../app/labs/[lab]/page.tsx';
-import { GET as getLabFile } from '../app/labs/[lab]/files/[...path]/route.ts';
-import nextConfig from '../next.config.ts';
-import { loadCatalog } from '../lib/content/loader.ts';
-import { validateCatalog } from '../lib/content/validation.ts';
-import { examples, exampleRuntimeFiles } from '../lib/examples/registry.ts';
-import { labs, labRuntimeFiles } from '../lib/labs/registry.ts';
-import { unregisteredRuntimeFiles } from '../lib/public-content-files.ts';
-import { buildPublicContentRedirects } from '../lib/public-content-redirects.ts';
+import ExamplePage from '../../app/examples/[example]/page.tsx';
+import { GET as getExampleFile } from '../../app/examples/[example]/files/[...path]/route.ts';
+import ArticlePage from '../../app/articles/[domain]/[slug]/page.tsx';
+import LabPage from '../../app/labs/[lab]/page.tsx';
+import { GET as getLabFile } from '../../app/labs/[lab]/files/[...path]/route.ts';
+import nextConfig from '../../next.config.ts';
+import { loadCatalog } from '../../lib/content/loader.ts';
+import { validateCatalog } from '../../lib/content/validation.ts';
+import { examples, exampleRuntimeFiles } from '../../lib/examples/registry.ts';
+import { labs, labRuntimeFiles } from '../../lib/labs/registry.ts';
+import { unregisteredRuntimeFiles } from '../../lib/public-content-files.ts';
+import { buildPublicContentRedirects } from '../../lib/public-content-redirects.ts';
 
 const unwrap = (value) => {
   while (value && typeof value === 'object' && 'default' in value) value = value.default;
@@ -60,7 +60,7 @@ test('lab and example downloads return only registered public files', async () =
     params: Promise.resolve({ lab: 'kubernetes-foundations', path: ['Makefile'] }),
   });
   assert.equal(privateLabFile.status, 404);
-  assert.ok(existsSync(new URL('../labs/kubernetes/01-foundations/Makefile', import.meta.url)));
+  assert.ok(existsSync(new URL('../../labs/kubernetes/01-foundations/Makefile', import.meta.url)));
 
   const privateExampleFile = await getExampleFile(new Request('http://local.test'), {
     params: Promise.resolve({
@@ -70,7 +70,7 @@ test('lab and example downloads return only registered public files', async () =
   });
   assert.equal(privateExampleFile.status, 404);
   assert.ok(
-    existsSync(new URL('../examples/atlas-demo-api/cmd/server/main_test.go', import.meta.url)),
+    existsSync(new URL('../../examples/atlas-demo-api/cmd/server/main_test.go', import.meta.url)),
   );
 });
 
@@ -148,10 +148,10 @@ test('public content redirects and production tracing follow the allowlists', as
   assert.deepEqual(exclusions['/examples/*'], unregisteredRuntimeFiles('examples', examples));
   assert.ok(exclusions['/labs/*'].some((file) => file.endsWith('/Makefile')));
   assert.ok(exclusions['/examples/*'].some((file) => file.endsWith('/main_test.go')));
-  assert.equal(existsSync(new URL('../app/tests/[...path]/route.ts', import.meta.url)), false);
+  assert.equal(existsSync(new URL('../../app/tests/[...path]/route.ts', import.meta.url)), false);
   assert.equal(
     readFileSync(
-      new URL('../content/articles/kubernetes/local-kind-cluster/article.html', import.meta.url),
+      new URL('../../content/articles/kubernetes/local-kind-cluster/article.html', import.meta.url),
       'utf8',
     ).includes('/labs/kubernetes-cluster/files/version-matrix.yaml'),
     true,

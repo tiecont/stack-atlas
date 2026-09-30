@@ -16,7 +16,7 @@ export function createApiClient(baseUrl: string, fetchImpl: typeof fetch = fetch
   }
   if (!base.pathname.endsWith('/')) base.pathname += '/';
 
-  async function request<T>(requestPath: string, options: RequestOptions = {}): Promise<T> {
+  async function request(requestPath: string, options: RequestOptions = {}): Promise<unknown> {
     if (typeof requestPath !== 'string' || requestPath.startsWith('//')) {
       throw new TypeError('API paths must be relative to the configured base URL.');
     }
@@ -55,20 +55,21 @@ export function createApiClient(baseUrl: string, fetchImpl: typeof fetch = fetch
         normalizeProblem(payload, response.status, response.statusText),
       );
     }
-    if (response.status === 204) return null as T;
-    return (await response.json()) as T;
+    if (response.status === 204) return null;
+    const payload: unknown = await response.json();
+    return payload;
   }
 
   return Object.freeze({
     request,
-    get: <T>(requestPath: string, options?: RequestOptions) =>
-      request<T>(requestPath, { ...options, method: 'GET' }),
-    post: <T>(requestPath: string, body?: unknown, options?: RequestOptions) =>
-      request<T>(requestPath, { ...options, method: 'POST', body }),
-    put: <T>(requestPath: string, body?: unknown, options?: RequestOptions) =>
-      request<T>(requestPath, { ...options, method: 'PUT', body }),
-    delete: <T>(requestPath: string, options?: RequestOptions) =>
-      request<T>(requestPath, { ...options, method: 'DELETE' }),
+    get: (requestPath: string, options?: RequestOptions) =>
+      request(requestPath, { ...options, method: 'GET' }),
+    post: (requestPath: string, body?: unknown, options?: RequestOptions) =>
+      request(requestPath, { ...options, method: 'POST', body }),
+    put: (requestPath: string, body?: unknown, options?: RequestOptions) =>
+      request(requestPath, { ...options, method: 'PUT', body }),
+    delete: (requestPath: string, options?: RequestOptions) =>
+      request(requestPath, { ...options, method: 'DELETE' }),
   });
 }
 

@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import nextConfig from '../next.config.ts';
-import { loadCatalog } from '../lib/content/loader.ts';
-import { buildLegacyRedirects, validateLegacyRedirects } from '../lib/content/redirects.ts';
-import { buildPublicContentRedirects } from '../lib/public-content-redirects.ts';
-import { searchCatalog } from '../lib/content/search.ts';
+import nextConfig from '../../next.config.ts';
+import { loadCatalog } from '../../lib/content/loader.ts';
+import { buildLegacyRedirects, validateLegacyRedirects } from '../../lib/content/redirects.ts';
+import { buildPublicContentRedirects } from '../../lib/public-content-redirects.ts';
+import { searchCatalog } from '../../lib/content/search.ts';
 
 const catalog = loadCatalog();
 const unwrap = (value) => {

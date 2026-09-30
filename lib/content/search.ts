@@ -39,6 +39,17 @@ export function searchCatalog(query: string, kind: SearchKind | 'all' = 'all', l
       results.push({ id: learningPath.id, title: learningPath.title, description: learningPath.description, url: `/paths/${learningPath.id}/`, kind: 'path', label: 'Learning path', score: learningPath.title.toLocaleLowerCase().includes(normalized) ? 2 : 0 });
     }
   }
-  return results.sort((left, right) => right.score - left.score || left.title.localeCompare(right.title)).slice(0, limit)
-    .map(item => Object.fromEntries(Object.entries(item).filter(([key]) => key !== 'score')) as SearchResult);
+  return results
+    .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title))
+    .slice(0, limit)
+    .map((item) => ({
+      id: item.id,
+      title: item.title,
+      description: item.description,
+      url: item.url,
+      kind: item.kind,
+      label: item.label,
+      ...(item.domain === undefined ? {} : { domain: item.domain }),
+      ...(item.tags === undefined ? {} : { tags: item.tags }),
+    }));
 }

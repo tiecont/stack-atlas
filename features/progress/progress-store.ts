@@ -13,7 +13,7 @@ export const EMPTY_PROGRESS: LearningProgress = {
 };
 
 export function normalizeProgress(value: unknown): LearningProgress {
-  const record = value && typeof value === 'object' ? (value as Record<string, unknown>) : {};
+  const record = isRecord(value) ? value : {};
   const lastVisited =
     record.lastVisited &&
     typeof record.lastVisited === 'object' &&
@@ -39,8 +39,7 @@ export function readProgress(storage: Pick<Storage, 'getItem' | 'setItem'>): Lea
     const current = storage.getItem('stack-atlas-progress-v2');
     if (current) {
       const parsed: unknown = JSON.parse(current);
-      if (parsed && typeof parsed === 'object' && (parsed as { version?: unknown }).version === 2)
-        return normalizeProgress(parsed);
+      if (isRecord(parsed) && parsed['version'] === 2) return normalizeProgress(parsed);
     }
     const legacy = storage.getItem('stack-atlas-progress-v1');
     const progress = normalizeProgress(legacy ? JSON.parse(legacy) : {});
@@ -49,4 +48,8 @@ export function readProgress(storage: Pick<Storage, 'getItem' | 'setItem'>): Lea
   } catch {
     return EMPTY_PROGRESS;
   }
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

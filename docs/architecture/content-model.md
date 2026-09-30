@@ -41,10 +41,14 @@ Prerequisite relationships must resolve and remain acyclic.
 All human-authored metadata uses YAML. Article content remains in the
 repository; it is not copied to a CMS or database.
 
-The current article renderer treats Git-authored HTML as trusted source and
-converts it to React elements through a strict allowlist. It does not support
-admin-authored raw HTML. Future dynamic content should use typed structured
-blocks with dedicated React renderers.
+During the current platform phase, Git remains the canonical authored source;
+the Web catalog is not dual-written to the API. Existing Git-authored HTML
+continues through the strict allowlist renderer. The new shared structured
+renderer is a Web UI foundation exercised by a fixture; it is not wired to
+learner routes and does not claim compatibility with an API document schema.
+API-owned content fields and Web consumption will be aligned during the later
+authoring and cutover phases. The API's immutable revision and publication
+tables remain a separate foundation until those phases.
 
 ## Progress model
 
