@@ -6,7 +6,9 @@ build/
 .tmp/
 coverage/
 test-results/
+test-results-admin/
 playwright-report/
+playwright-report-admin/
 node_modules/
 .next/
 out/
