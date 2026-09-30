@@ -44,11 +44,10 @@ repository; it is not copied to a CMS or database.
 During the current platform phase, Git remains the canonical authored source;
 the Web catalog is not dual-written to the API. Existing Git-authored HTML
 continues through the strict allowlist renderer. The new shared structured
-renderer is a Web UI foundation exercised by a fixture; it is not wired to
-learner routes and does not claim compatibility with an API document schema.
-API-owned content fields and Web consumption will be aligned during the later
-authoring and cutover phases. The API's immutable revision and publication
-tables remain a separate foundation until those phases.
+renderer consumes the API-owned Content Document V1 contract through an
+independent Web mirror and canonical JSON fixture. It is not wired to learner
+routes. API-owned immutable revision and publication tables remain a separate
+foundation until authoring and cutover phases.
 
 ## Progress model
 

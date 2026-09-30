@@ -58,8 +58,9 @@ in the shared feature-scoped test trees, never beside production feature code.
   hostname-based platform selection, client-only admin authorization, role
   checks in local storage/query parameters, or arbitrary executable content.
 - Use the explicit shared renderer registry for structured blocks in learner
-  content and admin previews. Renderer fixtures are not an API schema or a
-  reason to migrate current Git content.
+  content and admin previews. It consumes the API-owned Content Document V1
+  contract through an independent Web mirror and matching canonical JSON
+  fixture. This does not migrate current Git content or switch catalog reads.
 
 ## CI and local gates
 

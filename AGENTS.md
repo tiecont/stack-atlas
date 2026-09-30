@@ -161,6 +161,15 @@ Render authored article HTML only through the React allowlist in
 blocks through the typed block renderer. Do not use `dangerouslySetInnerHTML`,
 create generated HTML pages, or render arbitrary authored tags/attributes.
 
+The API owns the persisted Content Document V1 contract. Web MUST mirror it
+independently and MUST NOT import contract source from the API repository. Each
+block uses `{ id, type, version: 1, props }` and the supported types are
+`rich_text`, `heading`, `code`, `callout`, `image`, `table`, `divider`, and
+`related_content`. Paragraphs, lists, and inline formatting live inside
+`rich_text.props.nodes`. Keep the canonical JSON fixture semantically identical
+to the API fixture and run it through the renderer tests. This contract does
+not switch the current Git catalog to API reads.
+
 Derive search, redirects, sitemap, robots, topic/path links, and content URLs
 from the typed catalog and its URL helpers. Do not recreate slug or basePath
 logic in route components.

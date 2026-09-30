@@ -1,10 +1,15 @@
 # Dynamic structured-content renderer
 
-`features/content-renderer/` provides the shared React renderer foundation for
-learner public content and admin preview. A typed `BlockDocument` is passed to
-`BlockRenderer`, which uses an explicit allowlist registry to select React
-components. This is a Web UI fixture format only; it is not an API or persisted
-content contract. It is not connected to the current learner catalog.
+`features/content-renderer/` consumes the API-owned Content Document V1 shape
+for learner public content and admin preview. A document contains
+`schema_version`, title, description, and ordered blocks. Every block has the
+`{ id, type, version, props }` envelope. Web maintains an independent mirror of
+the persisted API contract and imports no contract source from the API repo.
+
+The canonical JSON fixture is
+`tests/fixtures/content-document.v1.json`. Renderer tests load this fixture
+directly so the public and preview surfaces exercise the persisted V1 shape.
+The renderer foundation is not connected to the current learner Git catalog.
 
 ## Supported block components
 
@@ -19,16 +24,18 @@ content contract. It is not connected to the current learner catalog.
 | `divider`         | Semantic horizontal rule                                            |
 | `related_content` | Links and optional descriptions                                     |
 
-Rich text nodes include `paragraph`, `text`, `bold`, `italic`, `inline_code`,
-`link`, `bullet_list`, and `ordered_list`. Text is rendered as React children,
-which keeps markup escaped. The renderer does not accept raw HTML.
+Paragraphs, lists, and inline formatting belong to
+`rich_text.props.nodes`. Rich text nodes include `paragraph`, `text`, `bold`,
+`italic`, `inline_code`, `link`, `bullet_list`, and `ordered_list`. Text is
+rendered as React children, which keeps markup escaped. The renderer does not
+accept raw HTML.
 
 ## Unknown and malformed blocks
 
-The runtime validates each block shape before dispatch. `mode="preview"`
-shows the unsupported block type for development/admin diagnostics. Public
-mode shows a safe generic unsupported-content message. Unsupported data is
-never silently dropped or interpreted as a component path.
+The runtime validates the document envelope and every block before dispatch.
+`mode="preview"` shows the unsupported block type for development/admin
+diagnostics. Public mode shows a safe generic unsupported-content message.
+Unsupported data is never silently dropped or interpreted as a component path.
 
 ## Safety rules
 
@@ -41,8 +48,5 @@ never silently dropped or interpreted as a component path.
 - There is no `eval`, `Function`, script execution, or
   `dangerouslySetInnerHTML` in this feature.
 
-`tests/fixtures/structured-block-document.ts` exercises the renderer without
-converting the Git catalog. Existing article HTML remains on its separate
-allowlist renderer. Before API content is rendered here, API-owned document
-fields and validation rules must be aligned in the authoring phase; this
-fixture must not be mistaken for an early API contract.
+Existing article HTML remains on its separate allowlist renderer. Git content
+is not converted into structured blocks by this renderer.

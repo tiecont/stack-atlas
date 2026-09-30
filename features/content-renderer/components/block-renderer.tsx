@@ -8,18 +8,18 @@ import { RelatedContentBlock } from './blocks/related-content-block';
 import { RichTextBlock } from './blocks/rich-text-block';
 import { TableBlock } from './blocks/table-block';
 import type { BlockDocument, ContentBlock, RendererMode } from '../types';
-import { isContentBlock } from '../types';
+import { isContentBlock, isContentDocumentV1 } from '../types';
 
 const BLOCK_REGISTRY: Record<ContentBlock['type'], (block: ContentBlock) => ReactNode> = {
-  rich_text: (block) => (block.type === 'rich_text' ? <RichTextBlock block={block} /> : null),
-  heading: (block) => (block.type === 'heading' ? <HeadingBlock block={block} /> : null),
-  code: (block) => (block.type === 'code' ? <CodeBlock block={block} /> : null),
-  callout: (block) => (block.type === 'callout' ? <CalloutBlock block={block} /> : null),
-  image: (block) => (block.type === 'image' ? <ImageBlock block={block} /> : null),
-  table: (block) => (block.type === 'table' ? <TableBlock block={block} /> : null),
+  rich_text: (block) => (block.type === 'rich_text' ? <RichTextBlock block={block.props} /> : null),
+  heading: (block) => (block.type === 'heading' ? <HeadingBlock block={block.props} /> : null),
+  code: (block) => (block.type === 'code' ? <CodeBlock block={block.props} /> : null),
+  callout: (block) => (block.type === 'callout' ? <CalloutBlock block={block.props} /> : null),
+  image: (block) => (block.type === 'image' ? <ImageBlock block={block.props} /> : null),
+  table: (block) => (block.type === 'table' ? <TableBlock block={block.props} /> : null),
   divider: () => <DividerBlock />,
   related_content: (block) =>
-    block.type === 'related_content' ? <RelatedContentBlock block={block} /> : null,
+    block.type === 'related_content' ? <RelatedContentBlock block={block.props} /> : null,
 };
 
 export function BlockRenderer({
@@ -29,6 +29,15 @@ export function BlockRenderer({
   document: BlockDocument;
   mode?: RendererMode;
 }) {
+  if (!isContentDocumentV1(document)) {
+    return (
+      <div className="content-blocks">
+        <aside className="content-unsupported" role="status">
+          This content document is not available in this version.
+        </aside>
+      </div>
+    );
+  }
   return (
     <div className="content-blocks">
       {document.blocks.map((block, index) => {
@@ -42,7 +51,7 @@ export function BlockRenderer({
               : 'unknown';
           return <UnsupportedBlock key={index} mode={mode} type={type} />;
         }
-        return <Block key={index} block={block} />;
+        return <Block key={block.id} block={block} />;
       })}
     </div>
   );

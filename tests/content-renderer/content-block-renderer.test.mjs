@@ -32,24 +32,36 @@ test('text is escaped and unsafe links do not become active hyperlinks', () => {
   const html = renderToStaticMarkup(
     React.createElement(BlockRenderer, {
       document: {
+        schema_version: 1,
+        title: 'Unsafe values',
+        description: 'Renderer escaping behavior.',
         blocks: [
           {
+            id: 'unsafe-rich-text',
             type: 'rich_text',
-            nodes: [
-              {
-                type: 'paragraph',
-                children: [
-                  { type: 'text', text: '<script>alert(1)</script>' },
-                  {
-                    type: 'link',
-                    href: 'javascript:alert(1)',
-                    children: [{ type: 'text', text: 'unsafe link' }],
-                  },
-                ],
-              },
-            ],
+            version: 1,
+            props: {
+              nodes: [
+                {
+                  type: 'paragraph',
+                  children: [
+                    { type: 'text', text: '<script>alert(1)</script>' },
+                    {
+                      type: 'link',
+                      href: 'javascript:alert(1)',
+                      children: [{ type: 'text', text: 'unsafe link' }],
+                    },
+                  ],
+                },
+              ],
+            },
           },
-          { type: 'image', src: 'data:text/html,unsafe', alt: 'bad' },
+          {
+            id: 'unsafe-image',
+            type: 'image',
+            version: 1,
+            props: { src: 'data:text/html,unsafe', alt: 'bad' },
+          },
         ],
       },
     }),
@@ -64,7 +76,18 @@ test('text is escaped and unsafe links do not become active hyperlinks', () => {
 
 test('unknown or malformed blocks stay visible with preview diagnostics or safe public fallback', () => {
   const document = {
-    blocks: [{ type: 'future_block', payload: '<script>bad</script>' }, { type: 'code' }],
+    schema_version: 1,
+    title: 'Unsupported blocks',
+    description: 'Future and malformed blocks have safe fallbacks.',
+    blocks: [
+      {
+        id: 'future',
+        type: 'future_block',
+        version: 1,
+        props: { payload: '<script>bad</script>' },
+      },
+      { id: 'bad-code', type: 'code', version: 1, props: {} },
+    ],
   };
   const previewHtml = renderToStaticMarkup(
     React.createElement(BlockRenderer, { document, mode: 'preview' }),
@@ -78,4 +101,23 @@ test('unknown or malformed blocks stay visible with preview diagnostics or safe 
   assert.match(publicHtml, /This part of the content is not available/);
   assert.doesNotMatch(previewHtml, /<script>/);
   assert.doesNotMatch(publicHtml, /future_block/);
+});
+
+test('documents with duplicate block ids are rejected before rendering', () => {
+  const html = renderToStaticMarkup(
+    React.createElement(BlockRenderer, {
+      document: {
+        schema_version: 1,
+        title: 'Duplicate ids',
+        description: 'Block ids are unique in V1 documents.',
+        blocks: [
+          { id: 'same-id', type: 'divider', version: 1, props: {} },
+          { id: 'same-id', type: 'divider', version: 1, props: {} },
+        ],
+      },
+    }),
+  );
+
+  assert.match(html, /This content document is not available in this version/);
+  assert.doesNotMatch(html, /content-divider/);
 });

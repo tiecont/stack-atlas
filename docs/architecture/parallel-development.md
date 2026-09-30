@@ -38,11 +38,10 @@ must build from its own checkout and must not import source code from a sibling.
 ## Content platform sequence
 
 1. API establishes content identity, immutable revisions, publication history,
-   and the versioned block validator.
-2. Web establishes separate learner/admin runtime surfaces and a shared block
-   renderer foundation without switching the Git catalog to API reads. The Web
-   fixture is not an API document contract; API-owned fields wait for the API
-   schema and authoring phase.
+   the API-owned Content Document V1 persisted contract, and its validator.
+2. Web mirrors Content Document V1 independently, keeps the canonical JSON
+   fixture semantically identical, and renders that shape without switching the
+   Git catalog to API reads.
 3. API admin authoring and publishing endpoints precede the Web dynamic editor.
 4. Git-to-API content cutover is a later explicit phase.
 
