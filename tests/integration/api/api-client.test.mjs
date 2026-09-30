@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { ApiError, createApiClient } from '../../lib/api/client.ts';
-import fixture from '../fixtures/problem-details.v1.json' with { type: 'json' };
+import { ApiError, createApiClient } from '../../../lib/api/client.ts';
+import fixture from '../../fixtures/problem-details.v1.json' with { type: 'json' };
 
 const baseUrl = process.env.API_BASE_URL;
 if (!baseUrl) {

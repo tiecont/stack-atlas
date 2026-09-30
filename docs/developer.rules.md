@@ -26,8 +26,8 @@ features/
 lib/
   api/                        # one API client and Problem Details parser
   content/                    # YAML loader, typed catalog, validation, URLs
-tests/                       # Node regression tests and fixtures
-e2e/                         # Playwright browser tests
+tests/<feature>/             # Node regression and full-flow tests by feature
+e2e/<feature>/                # Playwright browser tests by feature
 scripts/                     # validation and repository tooling
 ```
 
@@ -35,9 +35,15 @@ Keep feature-specific UI and state within `features/<feature>/`. Shared site
 chrome belongs in `components/`; canonical content parsing stays in
 `lib/content/`.
 
+Production `*.service.ts` files require an adjacent
+`<service-name>.service.spec.ts` unit test. Full-flow and browser e2e tests stay
+in the shared feature-scoped test trees, never beside production feature code.
+
 ## Content and API boundaries
 
-- Do not move canonical content into a database or introduce a CMS.
+- During this phase, Git remains the canonical authored content source. Do not
+  dual-write or switch learner reads to API/PostgreSQL before the cutover phase.
+  The API content foundation is not a Web content dependency yet.
 - Keep IDs, URLs, ordering, prerequisites, relationships, and redirect aliases
   stable when changing the loader or renderer.
 - Add content invariants to `lib/content/validation.ts` and cover regressions
@@ -48,11 +54,19 @@ chrome belongs in `components/`; canonical content parsing stays in
   auth components for backend operations.
 - Render article fragments as React elements through the content allowlist.
   Do not add generated HTML pages or `dangerouslySetInnerHTML`.
+- Read `STACK_ATLAS_WEB_PLATFORM` only in `lib/platform/config.ts`. Do not add
+  hostname-based platform selection, client-only admin authorization, role
+  checks in local storage/query parameters, or arbitrary executable content.
+- Use the explicit shared renderer registry for structured blocks in learner
+  content and admin previews. It consumes the API-owned Content Document V1
+  contract through an independent Web mirror and matching canonical JSON
+  fixture. This does not migrate current Git content or switch catalog reads.
 
 ## CI and local gates
 
-The Web CI runs format checks, catalog validation, lint, TypeScript, unit tests,
-production build, Playwright smoke tests, and a Docker build. Local commits run
+The Web CI runs format checks, catalog validation, lint, TypeScript, test
+placement, unit tests, production build, feature-scoped Playwright smoke tests,
+and a Docker build. Local commits run
 lint-staged and `npm run test:precommit`.
 
 ```sh
@@ -61,6 +75,7 @@ npm run content:validate
 npm run typecheck
 npm run lint
 npm test
+npm run test:integration # requires API_BASE_URL
 npm run build
 npm run test:e2e
 docker compose config

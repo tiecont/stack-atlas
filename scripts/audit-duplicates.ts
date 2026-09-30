@@ -205,7 +205,9 @@ if (process.argv.includes('--preview')) {
     ];
     for (const candidate of candidates) {
       const key = [candidate.left.id, candidate.right.id].sort().join('|');
-      const [classification, decision] = decisions.get(key)!;
+      const resolution = decisions.get(key);
+      if (!resolution) throw new Error(`Missing duplicate-audit decision for ${key}.`);
+      const [classification, decision] = resolution;
       const refs =
         '[`' +
         candidate.left.id +

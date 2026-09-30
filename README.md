@@ -28,6 +28,16 @@ The app starts at `http://localhost:3001`. Next.js reads content directly from
 also need the API and PostgreSQL described in `../api/README.md`. Public
 knowledge pages work without the API or Engine.
 
+`STACK_ATLAS_WEB_PLATFORM` selects the request-time page surface in the same
+standalone image: `learner` serves the public catalog and `admin` serves
+`/admin/`. Development defaults to learner when the setting is omitted;
+production requires an explicit `learner` or `admin` value. The admin content
+page is an empty foundation until API authoring endpoints are available. Both
+modes use the same account session API, and API permissions will own future
+admin authorization. For local Docker use, set
+`STACK_ATLAS_WEB_PLATFORM=admin` in `.env` to run that surface from the same
+image.
+
 Web presents learning content and lab guides. Engine executes future remote
 labs. Web does not create namespaces, run `kubectl` for learners, own sandbox
 lifecycle, or store lab session state; see the [lab runtime ownership
@@ -81,9 +91,10 @@ make test-kubernetes
 make test-databases
 ```
 
-`docker compose up --build` runs the production-style standalone image on port 3001. Configure the API URL, public base path, site origin, or host port in
-`.env` before building when needed. The Dockerfile also has a `development`
-target for container-based Next.js development.
+`docker compose up --build` runs the production-style standalone image on port 3001. Configure build-time API URL, public base path, and site origin, plus the
+runtime `STACK_ATLAS_WEB_PLATFORM` and host port, in `.env` before starting
+Compose. Changing platforms does not require another image build. The Dockerfile
+also has a `development` target for container-based Next.js development.
 
 The Kubernetes lab uses a disposable kind cluster. Its separate workflow runs
 the TypeScript manifest validator, Go demo tests, context safety checks, and a

@@ -19,7 +19,11 @@ export default defineConfig({
   webServer: {
     command: 'npm run start',
     url: baseURL,
-    env: { PORT: port, WEB_HOST: '127.0.0.1' },
+    env: {
+      PORT: port,
+      WEB_HOST: '127.0.0.1',
+      STACK_ATLAS_WEB_PLATFORM: 'learner',
+    },
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },

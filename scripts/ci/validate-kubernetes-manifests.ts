@@ -33,10 +33,12 @@ type Options = {
   kubectl: string;
 };
 
+function isRecord(value: unknown): value is RecordValue {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
 function record(value: unknown): RecordValue {
-  return value !== null && typeof value === 'object' && !Array.isArray(value)
-    ? (value as RecordValue)
-    : {};
+  return isRecord(value) ? value : {};
 }
 
 function list(value: unknown): unknown[] {

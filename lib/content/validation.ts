@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { analyzeArticleHtml } from './html.ts';
 import { buildLegacyRedirects, validateLegacyRedirects } from './redirects.ts';
-import { ROOT, orderedModules, pathSequence } from './loader.ts';
+import { ROOT, orderedModules, pathSequence } from './catalog-utils.ts';
 import { examples, isExamplePublicRoute } from '../examples/registry.ts';
 import { isLabPublicRoute, labs } from '../labs/registry.ts';
 import { buildPublicContentRedirects } from '../public-content-redirects.ts';

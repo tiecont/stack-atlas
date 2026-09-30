@@ -22,14 +22,15 @@ export function normalizeProblem(
   status: number,
   statusText: string,
 ): ProblemDetails {
-  const supplied =
-    payload !== null && typeof payload === 'object' && !Array.isArray(payload)
-      ? (payload as Record<string, unknown>)
-      : {};
+  const supplied = isRecord(payload) ? payload : {};
   return {
     ...supplied,
     type: typeof supplied.type === 'string' ? supplied.type : 'about:blank',
     title: typeof supplied.title === 'string' ? supplied.title : statusText || `HTTP ${status}`,
     status,
   };
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

@@ -105,4 +105,7 @@ test('auth screens, metadata endpoints, health, and not-found route respond', as
 
   const missing = await page.goto('/articles/golang/missing-content/');
   expect(missing?.status()).toBe(404);
+
+  const learnerAdminRoute = await request.get('/admin/');
+  expect(learnerAdminRoute.status()).toBe(404);
 });

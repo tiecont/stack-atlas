@@ -7,7 +7,15 @@ must build from its own checkout and must not import source code from a sibling.
 
 ### Web
 
-- Own Next.js pages, browser behavior, and authored learning content.
+- Own Next.js learner/admin pages, browser behavior, and authored learning
+  content. One standalone image selects the learner or admin page surface from
+  the runtime `STACK_ATLAS_WEB_PLATFORM` value. Infra selects the hostname and
+  passes the platform value; Web does not branch on hostname.
+- Git remains the canonical authored content source through the current phase;
+  the API content tables are not a Web read dependency.
+- The server-side route gate isolates `/admin/*` from learner routes. Platform
+  selection controls route availability only; API permissions own future
+  authoring authorization.
 - Use the Nest API over versioned HTTP contracts for account and learner state.
 - Never call the Go Engine from the browser.
 - Develop public content without API or Engine checkouts; API-backed pages need
@@ -26,6 +34,20 @@ must build from its own checkout and must not import source code from a sibling.
   normalized result publication.
 - Develop runner behavior and transport adapters without Web or API checkouts.
 - Never own accounts or learning progress.
+
+## Content platform sequence
+
+1. API establishes content identity, immutable revisions, publication history,
+   the API-owned Content Document V1 persisted contract, and its validator.
+2. Web mirrors Content Document V1 independently, keeps the canonical JSON
+   fixture semantically identical, and renders that shape without switching the
+   Git catalog to API reads.
+3. API admin authoring and publishing endpoints precede the Web dynamic editor.
+4. Git-to-API content cutover is a later explicit phase.
+
+Engine CI and execution-domain boundary work proceed independently. Wire
+contract fields and fixtures wait for API-owned contract decisions; Engine does
+not add a runner in this phase.
 
 ## Current integration boundaries
 

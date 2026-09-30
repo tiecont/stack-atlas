@@ -1,5 +1,4 @@
 export type Site = {
-  id: string;
   name: string;
   description: string;
   language: string;

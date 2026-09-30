@@ -2,18 +2,18 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import HomePage from '../app/page.tsx';
+import HomePage from '../../app/page.tsx';
 import ArticlePage, {
   generateMetadata as articleMetadata,
   generateStaticParams as articleParams,
-} from '../app/articles/[domain]/[slug]/page.tsx';
-import TopicPage, { generateMetadata as topicMetadata } from '../app/topics/[topic]/page.tsx';
-import PathPage, { generateMetadata as pathMetadata } from '../app/paths/[path]/page.tsx';
-import sitemap from '../app/sitemap.ts';
-import robots from '../app/robots.ts';
-import { loadCatalog } from '../lib/content/loader.ts';
-import { examples } from '../lib/examples/registry.ts';
-import { labs } from '../lib/labs/registry.ts';
+} from '../../app/articles/[domain]/[slug]/page.tsx';
+import TopicPage, { generateMetadata as topicMetadata } from '../../app/topics/[topic]/page.tsx';
+import PathPage, { generateMetadata as pathMetadata } from '../../app/paths/[path]/page.tsx';
+import sitemap from '../../app/sitemap.ts';
+import robots from '../../app/robots.ts';
+import { loadCatalog } from '../../lib/content/loader.ts';
+import { examples } from '../../lib/examples/registry.ts';
+import { labs } from '../../lib/labs/registry.ts';
 
 const unwrap = (value) => {
   while (value && typeof value === 'object' && 'default' in value) value = value.default;

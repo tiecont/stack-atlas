@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { ArticleContent } from '../features/content/components/article-content.tsx';
-import { analyzeArticleHtml } from '../lib/content/html.ts';
-import { loadCatalog, orderedModules, pathSequence } from '../lib/content/loader.ts';
-import { validateCatalog } from '../lib/content/validation.ts';
+import { ArticleContent } from '../../features/content/components/article-content.tsx';
+import { analyzeArticleHtml } from '../../lib/content/html.ts';
+import { loadCatalog, orderedModules, pathSequence } from '../../lib/content/loader.ts';
+import { validateCatalog } from '../../lib/content/validation.ts';
 
 const catalog = loadCatalog();
 

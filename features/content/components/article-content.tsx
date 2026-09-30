@@ -5,7 +5,6 @@ import { withBasePath } from '@/lib/content/urls';
 
 type Node = DefaultTreeAdapterMap['childNode'];
 type Element = DefaultTreeAdapterMap['element'];
-type Fragment = DefaultTreeAdapterMap['documentFragment'];
 
 const safeTags = new Set([
   'a', 'b', 'blockquote', 'br', 'circle', 'code', 'defs', 'div', 'em', 'figcaption', 'figure', 'g', 'h2', 'h3', 'h4',
@@ -43,17 +42,17 @@ function safeHref(value: string): string | null {
 function safeStyle(value: string): CSSProperties | undefined {
   if (/url\s*\(|expression\s*\(|javascript:|@import/i.test(value)) return undefined;
   const allowed = new Set(['color', 'background', 'fill', 'stroke', 'font-size', 'font-weight', 'text-anchor', 'stroke-width', 'stop-color', 'stroke-linecap', 'stroke-linejoin']);
-  const result: Record<string, string | number> = {};
+  const result: CSSProperties = {};
   for (const declaration of value.split(';')) {
     const separator = declaration.indexOf(':');
     if (separator < 1) continue;
     const name = declaration.slice(0, separator).trim().toLowerCase();
     const setting = declaration.slice(separator + 1).trim();
     if (allowed.has(name) && setting && !/[<>]/.test(setting)) {
-      result[attributeNames[name] ?? name] = setting;
+      Reflect.set(result, attributeNames[name] ?? name, setting);
     }
   }
-  return Object.keys(result).length ? result as CSSProperties : undefined;
+  return Object.keys(result).length ? result : undefined;
 }
 
 function isElement(node: Node): node is Element {
@@ -93,6 +92,6 @@ function renderNode(node: Node, key: number): ReactNode {
 }
 
 export function ArticleContent({ html }: { html: string }) {
-  const fragment = parseArticleHtml(html) as Fragment;
+  const fragment = parseArticleHtml(html);
   return <>{fragment.childNodes.map((node, index) => renderNode(node, index))}</>;
 }

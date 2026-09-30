@@ -16,7 +16,7 @@ replacement.
 | Generated asset copies                                                 | Next-owned `app/globals.css`, `app/site.css`, `app/tokens.css`, and `app/icon.svg`                                                |
 | `site.js`, path-context, and progress scripts                          | Feature-scoped React search/progress, theme/menu interactions, and server-derived path navigation                                 |
 | Duplicated browser API client                                          | Single `lib/api/client.ts` and shared Problem Details handling                                                                    |
-| Python platform regressions                                            | Node test-runner checks under `tests/*.test.mjs`                                                                                  |
+| Python platform regressions                                            | Node test-runner checks grouped under `tests/<feature>/*.test.mjs`                                                                |
 | Python duplicate-content audit                                         | `scripts/audit-duplicates.ts` and `npm run audit:content`                                                                         |
 | Lab/example guides and downloadable files                              | Registry-backed guide pages and explicit file allowlists under `app/labs/` and `app/examples/`                                    |
 
