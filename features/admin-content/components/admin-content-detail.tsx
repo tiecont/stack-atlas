@@ -9,6 +9,7 @@ import {
   type ContentRevisionSummary,
 } from '../admin-content.service';
 import { AdminContentError } from './admin-content-error';
+import { AdminContentPublishingWorkflow } from './admin-content-publishing-workflow';
 import { ContentStatusLabel } from './content-status';
 
 const service = createAdminContentService();
@@ -22,7 +23,8 @@ export function AdminContentDetail({ contentId }: { contentId: string }) {
   }>();
   const [refreshKey, setRefreshKey] = useState(0);
   const requestKey = `${contentId}:${refreshKey}`;
-  const currentResult = result?.key === requestKey ? result : undefined;
+  const currentResult = result?.key.startsWith(`${contentId}:`) ? result : undefined;
+  const refreshing = currentResult !== undefined && currentResult.key !== requestKey;
   const item = currentResult?.item ?? null;
   const revisions = currentResult?.revisions ?? [];
   const loading = currentResult === undefined;
@@ -35,7 +37,13 @@ export function AdminContentDetail({ contentId }: { contentId: string }) {
           setResult({ key: requestKey, item: content, revisions: history.items, error: null });
       })
       .catch((cause: unknown) => {
-        if (current) setResult({ key: requestKey, item: null, revisions: [], error: cause });
+        if (current) {
+          setResult((previous) =>
+            previous?.key.startsWith(`${contentId}:`) && previous.item
+              ? { ...previous, key: requestKey, error: cause }
+              : { key: requestKey, item: null, revisions: [], error: cause },
+          );
+        }
       });
     return () => {
       current = false;
@@ -49,7 +57,7 @@ export function AdminContentDetail({ contentId }: { contentId: string }) {
       </div>
     );
   }
-  if (currentResult?.error) {
+  if (currentResult?.error && !item) {
     return (
       <AdminContentError
         action="read content"
@@ -116,6 +124,21 @@ export function AdminContentDetail({ contentId }: { contentId: string }) {
         </DetailCell>
       </dl>
 
+      {currentResult?.error && (
+        <AdminContentError
+          action="refresh content state"
+          error={currentResult.error}
+          onRetry={() => setRefreshKey((value) => value + 1)}
+        />
+      )}
+
+      <AdminContentPublishingWorkflow
+        item={item}
+        onRefresh={() => setRefreshKey((value) => value + 1)}
+        refreshing={refreshing || currentResult?.error !== null}
+        revisions={revisions}
+      />
+
       <section aria-labelledby="recent-revisions-heading">
         <div className={styles.sectionHeader}>
           <h2 id="recent-revisions-heading">Revision history</h2>
@@ -175,22 +198,29 @@ export function RevisionRows({
             {shortId(revision.revisionId)}
           </span>
           <span className={styles.revisionMeta}>
-            {publicationOnly ? (
-              <time className={styles.publishedMark} dateTime={revision.publishedAt ?? undefined}>
-                Published {revision.publishedAt ? formatDate(revision.publishedAt) : ''}
-              </time>
-            ) : (
-              <time dateTime={revision.createdAt}>{formatDate(revision.createdAt)}</time>
-            )}
+            <time
+              className={publicationOnly ? styles.publishedMark : undefined}
+              dateTime={publicationOnly ? (revision.publishedAt ?? undefined) : revision.createdAt}
+            >
+              {publicationOnly && revision.publishedAt
+                ? `Published ${formatDate(revision.publishedAt)}`
+                : formatDate(revision.createdAt)}
+            </time>
+          </span>
+          <span
+            className={styles.revisionMeta}
+            title={
+              publicationOnly
+                ? (revision.publishedBy ?? undefined)
+                : (revision.revisionCreatedBy ?? undefined)
+            }
+          >
+            {publicationOnly
+              ? (revision.publishedBy ?? 'Publisher unavailable')
+              : (revision.revisionCreatedBy ?? 'Creator unavailable')}
           </span>
           <span className={revision.publishedAt ? styles.publishedMark : styles.revisionMeta}>
-            {publicationOnly
-              ? revision.publishedBy
-                ? `By ${shortId(revision.publishedBy)}`
-                : 'Publisher unavailable'
-              : revision.publishedAt
-                ? 'Published'
-                : 'Draft'}
+            {revision.publishedAt ? 'Published' : 'Draft'}
           </span>
         </li>
       ))}

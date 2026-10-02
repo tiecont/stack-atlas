@@ -9,6 +9,7 @@ import {
   type ContentBlockTypeV1,
   type ContentDocumentV1,
 } from '@/features/content-renderer/types';
+import { ApiError } from '@/lib/api/client';
 import styles from '../admin-content.module.css';
 import {
   createAdminContentService,
@@ -84,7 +85,10 @@ export function AdminContentEditor({ contentId }: { contentId: string }) {
         }
       })
       .catch((cause: unknown) => {
-        if (active) setLoadError({ contentId, cause });
+        if (active) {
+          setLoadError({ contentId, cause });
+          setState((value) => (value?.contentId === contentId ? { ...value, busy: false } : value));
+        }
       });
     return () => {
       active = false;
@@ -214,6 +218,17 @@ export function AdminContentEditor({ contentId }: { contentId: string }) {
     }
   }
 
+  function reloadLatestRevision() {
+    if (!current || current.busy) return;
+    setLoadError(undefined);
+    setState((value) =>
+      value?.contentId === contentId
+        ? { ...value, busy: true, error: null, savedMessage: '' }
+        : value,
+    );
+    setRefresh((value) => value + 1);
+  }
+
   if (!current) {
     if (currentLoadError) {
       return (
@@ -233,6 +248,7 @@ export function AdminContentEditor({ contentId }: { contentId: string }) {
 
   const revision = current.revision;
   const document = current.document;
+  const staleConflict = current.error instanceof ApiError && current.error.status === 409;
   const blockIssue = (id: string) => issues.find((issue) => issue.target === `editor-block-${id}`);
   const metadataIssue = (target: string) => issues.find((issue) => issue.target === target);
   const deleteBlock = document.blocks.find((block) => block.id === deleteBlockId);
@@ -269,13 +285,50 @@ export function AdminContentEditor({ contentId }: { contentId: string }) {
 
       {current.error && (
         <div className={styles.editorError}>
-          <AdminContentError action="save this draft" error={current.error} />
+          {staleConflict ? (
+            <section className={styles.editorConflict} role="alert">
+              <h2>This draft changed after you opened it</h2>
+              <p>
+                The save was rejected. Your local edits are still here and were not retried.
+                Reloading replaces them with the latest server revision.
+              </p>
+              <button
+                className={styles.secondaryButton}
+                disabled={current.busy}
+                onClick={reloadLatestRevision}
+                type="button"
+              >
+                Reload latest revision
+              </button>
+            </section>
+          ) : (
+            <AdminContentError action="save this draft" error={current.error} />
+          )}
           {dirty && (
             <p className={styles.editorPreserved} role="status">
               Your unsaved edits are still in this editor.
             </p>
           )}
         </div>
+      )}
+      {currentLoadError && (
+        <div className={styles.editorError}>
+          <AdminContentError
+            action="reload the latest revision"
+            error={currentLoadError}
+            onRetry={reloadLatestRevision}
+          />
+          {dirty && (
+            <p className={styles.editorPreserved} role="status">
+              Your local edits remain in this editor because reload did not complete.
+            </p>
+          )}
+        </div>
+      )}
+      {current.busy && current.blocked && (
+        <p className={styles.fieldHint} role="status">
+          Loading the latest revision…
+        </p>
       )}
       {current.savedMessage && (
         <p className={styles.editorSuccess} role="status">
@@ -608,6 +661,6 @@ function isBlocked(error: unknown): boolean {
     typeof error === 'object' &&
     error !== null &&
     'status' in error &&
-    (error.status === 401 || error.status === 403)
+    (error.status === 401 || error.status === 403 || error.status === 409)
   );
 }

@@ -50,6 +50,17 @@ export interface ContentRevision {
   document: ContentDocumentV1;
 }
 
+export interface PublicContent {
+  contentId: string;
+  contentKey: string;
+  contentType: 'article';
+  slug: string;
+  publishedRevisionId: string;
+  document: ContentDocumentV1;
+  seo: { title: string; description: string };
+  publishedAt: string;
+}
+
 export interface ContentPage {
   items: ContentItem[];
   nextCursor: string | null;
@@ -81,6 +92,9 @@ export interface AdminContentService {
     baseRevisionId: string,
     document: ContentDocumentV1,
   ): Promise<ContentRevision>;
+  publishRevision(contentId: string, revisionId: string): Promise<ContentRevision>;
+  archiveContent(contentId: string): Promise<ContentItem>;
+  getPublicContent(slug: string): Promise<PublicContent>;
 }
 
 const DEFAULT_PAGE_SIZE = 25;
@@ -149,6 +163,33 @@ export function createAdminContentService(client: ApiTransport = api): AdminCont
           baseRevisionId,
           document,
         }),
+      );
+    },
+
+    async publishRevision(contentId, revisionId): Promise<ContentRevision> {
+      const published = parseContentRevision(
+        await client.post(`admin/content/${encodeURIComponent(contentId)}/publish`, {
+          revisionId,
+        }),
+      );
+      if (published.contentId !== contentId || published.revisionId !== revisionId) {
+        throw new TypeError('The API published a different content revision than requested.');
+      }
+      if (!published.publishedAt || !published.publishedBy) {
+        throw new TypeError('Published content must include publication time and actor.');
+      }
+      return published;
+    },
+
+    async archiveContent(contentId): Promise<ContentItem> {
+      return parseContentItem(
+        await client.post(`admin/content/${encodeURIComponent(contentId)}/archive`),
+      );
+    },
+
+    async getPublicContent(slug): Promise<PublicContent> {
+      return parsePublicContent(
+        await client.get(`content/${encodeURIComponent(slug)}`, { cache: 'no-store' }),
       );
     },
   };
@@ -226,6 +267,28 @@ function parseContentRevision(value: unknown): ContentRevision {
     publishedAt: nullableDate(record['publishedAt'], 'publishedAt'),
     publishedBy: nullableString(record['publishedBy'], 'publishedBy'),
     document,
+  };
+}
+
+function parsePublicContent(value: unknown): PublicContent {
+  const record = asRecord(value, 'published content');
+  const document = record['document'];
+  const seo = asRecord(record['seo'], 'published content SEO');
+  if (!isContentDocumentV1(document))
+    throw new TypeError('Published document is not Content Document V1.');
+  if (record['contentType'] !== 'article') throw new TypeError('Content type is not supported.');
+  return {
+    contentId: requiredString(record['contentId'], 'contentId'),
+    contentKey: requiredString(record['contentKey'], 'contentKey'),
+    contentType: 'article',
+    slug: requiredString(record['slug'], 'slug'),
+    publishedRevisionId: requiredString(record['publishedRevisionId'], 'publishedRevisionId'),
+    document,
+    seo: {
+      title: requiredString(seo['title'], 'seo.title'),
+      description: requiredString(seo['description'], 'seo.description'),
+    },
+    publishedAt: dateString(record['publishedAt'], 'publishedAt'),
   };
 }
 

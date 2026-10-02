@@ -126,6 +126,97 @@ test('admin content service appends a revision with its required optimistic conc
   assert.equal(updated.revisionNumber, 3);
 });
 
+test('admin content service publishes the selected immutable revision', async () => {
+  let requestPath = '';
+  let requestBody: unknown;
+  const client: ApiTransport = {
+    async get() {
+      return revision;
+    },
+    async post(path, body) {
+      requestPath = path;
+      requestBody = body;
+      return {
+        ...revision,
+        contentId: 'content/1',
+        status: 'PUBLISHED',
+        publishedAt: '2026-09-03T10:00:00.000Z',
+        publishedBy: 'account-publisher',
+      };
+    },
+  };
+
+  const published = await createAdminContentService(client).publishRevision(
+    'content/1',
+    'revision-1',
+  );
+
+  assert.equal(requestPath, 'admin/content/content%2F1/publish');
+  assert.deepEqual(requestBody, { revisionId: 'revision-1' });
+  assert.equal(published.status, 'PUBLISHED');
+  assert.equal(published.publishedBy, 'account-publisher');
+});
+
+test('admin content service archives by item identity without accepting a client actor', async () => {
+  let requestPath = '';
+  let requestBody: unknown;
+  const client: ApiTransport = {
+    async get() {
+      return revision;
+    },
+    async post(path, body) {
+      requestPath = path;
+      requestBody = body;
+      return {
+        ...item,
+        status: 'ARCHIVED',
+        archivedAt: '2026-09-03T10:00:00.000Z',
+        archivedBy: 'account-archiver',
+      };
+    },
+  };
+
+  const archived = await createAdminContentService(client).archiveContent('content/1');
+
+  assert.equal(requestPath, 'admin/content/content%2F1/archive');
+  assert.equal(requestBody, undefined);
+  assert.equal(archived.status, 'ARCHIVED');
+  assert.equal(archived.archivedBy, 'account-archiver');
+});
+
+test('public content reads bypass fetch caches and validate the published revision response', async () => {
+  let requestPath = '';
+  let requestOptions: { cache?: RequestCache } | undefined;
+  const client: ApiTransport = {
+    async get(path, options) {
+      requestPath = path;
+      requestOptions = options;
+      return {
+        contentId: 'content-1',
+        contentKey: 'article:systems-basics',
+        contentType: 'article',
+        slug: 'engineering/systems-basics',
+        publishedRevisionId: 'revision-2',
+        document,
+        seo: { title: 'Systems Basics', description: 'A systems guide.' },
+        publishedAt: '2026-09-03T10:00:00.000Z',
+      };
+    },
+    async post() {
+      return revision;
+    },
+  };
+
+  const published = await createAdminContentService(client).getPublicContent(
+    'engineering/systems basics',
+  );
+
+  assert.equal(requestPath, 'content/engineering%2Fsystems%20basics');
+  assert.equal(requestOptions?.cache, 'no-store');
+  assert.equal(published.publishedRevisionId, 'revision-2');
+  assert.equal(published.seo.title, 'Systems Basics');
+});
+
 test('malformed API content data fails closed', async () => {
   const client: ApiTransport = {
     async get() {
