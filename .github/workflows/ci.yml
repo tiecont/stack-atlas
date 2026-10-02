@@ -88,7 +88,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: stack-atlas-playwright-report
-          path: playwright-report/
+          path: |
+            playwright-report/
+            playwright-report-admin/
           retention-days: 30
 
   docker-validate:
@@ -124,31 +126,54 @@ jobs:
         run: |
           set -eu
           runtime_name=""
+          print_container_diagnostics() {
+            diagnostic_name="$1"
+            echo "Docker diagnostics for $diagnostic_name"
+            docker ps -a || true
+            docker inspect "$diagnostic_name" || true
+            docker logs "$diagnostic_name" || true
+          }
           cleanup_runtime() {
+            result=$?
+            if [ "$result" -ne 0 ] && [ -n "$runtime_name" ]; then
+              print_container_diagnostics "$runtime_name"
+            fi
             if [ -n "$runtime_name" ]; then docker rm -f "$runtime_name" >/dev/null 2>&1 || true; fi
+            return "$result"
           }
           trap cleanup_runtime EXIT
           wait_for_http_ready() {
-            name="$1"
-            port="$2"
-            output="$3"
+            local name="$1"
+            local port="$2"
+            local output="$3"
+            local curl_log
+            local deadline
+            local state
             curl_log="/tmp/$name-curl.log"
             deadline=$((SECONDS + 60))
             : >"$curl_log"
             while [ "$SECONDS" -lt "$deadline" ]; do
               state=$(docker inspect --format '{{.State.Status}}' "$name" 2>/dev/null || true)
-              if [ "$state" != running ]; then
-                docker logs "$name" || true
-                echo "Container $name stopped before its health endpoint became ready (state: ${state:-missing})."
-                return 1
-              fi
-              if curl --fail --silent --show-error --connect-timeout 1 --max-time 5 \
-                "http://127.0.0.1:$port/api/healthz/" --output "$output" 2>>"$curl_log"; then
-                return 0
-              fi
+              case "$state" in
+                exited|dead)
+                  print_container_diagnostics "$name"
+                  cat "$curl_log"
+                  echo "Container $name exited before its health endpoint became ready (state: $state)."
+                  return 1
+                  ;;
+                running)
+                  if curl --fail --silent --show-error --connect-timeout 1 --max-time 5 \
+                    "http://127.0.0.1:$port/api/healthz/" --output "$output" 2>>"$curl_log"; then
+                    return 0
+                  fi
+                  ;;
+                *)
+                  # Docker can briefly report `created` immediately after `docker run --detach`.
+                  ;;
+              esac
               sleep 1
             done
-            docker logs "$name" || true
+            print_container_diagnostics "$name"
             cat "$curl_log"
             echo "Container $name did not return a healthy response within 60 seconds."
             return 1
@@ -169,19 +194,21 @@ jobs:
               attempt=$((attempt + 1))
             done
             if [ "$state" != exited ]; then
-              docker logs "$name"
+              print_container_diagnostics "$name"
               docker rm -f "$name"
               echo "The image did not exit after rejecting STACK_ATLAS_WEB_PLATFORM=$value."
               exit 1
             fi
             exit_code=$(docker inspect --format '{{.State.ExitCode}}' "$name")
             docker logs "$name" >"/tmp/$name.log" 2>&1
-            docker rm "$name"
             if [ "$exit_code" = 0 ] || ! grep -q 'STACK_ATLAS_WEB_PLATFORM' "/tmp/$name.log"; then
+              print_container_diagnostics "$name"
               cat "/tmp/$name.log"
+              docker rm "$name"
               echo "The image did not reject STACK_ATLAS_WEB_PLATFORM=$value as expected."
               exit 1
             fi
+            docker rm "$name"
           }
           expect_platform_startup_failure stack-atlas-web-missing-platform ""
           expect_platform_startup_failure stack-atlas-web-invalid-platform invalid
@@ -222,7 +249,8 @@ jobs:
               curl --fail --silent --show-error \
                 "http://127.0.0.1:$port/admin/content/" \
                 --output "/tmp/stack-atlas-web-$mode-content.html"
-              grep -q 'No API content is available' "/tmp/stack-atlas-web-$mode-content.html"
+              grep -q 'Search content' "/tmp/stack-atlas-web-$mode-content.html"
+              grep -q 'New content' "/tmp/stack-atlas-web-$mode-content.html"
               status=$(curl --silent --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port/articles/")
               test "$status" = 404
               status=$(curl --silent --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:$port/paths/")
