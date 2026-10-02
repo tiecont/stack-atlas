@@ -2,21 +2,6 @@ name: Kubernetes labs
 
 on:
   pull_request:
-    paths:
-      - 'content/articles/kubernetes/**'
-      - 'content/domains/kubernetes.yaml'
-      - 'content/paths/kubernetes-engineer.yaml'
-      - 'labs/kubernetes/**'
-      - 'examples/atlas-demo-api/**'
-      - 'scripts/ci/kubernetes/**'
-      - 'scripts/ci/test_kubernetes_labs.sh'
-      - 'scripts/ci/validate-kubernetes-manifests.ts'
-      - 'lib/labs/registry.ts'
-      - 'tests/kubernetes/**'
-      - 'package.json'
-      - 'package-lock.json'
-      - 'Makefile'
-      - '.github/workflows/kubernetes-labs.yml'
   push:
     branches: [main]
     paths:
