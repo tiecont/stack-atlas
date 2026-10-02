@@ -44,26 +44,33 @@ cleanup() {
 trap cleanup EXIT
 
 wait_for_http() {
-  container="$1"
-  url="$2"
-  curl_log="/tmp/${container}-curl.log"
-  response_file="/tmp/${container}-response.txt"
-  attempts=60
+  local container="$1"
+  local url="$2"
+  local curl_log="/tmp/${container}-curl.log"
+  local response_file="/tmp/${container}-response.txt"
+  local attempts=60
+  local state
   : >"$curl_log"
 
   for ((attempt = 1; attempt <= attempts; attempt += 1)); do
     state="$(docker inspect --format '{{.State.Status}}' "$container" 2>/dev/null || true)"
-    if [[ "$state" != running ]]; then
-      echo "Container $container exited before HTTP readiness (state: ${state:-missing})." >&2
-      return 1
-    fi
-
-    # A fresh container can briefly refuse or reset connections while Next starts.
-    if curl --fail --silent --show-error --connect-timeout 1 --max-time 5 \
-      "$url" --output "$response_file" 2>>"$curl_log"; then
-      cat "$response_file"
-      return 0
-    fi
+    case "$state" in
+      exited|dead)
+        echo "Container $container exited before HTTP readiness (state: $state)." >&2
+        return 1
+        ;;
+      running)
+        # A fresh container can briefly refuse or reset connections while Next starts.
+        if curl --fail --silent --show-error --connect-timeout 1 --max-time 5 \
+          "$url" --output "$response_file" 2>>"$curl_log"; then
+          cat "$response_file"
+          return 0
+        fi
+        ;;
+      *)
+        # Docker can briefly report `created` immediately after `docker run --detach`.
+        ;;
+    esac
     sleep 1
   done
 
@@ -164,7 +171,8 @@ grep -q 'Administration' /tmp/stack-atlas-web-smoke-admin.html
 assert_status 200 http://127.0.0.1:3012/admin/content/
 curl --fail --silent --show-error http://127.0.0.1:3012/admin/content/ \
   --output /tmp/stack-atlas-web-smoke-admin-content.html
-grep -q 'No API content is available' /tmp/stack-atlas-web-smoke-admin-content.html
+grep -q 'Search content' /tmp/stack-atlas-web-smoke-admin-content.html
+grep -q 'New content' /tmp/stack-atlas-web-smoke-admin-content.html
 assert_status 404 http://127.0.0.1:3012/articles/
 assert_status 404 http://127.0.0.1:3012/paths/
 docker stop "$admin_name" >/dev/null

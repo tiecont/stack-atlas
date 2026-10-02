@@ -1566,7 +1566,7 @@ kbd {
   color: var(--ink);
   text-decoration: none;
 }
-.admin-brand > span {
+.admin-brand > span:first-child {
   display: grid;
   width: 34px;
   height: 34px;
