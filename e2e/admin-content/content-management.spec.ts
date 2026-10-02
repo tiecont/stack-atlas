@@ -1,4 +1,5 @@
 import { expect, test, type Page, type Route } from '@playwright/test';
+import { isContentDocumentV1, type ContentDocumentV1 } from '@/features/content-renderer/types';
 
 type ApiReply = { status: number; body: unknown; problem?: boolean };
 type ApiMock = (method: string, path: string, search: URLSearchParams, body: unknown) => ApiReply;
@@ -104,7 +105,7 @@ test('new content submits the API request contract and opens the created item', 
   await page.getByRole('button', { name: 'Create draft' }).click();
 
   await expect(page).toHaveURL(/\/admin\/content\/content-new\/$/);
-  await expect(page.getByRole('heading', { name: 'Concurrency Guide' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Concurrency Guide', level: 1 })).toBeVisible();
   expect(createBody).toMatchObject({
     slug: 'engineering/new-guide',
     document: {
@@ -151,9 +152,10 @@ test('content detail shows identity and revision and publication history', async
   });
 
   await page.goto('/admin/content/content-1/');
-  await expect(page.getByRole('heading', { name: 'Systems Architecture' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Systems Architecture', level: 1 })).toBeVisible();
   await expect(page.getByText('article:systems-guide')).toBeVisible();
-  await expect(page.getByText('Revision 2')).toBeVisible();
+  await expect(page.locator('strong').filter({ hasText: 'Revision 2' })).toBeVisible();
+  await expect(page.getByText('account-1').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Publication history' })).toBeVisible();
   await expect(page.getByText(/Published/).first()).toBeVisible();
 
@@ -321,15 +323,30 @@ test('draft editor updates Content V1 blocks and saves against the loaded revisi
 });
 
 test('stale revision conflict preserves local editor changes', async ({ page }) => {
-  const draft = makeItem('content-draft', 'revision-1', null, 'DRAFT');
+  let latestRevisionId = 'revision-1';
+  let appendCalls = 0;
+  const firstDraft = makeItem('content-draft', latestRevisionId, null, 'DRAFT');
+  const concurrentDraft = makeItem('content-draft', 'revision-2', null, 'DRAFT');
   await mockAdminApi(page, (method, path) => {
     if (method === 'GET' && path === 'admin/content/content-draft') {
-      return { status: 200, body: draft };
+      const item = latestRevisionId === 'revision-1' ? firstDraft : concurrentDraft;
+      return { status: 200, body: item };
     }
     if (method === 'GET' && path.endsWith('/revisions/revision-1')) {
-      return { status: 200, body: makeRevision('revision-1', 'Draft Systems Guide', 1, draft) };
+      return {
+        status: 200,
+        body: makeRevision('revision-1', 'Draft Systems Guide', 1, firstDraft),
+      };
+    }
+    if (method === 'GET' && path.endsWith('/revisions/revision-2')) {
+      return {
+        status: 200,
+        body: makeRevision('revision-2', 'Concurrent revision', 2, concurrentDraft),
+      };
     }
     if (method === 'POST' && path === 'admin/content/content-draft/revisions') {
+      appendCalls += 1;
+      latestRevisionId = 'revision-2';
       return problem(409, 'Conflict', 'The base revision is no longer current.');
     }
     return notFound();
@@ -338,9 +355,215 @@ test('stale revision conflict preserves local editor changes', async ({ page }) 
   await page.goto('/admin/content/content-draft/edit/');
   await page.locator('#document-title').fill('Keep these local edits');
   await page.getByRole('button', { name: 'Save draft' }).click();
-  await expect(page.getByRole('heading', { name: 'Content conflict' })).toBeVisible();
   await expect(page.getByText('Your unsaved edits are still in this editor.')).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'This draft changed after you opened it' }),
+  ).toBeVisible();
   await expect(page.locator('#document-title')).toHaveValue('Keep these local edits');
+  await page.getByRole('button', { name: 'Reload latest revision' }).click();
+  await expect(page.locator('#document-title')).toHaveValue('Concurrent revision');
+  expect(appendCalls).toBe(1);
+});
+
+test('admin saves, previews, publishes, and verifies the public revision', async ({ page }) => {
+  let latestRevisionId = 'revision-1';
+  let publishedRevisionId: string | null = null;
+  let currentStatus: 'DRAFT' | 'PUBLISHED' = 'DRAFT';
+  let currentDocument: ContentDocumentV1 = {
+    schema_version: 1,
+    title: 'Draft Systems Guide',
+    description: 'A guide to system design.',
+    blocks: [
+      {
+        id: 'body',
+        type: 'rich_text',
+        version: 1,
+        props: { nodes: [{ type: 'paragraph', children: [{ type: 'text', text: '' }] }] },
+      },
+    ],
+  };
+  let appendCalls = 0;
+  let publishBody: unknown;
+  const currentItem = () =>
+    makeItem('content-draft', latestRevisionId, publishedRevisionId, currentStatus);
+  const currentRevision = (revisionId: string) => {
+    const revisionNumber = revisionId === 'revision-1' ? 1 : 2;
+    return {
+      ...makeRevision(revisionId, currentDocument.title, revisionNumber, currentItem()),
+      status: currentStatus,
+      document: currentDocument,
+      publishedAt: publishedRevisionId === revisionId ? '2026-09-05T10:00:00.000Z' : null,
+      publishedBy: publishedRevisionId === revisionId ? 'account-publisher' : null,
+    };
+  };
+
+  await mockAdminApi(page, (method, path, _search, body) => {
+    if (method === 'GET' && path === 'admin/content/content-draft') {
+      return { status: 200, body: currentItem() };
+    }
+    if (method === 'GET' && path === 'admin/content/content-draft/revisions') {
+      return {
+        status: 200,
+        body: {
+          items: [
+            makeSummary(
+              'content-draft',
+              'revision-2',
+              2,
+              publishedRevisionId === 'revision-2' ? '2026-09-05T10:00:00.000Z' : null,
+            ),
+            makeSummary(
+              'content-draft',
+              'revision-1',
+              1,
+              publishedRevisionId === 'revision-1' ? '2026-09-03T10:00:00.000Z' : null,
+            ),
+          ],
+          nextCursor: null,
+        },
+      };
+    }
+    if (method === 'GET' && path.endsWith(`/revisions/${latestRevisionId}`)) {
+      return { status: 200, body: currentRevision(latestRevisionId) };
+    }
+    if (method === 'GET' && path.endsWith('/revisions/revision-1')) {
+      return {
+        status: 200,
+        body: makeRevision(
+          'revision-1',
+          'Draft Systems Guide',
+          1,
+          makeItem('content-draft', latestRevisionId, publishedRevisionId, currentStatus),
+        ),
+      };
+    }
+    if (method === 'GET' && path.endsWith('/revisions/revision-2')) {
+      return { status: 200, body: currentRevision('revision-2') };
+    }
+    if (method === 'POST' && path === 'admin/content/content-draft/revisions') {
+      appendCalls += 1;
+      latestRevisionId = 'revision-2';
+      if (isRecord(body) && isContentDocumentV1(body['document'])) {
+        currentDocument = body['document'];
+      }
+      return { status: 201, body: currentRevision('revision-2') };
+    }
+    if (method === 'POST' && path === 'admin/content/content-draft/publish') {
+      publishBody = body;
+      publishedRevisionId =
+        isRecord(body) && typeof body['revisionId'] === 'string' ? body['revisionId'] : null;
+      currentStatus = 'PUBLISHED';
+      return { status: 200, body: currentRevision(publishedRevisionId ?? latestRevisionId) };
+    }
+    return notFound();
+  });
+
+  await page.route('**/api/v1/content/**', async (route) => {
+    const request = route.request();
+    const headers = corsHeaders(request.headers()['origin'] ?? 'http://127.0.0.1:3102');
+    if (request.method() === 'OPTIONS') {
+      await route.fulfill({ status: 204, headers });
+      return;
+    }
+    if (!publishedRevisionId) {
+      await route.fulfill({
+        status: 404,
+        headers: { ...headers, 'content-type': 'application/problem+json' },
+        body: JSON.stringify(problem(404, 'Not Found', 'Published content was not found.').body),
+      });
+      return;
+    }
+    const revision = currentRevision(publishedRevisionId);
+    await route.fulfill({
+      status: 200,
+      headers: { ...headers, 'content-type': 'application/json' },
+      body: JSON.stringify({
+        contentId: 'content-draft',
+        contentKey: 'article:draft-note',
+        contentType: 'article',
+        slug: 'engineering/draft-note',
+        publishedRevisionId,
+        document: revision.document,
+        seo: { title: revision.document.title, description: revision.document.description },
+        publishedAt: '2026-09-05T10:00:00.000Z',
+      }),
+    });
+  });
+
+  await page.goto('/admin/content/content-draft/');
+  await page.getByRole('link', { name: 'Edit draft' }).click();
+  await page.locator('#document-title').fill('Systems Guide for Publication');
+  await page
+    .getByRole('article', { name: 'Block 1: Rich text' })
+    .getByLabel('Text', { exact: true })
+    .fill('Published learner copy.');
+  await page.getByRole('button', { name: 'Save draft' }).click();
+  await expect(page.getByRole('status')).toContainText('Saved as revision 2.');
+  expect(latestRevisionId).toBe('revision-2');
+  expect(publishedRevisionId).toBeNull();
+  expect(appendCalls).toBe(1);
+
+  await page.getByRole('link', { name: 'Back to content' }).click();
+  await expect(
+    page.getByRole('heading', { name: 'Systems Guide for Publication', level: 1 }),
+  ).toBeVisible();
+  await expect(page.getByText('Published learner copy.', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Publish selected revision' }).click();
+  const publishDialog = page.getByRole('dialog');
+  await expect(publishDialog.getByRole('heading', { name: 'Publish revision 2?' })).toBeVisible();
+  await publishDialog.getByRole('button', { name: 'Publish revision', exact: true }).click();
+
+  await expect(page.getByText('Public content now serves this revision.')).toBeVisible();
+  expect(publishBody).toEqual({ revisionId: 'revision-2' });
+  expect(publishedRevisionId).toBe('revision-2');
+  expect(appendCalls).toBe(1);
+});
+
+test('archive requires confirmation and displays the archived state', async ({ page }) => {
+  const draft = makeItem('content-draft', 'revision-1', null, 'DRAFT');
+  let archiveCalls = 0;
+  let archivedItem: unknown = null;
+  await mockAdminApi(page, (method, path) => {
+    if (method === 'GET' && path === 'admin/content/content-draft') {
+      return { status: 200, body: archivedItem ?? draft };
+    }
+    if (method === 'GET' && path === 'admin/content/content-draft/revisions') {
+      return {
+        status: 200,
+        body: { items: [makeSummary('content-draft', 'revision-1', 1, null)], nextCursor: null },
+      };
+    }
+    if (method === 'GET' && path.endsWith('/revisions/revision-1')) {
+      return { status: 200, body: makeRevision('revision-1', 'Draft Systems Guide', 1, draft) };
+    }
+    if (method === 'POST' && path === 'admin/content/content-draft/archive') {
+      archiveCalls += 1;
+      archivedItem = {
+        ...draft,
+        status: 'ARCHIVED',
+        archivedAt: '2026-09-05T10:00:00.000Z',
+        archivedBy: 'account-archiver',
+      };
+      return {
+        status: 200,
+        body: archivedItem,
+      };
+    }
+    return notFound();
+  });
+
+  await page.goto('/admin/content/content-draft/');
+  await page.getByRole('button', { name: 'Archive content' }).click();
+  const archiveDialog = page.getByRole('dialog');
+  await expect(archiveDialog.getByRole('heading', { name: 'Archive this content?' })).toBeVisible();
+  await archiveDialog.getByRole('button', { name: 'Cancel' }).click();
+  expect(archiveCalls).toBe(0);
+
+  await page.getByRole('button', { name: 'Archive content' }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Archive content' }).click();
+  await expect(page.getByText(/^Content archived on /)).toBeVisible();
+  await expect(page.getByText('Archived', { exact: true })).toBeVisible();
+  expect(archiveCalls).toBe(1);
 });
 
 async function mockAdminApi(page: Page, mock: ApiMock): Promise<void> {
@@ -382,7 +605,7 @@ function makeItem(
   contentId: string,
   latestRevisionId: string,
   publishedRevisionId: string | null,
-  status: 'DRAFT' | 'PUBLISHED',
+  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED',
 ) {
   return {
     contentId,

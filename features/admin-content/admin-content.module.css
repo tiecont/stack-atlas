@@ -362,10 +362,9 @@
 
 .revisionItem {
   display: grid;
-  grid-template-columns: minmax(110px, 0.65fr) minmax(180px, 1.2fr) minmax(120px, 0.9fr) minmax(
-      120px,
-      0.9fr
-    );
+  grid-template-columns:
+    minmax(110px, 0.65fr) minmax(150px, 1.1fr) minmax(140px, 1fr) minmax(130px, 0.9fr)
+    minmax(100px, 0.8fr);
   align-items: center;
   gap: 12px;
   min-height: 52px;
@@ -390,6 +389,103 @@
   background: #fff7e4;
   color: #59430e;
   font-size: 11px;
+}
+
+.workflowSection {
+  margin: 30px 0;
+  padding-top: 1px;
+  border-top: 1px solid var(--line);
+}
+
+.workflowToolbar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: end;
+  gap: 14px;
+}
+
+.workflowActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.previewSurface {
+  margin-top: 18px;
+  padding: 20px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.previewHeading {
+  margin-bottom: 18px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid var(--line);
+}
+
+.previewHeading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 20px;
+}
+
+.previewHeading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.workflowSuccess,
+.workflowWarning {
+  margin: 15px 0 0;
+  padding: 11px 13px;
+  border-left: 3px solid #21805b;
+  background: #eaf6ef;
+  color: #14583f;
+  font-size: 12px;
+}
+
+.workflowSuccess h3 {
+  margin: 0;
+  font-size: 13px;
+}
+
+.workflowSuccess p {
+  margin: 4px 0 0;
+}
+
+.workflowWarning {
+  border-left-color: #a66a13;
+  background: #fff7e4;
+  color: #60450e;
+}
+
+.workflowDialog {
+  width: min(100% - 32px, 430px);
+  padding: 22px;
+  border: 1px solid #cbd6da;
+  border-radius: 5px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 16px 50px rgb(19 42 45 / 24%);
+}
+
+.workflowDialog::backdrop {
+  background: rgb(22 35 38 / 44%);
+}
+
+.workflowDialog h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.workflowDialog p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 @media (max-width: 760px) {
@@ -421,6 +517,14 @@
 
   .revisionItem {
     grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .workflowToolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .workflowActions {
     align-items: start;
   }
 }
@@ -885,6 +989,27 @@
 .editorError {
   display: grid;
   gap: 6px;
+}
+
+.editorConflict {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 13px;
+  border-left: 3px solid #a66a13;
+  background: #fff7e4;
+  color: #60450e;
+}
+
+.editorConflict h2 {
+  margin: 0;
+  color: inherit;
+  font-size: 13px;
+}
+
+.editorConflict p {
+  margin: 0;
+  font-size: 12px;
 }
 
 .editorPreserved {
