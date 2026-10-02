@@ -70,12 +70,22 @@ export function AdminContentDetail({ contentId }: { contentId: string }) {
           <h1>{item.title}</h1>
           <p>{item.slug}</p>
         </div>
-        <Link
-          className={styles.primaryLink}
-          href={`/admin/content/${encodeURIComponent(contentId)}/revisions/`}
-        >
-          Revision history
-        </Link>
+        <div className={styles.editorHeaderActions}>
+          {item.status === 'DRAFT' && (
+            <Link
+              className={styles.primaryLink}
+              href={`/admin/content/${encodeURIComponent(contentId)}/edit/`}
+            >
+              Edit draft
+            </Link>
+          )}
+          <Link
+            className={styles.primaryLink}
+            href={`/admin/content/${encodeURIComponent(contentId)}/revisions/`}
+          >
+            Revision history
+          </Link>
+        </div>
       </header>
 
       <dl className={styles.detailsGrid}>

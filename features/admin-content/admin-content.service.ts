@@ -76,6 +76,11 @@ export interface AdminContentService {
   listRevisions(contentId: string, cursor?: string): Promise<RevisionPage>;
   getRevision(contentId: string, revisionId: string): Promise<ContentRevision>;
   createContent(input: CreateContentInput): Promise<ContentRevision>;
+  appendRevision(
+    contentId: string,
+    baseRevisionId: string,
+    document: ContentDocumentV1,
+  ): Promise<ContentRevision>;
 }
 
 const DEFAULT_PAGE_SIZE = 25;
@@ -136,6 +141,15 @@ export function createAdminContentService(client: ApiTransport = api): AdminCont
 
     async createContent(input): Promise<ContentRevision> {
       return parseContentRevision(await client.post('admin/content', input));
+    },
+
+    async appendRevision(contentId, baseRevisionId, document): Promise<ContentRevision> {
+      return parseContentRevision(
+        await client.post(`admin/content/${encodeURIComponent(contentId)}/revisions`, {
+          baseRevisionId,
+          document,
+        }),
+      );
     },
   };
 }
