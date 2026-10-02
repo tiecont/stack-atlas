@@ -101,7 +101,7 @@ export const CONTENT_DOCUMENT_LIMITS_V1 = Object.freeze({
 });
 
 const BLOCK_ID_PATTERN = /^[a-z0-9][a-z0-9._:-]{0,127}$/;
-const HEADING_ANCHOR_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const HEADING_ANCHOR_PATTERN = /^[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)*$/u;
 
 export function isContentDocumentV1(value: unknown): value is ContentDocumentV1 {
   if (
@@ -260,7 +260,9 @@ export function isContentBlock(value: unknown): value is ContentBlock {
         (props['level'] === 2 || props['level'] === 3 || props['level'] === 4) &&
         isBoundedText(props['text'], 160) &&
         (props['anchor'] === undefined ||
-          (isBoundedText(props['anchor'], 120) && HEADING_ANCHOR_PATTERN.test(props['anchor'])))
+          (isBoundedText(props['anchor'], 120) &&
+            props['anchor'] === props['anchor'].toLowerCase() &&
+            HEADING_ANCHOR_PATTERN.test(props['anchor'])))
       );
     case 'code':
       return (

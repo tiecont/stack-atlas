@@ -1,7 +1,9 @@
 # Dynamic structured-content renderer
 
 `features/content-renderer/` consumes the API-owned Content Document V1 shape
-for learner public content and admin preview. A document contains
+for learner public content and admin preview. Published article documents are
+loaded by a Server Component from the public Content API and are rendered on
+the server with this same registry. A document contains
 `schema_version`, title, description, and ordered blocks. Every block has the
 `{ id, type, version, props }` envelope. Web maintains an independent mirror of
 the persisted API contract and imports no contract source from the API repo.
@@ -11,7 +13,8 @@ The canonical JSON fixture is
 directly so the public and preview surfaces exercise the persisted V1 shape.
 API owns the persisted contract. Web mirrors it independently, maintains its
 own copied fixture, and imports no contract source from a sibling repository.
-The renderer foundation is not connected to the current learner Git catalog.
+The public article route does not fall back to Git HTML when API content is
+missing or unavailable.
 
 ## Supported block components
 
@@ -62,5 +65,8 @@ stay in parity.
 - There is no `eval`, `Function`, script execution, or
   `dangerouslySetInnerHTML` in this feature.
 
-Existing article HTML remains on its separate allowlist renderer. Git content
-is not converted into structured blocks by this renderer.
+Git still supplies supplemental topic, path, module, prerequisite, lab, legacy
+redirect, and sitemap inventory data during this transition. It is not a
+second authored article body source. The old HTML allowlist remains covered by
+catalog validation tests while the filesystem runtime ownership cleanup is
+completed separately.

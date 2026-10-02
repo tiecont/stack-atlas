@@ -41,9 +41,11 @@ in the shared feature-scoped test trees, never beside production feature code.
 
 ## Content and API boundaries
 
-- During this phase, Git remains the canonical authored content source. Do not
-  dual-write or switch learner reads to API/PostgreSQL before the cutover phase.
-  The API content foundation is not a Web content dependency yet.
+- API/PostgreSQL owns published article documents and normal authoring uses
+  Admin Web -> API -> PostgreSQL. Do not dual-write article bodies or fall back
+  to Git HTML when an API article is missing. The Git catalog still owns the
+  current topic/path, membership, lab, redirect, and sitemap inventory data;
+  remove that runtime only after replacement API owners and parity checks exist.
 - Keep IDs, URLs, ordering, prerequisites, relationships, and redirect aliases
   stable when changing the loader or renderer.
 - Add content invariants to `lib/content/validation.ts` and cover regressions
@@ -60,7 +62,8 @@ in the shared feature-scoped test trees, never beside production feature code.
 - Use the explicit shared renderer registry for structured blocks in learner
   content and admin previews. It consumes the API-owned Content Document V1
   contract through an independent Web mirror and matching canonical JSON
-  fixture. This does not migrate current Git content or switch catalog reads.
+  fixture. Public article pages load published documents from the API in Server
+  Components; the remaining Git catalog reads are supplemental migration data.
 
 ## CI and local gates
 

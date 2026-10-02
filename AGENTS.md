@@ -144,9 +144,12 @@ base path, and site URL must match the deployed runtime.
 
 ### CONTENT-001 — Canonical source and identity
 
-Git-authored YAML and article HTML remain the canonical learner content until
-an explicit cutover. Do not dual-write or switch learner reads to the API
-content foundation before that cutover.
+API/PostgreSQL owns published article documents and public article routes read
+only that published API representation. Do not dual-write article bodies or
+fall back to Git HTML when an API article is missing. The Git catalog remains
+the current owner of topic/path/module metadata, supplemental relationships,
+lab references, legacy redirects, and sitemap inventory. Keep that runtime
+until replacement API contracts exist and parity is verified.
 
 Preserve article IDs, slugs, canonical URLs, authored ordering, prerequisites,
 path membership, relationships, and legacy aliases. Do not replace the catalog
@@ -167,8 +170,9 @@ block uses `{ id, type, version: 1, props }` and the supported types are
 `rich_text`, `heading`, `code`, `callout`, `image`, `table`, `divider`, and
 `related_content`. Paragraphs, lists, and inline formatting live inside
 `rich_text.props.nodes`. Keep the canonical JSON fixture semantically identical
-to the API fixture and run it through the renderer tests. This contract does
-not switch the current Git catalog to API reads.
+to the API fixture and run it through the renderer tests. Learner article
+routes and admin preview both use this renderer; Git catalog reads are limited
+to supplemental metadata and derived navigation during the migration.
 
 Treat block `id` only as unique document-local identity. A heading's optional
 HTML anchor comes from `props.anchor`; never infer it from the block id. Reject
@@ -185,9 +189,10 @@ paths, fragments, HTTP, or HTTPS. The copied fixture lives at
 repo. Keep the runtime parser, V1 type list, renderer registry, and fixture in
 parity; a test MUST assert both registry coverage and fixture coverage.
 
-Derive search, redirects, sitemap, robots, topic/path links, and content URLs
-from the typed catalog and its URL helpers. Do not recreate slug or basePath
-logic in route components.
+Derive topic/path search, redirects, sitemap, robots, topic/path links, and
+content URLs from the typed catalog and its URL helpers. Article search uses
+published API results. Do not recreate slug or basePath logic in route
+components.
 
 ### CONTENT-003 — Public file routes
 

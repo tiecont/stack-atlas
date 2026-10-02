@@ -1286,6 +1286,9 @@ kbd {
 .article-toc .toc-level-3 {
   padding-left: 10px;
 }
+.article-toc .toc-level-4 {
+  padding-left: 20px;
+}
 .path-context {
   display: grid;
   gap: 5px;

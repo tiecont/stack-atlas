@@ -1,8 +1,9 @@
 # Stack Atlas content model
 
-Stack Atlas stores authored knowledge as YAML metadata and HTML article
-fragments. A TypeScript loader validates the catalog and Next.js renders it as
-React pages.
+Published article documents are owned by the API and PostgreSQL. The Web
+renders the API's structured Content Document V1. The Git catalog remains a
+temporary source for taxonomy, learning paths, supplemental article
+relationships, redirects, and the public URL inventory.
 
 ## Core records
 
@@ -21,8 +22,9 @@ React pages.
 - **Lab** — a registered guide and allowlisted file set referenced by an
   article's `labs` list. Its stable ID is defined in `lib/labs/registry.ts`.
 
-Article is the canonical knowledge node; a learning path is an ordered set of
-article references. A season is not a source content type.
+An API content item is the canonical published article node; a learning path is
+an ordered set of article references from the current Git catalog. A season is
+not a source content type.
 
 ## Validation
 
@@ -38,16 +40,19 @@ An article's `learning_paths` entries state membership through `path_id` and
 declarations agree and that an article occurs no more than once in each path.
 Prerequisite relationships must resolve and remain acyclic.
 
-All human-authored metadata uses YAML. Article content remains in the
-repository; it is not copied to a CMS or database.
+Git authored article HTML is imported as immutable API revisions and the
+published API representation is the only runtime source for article body,
+title, description, slug, and publication state. A missing or archived API
+article returns not-found; Web does not fall back to filesystem body content.
+The public route uses the same structured renderer as admin preview and caches
+public API reads for 60 seconds with a 3.5-second upstream timeout.
 
-During the current platform phase, Git remains the canonical authored source;
-the Web catalog is not dual-written to the API. Existing Git-authored HTML
-continues through the strict allowlist renderer. The new shared structured
-renderer consumes the API-owned Content Document V1 contract through an
-independent Web mirror and canonical JSON fixture. It is not wired to learner
-routes. API-owned immutable revision and publication tables remain a separate
-foundation until authoring and cutover phases.
+The current API model does not persist topic taxonomy, path/module membership,
+prerequisites, lab references, or legacy redirect metadata. Those supplemental
+surfaces still come from Git during this transition. This is not a dual-write
+workflow: normal article authoring and publishing use Admin Web, API, and
+PostgreSQL. The later filesystem runtime ownership cleanup must first provide
+replacement owners for the remaining Git-backed data.
 
 ## Progress model
 

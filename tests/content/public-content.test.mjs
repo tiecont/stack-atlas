@@ -4,7 +4,6 @@ import { test } from 'node:test';
 import { renderToStaticMarkup } from 'react-dom/server';
 import ExamplePage from '../../app/examples/[example]/page.tsx';
 import { GET as getExampleFile } from '../../app/examples/[example]/files/[...path]/route.ts';
-import ArticlePage from '../../app/articles/[domain]/[slug]/page.tsx';
 import LabPage from '../../app/labs/[lab]/page.tsx';
 import { GET as getLabFile } from '../../app/labs/[lab]/files/[...path]/route.ts';
 import nextConfig from '../../next.config.ts';
@@ -34,16 +33,6 @@ test('registered lab and example guides render from their explicit definitions',
   const exampleMarkup = renderToStaticMarkup(example);
   assert.match(exampleMarkup, /atlas-demo-api/);
   assert.match(exampleMarkup, /GET \/health\/live/);
-});
-
-test('article lab references link to the registered guide route', async () => {
-  const article = await unwrap(ArticlePage)({
-    params: Promise.resolve({ domain: 'kubernetes', slug: 'local-kind-cluster' }),
-    searchParams: Promise.resolve({}),
-  });
-  const markup = renderToStaticMarkup(article);
-  assert.match(markup, /href="\/labs\/kubernetes-cluster\/"/);
-  assert.match(markup, /Version matrix/);
 });
 
 test('lab and example downloads return only registered public files', async () => {
