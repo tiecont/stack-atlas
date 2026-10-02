@@ -21,7 +21,9 @@ runtime value explicitly.
 ## Route ownership
 
 The Next.js `proxy.ts` gate applies ownership checks before route rendering.
-Rejected routes respond with 404. The root on admin redirects to `/admin/`.
+Rejected routes respond with 404. The root on admin issues a temporary redirect
+to `/admin/`; runtime checks require a 3xx response with that destination and
+do not pin the implementation to one specific redirect status.
 
 | Surface | Routes                                                                                                                    |
 | ------- | ------------------------------------------------------------------------------------------------------------------------- |

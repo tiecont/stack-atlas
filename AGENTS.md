@@ -170,6 +170,21 @@ block uses `{ id, type, version: 1, props }` and the supported types are
 to the API fixture and run it through the renderer tests. This contract does
 not switch the current Git catalog to API reads.
 
+Treat block `id` only as unique document-local identity. A heading's optional
+HTML anchor comes from `props.anchor`; never infer it from the block id. Reject
+unknown document, envelope, props, rich-text node, and inline-node fields in
+the persisted contract mirror. Reject unsupported block versions, duplicate
+block ids, unsafe URL schemes, protocol-relative URLs, and URL credentials.
+Keep the independent mirror limits aligned with the API: compact JSON <=
+1,048,576 UTF-8 bytes; <=500 blocks; block ids <=128 characters; inline depth
+<=16; code <=100,000 UTF-8 bytes; tables <=20 columns and <=100 rows, with
+matching row widths and cells <=2,000 characters; <=20 related items; URLs
+<=2,048 characters. Image sources allow local paths or HTTPS; links allow local
+paths, fragments, HTTP, or HTTPS. The copied fixture lives at
+`tests/fixtures/content/content-document-v1.json`; do not read it from a sibling
+repo. Keep the runtime parser, V1 type list, renderer registry, and fixture in
+parity; a test MUST assert both registry coverage and fixture coverage.
+
 Derive search, redirects, sitemap, robots, topic/path links, and content URLs
 from the typed catalog and its URL helpers. Do not recreate slug or basePath
 logic in route components.

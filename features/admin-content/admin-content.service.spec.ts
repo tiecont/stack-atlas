@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import type { BlockDocument } from '@/features/content-renderer/types';
+import type { ContentDocumentV1 } from '@/features/content-renderer/types';
 import { createAdminContentService, type ApiTransport } from './admin-content.service';
 
 const item = {
@@ -17,7 +17,7 @@ const item = {
   updatedAt: '2026-09-02T10:00:00.000Z',
 };
 
-const document: BlockDocument = {
+const document: ContentDocumentV1 = {
   schema_version: 1,
   title: 'Systems Basics',
   description: 'A systems guide.',

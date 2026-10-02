@@ -1,5 +1,5 @@
 import { api, ApiError, type createApiClient } from '@/lib/api/client';
-import { isContentDocumentV1, type BlockDocument } from '@/features/content-renderer/types';
+import { isContentDocumentV1, type ContentDocumentV1 } from '@/features/content-renderer/types';
 
 export const CONTENT_STATUSES = ['DRAFT', 'IN_REVIEW', 'PUBLISHED', 'ARCHIVED'] as const;
 export type ContentStatus = (typeof CONTENT_STATUSES)[number];
@@ -47,7 +47,7 @@ export interface ContentRevision {
   createdAt: string;
   publishedAt: string | null;
   publishedBy: string | null;
-  document: BlockDocument;
+  document: ContentDocumentV1;
 }
 
 export interface ContentPage {
@@ -63,7 +63,7 @@ export interface RevisionPage {
 export interface CreateContentInput {
   contentKey: string;
   slug: string;
-  document: BlockDocument;
+  document: ContentDocumentV1;
 }
 
 export interface AdminContentService {
