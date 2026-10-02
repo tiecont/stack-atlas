@@ -104,6 +104,28 @@ test('admin content service posts the API-owned create request shape and validat
   assert.equal(created.document.title, 'Systems Basics');
 });
 
+test('admin content service appends a revision with its required optimistic concurrency base', async () => {
+  let requestPath = '';
+  let requestBody: unknown;
+  const client: ApiTransport = {
+    async get() {
+      return revision;
+    },
+    async post(path, body) {
+      requestPath = path;
+      requestBody = body;
+      return { ...revision, revisionId: 'revision-2', revisionNumber: 3 };
+    },
+  };
+  const service = createAdminContentService(client);
+  const updated = await service.appendRevision('content/1', 'revision-1', document);
+
+  assert.equal(requestPath, 'admin/content/content%2F1/revisions');
+  assert.deepEqual(requestBody, { baseRevisionId: 'revision-1', document });
+  assert.equal(updated.revisionId, 'revision-2');
+  assert.equal(updated.revisionNumber, 3);
+});
+
 test('malformed API content data fails closed', async () => {
   const client: ApiTransport = {
     async get() {

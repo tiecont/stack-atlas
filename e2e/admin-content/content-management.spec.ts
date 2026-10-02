@@ -222,6 +222,127 @@ test('401, 404, and 409 responses render their Problem Details states', async ({
   await expect(page.getByText('Another active content item already uses this slug.')).toBeVisible();
 });
 
+test('draft editor updates Content V1 blocks and saves against the loaded revision', async ({
+  page,
+}) => {
+  const draft = makeItem('content-draft', 'revision-1', null, 'DRAFT');
+  const original = makeRevision('revision-1', 'Draft Systems Guide', 1, draft);
+  let appendBody: unknown;
+  await mockAdminApi(page, (method, path, _search, body) => {
+    if (method === 'GET' && path === 'admin/content/content-draft') {
+      return { status: 200, body: draft };
+    }
+    if (method === 'GET' && path.endsWith('/revisions/revision-1')) {
+      return { status: 200, body: original };
+    }
+    if (method === 'POST' && path === 'admin/content/content-draft/revisions') {
+      appendBody = body;
+      const document = isRecord(body) ? body['document'] : original.document;
+      return {
+        status: 201,
+        body: { ...original, revisionId: 'revision-2', revisionNumber: 2, document },
+      };
+    }
+    return notFound();
+  });
+
+  await page.goto('/admin/content/content-draft/edit/');
+  await expect(page.getByRole('heading', { name: 'Draft Systems Guide' })).toBeVisible();
+  const blockEditor = (name: string, position: number) =>
+    page.getByRole('article', { name: `Block ${position}: ${name}` });
+  await page.locator('#document-title').fill('Edited Systems Guide');
+  await blockEditor('Rich text', 1)
+    .getByLabel('Text', { exact: true })
+    .fill('Introduction to the system.');
+  await blockEditor('Rich text', 1).getByLabel('Format').selectOption('bold');
+
+  const addBlock = async (type: string) => {
+    await page.getByLabel('Block type').selectOption(type);
+    await page.getByRole('button', { name: 'Add block', exact: true }).click();
+  };
+
+  await addBlock('heading');
+  await blockEditor('Heading', 2).getByLabel('Text', { exact: true }).fill('Architecture');
+  await addBlock('code');
+  await blockEditor('Code', 3).getByLabel('Language').fill('typescript');
+  await blockEditor('Code', 3).getByLabel('Code', { exact: true }).fill('const ready = true;');
+  await addBlock('callout');
+  await blockEditor('Callout', 4).getByLabel('Tone').selectOption('warning');
+  await blockEditor('Callout', 4).locator('textarea').fill('Protect the revision base.');
+  await addBlock('image');
+  await blockEditor('Image', 5).getByLabel('Source').fill('/images/architecture.png');
+  await blockEditor('Image', 5).getByLabel('Alt text').fill('System architecture diagram');
+  await addBlock('table');
+  await blockEditor('Table', 6).getByLabel('Header 1').fill('Layer');
+  await blockEditor('Table', 6).getByLabel('Row 1, column 1').fill('API');
+  await addBlock('divider');
+  await addBlock('related_content');
+  await blockEditor('Related content', 8)
+    .getByLabel('Title', { exact: true })
+    .fill('Related guide');
+  await blockEditor('Related content', 8).getByLabel('URL').fill('/articles/related-guide/');
+
+  const firstOutlineItem = page.getByRole('button', { name: '1. Rich text' });
+  await firstOutlineItem.focus();
+  await page.keyboard.press('ArrowDown');
+  await expect(page.getByRole('button', { name: '2. Heading' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+
+  await page.getByRole('button', { name: 'Save draft' }).click();
+  await expect(page.getByRole('status')).toContainText('Saved as revision 2.');
+  expect(appendBody).toMatchObject({
+    baseRevisionId: 'revision-1',
+    document: {
+      schema_version: 1,
+      title: 'Edited Systems Guide',
+      blocks: [
+        {
+          type: 'rich_text',
+          props: { nodes: [{ type: 'paragraph', children: [{ type: 'bold' }] }] },
+        },
+        { type: 'heading', props: { text: 'Architecture' } },
+        { type: 'code', props: { language: 'typescript', code: 'const ready = true;' } },
+        { type: 'callout', props: { tone: 'warning', text: 'Protect the revision base.' } },
+        {
+          type: 'image',
+          props: { src: '/images/architecture.png', alt: 'System architecture diagram' },
+        },
+        { type: 'table', props: { headers: ['Layer'], rows: [['API']] } },
+        { type: 'divider', props: {} },
+        {
+          type: 'related_content',
+          props: { items: [{ title: 'Related guide', href: '/articles/related-guide/' }] },
+        },
+      ],
+    },
+  });
+});
+
+test('stale revision conflict preserves local editor changes', async ({ page }) => {
+  const draft = makeItem('content-draft', 'revision-1', null, 'DRAFT');
+  await mockAdminApi(page, (method, path) => {
+    if (method === 'GET' && path === 'admin/content/content-draft') {
+      return { status: 200, body: draft };
+    }
+    if (method === 'GET' && path.endsWith('/revisions/revision-1')) {
+      return { status: 200, body: makeRevision('revision-1', 'Draft Systems Guide', 1, draft) };
+    }
+    if (method === 'POST' && path === 'admin/content/content-draft/revisions') {
+      return problem(409, 'Conflict', 'The base revision is no longer current.');
+    }
+    return notFound();
+  });
+
+  await page.goto('/admin/content/content-draft/edit/');
+  await page.locator('#document-title').fill('Keep these local edits');
+  await page.getByRole('button', { name: 'Save draft' }).click();
+  await expect(page.getByRole('heading', { name: 'Content conflict' })).toBeVisible();
+  await expect(page.getByText('Your unsaved edits are still in this editor.')).toBeVisible();
+  await expect(page.locator('#document-title')).toHaveValue('Keep these local edits');
+});
+
 async function mockAdminApi(page: Page, mock: ApiMock): Promise<void> {
   await page.unroute('**/api/v1/admin/content**').catch(() => undefined);
   await page.route('**/api/v1/admin/content**', async (route: Route) => {
