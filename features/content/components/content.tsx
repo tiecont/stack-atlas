@@ -37,7 +37,11 @@ export function ArticleGrid({ articles, catalog, list = false }: { articles: Art
   return <div className={`article-grid${list ? ' article-grid-list' : ''}`}>{articles.map(article => <ArticleCard article={article} catalog={catalog} key={article.id} />)}</div>;
 }
 
-export function ArticleTableOfContents({ headings }: { headings: Article['headings'] }) {
+export function ArticleTableOfContents({
+  headings,
+}: {
+  headings: Array<{ level: 2 | 3 | 4; id: string; title: string }>;
+}) {
   if (!headings.length) return null;
   return <nav className="article-toc" aria-label="On this page"><strong>On this page</strong>{headings.map(item => <a className={`toc-level-${item.level}`} href={`#${encodeURIComponent(item.id)}`} key={`${item.level}-${item.id}`}>{item.title}</a>)}</nav>;
 }

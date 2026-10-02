@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArticleContent } from '@/features/content/components/article-content';
 import {
   ArticleHeader,
   ArticleNavigation,
@@ -10,8 +9,13 @@ import {
   PrerequisiteList,
   RelatedContent,
 } from '@/features/content/components/content';
+import { BlockRenderer, isContentBlock } from '@/features/content-renderer';
 import { ArticlePathTracker } from '@/features/progress/components/learning-progress';
 import { SiteShell } from '@/components/site-shell';
+import {
+  getPublishedContent,
+  type PublishedContent,
+} from '@/features/content/public-content.service';
 import { loadCatalog, pathSequence } from '@/lib/content/loader';
 import { canonicalUrl } from '@/lib/content/urls';
 import { getLab } from '@/lib/labs/registry';
@@ -22,42 +26,58 @@ type Props = {
   searchParams: Promise<{ path?: string }>;
 };
 
-function articleFor(domain: string, slug: string) {
-  const url = `/articles/${domain}/${slug}/`;
-  return loadCatalog().articleByUrl.get(url);
+function routeSlug(domain: string, slug: string): string {
+  return `articles/${domain}/${slug}`;
 }
 
-export function generateStaticParams() {
-  return loadCatalog().articles.map((article) => {
-    const [, , domain, slug] = article.url.split('/');
-    return { domain, slug };
-  });
+function sourceArticleFor(content: PublishedContent, catalog: ReturnType<typeof loadCatalog>) {
+  const sourceId = content.contentKey.startsWith('article:')
+    ? content.contentKey.slice('article:'.length)
+    : '';
+  return catalog.articleById.get(sourceId) ?? catalog.articleByUrl.get(`/${content.slug}/`);
+}
+
+function documentHeadings(content: PublishedContent) {
+  return content.document.blocks.flatMap((block) =>
+    isContentBlock(block) && block.type === 'heading' && block.props.anchor
+      ? [{ level: block.props.level, id: block.props.anchor, title: block.props.text }]
+      : [],
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { domain, slug } = await params;
-  const article = articleFor(domain, slug);
-  if (!article) return { title: 'Not found' };
+  const content = await getPublishedContent(routeSlug(domain, slug));
+  if (!content) return { title: 'Not found' };
+  const canonical = `/${content.slug}/`;
   return {
-    title: article.title,
-    description: article.description,
-    alternates: { canonical: canonicalUrl(article.url) },
-    openGraph: { title: article.title, description: article.description, type: 'article' },
+    title: content.seo.title,
+    description: content.seo.description,
+    alternates: { canonical: canonicalUrl(canonical) },
+    openGraph: {
+      title: content.seo.title,
+      description: content.seo.description,
+      type: 'article',
+    },
   };
 }
 
 export default async function ArticlePage({ params, searchParams }: Props) {
   const [{ domain, slug }, query] = await Promise.all([params, searchParams]);
+  const content = await getPublishedContent(routeSlug(domain, slug));
+  if (!content) notFound();
+
   const catalog = loadCatalog();
-  const article = articleFor(domain, slug);
-  if (!article) notFound();
-  const topic = catalog.topicById.get(article.domain);
-  const category = catalog.categoryById.get(article.category ?? '');
-  const prerequisites = article.prerequisites
+  const article = sourceArticleFor(content, catalog);
+  const topic = article ? catalog.topicById.get(article.domain) : undefined;
+  const category = article ? catalog.categoryById.get(article.category ?? '') : undefined;
+  const prerequisites = (article?.prerequisites ?? [])
     .map((id) => catalog.articleById.get(id))
     .filter((item) => !!item);
-  const related = article.related.map((id) => catalog.articleById.get(id)).filter((item) => !!item);
-  const membershipPaths = article.learning_paths.flatMap((membership) => {
+  const related = (article?.related ?? [])
+    .map((id) => catalog.articleById.get(id))
+    .filter((item) => !!item);
+  const membershipPaths = (article?.learning_paths ?? []).flatMap((membership) => {
     const path = catalog.pathById.get(membership.path_id);
     return path ? [{ membership, path }] : [];
   });
@@ -69,28 +89,42 @@ export default async function ArticlePage({ params, searchParams }: Props) {
     (module) => module.id === selected?.membership.module_id,
   );
   const selectedSequence = selectedPath ? pathSequence(selectedPath) : [];
-  const position = selectedSequence.findIndex((item) => item.id === article.id);
+  const position = article ? selectedSequence.findIndex((item) => item.id === article.id) : -1;
   const previous = position > 0 ? selectedSequence[position - 1] : undefined;
   const next = position >= 0 ? selectedSequence[position + 1] : undefined;
-  const reviewed = article.review?.last_reviewed;
-  const statusDate = article.updated_at ?? reviewed;
-  const statusLabel = article.updated_at ? 'Updated' : 'Reviewed';
-  const difficulty = article.difficulty === 'unspecified' ? '' : article.difficulty;
+  const difficulty = article?.difficulty === 'unspecified' ? '' : article?.difficulty;
+  const topicTitle = topic?.title ?? article?.domain ?? domain;
   const eyebrow = [
-    topic?.title ?? article.domain,
-    category?.title ?? article.category,
+    topicTitle,
+    category?.title ?? article?.category,
     difficulty && difficulty[0].toUpperCase() + difficulty.slice(1),
   ]
     .filter(Boolean)
     .join(' · ');
+  const articleId = article?.id ?? content.contentKey;
+  const hasDocumentRelatedBlock = content.document.blocks.some(
+    (block) => isContentBlock(block) && block.type === 'related_content',
+  );
 
   return (
     <SiteShell>
-      <main id="main" className="page-shell article-page" data-article-id={article.id}>
+      <main
+        id="main"
+        className="page-shell article-page"
+        data-article-id={articleId}
+        data-content-id={content.contentId}
+      >
         <Breadcrumbs
           items={[
-            { label: topic?.title ?? article.domain, href: `/topics/${article.domain}/` },
-            ...(category
+            ...(article
+              ? [
+                  {
+                    label: topicTitle,
+                    href: `/topics/${article.domain}/`,
+                  },
+                ]
+              : [{ label: 'Articles', href: '/articles/' }]),
+            ...(category && article
               ? [
                   {
                     label: category.title,
@@ -98,30 +132,30 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                   },
                 ]
               : []),
-            { label: article.title },
+            { label: content.document.title },
           ]}
         />
         <ArticleHeader
-          articleId={article.id}
-          eyebrow={eyebrow}
-          title={article.title}
-          description={article.description}
-          topic={topic?.title ?? article.domain}
-          statusDate={statusDate}
-          statusLabel={statusLabel}
+          articleId={articleId}
+          eyebrow={eyebrow || 'Article'}
+          title={content.document.title}
+          description={content.document.description}
+          topic={topicTitle}
+          statusDate={content.publishedAt.slice(0, 10)}
+          statusLabel="Published"
         />
         <div className="article-layout">
           <aside className="article-sidebar">
-            <ArticleTableOfContents headings={article.headings} />
+            <ArticleTableOfContents headings={documentHeadings(content)} />
             {selectedPath && selectedModule ? (
               <>
-                <ArticlePathTracker pathId={selectedPath.id} articleId={article.id} />
+                <ArticlePathTracker pathId={selectedPath.id} articleId={articleId} />
                 <Link className="path-context" href={sitePath(`/paths/${selectedPath.id}/`)}>
                   <span>Part of {selectedPath.title}</span>
                   <strong>
                     {selectedModule.title} · Lesson{' '}
                     {String(
-                      selectedModule.articles.findIndex((item) => item.id === article.id) + 1,
+                      selectedModule.articles.findIndex((item) => item.id === article?.id) + 1,
                     ).padStart(2, '0')}
                   </strong>
                 </Link>
@@ -135,7 +169,7 @@ export default async function ArticlePage({ params, searchParams }: Props) {
                       <Link
                         className="related-link"
                         href={sitePath(
-                          `${article.url}?path=${encodeURIComponent(membership.path_id)}`,
+                          `${article?.url ?? `/${content.slug}/`}?path=${encodeURIComponent(membership.path_id)}`,
                         )}
                         key={`${membership.path_id}:${membership.module_id}`}
                       >
@@ -151,12 +185,12 @@ export default async function ArticlePage({ params, searchParams }: Props) {
             )}
           </aside>
           <article className="article-body">
-            <ArticleContent html={article.bodyHtml} />
-            {article.labs.length > 0 && (
+            <BlockRenderer document={content.document} mode="public" />
+            {(article?.labs.length ?? 0) > 0 && (
               <section className="article-related">
                 <h2>Hands-on Labs</h2>
                 <div>
-                  {article.labs.map((lab) => (
+                  {article?.labs.map((lab) => (
                     <a className="related-link" href={sitePath(`/labs/${lab}/`)} key={lab}>
                       Open {getLab(lab)?.title ?? lab} lab guide
                     </a>
@@ -165,8 +199,8 @@ export default async function ArticlePage({ params, searchParams }: Props) {
               </section>
             )}
             <PrerequisiteList articles={prerequisites} />
-            <RelatedContent articles={related} />
-            {selectedPath && (
+            {!hasDocumentRelatedBlock && <RelatedContent articles={related} />}
+            {selectedPath && article && (
               <ArticleNavigation pathId={selectedPath.id} previous={previous} next={next} />
             )}
           </article>

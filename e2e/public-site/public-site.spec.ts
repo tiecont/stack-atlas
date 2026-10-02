@@ -1,6 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-test('homepage, topic, path, and canonical article render', async ({ page }) => {
+test('homepage, topic, path, and API-published canonical article render', async ({
+  page,
+  request,
+}) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Engineering knowledge,/ })).toBeVisible();
 
@@ -10,12 +13,25 @@ test('homepage, topic, path, and canonical article render', async ({ page }) => 
   await page.goto('/paths/golang-backend/');
   await expect(page.getByRole('heading', { name: 'Golang Backend Engineering' })).toBeVisible();
 
-  await page.goto('/articles/golang/types-zero-values/');
+  const articlePath = '/articles/golang/types-zero-values/?path=golang-backend';
+  const serverResponse = await request.get(articlePath);
+  expect(serverResponse.status()).toBe(200);
+  expect(await serverResponse.text()).toContain('Every type has a useful default value.');
+
+  const response = await page.goto(articlePath);
+  expect(response?.status()).toBe(200);
   await expect(page).toHaveTitle(/Types, Variables và Zero Value/);
   await expect(page.getByRole('heading', { name: 'Types, Variables và Zero Value' })).toBeVisible();
+  await expect(page.locator('main')).toHaveAttribute(
+    'data-content-id',
+    '00000000-0000-4000-8000-000000000001',
+  );
+  await expect(page.getByRole('heading', { name: 'Zero values' })).toHaveAttribute('id', 'uu-điem');
+  await expect(page.getByText('Every type has a useful default value.')).toBeVisible();
+  await expect(page.getByText('Part of Golang Backend Engineering')).toBeVisible();
 });
 
-test('search returns results from authored article content', async ({ page }) => {
+test('search returns published API articles and Git-backed topic results', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Search', exact: true }).click();
 
@@ -23,6 +39,24 @@ test('search returns results from authored article content', async ({ page }) =>
   await expect(dialog).toBeVisible();
   await dialog.getByRole('searchbox').fill('ownership');
   await expect(dialog.getByRole('link', { name: /Data Ownership/ }).first()).toBeVisible();
+
+  await dialog.getByRole('searchbox').fill('distributed systems');
+  await dialog.getByRole('button', { name: 'Topics' }).click();
+  await expect(dialog.getByRole('link', { name: /Distributed Systems/ })).toBeVisible();
+});
+
+test('API article blocks keep registered lab links', async ({ page }) => {
+  await page.goto('/articles/kubernetes/local-kind-cluster/');
+  await expect(
+    page.getByRole('heading', { name: 'Tạo Kubernetes lab cluster local bằng kind' }),
+  ).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Version matrix' })).toHaveAttribute(
+    'href',
+    '/labs/kubernetes-cluster/files/version-matrix.yaml',
+  );
+  await expect(
+    page.getByRole('link', { name: 'Open Local kind cluster lab guide' }),
+  ).toHaveAttribute('href', '/labs/kubernetes-cluster/');
 });
 
 test('legacy article and historical module URLs redirect to canonical targets', async ({
@@ -105,6 +139,15 @@ test('auth screens, metadata endpoints, health, and not-found route respond', as
 
   const missing = await page.goto('/articles/golang/missing-content/');
   expect(missing?.status()).toBe(404);
+
+  const unpublishedGitArticle = await page.goto('/articles/golang/graceful-shutdown/');
+  expect(unpublishedGitArticle?.status()).toBe(404);
+
+  const unavailable = await page.goto('/articles/golang/upstream-failure/');
+  expect(unavailable?.status()).toBe(500);
+  await expect(
+    page.getByRole('heading', { name: 'Article temporarily unavailable' }),
+  ).toBeVisible();
 
   const learnerAdminRoute = await request.get('/admin/');
   expect(learnerAdminRoute.status()).toBe(404);

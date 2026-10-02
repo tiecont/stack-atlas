@@ -1,0 +1,38 @@
+{
+  "contentId": "00000000-0000-4000-8000-000000000001",
+  "contentKey": "article:season-01-fundamentals-02-types-zero-values",
+  "contentType": "article",
+  "slug": "articles/golang/types-zero-values",
+  "publishedRevisionId": "00000000-0000-4000-8000-000000000002",
+  "document": {
+    "schema_version": 1,
+    "title": "Types, Variables và Zero Value",
+    "description": "Hiểu type system đơn giản của Go và tại sao zero value làm API dễ dùng hơn.",
+    "blocks": [
+      {
+        "id": "heading-zero-values",
+        "type": "heading",
+        "version": 1,
+        "props": { "level": 2, "anchor": "uu-điem", "text": "Zero values" }
+      },
+      {
+        "id": "intro",
+        "type": "rich_text",
+        "version": 1,
+        "props": {
+          "nodes": [
+            {
+              "type": "paragraph",
+              "children": [{ "type": "text", "text": "Every type has a useful default value." }]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "seo": {
+    "title": "Types, Variables và Zero Value",
+    "description": "Hiểu type system đơn giản của Go và tại sao zero value làm API dễ dùng hơn."
+  },
+  "publishedAt": "2026-09-30T00:00:00.000Z"
+}

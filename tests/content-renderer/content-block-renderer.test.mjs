@@ -6,6 +6,7 @@ import { CONTENT_BLOCK_RENDERER_REGISTRY } from '../../features/content-renderer
 import { BlockRenderer } from '../../features/content-renderer/index.ts';
 import {
   CONTENT_BLOCK_TYPES_V1,
+  isContentBlock,
   parseContentDocumentV1,
 } from '../../features/content-renderer/types.ts';
 import { structuredBlockDocument } from '../fixtures/structured-block-document.ts';
@@ -193,6 +194,17 @@ test('the heading block id stays separate from its optional rendered anchor', ()
 
   assert.match(html, /<h2 id="overview">Overview<\/h2>/);
   assert.doesNotMatch(html, /<h2 id="heading-overview">/);
+});
+
+test('accepts lowercase Unicode anchors and rejects uppercase anchors', () => {
+  const unicodeAnchorDocument = structuredClone(structuredBlockDocument);
+  const heading = unicodeAnchorDocument.blocks.find((block) => block.type === 'heading');
+  assert.ok(heading);
+  heading.props['anchor'] = 'uu-điem';
+  assert.ok(isContentBlock(heading));
+
+  heading.props['anchor'] = 'Uu-điem';
+  assert.equal(isContentBlock(heading), false);
 });
 
 test('table row shape is validated before dispatch to the renderer', () => {
